@@ -1,0 +1,259 @@
+/* gallery.css */
+.gallery-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.gallery-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--color-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* Block 1: The Space */
+.block-space-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.portrait-img-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: zoom-in;
+  background-color: var(--color-soft);
+}
+
+.block-space-grid .portrait-img-container,
+.practice-side,
+.practice-center {
+  height: 480px;
+}
+
+@media (max-width: 1024px) {
+  .block-space-grid .portrait-img-container,
+  .practice-side,
+  .practice-center {
+    height: 360px;
+  }
+}
+
+/* Block 2: The Practice */
+.block-practice-layout {
+  display: flex;
+  gap: 10px;
+  margin-top: 48px;
+}
+
+.practice-side {
+  width: 23%;
+}
+
+.practice-center {
+  width: 50%;
+}
+
+/* Block 3: Genesis */
+.block-genesis-layout {
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  gap: 10px;
+  margin-top: 48px;
+}
+
+.genesis-text-card {
+  background-color: var(--color-soft);
+  border-radius: 4px;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.genesis-text-card h3 {
+  font-family: var(--font-serif);
+  color: var(--color-dark);
+  font-size: 22px;
+  margin-bottom: 0;
+}
+
+.genesis-text-card h3 span {
+  font-style: italic;
+}
+
+.genesis-divider {
+  width: 32px;
+  height: 1px;
+  background-color: var(--color-mid);
+  margin: 16px 0;
+}
+
+.genesis-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-dark);
+  opacity: 0.75;
+  line-height: 1.8;
+  margin-bottom: 0;
+}
+
+.genesis-photo {
+  height: 520px;
+}
+
+/* Image handling */
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.4s ease;
+}
+
+.portrait-img-container:hover .gallery-img {
+  transform: scale(1.02);
+}
+
+.portrait-img-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-dark);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.portrait-img-container:hover::after {
+  opacity: 0.18;
+}
+
+/* Mobile Overrides */
+@media (max-width: 768px) {
+  .gallery-section {
+    padding: 0;
+  }
+  
+  .gallery-label {
+    padding: 0 24px;
+  }
+
+  /* Block 3 Mobile: Photo Top, Text Bottom */
+  .block-genesis-layout {
+    grid-template-columns: 1fr;
+    padding: 0 24px;
+    gap: 0;
+  }
+
+  .genesis-photo {
+    height: 380px;
+    min-height: 320px;
+    order: 1;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .genesis-text-card {
+    order: 2;
+    padding: 36px 24px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+/* Lightbox Overrides */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(73, 53, 35, 0.96);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-image {
+  max-height: 85vh;
+  max-width: 95vw;
+  object-fit: contain;
+  margin: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transition: opacity 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .lightbox-image {
+    max-width: 95vw;
+    max-height: 85vh;
+  }
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  font-size: 20px;
+  color: var(--color-base);
+  cursor: pointer;
+  z-index: 10005;
+  background: none;
+  border: none;
+  padding: 12px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.lightbox-nav-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30%;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+.lightbox-nav-zone.left { left: 0; }
+.lightbox-nav-zone.right { right: 0; }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  color: var(--color-soft);
+  letter-spacing: 0.1em;
+  z-index: 10001;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
