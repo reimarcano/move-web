@@ -4,7 +4,7 @@ import sesionesPrivadas from "../assets/move-pilates-madrid-05.jpg";
 
 export default function Classes() {
   useEffect(() => {
-    document.title = "Clases 11 | MOVE Pilates Boutique Pozuelo de Alarcón";
+    document.title = "Clases | MOVE Pilates Boutique Pozuelo de Alarcón";
   }, []);
 
   return (
