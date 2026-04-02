@@ -13,7 +13,7 @@ export default function Home() {
   const faqs = [
     {
       question: "¿Dónde está MOVE Pilates Boutique?",
-      answer: "Estamos en Av. de Europa, 31, local 7, 28224 Pozuelo de Alarcón, Madrid. Fácil acceso desde Majadahonda, Boadilla del Monte y Las Rozas."
+      answer: "Estamos en Av. de Europa, 31, local 7, acceso desde Calle Berna. 28224 Pozuelo de Alarcón, Madrid. Fácil acceso desde Majadahonda, Boadilla del Monte y Las Rozas."
     },
     {
       question: "¿Puedo empezar si nunca he hecho Pilates Reformer?",
@@ -21,7 +21,7 @@ export default function Home() {
     },
     {
       question: "¿Qué beneficios tiene el Pilates Reformer?",
-      answer: "El Pilates Reformer mejora la postura, fortalece la musculatura profunda, aumenta la movilidad articular y desarrolla el control corporal. Es especialmente útil para personas con dolor de espalda, lumbares o cervicales, deportistas que quieren mejorar su rendimiento, y mujeres en embarazo o postparto."
+      answer: "El Pilates Reformer mejora la postura, fortalece el core y la musculatura profunda, aumenta la movilidad articular y mejora el control corporal. Es una disciplina muy eficaz para ganar fuerza, estabilidad y consciencia corporal, y para moverte con más control tanto en tu rutina diaria como en otros deportes. Además, el Pilates Reformer puede adaptarse a personas que buscan trabajar con cuidado si tienen molestias de espalda, lumbares o cervicales, a deportistas que quieren mejorar movilidad y rendimiento, y a mujeres en embarazo o postparto, siempre valorando cada caso con prudencia. En MOVE Pilates Boutique, en Pozuelo de Alarcón, trabajamos en grupos reducidos de máximo 4 personas y sesiones privadas para ofrecer una atención realmente personalizada."
     },
     {
       question: "¿Ayuda el Pilates Reformer con el dolor de espalda?",
