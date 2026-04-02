@@ -41,7 +41,7 @@ export default function Home() {
     },
     {
       question: "¿Tenéis clase de prueba?",
-      answer: "Sí. Ofrecemos una primera clase grupal por 20 € y una primera sesión privada por 40 €. Sin compromiso previo — es la forma más sencilla de conocer el estudio y entender cómo trabajamos. Escríbenos por WhatsApp al +34 654 49 55 08 para ver disponibilidad."
+      answer: "Sí. Como cortesía, te invitamos a descubrir nuestro método con una clase de bienvenida sin coste. Escríbenos por WhatsApp al +34 654 49 55 08 para confirmar disponibilidad."
     },
     {
       question: "¿Cuáles son las tarifas de Move Pilates Reformer en Pozuelo?",
