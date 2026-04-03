@@ -71,15 +71,20 @@ export default function Home() {
           className="absolute left-1/2 -translate-x-1/2 text-center w-full max-w-[900px] z-10 px-6 md:px-10 top-[5%]"
         >
           <h1 className="mb-0 reveal font-serif text-negro-move font-normal">
-  Tu centro de <span className="italic">Pilates Reformer</span>
+  Tu centro de <span className="italic">Pilates Reformer en</span>
   <br />
-  en Pozuelo de Alarcón
+  Pozuelo de Alarcón
 </h1>
 
-<p className="reveal reveal-delay-1 mt-3 text-negro-move max-w-[700px] mx-auto">
-  Pilates Reformer con grupos reducidos de máximo 4 personas,
-  <br />
-  sesiones privadas y atención personalizada.
+<p 
+  className="reveal reveal-delay-1 mt-3 mx-auto w-fit max-w-[760px] rounded-full px-5 py-3 text-center leading-relaxed backdrop-blur-[3px]"
+  style={{
+    background: 'rgba(246, 243, 236, 0.72)',
+    color: '#493523',
+    fontSize: '15px',
+  }}
+>
+  Pilates Reformer con grupos reducidos de máximo 4 personas, sesiones privadas y atención personalizada.
 </p>
           <div className="reveal reveal-delay-1 mt-4">
             <a 
