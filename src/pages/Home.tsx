@@ -100,11 +100,11 @@ en Pozuelo de Alarcón
     </div>
   </section>
 
-  <section
+ <section
   className="w-full"
   style={{ background: '#F6F3EC' }}
 >
-  <div className="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-24">
+  <div className="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-24 reveal">
     <div className="mb-12 text-center">
       <span
         style={{
@@ -120,7 +120,7 @@ en Pozuelo de Alarcón
     </div>
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-10 text-center">
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center reveal reveal-delay-1">
         <div
           className="mb-8 rounded-full flex items-center justify-center"
           style={{
@@ -136,13 +136,12 @@ en Pozuelo de Alarcón
             src="/ELEMENTOS DE MARCA MOVE-clases grupales.png"
             alt="Elemento visual de MOVE para clases grupales"
             style={{
-              width: '130px',
-              height: '130px',
+              width: '150px',
+              height: '150px',
               objectFit: 'contain',
             }}
           />
         </div>
-
         <h3
           className="mb-3"
           style={{
@@ -154,7 +153,6 @@ en Pozuelo de Alarcón
         >
           Máximo 4 personas
         </h3>
-
         <p
           className="max-w-[250px] mx-auto"
           style={{
@@ -167,7 +165,7 @@ en Pozuelo de Alarcón
         </p>
       </div>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center reveal reveal-delay-2">
         <div
           className="mb-8 rounded-full flex items-center justify-center"
           style={{
@@ -189,7 +187,6 @@ en Pozuelo de Alarcón
             }}
           />
         </div>
-
         <h3
           className="mb-3"
           style={{
@@ -201,7 +198,6 @@ en Pozuelo de Alarcón
         >
           Sesiones privadas
         </h3>
-
         <p
           className="max-w-[250px] mx-auto"
           style={{
@@ -214,7 +210,7 @@ en Pozuelo de Alarcón
         </p>
       </div>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center reveal reveal-delay-3">
         <div
           className="mb-8 rounded-full flex items-center justify-center"
           style={{
@@ -230,13 +226,12 @@ en Pozuelo de Alarcón
             src="/ELEMENTOS DE MARCA MOVE-atencion personalizada.png"
             alt="Elemento visual de MOVE para atención personalizada"
             style={{
-              width: '120px',
-              height: '120px',
+              width: '130px',
+              height: '130px',
               objectFit: 'contain',
             }}
           />
         </div>
-
         <h3
           className="mb-3"
           style={{
@@ -248,7 +243,6 @@ en Pozuelo de Alarcón
         >
           Atención personalizada
         </h3>
-
         <p
           className="max-w-[250px] mx-auto"
           style={{
