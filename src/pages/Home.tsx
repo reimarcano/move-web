@@ -99,7 +99,7 @@ export default function Home() {
     letterSpacing: '0.12em',
   }}
 >
-  Reserva tu clase de Pilates Reformer
+  Reserva tu primera clase de Pilates
             </a>
           </div>
         </div>
