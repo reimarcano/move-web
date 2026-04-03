@@ -136,8 +136,8 @@ en Pozuelo de Alarcón
             src="/ELEMENTOS DE MARCA MOVE-clases grupales.png"
             alt="Elemento visual de MOVE para clases grupales"
             style={{
-              width: '100px',
-              height: '100px',
+              width: '130px',
+              height: '130px',
               objectFit: 'contain',
             }}
           />
@@ -230,8 +230,8 @@ en Pozuelo de Alarcón
             src="/ELEMENTOS DE MARCA MOVE-atencion personalizada.png"
             alt="Elemento visual de MOVE para atención personalizada"
             style={{
-              width: '100px',
-              height: '100px',
+              width: '120px',
+              height: '120px',
               objectFit: 'contain',
             }}
           />
