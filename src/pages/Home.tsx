@@ -71,9 +71,7 @@ export default function Home() {
           className="absolute left-1/2 -translate-x-1/2 text-center w-full max-w-[900px] z-10 px-6 md:px-10 top-[5%]"
         >
           <h1 className="mb-0 reveal font-serif text-negro-move font-normal">
-  Tu centro de <span className="italic">Pilates Reformer en</span>
-  <br />
-  Pozuelo de Alarcón
+  Tu centro de <span className="italic">Pilates Reformer </span>en Pozuelo de Alarcón
 </h1>
 
 <p 
@@ -104,7 +102,7 @@ export default function Home() {
     letterSpacing: '0.12em',
   }}
 >
-  Reserva tu primera clase de Pilates
+  Reserva tu plaza en MOVE
             </a>
           </div>
         </div>
