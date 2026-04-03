@@ -71,11 +71,15 @@ export default function Home() {
           className="absolute left-1/2 -translate-x-1/2 text-center w-full max-w-[900px] z-10 px-6 md:px-10 top-[5%]"
         >
           <h1 className="mb-0 reveal font-serif text-negro-move font-normal">
-            Tu centro de <span className="italic">Pilates Reformer</span> en Pozuelo de Alarcón
-          </h1>
+  Tu centro de <span className="italic">Pilates Reformer</span>
+  <br />
+  en Pozuelo de Alarcón
+</h1>
 
-          <p className="reveal reveal-delay-1 mt-3 text-negro-move max-w-[700px] mx-auto">
-  Pilates Reformer en Pozuelo de Alarcón con grupos de máximo 4 personas, sesiones privadas y atención personalizada.
+<p className="reveal reveal-delay-1 mt-3 text-negro-move max-w-[700px] mx-auto">
+  Pilates Reformer con grupos reducidos de máximo 4 personas,
+  <br />
+  sesiones privadas y atención personalizada.
 </p>
           <div className="reveal reveal-delay-1 mt-4">
             <a 
