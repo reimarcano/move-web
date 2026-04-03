@@ -83,23 +83,23 @@ export default function Home() {
 </p>
           <div className="reveal reveal-delay-1 mt-4">
             <a 
-              href="https://wa.me/34654495508" 
-              target="_blank" 
-              rel="noreferrer"
-              className="inline-block border-[1.5px] rounded-[100px] transition-all duration-300 ease-in-out hover:bg-[#493523] hover:text-[#F6F3EC] hover:border-[#493523] hover:-translate-y-[1px]"
-              aria-label="Reservar tu primera clase por WhatsApp"
-              style={{
-                background: 'transparent',
-                color: '#493523',
-                borderColor: '#493523',
-                padding: '14px 32px',
-                fontFamily: 'Arial, sans-serif',
-                fontSize: '12px',
-                textTransform: 'uppercase',
-                letterSpacing: '0.12em',
-              }}
-            >
-              Reserva tu primera clase
+              href="https://wa.me/34654495508?text=Hola%2C%20me%20gustar%C3%ADa%20reservar%20mi%20primera%20clase%20gratuita%20en%20MOVE%20Pilates%20Boutique.%20%C2%BFPod%C3%A9is%20indicarme%20disponibilidad%3F"
+  target="_blank"
+  rel="noreferrer"
+  aria-label="Reserva tu primera clase por WhatsApp"
+  className="inline-block rounded-[100px] border-[1.5px] transition-all duration-300 ease-in-out hover:-translate-y-[1px] hover:bg-[#7F7763] hover:border-[#7F7763] hover:text-[#F6F3EC]"
+  style={{
+    background: '#493523',
+    color: '#F6F3EC',
+    borderColor: '#493523',
+    padding: '14px 32px',
+    fontFamily: 'Arial, sans-serif',
+    fontSize: '12px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.12em',
+  }}
+>
+  Reserva tu clase de Pilates Reformer
             </a>
           </div>
         </div>
