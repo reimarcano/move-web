@@ -101,142 +101,112 @@ en Pozuelo de Alarcón
   </section>
 
   <section
-    className="w-full"
-    style={{ background: '#F0EADE' }}
-  >
-    <div className="mx-auto max-w-[1200px] px-6 md:px-10 py-14 md:py-16">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
-        <div className="flex flex-col items-center">
-          <div
-            className="flex items-center justify-center rounded-full border-[3px] mb-5"
-            style={{
-              width: '110px',
-              height: '110px',
-              borderColor: '#6B4B3A',
-            }}
-          >
-            <span
-              style={{
-                fontFamily: 'Arial, sans-serif',
-                fontSize: '13px',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: '#6B4B3A',
-              }}
-            >
-              4 MAX
-            </span>
-          </div>
-          <h3
-            className="mb-2"
-            style={{
-              fontFamily: 'Georgia, serif',
-              fontSize: '28px',
-              color: '#493523',
-            }}
-          >
-            Máximo 4 personas
-          </h3>
-          <p
-            className="max-w-[280px] mx-auto"
-            style={{
-              fontSize: '15px',
-              lineHeight: '1.6',
-              color: '#6B4B3A',
-            }}
-          >
-            Clases reducidas para un acompañamiento más cercano y consciente.
-          </p>
-        </div>
+  className="w-full"
+  style={{ background: '#F6F3EC' }}
+>
+  <div className="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-24">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-10 text-center">
+      <div className="flex flex-col items-center">
+        <div
+          className="mb-8 rounded-full border"
+          style={{
+            width: '92px',
+            height: '92px',
+            borderColor: 'rgba(73, 53, 35, 0.55)',
+            borderWidth: '1.5px',
+          }}
+        />
+        <h3
+          className="mb-3"
+          style={{
+            fontFamily: 'Georgia, serif',
+            fontSize: '24px',
+            lineHeight: '1.2',
+            color: '#493523',
+          }}
+        >
+          Máximo 4 personas
+        </h3>
+        <p
+          className="max-w-[250px] mx-auto"
+          style={{
+            fontSize: '15px',
+            lineHeight: '1.75',
+            color: 'rgba(73, 53, 35, 0.82)',
+          }}
+        >
+          Clases reducidas para un acompañamiento más cercano y consciente.
+        </p>
+      </div>
 
-        <div className="flex flex-col items-center">
-          <div
-            className="flex items-center justify-center rounded-full border-[3px] mb-5"
-            style={{
-              width: '110px',
-              height: '110px',
-              borderColor: '#6B4B3A',
-            }}
-          >
-            <span
-              style={{
-                fontFamily: 'Arial, sans-serif',
-                fontSize: '13px',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: '#6B4B3A',
-              }}
-            >
-              1:1
-            </span>
-          </div>
-          <h3
-            className="mb-2"
-            style={{
-              fontFamily: 'Georgia, serif',
-              fontSize: '28px',
-              color: '#493523',
-            }}
-          >
-            Sesiones privadas
-          </h3>
-          <p
-            className="max-w-[280px] mx-auto"
-            style={{
-              fontSize: '15px',
-              lineHeight: '1.6',
-              color: '#6B4B3A',
-            }}
-          >
-            Un espacio adaptado a tu ritmo, tus objetivos y tu momento vital.
-          </p>
-        </div>
+      <div className="flex flex-col items-center">
+        <div
+          className="mb-8 rounded-full border"
+          style={{
+            width: '92px',
+            height: '92px',
+            borderColor: 'rgba(73, 53, 35, 0.55)',
+            borderWidth: '1.5px',
+          }}
+        />
+        <h3
+          className="mb-3"
+          style={{
+            fontFamily: 'Georgia, serif',
+            fontSize: '24px',
+            lineHeight: '1.2',
+            color: '#493523',
+          }}
+        >
+          Sesiones privadas
+        </h3>
+        <p
+          className="max-w-[250px] mx-auto"
+          style={{
+            fontSize: '15px',
+            lineHeight: '1.75',
+            color: 'rgba(73, 53, 35, 0.82)',
+          }}
+        >
+          Un espacio adaptado a tu ritmo, tus objetivos y tu momento vital.
+        </p>
+      </div>
 
-        <div className="flex flex-col items-center">
-          <div
-            className="flex items-center justify-center rounded-full border-[3px] mb-5"
-            style={{
-              width: '110px',
-              height: '110px',
-              borderColor: '#6B4B3A',
-            }}
-          >
-            <span
-              style={{
-                fontFamily: 'Arial, sans-serif',
-                fontSize: '13px',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: '#6B4B3A',
-              }}
-            >
-              MOVE
-            </span>
-          </div>
-          <h3
-            className="mb-2"
-            style={{
-              fontFamily: 'Georgia, serif',
-              fontSize: '28px',
-              color: '#493523',
-            }}
-          >
-            Atención personalizada
-          </h3>
-          <p
-            className="max-w-[280px] mx-auto"
-            style={{
-              fontSize: '15px',
-              lineHeight: '1.6',
-              color: '#6B4B3A',
-            }}
-          >
-            Técnica, cuidado y sensibilidad en cada sesión de Pilates Reformer.
-          </p>
-        </div>
+      <div className="flex flex-col items-center">
+        <div
+          className="mb-8 rounded-full border"
+          style={{
+            width: '92px',
+            height: '92px',
+            borderColor: 'rgba(73, 53, 35, 0.55)',
+            borderWidth: '1.5px',
+          }}
+        />
+        <h3
+          className="mb-3"
+          style={{
+            fontFamily: 'Georgia, serif',
+            fontSize: '24px',
+            lineHeight: '1.2',
+            color: '#493523',
+          }}
+        >
+          Atención personalizada
+        </h3>
+        <p
+          className="max-w-[250px] mx-auto"
+          style={{
+            fontSize: '15px',
+            lineHeight: '1.75',
+            color: 'rgba(73, 53, 35, 0.82)',
+          }}
+        >
+          Técnica, cuidado y sensibilidad en cada sesión de Pilates Reformer.
+        </p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
       {/* Philosophy Section */}
