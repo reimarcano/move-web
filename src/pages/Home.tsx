@@ -102,7 +102,7 @@ en Pozuelo de Alarcón
 
   <section
     className="w-full"
-    style={{ background: '#F6E3D6' }}
+    style={{ background: '#F0EADE' }}
   >
     <div className="mx-auto max-w-[1200px] px-6 md:px-10 py-14 md:py-16">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
