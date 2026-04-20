@@ -8,52 +8,6 @@ export default function Home() {
 
 useEffect(() => {
     document.title = "MOVE Pilates Boutique | Pilates Reformer Pozuelo de Alarcón";
-
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.setAttribute('name', 'description');
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute('content', 'MOVE Pilates Boutique: estudio de Pilates Reformer en Pozuelo de Alarcón. Grupos de máximo 4 personas y sesiones privadas con atención totalmente personalizada. Primera clase de bienvenida incluida.');
-
-    const existing = document.getElementById('schema-local');
-    if (!existing) {
-      const script = document.createElement('script');
-      script.id = 'schema-local';
-      script.type = 'application/ld+json';
-      script.text = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "SportsActivityLocation",
-        "name": "MOVE Pilates Boutique",
-        "description": "Estudio de Pilates Reformer en Pozuelo de Alarcón con grupos de máximo 4 personas y sesiones privadas.",
-        "url": "https://movepilatesboutique.com",
-        "telephone": "+34654495508",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Av. de Europa, 31, local 7",
-          "addressLocality": "Pozuelo de Alarcón",
-          "postalCode": "28224",
-          "addressRegion": "Madrid",
-          "addressCountry": "ES"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 40.4355,
-          "longitude": -3.8130
-        },
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-            "opens": "07:00",
-            "closes": "21:00"
-          }
-        ],
-        "priceRange": "€€"
-      });
-      document.head.appendChild(script);
-    }
   }, []);
   
   const faqs = [
