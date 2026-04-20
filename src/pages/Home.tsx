@@ -5,48 +5,6 @@ import { faqs } from "../data/faqs";
 const Reviews = lazy(() => import("../components/Reviews"));
 
 /* ────────────────────────────────────────────
-   Schema.org structured data
-   ──────────────────────────────────────────── */
-
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "HealthClub",
-  name: "MOVE Pilates Boutique",
-  description:
-    "Estudio de Pilates Reformer en Pozuelo de Alarcón. Clases en grupos reducidos de máximo 4 personas y sesiones privadas 1:1.",
-  url: "https://movepilatesboutique.com",
-  telephone: "+34654495508",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Av. de Europa, 31, local 7",
-    addressLocality: "Pozuelo de Alarcón",
-    postalCode: "28224",
-    addressRegion: "Madrid",
-    addressCountry: "ES",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 40.4358,
-    longitude: -3.8142,
-  },
-  openingHoursSpecification: [],
-  image: "https://movepilatesboutique.com/assets/move_portada_pilates-pozuelo.jpg",
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
-  })),
-};
-
-/* ────────────────────────────────────────────
    Constants
    ──────────────────────────────────────────── */
 
@@ -157,243 +115,196 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-        <title>MOVE Pilates Boutique | Pilates Reformer Pozuelo de Alarcón</title>
-        <meta
-          name="description"
-          content="Estudio de Pilates Reformer en Pozuelo de Alarcón. Clases en grupos reducidos de máximo 4 personas y sesiones privadas 1:1. Primera clase gratuita."
-        />
-        <meta
-          name="keywords"
-          content="pilates reformer, pozuelo de alarcón, pilates madrid, clases pilates, pilates embarazo, pilates postparto, pilates espalda"
-        />
-        <link rel="canonical" href="https://movepilatesboutique.com" />
+    <div className="w-full">
+      {/* ── Hero Section ── */}
+      <section className="relative h-screen flex items-start justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/assets/move_portada_pilates-pozuelo.jpg"
+            alt="Estudio de Pilates Reformer MOVE en Pozuelo de Alarcón"
+            className="w-full h-full object-cover"
+            width={1920}
+            height={1080}
+            style={{ objectPosition: "center 20%" }}
+            referrerPolicy="no-referrer"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </div>
 
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="MOVE Pilates Boutique | Pilates Reformer Pozuelo de Alarcón" />
-        <meta
-          property="og:description"
-          content="Estudio de Pilates Reformer en Pozuelo de Alarcón. Grupos reducidos, atención personalizada y primera clase gratuita."
-        />
-        <meta property="og:url" content="https://movepilatesboutique.com" />
-        <meta
-          property="og:image"
-          content="https://movepilatesboutique.com/assets/move_portada_pilates-pozuelo.jpg"
-        />
-        <meta property="og:locale" content="es_ES" />
-        <meta property="og:site_name" content="MOVE Pilates Boutique" />
+        <div className="absolute left-1/2 -translate-x-1/2 text-center w-full max-w-[900px] z-10 px-6 md:px-10 top-[5%]">
+          <h1 className="mb-0 reveal font-serif text-negro-move font-normal">
+            Tu centro de <span className="italic">Pilates Reformer</span>
+            <br />
+            en Pozuelo de Alarcón
+          </h1>
 
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="MOVE Pilates Boutique | Pilates Reformer Pozuelo de Alarcón" />
-        <meta
-          name="twitter:description"
-          content="Estudio de Pilates Reformer en Pozuelo de Alarcón. Grupos reducidos y primera clase gratuita."
-        />
-        <meta
-          name="twitter:image"
-          content="https://movepilatesboutique.com/assets/move_portada_pilates-pozuelo.jpg"
-        />
+          <div className="reveal reveal-delay-1 mt-4">
+            <a
+              href={WHATSAPP_CTA_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Reserva tu primera clase por WhatsApp"
+              className="inline-block rounded-[100px] border-[1.5px] bg-[#493523] text-[#F6F3EC] border-[#493523] uppercase tracking-[0.12em] transition-all duration-300 ease-in-out hover:-translate-y-[1px] hover:bg-[#7F7763] hover:border-[#7F7763] hover:text-[#F6F3EC]"
+              style={{
+                padding: "14px 32px",
+                fontFamily: "Arial, sans-serif",
+                fontSize: "12px",
+              }}
+            >
+              Reserva tu plaza en MOVE
+            </a>
+          </div>
+        </div>
+      </section>
 
-        {/* Structured Data */}
-        <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      </Helmet>
-
-      <div className="w-full">
-        {/* ── Hero Section ── */}
-        <section className="relative h-screen flex items-start justify-center overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <img
-              src="/assets/move_portada_pilates-pozuelo.jpg"
-              alt="Estudio de Pilates Reformer MOVE en Pozuelo de Alarcón"
-              className="w-full h-full object-cover"
-              width={1920}
-              height={1080}
-              style={{ objectPosition: "center 20%" }}
-              referrerPolicy="no-referrer"
-              fetchPriority="high"
-              decoding="async"
-            />
+      {/* ── Features Section ── */}
+      <section className="w-full bg-[#F6F3EC]">
+        <div className="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-24 reveal">
+          <div className="mb-12 text-center">
+            <span className="font-sans text-[12px] tracking-[0.18em] uppercase text-[rgba(73,53,35,0.7)]">
+              La experiencia MOVE
+            </span>
           </div>
 
-          <div className="absolute left-1/2 -translate-x-1/2 text-center w-full max-w-[900px] z-10 px-6 md:px-10 top-[5%]">
-            <h1 className="mb-0 reveal font-serif text-negro-move font-normal">
-              Tu centro de <span className="italic">Pilates Reformer</span>
-              <br />
-              en Pozuelo de Alarcón
-            </h1>
-
-            <div className="reveal reveal-delay-1 mt-4">
-              <a
-                href={WHATSAPP_CTA_URL}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Reserva tu primera clase por WhatsApp"
-                className="inline-block rounded-[100px] border-[1.5px] bg-[#493523] text-[#F6F3EC] border-[#493523] uppercase tracking-[0.12em] transition-all duration-300 ease-in-out hover:-translate-y-[1px] hover:bg-[#7F7763] hover:border-[#7F7763] hover:text-[#F6F3EC]"
-                style={{
-                  padding: "14px 32px",
-                  fontFamily: "Arial, sans-serif",
-                  fontSize: "12px",
-                }}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-10 text-center">
+            {features.map((feature, index) => (
+              <div
+                key={feature.title}
+                className={`flex flex-col items-center reveal reveal-delay-${index + 1}`}
               >
-                Reserva tu plaza en MOVE
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Features Section ── */}
-        <section className="w-full bg-[#F6F3EC]">
-          <div className="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-24 reveal">
-            <div className="mb-12 text-center">
-              <span className="font-sans text-[12px] tracking-[0.18em] uppercase text-[rgba(73,53,35,0.7)]">
-                La experiencia MOVE
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-10 text-center">
-              {features.map((feature, index) => (
                 <div
-                  key={feature.title}
-                  className={`flex flex-col items-center reveal reveal-delay-${index + 1}`}
-                >
-                  <div
-                    className="mb-8 rounded-full flex items-center justify-center"
-                    style={{
-                      width: "92px",
-                      height: "92px",
-                      borderColor: "rgba(73, 53, 35, 0.55)",
-                      borderWidth: "1.5px",
-                      borderStyle: "solid",
-                      background: "#F6F3EC",
-                    }}
-                  >
-                    <img
-                      src={feature.icon}
-                      alt={feature.iconAlt}
-                      width={feature.iconSize}
-                      height={feature.iconSize}
-                      loading="lazy"
-                      decoding="async"
-                      style={{
-                        objectFit: "contain",
-                      }}
-                    />
-                  </div>
-                  <h3
-                    className="mb-3"
-                    style={{
-                      fontFamily: "Georgia, serif",
-                      fontSize: "24px",
-                      lineHeight: "1.2",
-                      color: "#493523",
-                    }}
-                  >
-                    {feature.title}
-                  </h3>
-                  <p
-                    className="max-w-[250px] mx-auto"
-                    style={{
-                      fontSize: "15px",
-                      lineHeight: "1.75",
-                      color: "rgba(73, 53, 35, 0.82)",
-                    }}
-                  >
-                    {feature.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Philosophy Section ── */}
-        <section className="section-padding-oscuro px-6 bg-marron-move text-crema-move text-center">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-crema-move mb-0 font-serif italic reveal">
-              &ldquo;Move no es solo un estudio de Pilates Reformer, es un refugio en Pozuelo de
-              Alarcón diseñado con intención, sensibilidad y propósito. Un espacio donde cada
-              detalle está pensado para invitarte a reconectar contigo.&rdquo;
-            </h2>
-            <div className="mt-section-lg flex flex-col items-center reveal reveal-delay-2">
-              <div className="w-48 h-48 rounded-full overflow-hidden border-2 border-crema-move/20 shadow-2xl">
-                <img
-                  src="/assets/foto-genesis.jpg"
-                  alt="Retrato de Génesis Romero, fundadora de MOVE Pilates Boutique"
-                  className="w-full h-full object-cover"
-                  width={192}
-                  height={192}
-                  loading="lazy"
-                  decoding="async"
+                  className="mb-8 rounded-full flex items-center justify-center"
                   style={{
-                    objectPosition: "center 42%",
-                    transform: "scale(1.4)",
+                    width: "92px",
+                    height: "92px",
+                    borderColor: "rgba(73, 53, 35, 0.55)",
+                    borderWidth: "1.5px",
+                    borderStyle: "solid",
+                    background: "#F6F3EC",
                   }}
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-              <div className="mt-3 text-center">
-                <p className="font-sans text-[13px] text-crema-move/55 text-center tracking-[0.05em] mb-0">
-                  Génesis Romero
+                >
+                  <img
+                    src={feature.icon}
+                    alt={feature.iconAlt}
+                    width={feature.iconSize}
+                    height={feature.iconSize}
+                    loading="lazy"
+                    decoding="async"
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+                <h3
+                  className="mb-3"
+                  style={{
+                    fontFamily: "Georgia, serif",
+                    fontSize: "24px",
+                    lineHeight: "1.2",
+                    color: "#493523",
+                  }}
+                >
+                  {feature.title}
+                </h3>
+                <p
+                  className="max-w-[250px] mx-auto"
+                  style={{
+                    fontSize: "15px",
+                    lineHeight: "1.75",
+                    color: "rgba(73, 53, 35, 0.82)",
+                  }}
+                >
+                  {feature.description}
                 </p>
-                <p className="font-sans text-[11px] text-crema-move/55 text-center uppercase tracking-[0.1em] mb-0">
-                  Fundadora de MOVE
-                </p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Philosophy Section ── */}
+      <section className="section-padding-oscuro px-6 bg-marron-move text-crema-move text-center">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-crema-move mb-0 font-serif italic reveal">
+            &ldquo;Move no es solo un estudio de Pilates Reformer, es un refugio en Pozuelo de
+            Alarcón diseñado con intención, sensibilidad y propósito. Un espacio donde cada
+            detalle está pensado para invitarte a reconectar contigo.&rdquo;
+          </h2>
+          <div className="mt-section-lg flex flex-col items-center reveal reveal-delay-2">
+            <div className="w-48 h-48 rounded-full overflow-hidden border-2 border-crema-move/20 shadow-2xl">
+              <img
+                src="/assets/foto-genesis.jpg"
+                alt="Retrato de Génesis Romero, fundadora de MOVE Pilates Boutique"
+                className="w-full h-full object-cover"
+                width={192}
+                height={192}
+                loading="lazy"
+                decoding="async"
+                style={{
+                  objectPosition: "center 42%",
+                  transform: "scale(1.4)",
+                }}
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <div className="mt-3 text-center">
+              <p className="font-sans text-[13px] text-crema-move/55 text-center tracking-[0.05em] mb-0">
+                Génesis Romero
+              </p>
+              <p className="font-sans text-[11px] text-crema-move/55 text-center uppercase tracking-[0.1em] mb-0">
+                Fundadora de MOVE
+              </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ── FAQ Section ── */}
-        <section className="bg-tostado section-padding-oscuro px-6">
-          <div className="max-w-[720px] mx-auto">
-            <h2 className="text-center text-negro-move mb-text-lg reveal">Preguntas frecuentes</h2>
-            <div className="w-10 h-[1px] bg-negro-move mx-auto mb-section-md reveal reveal-delay-1" />
+      {/* ── FAQ Section ── */}
+      <section className="bg-tostado section-padding-oscuro px-6">
+        <div className="max-w-[720px] mx-auto">
+          <h2 className="text-center text-negro-move mb-text-lg reveal">Preguntas frecuentes</h2>
+          <div className="w-10 h-[1px] bg-negro-move mx-auto mb-section-md reveal reveal-delay-1" />
 
-            <div className="border-b border-negro-move reveal reveal-delay-2">
-              {faqs.map((faq, index) => (
-                <FAQItem
-                  key={index}
-                  faq={faq}
-                  index={index}
-                  isOpen={openIndex === index}
-                  onToggle={() => toggleFaq(index)}
-                />
-              ))}
-            </div>
-
-            <div className="mt-section-md text-center reveal">
-              <h3 className="font-serif text-negro-move text-[22px] mb-text-md italic">
-                ¿Tienes más preguntas?
-              </h3>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-primary"
-                aria-label="Escríbenos por WhatsApp para más información"
-              >
-                Escríbenos por WhatsApp
-              </a>
-            </div>
+          <div className="border-b border-negro-move reveal reveal-delay-2">
+            {faqs.map((faq, index) => (
+              <FAQItem
+                key={index}
+                faq={faq}
+                index={index}
+                isOpen={openIndex === index}
+                onToggle={() => toggleFaq(index)}
+              />
+            ))}
           </div>
-        </section>
 
-        {/* ── Reviews (lazy loaded) ── */}
-        <Suspense
-          fallback={
-            <div className="py-20 text-center text-negro-move/40 text-sm">
-              Cargando reseñas…
-            </div>
-          }
-        >
-          <Reviews />
-        </Suspense>
-      </div>
-    </>
+          <div className="mt-section-md text-center reveal">
+            <h3 className="font-serif text-negro-move text-[22px] mb-text-md italic">
+              ¿Tienes más preguntas?
+            </h3>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary"
+              aria-label="Escríbenos por WhatsApp para más información"
+            >
+              Escríbenos por WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Reviews (lazy loaded) ── */}
+      <Suspense
+        fallback={
+          <div className="py-20 text-center text-negro-move/40 text-sm">
+            Cargando reseñas…
+          </div>
+        }
+      >
+        <Reviews />
+      </Suspense>
+    </div>
   );
 }
-
-
