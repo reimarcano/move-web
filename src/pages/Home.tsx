@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useCallback, Suspense, lazy } from "react";
 import { ChevronDown } from "lucide-react";
-import { Helmet } from "react-helmet-async";
 import { faqs } from "../data/faqs";
 
 const Reviews = lazy(() => import("../components/Reviews"));
@@ -159,8 +158,6 @@ export default function Home() {
 
   return (
     <>
-      {/* ── SEO Head ── */}
-      <Helmet>
         <title>MOVE Pilates Boutique | Pilates Reformer Pozuelo de Alarcón</title>
         <meta
           name="description"
