@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Star } from 'lucide-react';
 
 const reviewsData = [
   {
@@ -112,34 +111,6 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review, index }) => {
 };
 
 export default function Reviews() {
-  const googleBusinessUrl = "https://www.google.com/maps/place//data=!4m2!3m1!1s0xd4187ede06d0267:0x6d55b452244d1c6a?sa=X&ved=1t:8290&ictx=111";
-
-  useEffect(() => {
-    // Schema Markup
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.id = 'reviews-schema';
-    script.innerHTML = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "MOVE Pilates Boutique",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "27",
-        "bestRating": "5"
-      }
-    });
-    document.head.appendChild(script);
-
-    return () => {
-      const existingScript = document.getElementById('reviews-schema');
-      if (existingScript) {
-        document.head.removeChild(existingScript);
-      }
-    };
-  }, []);
-
   return (
     <section className="bg-crema-base section-padding-claro px-6">
       <div className="max-w-[1000px] mx-auto">
