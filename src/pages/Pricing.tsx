@@ -7,7 +7,7 @@ import { MapPin, Clock, Phone, Mail, Instagram } from 'lucide-react';
 export default function Pricing() {
   useEffect(() => {
   document.title = "Tarifas | MOVE Pilates Boutique Pozuelo de Alarcón";
-  document.querySelector('meta[name="description"]')?.setAttribute('content', 'Tarifas de Pilates Reformer en MOVE Pozuelo de Alarcón. Clases grupales desde 115 €/mes con grupos de máximo 4 personas. Primera clase de bienvenida sin coste.'); // ← AÑADE ESTO
+  document.querySelector('meta[name="description"]')?.setAttribute('content', 'Clases de Pilates Reformer en grupos de máximo 4 personas, desde 115 €/mes. Sesiones privadas 1:1 con atención totalmente personalizada. Primera clase de bienvenida sin coste. Pozuelo de Alarcón.');
 }, []);
 
   return (
