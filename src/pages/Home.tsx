@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef, useCallback, Suspense, lazy } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { ChevronDown } from "lucide-react";
 import { faqs } from "../data/faqs";
 
-const Reviews = lazy(() => import("../components/Reviews"));
+import Reviews from "../components/Reviews";
 
 /* ────────────────────────────────────────────
    Constants
@@ -296,15 +296,7 @@ export default function Home() {
       </section>
 
       {/* ── Reviews (lazy loaded) ── */}
-      <Suspense
-        fallback={
-          <div className="py-20 text-center text-negro-move/40 text-sm">
-            Cargando reseñas…
-          </div>
-        }
-      >
-        <Reviews />
-      </Suspense>
+      <Reviews />
     </div>
   );
 }
