@@ -137,14 +137,11 @@ export default function Pricing() {
                   </div>
                   <div className="flex-1 text-left">
                     <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 w-full">
-                      <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Lun · Mar · Jue</span>
-                      <span className="font-sans text-[13px] text-[#493523] text-right">8:00 – 20:00</span>
-                      
-                      <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Miércoles</span>
-                      <span className="font-sans text-[13px] text-[#493523] text-right">8:00 – 16:00</span>
+                      <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Lun - Jue</span>
+                      <span className="font-sans text-[13px] text-[#493523] text-right">8:00 – 21:00</span>
                       
                       <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Viernes</span>
-                      <span className="font-sans text-[13px] text-[#493523] text-right">8:00 – 14:00</span>
+                      <span className="font-sans text-[13px] text-[#493523] text-right">8:00 – 20:00</span>
                       
                       <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Sáb · Dom</span>
                       <span className="font-sans text-[13px] text-[#493523] text-right">Cerrado</span>
