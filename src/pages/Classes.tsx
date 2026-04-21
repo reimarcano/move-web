@@ -4,8 +4,9 @@ import sesionesPrivadas from "../assets/move-pilates-madrid-05.jpg";
 
 export default function Classes() {
   useEffect(() => {
-    document.title = "Clases | MOVE Pilates Boutique Pozuelo de Alarcón";
-  }, []);
+  document.title = "Clases de Pilates Reformer en Pozuelo de Alarcón | MOVE";
+  document.querySelector('meta[name="description"]')?.setAttribute('content', 'Clases de Pilates Reformer en grupos de máximo 4 personas y sesiones privadas 1:1 en Pozuelo de Alarcón. Sin experiencia previa necesaria. Especialidades: recuperación de lesiones, deportistas, embarazo y postparto.');
+}, []);
 
   return (
     <div className="w-full">
