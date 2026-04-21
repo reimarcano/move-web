@@ -69,7 +69,7 @@ export default function Pricing() {
   className="font-sans text-sm md:text-base max-w-lg mx-auto mb-10 leading-relaxed font-medium"
   style={{ color: '#493523' }}
 >
-  Te invitamos a descubrir nuestro método con una sesión de cortesía.
+  Te invitamos a descubrir nuestro método.
 </p>
           
           <a 
