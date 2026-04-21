@@ -58,7 +58,7 @@ export default function Pricing() {
       {/* Primera Vez - Aligned Style */}
       <section className="max-w-4xl mx-auto px-6 section-padding-claro pt-0 reveal">
         <div className="bg-[#F0EADE] border border-[#D8D0BF] rounded-[8px] p-10 md:p-16 text-center">
-          <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-[#493523] mb-6 block">Cortesía de Bienvenida</span>
+          <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-[#493523] mb-6 block">Clase de Bienvenida</span>
           
           <h2 className="font-serif text-3xl md:text-5xl text-[#493523] mb-6 leading-tight font-normal">
             Tu primera sesión <br />
