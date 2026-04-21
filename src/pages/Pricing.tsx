@@ -65,8 +65,8 @@ export default function Pricing() {
             <span className="italic font-light">sin coste.</span>
           </h2>
           
-          <p className="font-sans text-sm md:text-base text-[#7F7763] max-w-lg mx-auto mb-10 leading-relaxed font-medium">
-            Te invitamos a descubrir nuestro método con una sesión inaugural gratuita.
+          <p className="font-sans text-sm md:text-base text-[#493523] max-w-lg mx-auto mb-10 leading-relaxed font-medium">
+            Te invitamos a descubrir nuestro método con una sesión de cortesía.
           </p>
           
           <a 
