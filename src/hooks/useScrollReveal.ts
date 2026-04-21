@@ -5,35 +5,38 @@ export const useScrollReveal = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px',
-    };
+    // Esperamos a que React termine de pintar el DOM completo
+    const timer = setTimeout(() => {
+      const observerOptions = {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px',
+      };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const element = entry.target as HTMLElement;
-          element.classList.add('visible');
-          element.style.willChange = 'opacity, transform';
-          
-          element.addEventListener('transitionend', () => {
-            element.style.willChange = 'auto';
-          }, { once: true });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const element = entry.target as HTMLElement;
+            element.classList.add('visible');
+            element.style.willChange = 'opacity, transform';
 
-          // Stop observing once visible
-          observer.unobserve(element);
-        }
-      });
-    }, observerOptions);
+            element.addEventListener('transitionend', () => {
+              element.style.willChange = 'auto';
+            }, { once: true });
 
-    // Initial scan for elements
-    const revealElements = document.querySelectorAll('.reveal');
-    revealElements.forEach((el) => observer.observe(el));
+            observer.unobserve(element);
+          }
+        });
+      }, observerOptions);
 
-    return () => {
-      revealElements.forEach((el) => observer.unobserve(el));
-      observer.disconnect();
-    };
-  }, [location]); // Re-run on route change
+      const revealElements = document.querySelectorAll('.reveal');
+      revealElements.forEach((el) => observer.observe(el));
+
+      return () => {
+        revealElements.forEach((el) => observer.unobserve(el));
+        observer.disconnect();
+      };
+    }, 100); // 100ms da tiempo a React para montar todos los componentes
+
+    return () => clearTimeout(timer);
+  }, [location]);
 };
