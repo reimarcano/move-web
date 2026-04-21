@@ -5,8 +5,7 @@ export const useScrollReveal = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Esperamos a que React termine de pintar el DOM completo
-    const timer = setTimeout(() => {
+    const initObserver = () => {
       const observerOptions = {
         threshold: 0.12,
         rootMargin: '0px 0px -40px 0px',
@@ -31,12 +30,21 @@ export const useScrollReveal = () => {
       const revealElements = document.querySelectorAll('.reveal');
       revealElements.forEach((el) => observer.observe(el));
 
-      return () => {
-        revealElements.forEach((el) => observer.unobserve(el));
-        observer.disconnect();
-      };
-    }, 100); // 100ms da tiempo a React para montar todos los componentes
+      return observer;
+    };
 
-    return () => clearTimeout(timer);
+    // rAF doble: espera a que el navegador haya pintado el DOM completo
+    let observer: IntersectionObserver;
+    const raf1 = requestAnimationFrame(() => {
+      const raf2 = requestAnimationFrame(() => {
+        observer = initObserver();
+      });
+      return () => cancelAnimationFrame(raf2);
+    });
+
+    return () => {
+      cancelAnimationFrame(raf1);
+      if (observer) observer.disconnect();
+    };
   }, [location]);
 };
