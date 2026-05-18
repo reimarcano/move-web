@@ -157,7 +157,7 @@ export default function Home() {
                 fontSize: "12px",
               }}
             >
-              Reserva tu plaza en MOVE
+              Reserva tu plaza en MOVE sin coste
             </a>
           </div>
         </div>
