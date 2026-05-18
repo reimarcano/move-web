@@ -157,7 +157,7 @@ export default function Home() {
                 fontSize: "12px",
               }}
             >
-              Reserva tu priemra clase de cortesia
+              Reserva tu primera clase de cortesía
             </a>
           </div>
         </div>
