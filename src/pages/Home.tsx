@@ -157,7 +157,7 @@ export default function Home() {
                 fontSize: "12px",
               }}
             >
-              Reserva tu 1ra clase de cortesia en Move
+              Reserva tu priemra clase de cortesia
             </a>
           </div>
         </div>
