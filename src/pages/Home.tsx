@@ -157,7 +157,7 @@ export default function Home() {
                 fontSize: "12px",
               }}
             >
-              Reserva tu plaza en MOVE sin coste
+              Reserva tu 1ra clase de cortesia en Move
             </a>
           </div>
         </div>
