@@ -262,9 +262,8 @@ export default function Layout() {
                   lineHeight: '1.8'
                 }}
               >
-                Lun – Mar – Jue: 8:00 – 20:00<br />
-                Mié: 8:00 – 16:00<br />
-                Vie: 8:00 – 14:00
+                Lun · Mar · Mié · Jue: 9:00 – 20:00<br />
+                Vie: 8:00 – 14:00 | 17:00 – 19:00
               </p>
             </div>
 
