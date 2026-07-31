@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import clasesGrupales from "../assets/move-pilates-pozuelo-grupos-01.jpg";
 import sesionesPrivadas from "../assets/move-pilates-madrid-05.jpg";
+import clasesGrupalesWebp from "../assets/move-pilates-pozuelo-grupos-01.webp";
+import sesionesPrivadasWebp from "../assets/move-pilates-madrid-05.webp";
 
 export default function Classes() {
   useEffect(() => {
@@ -25,14 +27,17 @@ export default function Classes() {
       <section className="bg-crema-base section-padding-claro px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1 reveal">
-            <img
-              src={clasesGrupales}
-              alt="Clases grupales de Pilates Reformer en MOVE · Pozuelo de Alarcón · Madrid"
-              className="w-full aspect-[3/4] object-cover rounded-2xl shadow-sm"
-              style={{ objectPosition: "center 20%" }}
-              loading="lazy"
-              decoding="async"
-            />
+            <picture className="block">
+              <source srcSet={clasesGrupalesWebp} type="image/webp" />
+              <img
+                src={clasesGrupales}
+                alt="Clases grupales de Pilates Reformer en MOVE · Pozuelo de Alarcón · Madrid"
+                className="w-full aspect-[3/4] object-cover rounded-2xl shadow-sm"
+                style={{ objectPosition: "center 20%" }}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </div>
           <div className="order-1 md:order-2 md:pl-8 reveal reveal-delay-1">
             <h2 className="mb-text-lg text-negro-move">Clases Grupales</h2>
@@ -188,14 +193,17 @@ export default function Classes() {
             </div>
           </div>
           <div className="reveal reveal-delay-1">
-            <img
-              src={sesionesPrivadas}
-              alt="Sesiones privadas de Pilates Reformer en MOVE · Pozuelo de Alarcón · Madrid"
-              className="w-full aspect-[3/4] object-cover rounded-2xl shadow-sm"
-              style={{ objectPosition: "center 20%" }}
-              loading="lazy"
-              decoding="async"
-            />
+            <picture className="block">
+              <source srcSet={sesionesPrivadasWebp} type="image/webp" />
+              <img
+                src={sesionesPrivadas}
+                alt="Sesiones privadas de Pilates Reformer en MOVE · Pozuelo de Alarcón · Madrid"
+                className="w-full aspect-[3/4] object-cover rounded-2xl shadow-sm"
+                style={{ objectPosition: "center 20%" }}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </div>
         </div>
       </section>

@@ -124,17 +124,20 @@ export default function Home() {
       {/* ── Hero Section ── */}
       <section className="relative h-screen flex items-start justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img
-            src="/assets/move_portada_pilates-pozuelo.jpg"
-            alt="Estudio de Pilates Reformer MOVE en Pozuelo de Alarcón"
-            className="w-full h-full object-cover"
-            width={1920}
-            height={1080}
-            style={{ objectPosition: "center 20%" }}
-            referrerPolicy="no-referrer"
-            fetchPriority="high"
-            decoding="async"
-          />
+          <picture className="block w-full h-full">
+            <source srcSet="/assets/move_portada_pilates-pozuelo.webp" type="image/webp" />
+            <img
+              src="/assets/move_portada_pilates-pozuelo.jpg"
+              alt="Estudio de Pilates Reformer MOVE en Pozuelo de Alarcón"
+              className="w-full h-full object-cover"
+              width={1920}
+              height={1080}
+              style={{ objectPosition: "center 20%" }}
+              referrerPolicy="no-referrer"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </picture>
         </div>
 
         <div className="absolute left-1/2 -translate-x-1/2 text-center w-full max-w-[900px] z-10 px-6 md:px-10 top-[5%]">
@@ -238,20 +241,23 @@ export default function Home() {
           </h2>
           <div className="mt-section-lg flex flex-col items-center reveal reveal-delay-2">
             <div className="w-48 h-48 rounded-full overflow-hidden border-2 border-crema-move/20 shadow-2xl">
-              <img
-                src="/assets/foto-genesis.jpg"
-                alt="Retrato de Génesis Romero, fundadora de MOVE Pilates Boutique"
-                className="w-full h-full object-cover"
-                width={192}
-                height={192}
-                loading="lazy"
-                decoding="async"
-                style={{
-                  objectPosition: "center 42%",
-                  transform: "scale(1.4)",
-                }}
-                referrerPolicy="no-referrer"
-              />
+              <picture className="block w-full h-full">
+                <source srcSet="/assets/foto-genesis.webp" type="image/webp" />
+                <img
+                  src="/assets/foto-genesis.jpg"
+                  alt="Retrato de Génesis Romero, fundadora de MOVE Pilates Boutique"
+                  className="w-full h-full object-cover"
+                  width={192}
+                  height={192}
+                  loading="lazy"
+                  decoding="async"
+                  style={{
+                    objectPosition: "center 42%",
+                    transform: "scale(1.4)",
+                  }}
+                  referrerPolicy="no-referrer"
+                />
+              </picture>
             </div>
             <div className="mt-3 text-center">
               <p className="font-sans text-[13px] text-crema-move/55 text-center tracking-[0.05em] mb-0">
