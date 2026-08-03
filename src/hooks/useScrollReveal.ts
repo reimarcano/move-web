@@ -5,46 +5,85 @@ export const useScrollReveal = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const initObserver = () => {
-      const observerOptions = {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    const observedElements = new WeakSet<Element>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const element = entry.target as HTMLElement;
+
+          element.classList.add('visible');
+          element.style.willChange = 'opacity, transform';
+
+          element.addEventListener(
+            'transitionend',
+            () => {
+              element.style.willChange = 'auto';
+            },
+            { once: true },
+          );
+
+          observer.unobserve(element);
+        });
+      },
+      {
         threshold: 0.12,
         rootMargin: '0px 0px -40px 0px',
-      };
+      },
+    );
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const element = entry.target as HTMLElement;
-            element.classList.add('visible');
-            element.style.willChange = 'opacity, transform';
+    const registerRevealElements = (root: ParentNode = document) => {
+      const elements = root.querySelectorAll('.reveal');
 
-            element.addEventListener('transitionend', () => {
-              element.style.willChange = 'auto';
-            }, { once: true });
+      elements.forEach((element) => {
+        if (observedElements.has(element)) return;
 
-            observer.unobserve(element);
-          }
-        });
-      }, observerOptions);
+        observedElements.add(element);
 
-      const revealElements = document.querySelectorAll('.reveal');
-      revealElements.forEach((el) => observer.observe(el));
+        if (prefersReducedMotion) {
+          element.classList.add('visible');
+          return;
+        }
 
-      return observer;
+        observer.observe(element);
+      });
     };
 
-    // rAF doble: espera a que el navegador haya pintado el DOM completo
-    let observer: IntersectionObserver;
-    const raf1 = requestAnimationFrame(() => {
-      const raf2 = requestAnimationFrame(() => {
-        observer = initObserver();
+    registerRevealElements();
+
+    const mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return;
+
+          if (node.classList.contains('reveal')) {
+            if (prefersReducedMotion) {
+              node.classList.add('visible');
+            } else if (!observedElements.has(node)) {
+              observedElements.add(node);
+              observer.observe(node);
+            }
+          }
+
+          registerRevealElements(node);
+        });
       });
-      return () => cancelAnimationFrame(raf2);
+    });
+
+    mutationObserver.observe(document.getElementById('root') ?? document.body, {
+      childList: true,
+      subtree: true,
     });
 
     return () => {
-      cancelAnimationFrame(raf1);
-      if (observer) observer.disconnect();
+      observer.disconnect();
+      mutationObserver.disconnect();
     };
-  }, [location]);
+  }, [location.pathname]);
 };
