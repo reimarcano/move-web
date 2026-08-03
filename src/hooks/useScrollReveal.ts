@@ -5,47 +5,57 @@ export const useScrollReveal = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const initObserver = () => {
-      const observerOptions = {
-        threshold: 0.12,
-        rootMargin: '0px 0px -40px 0px',
-      };
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const element = entry.target as HTMLElement;
-            element.classList.add('visible');
-            element.style.willChange = 'opacity, transform';
+          if (!entry.isIntersecting) return;
 
-            element.addEventListener('transitionend', () => {
-              element.style.willChange = 'auto';
-            }, { once: true });
-
-            observer.unobserve(element);
-          }
+          const element = entry.target as HTMLElement;
+          element.classList.add('visible');
+          observer.unobserve(element);
         });
-      }, observerOptions);
+      },
+      {
+        threshold: 0.01,
+        rootMargin: '0px 0px -10px 0px',
+      },
+    );
 
-      const revealElements = document.querySelectorAll('.reveal');
-      revealElements.forEach((el) => observer.observe(el));
+    const revealAll = () => {
+      const elements = document.querySelectorAll<HTMLElement>('.reveal');
 
-      return observer;
+      elements.forEach((element) => {
+        if (prefersReducedMotion) {
+          element.classList.add('visible');
+        } else {
+          observer.observe(element);
+        }
+      });
     };
 
-    // rAF doble: espera a que el navegador haya pintado el DOM completo
-    let observer: IntersectionObserver;
-    const raf1 = requestAnimationFrame(() => {
-      const raf2 = requestAnimationFrame(() => {
-        observer = initObserver();
-      });
-      return () => cancelAnimationFrame(raf2);
+    const timeout = window.setTimeout(revealAll, 100);
+
+    const mutationObserver = new MutationObserver(() => {
+      revealAll();
     });
 
+    const root = document.getElementById('root');
+
+    if (root) {
+      mutationObserver.observe(root, {
+        childList: true,
+        subtree: true,
+      });
+    }
+
     return () => {
-      cancelAnimationFrame(raf1);
-      if (observer) observer.disconnect();
+      window.clearTimeout(timeout);
+      observer.disconnect();
+      mutationObserver.disconnect();
     };
   }, [location.pathname]);
 };
