@@ -16,6 +16,31 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-RWGZ9S0QMF');
+            document.addEventListener('click', function (event) {
+        const target = event.target;
+
+        if (!(target instanceof Element)) return;
+
+        const link = target.closest('a');
+
+        if (!link) return;
+
+        const href = link.getAttribute('href') || '';
+        let method = '';
+
+        if (href.includes('wa.me/34654495508')) {
+          method = 'whatsapp';
+        } else if (href.startsWith('tel:+34654495508')) {
+          method = 'phone';
+        } else {
+          return;
+        }
+
+        gtag('event', 'generate_lead', {
+          method: method,
+          lead_source: window.location.pathname || '/'
+        });
+      });
     </script>
     <title>MOVE Pilates Boutique | Pilates Reformer Pozuelo de Alarcón</title>
     <meta name="description" content="MOVE Pilates Boutique: estudio de Pilates Reformer en Pozuelo de Alarcón. Grupos de máximo 4 personas y sesiones privadas con atención totalmente personalizada. Primera clase de bienvenida incluida." />
