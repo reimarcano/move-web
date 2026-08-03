@@ -75,7 +75,7 @@ export default function Contacto() {
                   </div>
                   <div className="flex-1 text-left">
                     <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 w-full">
-                      <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Lun · Mar · Mier· Jue</span>
+                      <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Lunes a Jueves</span>
                       <span className="font-sans text-[13px] text-[#493523] text-right">9:00 – 21:00</span>
                      
                       
