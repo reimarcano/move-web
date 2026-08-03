@@ -101,6 +101,11 @@ function SeoManager() {
       <meta property="og:image:height" content="630" />
       <meta property="og:locale" content="es_ES" />
       <meta property="og:site_name" content="MOVE Pilates Boutique" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={seo.title} />
+<meta name="twitter:description" content={seo.description} />
+<meta name="twitter:image" content={OG_IMAGE} />
     </Helmet>
   );
 }
