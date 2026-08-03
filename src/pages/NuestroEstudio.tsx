@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-
+import movePilatesMadrid05 from '../assets/move-pilates-madrid-05.webp';
 // Gallery 1: Nuestro Espacio
 const espacioImages = [
   '/assets/01-move-pilates-pozuelo.jpg',
@@ -19,7 +19,7 @@ const clasesImages = [
   '/assets/move-pilates-madrid-02.jpg',
   '/assets/move-pilates-madrid-03.jpg',
   '/assets/move-pilates-madrid-04.jpg',
-  '/assets/move-pilates-madrid-05.jpg',
+  movePilatesMadrid05,
   '/assets/move-pilates-madrid-06.jpg',
   '/assets/move-pilates-madrid-07.jpg',
   '/assets/move-pilates-madrid-08.jpg',

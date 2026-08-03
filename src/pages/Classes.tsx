@@ -1,21 +1,14 @@
-import { useEffect } from "react";
-import clasesGrupales from "../assets/move-pilates-pozuelo-grupos-01.jpg";
-import sesionesPrivadas from "../assets/move-pilates-madrid-05.jpg";
-import clasesGrupalesWebp from "../assets/move-pilates-pozuelo-grupos-01.webp";
-import sesionesPrivadasWebp from "../assets/move-pilates-madrid-05.webp";
+import clasesGrupales from "../assets/move-pilates-pozuelo-grupos-01.webp";
+import sesionesPrivadas from "../assets/move-pilates-madrid-05.webp";
 
 export default function Classes() {
-  useEffect(() => {
-  document.title = "Clases de Pilates Reformer en Pozuelo de Alarcón | MOVE";
-  document.querySelector('meta[name="description"]')?.setAttribute('content', 'Clases de Pilates Reformer en grupos de máximo 4 personas y sesiones privadas 1:1 en Pozuelo de Alarcón. Sin experiencia previa necesaria. Especialidades: recuperación de lesiones, deportistas, embarazo y postparto.');
-}, []);
-
   return (
     <div className="w-full">
       <section className="px-6 text-center max-w-4xl mx-auto section-padding-claro">
         <h1 className="mb-text-xl reveal font-serif text-[#493523] font-normal">
           Muévete bien. <span className="italic">Siéntete mejor.</span>
         </h1>
+
         <p className="reveal reveal-delay-1 mx-auto">
           Sesiones de Pilates Reformer en grupos reducidos y clases privadas,
           con atención personalizada para mejorar postura, fuerza, movilidad y
@@ -23,55 +16,58 @@ export default function Classes() {
         </p>
       </section>
 
-      {/* Block A - Grupales */}
+      {/* Clases grupales */}
       <section className="bg-crema-base section-padding-claro px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1 reveal">
-            <picture className="block">
-              <source srcSet={clasesGrupalesWebp} type="image/webp" />
-              <img
-                src={clasesGrupales}
-                alt="Clases grupales de Pilates Reformer en MOVE · Pozuelo de Alarcón · Madrid"
-                className="w-full aspect-[3/4] object-cover rounded-2xl shadow-sm"
-                style={{ objectPosition: "center 20%" }}
-                loading="lazy"
-                decoding="async"
-              />
-            </picture>
+            <img
+              src={clasesGrupales}
+              alt="Clases grupales de Pilates Reformer en MOVE · Pozuelo de Alarcón · Madrid"
+              className="w-full aspect-[3/4] object-cover rounded-2xl shadow-sm"
+              style={{ objectPosition: "center 20%" }}
+              loading="lazy"
+              decoding="async"
+            />
           </div>
+
           <div className="order-1 md:order-2 md:pl-8 reveal reveal-delay-1">
             <h2 className="mb-text-lg text-negro-move">Clases Grupales</h2>
+
             <p className="text-texto-move font-sans mb-text-lg">
               Pilates Reformer en grupos reducidos · Máximo 4 personas · 50
               minutos
             </p>
+
             <ul className="space-y-4 mb-section-md" role="list">
               <li className="flex items-center gap-3 mb-0 text-texto-move reveal reveal-delay-1">
                 <span
                   className="w-1.5 h-1.5 rounded-full bg-negro-move"
                   aria-hidden="true"
-                ></span>
+                />
                 Grupos reducidos de máximo 4 personas
               </li>
+
               <li className="flex items-center gap-3 mb-0 text-texto-move reveal reveal-delay-2">
                 <span
                   className="w-1.5 h-1.5 rounded-full bg-negro-move"
                   aria-hidden="true"
-                ></span>
+                />
                 Corrección técnica y ajustes individuales en cada clase
               </li>
+
               <li className="flex items-center gap-3 mb-0 text-texto-move reveal reveal-delay-3">
                 <span
                   className="w-1.5 h-1.5 rounded-full bg-negro-move"
                   aria-hidden="true"
-                ></span>
+                />
                 Progresión adaptada a tu nivel
               </li>
+
               <li className="flex items-center gap-3 mb-0 text-texto-move reveal reveal-delay-4">
                 <span
                   className="w-1.5 h-1.5 rounded-full bg-negro-move"
                   aria-hidden="true"
-                ></span>
+                />
                 Entrenamiento guiado, seguro y personalizado
               </li>
             </ul>
@@ -80,6 +76,7 @@ export default function Classes() {
               <h3 className="tag-label mb-text-sm text-negro-move">
                 IDEAL PARA
               </h3>
+
               <p className="text-[14px] leading-[1.75] text-texto-move mb-0">
                 Nuestras clases grupales de Pilates Reformer en Pozuelo están
                 pensadas para personas que quieren mejorar su postura, ganar
@@ -98,6 +95,7 @@ export default function Classes() {
               <h3 className="tag-label mb-text-sm text-negro-move">
                 ESPECIALIDADES
               </h3>
+
               <p className="text-[14px] leading-[1.75] text-texto-move mb-0">
                 Dolor de espalda y postura: trabajamos fuerza profunda,
                 movilidad y control corporal para ayudar a mejorar la postura y
@@ -117,43 +115,48 @@ export default function Classes() {
         </div>
       </section>
 
-      {/* Block B - Privadas */}
+      {/* Sesiones privadas */}
       <section className="bg-crema-base section-padding-claro px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="md:pr-8 reveal">
             <h2 className="text-negro-move mb-text-lg">
               Sesiones Privadas de Pilates Reformer
             </h2>
+
             <p className="text-texto-move font-sans mb-text-lg">
               Atención 1:1 · Valoración inicial · Plan adaptado a ti
             </p>
+
             <ul className="space-y-4 mb-section-md" role="list">
               <li className="flex items-center gap-3 mb-0 text-texto-move reveal reveal-delay-1">
                 <span
                   className="w-1.5 h-1.5 rounded-full bg-negro-move"
                   aria-hidden="true"
-                ></span>
+                />
                 Valoración inicial completa
               </li>
+
               <li className="flex items-center gap-3 mb-0 text-texto-move reveal reveal-delay-2">
                 <span
                   className="w-1.5 h-1.5 rounded-full bg-negro-move"
                   aria-hidden="true"
-                ></span>
+                />
                 Plan personalizado según tu cuerpo, nivel y objetivos
               </li>
+
               <li className="flex items-center gap-3 mb-0 text-texto-move reveal reveal-delay-3">
                 <span
                   className="w-1.5 h-1.5 rounded-full bg-negro-move"
                   aria-hidden="true"
-                ></span>
+                />
                 Ajustes sesión a sesión según tu evolución
               </li>
+
               <li className="flex items-center gap-3 mb-0 text-texto-move reveal reveal-delay-4">
                 <span
                   className="w-1.5 h-1.5 rounded-full bg-negro-move"
                   aria-hidden="true"
-                ></span>
+                />
                 Un entorno tranquilo, cuidado y sin prisas
               </li>
             </ul>
@@ -162,6 +165,7 @@ export default function Classes() {
               <h3 className="tag-label mb-text-sm text-negro-move">
                 IDEAL PARA
               </h3>
+
               <p className="text-[14px] leading-[1.75] text-texto-move mb-0">
                 Las sesiones privadas de Pilates Reformer están pensadas para
                 quienes buscan un trabajo más individualizado, ya sea por su
@@ -179,6 +183,7 @@ export default function Classes() {
               <h3 className="tag-label mb-text-sm text-negro-move">
                 ENFOQUE DEPORTIVO
               </h3>
+
               <p className="text-[14px] leading-[1.75] text-texto-move mb-0">
                 También son ideales para deportistas que quieren mejorar
                 movilidad, estabilidad, control postural y calidad de movimiento
@@ -192,23 +197,21 @@ export default function Classes() {
               </p>
             </div>
           </div>
+
           <div className="reveal reveal-delay-1">
-            <picture className="block">
-              <source srcSet={sesionesPrivadasWebp} type="image/webp" />
-              <img
-                src={sesionesPrivadas}
-                alt="Sesiones privadas de Pilates Reformer en MOVE · Pozuelo de Alarcón · Madrid"
-                className="w-full aspect-[3/4] object-cover rounded-2xl shadow-sm"
-                style={{ objectPosition: "center 20%" }}
-                loading="lazy"
-                decoding="async"
-              />
-            </picture>
+            <img
+              src={sesionesPrivadas}
+              alt="Sesiones privadas de Pilates Reformer en MOVE · Pozuelo de Alarcón · Madrid"
+              className="w-full aspect-[3/4] object-cover rounded-2xl shadow-sm"
+              style={{ objectPosition: "center 20%" }}
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
       </section>
 
-      {/* Aviso sutil */}
+      {/* Aviso */}
       <div className="max-w-3xl mx-auto px-6 text-center pt-section-xl reveal">
         <p className="text-[12px] text-texto-move/70 leading-relaxed italic">
           Si estás en proceso de recuperación o tienes una lesión activa, es
@@ -223,6 +226,7 @@ export default function Classes() {
         <h3 className="font-serif text-negro-move text-[24px] md:text-[32px] mb-8 italic">
           ¿No sabes cuál es tu formato?
         </h3>
+
         <a
           href="https://wa.me/34654495508"
           target="_blank"
