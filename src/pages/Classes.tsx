@@ -31,7 +31,7 @@ export default function Classes() {
           </div>
 
           <div className="order-1 md:order-2 md:pl-8 reveal reveal-delay-1">
-            <h2 className="mb-text-lg text-negro-move">Clases Grupales</h2>
+            <h2 className="mb-text-lg text-negro-move">Clases Grupales de Pilates Reformer</h2>
 
             <p className="text-texto-move font-sans mb-text-lg">
               Pilates Reformer en grupos reducidos · Máximo 4 personas · 50
