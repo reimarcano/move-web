@@ -13,6 +13,7 @@ import {
 import { Helmet } from 'react-helmet-async';
 
 import Layout from './components/Layout';
+import SpringLoader from './components/SpringLoader';
 import Home from './pages/Home';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import { canonicalForPath, OG_IMAGE, seoByPath } from './seo';
@@ -63,9 +64,15 @@ function SeoManager() {
 
 function AppContent() {
   useScrollReveal();
+  const location = useLocation();
+  const normalizedPath =
+    location.pathname !== '/'
+      ? location.pathname.replace(/\/+$/, '')
+      : '/';
 
   return (
     <>
+      <SpringLoader active={normalizedPath === '/'} />
       <SeoManager />
 
       <Suspense fallback={null}>
