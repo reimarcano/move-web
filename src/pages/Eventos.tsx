@@ -421,11 +421,6 @@ const EditorialGallery = ({
 // --- Main Page ---
 
 export default function Eventos() {
-  useEffect(() => {
-  document.title = "Eventos y Experiencias | MOVE Pilates Boutique Pozuelo de Alarcón";
-  document.querySelector('meta[name="description"]')?.setAttribute('content', 'Retiros de bienestar y Pilates Brunch organizados por Move Pilates Boutique. Experiencias diseñadas con intención, movimiento y conexión real. Apúntate a la próxima edición.');
-}, []);
-
   const scrollToWaitlist = () => {
     const element = document.getElementById('lista-espera');
     if (element) {

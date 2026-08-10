@@ -108,11 +108,6 @@ function FAQItem({
    ──────────────────────────────────────────── */
 
 export default function Home() {
-  useEffect(() => {
-    document.title = "MOVE Pilates Boutique | Pilates Reformer Pozuelo de Alarcón";
-    document.querySelector('meta[name="description"]')?.setAttribute('content', 'MOVE es un estudio boutique de Pilates Reformer en Pozuelo de Alarcón. Grupos de máximo 4 personas y sesiones privadas. Atención real y personalizada. Primera clase de bienvenida incluida.');
-  }, []);
-
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFaq = useCallback((index: number) => {
