@@ -124,6 +124,13 @@ html {
     font-weight: 400;
     line-height: 1.75;
     margin-bottom: 16px;
+    hyphens: none;
+    text-wrap: pretty;
+  }
+
+  h1, h2, h3, h4, h5, h6, li, blockquote {
+    hyphens: none;
+    text-wrap: pretty;
   }
 
   @media (min-width: 768px) {
@@ -131,6 +138,11 @@ html {
       font-size: 16px;
     }
   }
+}
+
+/* Keeps short editorial labels from ending with a stranded final word on mobile. */
+.label-balanced {
+  text-wrap: balance;
 }
 
 @layer components {

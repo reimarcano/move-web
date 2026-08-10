@@ -480,7 +480,7 @@ export default function Eventos() {
             Algunos momentos no se explican. <span className="italic">Se viven.</span>
           </h1>
           <p className="font-sans text-[14px] md:text-[15px] text-[#7F7763] leading-[1.75] mt-6">
-            Retiros y brunches diseñados con la misma intención que cada clase de MOVE — para que salgas diferente a como entraste.
+            Retiros y brunches diseñados con la misma intención que cada clase de MOVE, para que salgas diferente a como entraste.
           </p>
           <button 
             onClick={scrollToWaitlist}
@@ -509,15 +509,15 @@ export default function Eventos() {
         <div className="max-w-[1200px] mx-auto">
           {/* ENCABEZADO */}
           <div className="text-center reveal px-6">
-            <span className="font-sans text-[10px] text-[#7F7763] uppercase tracking-[0.18em] block mb-4">
-              Un espacio para desconectar, moverte y volver a ti
+            <span className="label-balanced font-sans text-[10px] text-[#7F7763] uppercase tracking-[0.18em] block mb-4">
+              Un espacio para desconectar, moverte y volver <span className="whitespace-nowrap">a ti</span>
             </span>
             <h2 className="font-serif text-[26px] md:text-[36px] text-[#493523] font-normal">
               Retiros de bienestar
             </h2>
             <div className="w-10 h-[1px] bg-[#D8D0BF] mx-auto my-8"></div>
             <p className="font-sans text-[15px] text-[#7F7763] max-w-[640px] mx-auto leading-[1.85]">
-              Los organizamos en lugares donde la naturaleza no es el decorado — es parte esencial de la experiencia. Entornos a las afueras de Madrid donde el aire, la luz y el silencio ya hacen su trabajo antes de que empiece nada. Cada retiro es diferente, pero todos comparten la misma estructura invisible: movimiento consciente en suelo, una mesa con comida real elaborada con cuidado, y talleres diseñados para conectar — arteterapia, sound healing, prácticas que le hablan al cuerpo de formas que las palabras no siempre alcanzan. No hay agenda apretada ni nada que demostrar. Solo tiempo de calidad contigo, en un entorno que lo hace posible.
+              Los organizamos en lugares donde la naturaleza no es el decorado. Es parte esencial de la experiencia. Entornos a las afueras de Madrid donde el aire, la luz y el silencio ya hacen su trabajo antes de que empiece nada. Cada retiro es diferente, pero todos comparten la misma estructura invisible: movimiento consciente en suelo, una mesa con comida real elaborada con cuidado y talleres diseñados para conectar. Arteterapia, sound healing y prácticas que le hablan al cuerpo de formas que las palabras no siempre alcanzan. No hay agenda apretada ni nada que demostrar. Solo tiempo de calidad contigo, en un entorno que lo hace posible.
             </p>
             <p className="mt-6 font-serif italic text-[18px] text-[#7F7763]">
               "Cada edición tiene su propio carácter. Lo que no cambia es la intención."
@@ -565,7 +565,7 @@ export default function Eventos() {
             </h2>
             <div className="w-10 h-[1px] bg-[#D8D0BF] mx-auto my-8"></div>
             <p className="font-sans text-[15px] text-[#7F7763] max-w-[640px] mx-auto leading-[1.85]">
-              Una mañana con intención. Empezamos moviéndonos — con la misma atención y el mismo cuidado con el que trabajamos cada clase en MOVE. Después, la mesa. Buena comida, espacio para respirar y la conversación que surge sola cuando el cuerpo ya está en calma. Lo organizamos en el estudio o en espacios seleccionados con criterio — cafés de especialidad, lugares donde el detalle importa tanto como aquí. Cada edición tiene su propio escenario. Lo que no cambia es lo que se genera entre quienes vienen: presencia, conexión y la sensación de haber dedicado bien el tiempo.
+              Una mañana con intención. Empezamos moviéndonos con la misma atención y el mismo cuidado con el que trabajamos cada clase en MOVE. Después, la mesa. Buena comida, espacio para respirar y la conversación que surge sola cuando el cuerpo ya está en calma. Lo organizamos en el estudio o en espacios seleccionados con criterio. Cafés de especialidad y lugares donde el detalle importa tanto como aquí. Cada edición tiene su propio escenario. Lo que no cambia es lo que se genera entre quienes vienen: presencia, conexión y la sensación de haber dedicado bien el tiempo.
             </p>
             <p className="mt-6 font-serif italic text-[18px] text-[#7F7763]">
               "Un formato corto. Una mañana que se queda."

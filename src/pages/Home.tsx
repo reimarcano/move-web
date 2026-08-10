@@ -202,7 +202,7 @@ export default function Home() {
                 <h3
                   className="mb-3"
                   style={{
-                    fontFamily: "Georgia, serif",
+                    fontFamily: "var(--font-serif)",
                     fontSize: "24px",
                     lineHeight: "1.2",
                     color: "#493523",

@@ -217,7 +217,7 @@ export default function Layout() {
               <p 
                 className="mt-4 font-normal"
                 style={{ 
-                  fontFamily: '"Times New Roman", Times, serif', 
+                  fontFamily: 'var(--font-serif)',
                   fontStyle: 'italic',
                   fontSize: '13px',
                   color: 'rgba(246,243,236,0.55)',
