@@ -30,7 +30,7 @@ export default function Contacto() {
                     <MapPin className="text-[#7F7763]" size={18} />
                   </div>
                   <div className="flex-1 text-left">
-                    <p className="font-sans text-[14px] text-[#493523] leading-[1.8] mb-0">
+                    <p className="font-sans text-[15px] text-[#493523] leading-[1.8] mb-0">
                       Av. de Europa, 31, local 7<br />
                       Acceso desde Calle Berna<br />
                       28224 Pozuelo de Alarcón, Madrid
@@ -44,7 +44,7 @@ export default function Contacto() {
                     <Phone className="text-[#7F7763]" size={18} />
                   </div>
                   <div className="flex-1 text-left">
-                    <a href="tel:+34654495508" className="font-sans text-[14px] text-[#493523] hover:text-[#7F7763] transition-all duration-200 no-underline">
+                    <a href="tel:+34654495508" className="font-sans text-[15px] text-[#493523] hover:text-[#7F7763] transition-all duration-200 no-underline">
                       +34 654 49 55 08
                     </a>
                   </div>
@@ -56,7 +56,7 @@ export default function Contacto() {
                     <Mail className="text-[#7F7763]" size={18} />
                   </div>
                   <div className="flex-1 text-left">
-                    <a href="mailto:movebygenesis@gmail.com" className="font-sans text-[14px] text-[#493523] hover:text-[#7F7763] transition-all duration-200 no-underline">
+                    <a href="mailto:movebygenesis@gmail.com" className="font-sans text-[15px] text-[#493523] hover:text-[#7F7763] transition-all duration-200 no-underline">
                       movebygenesis@gmail.com
                     </a>
                   </div>
@@ -68,16 +68,16 @@ export default function Contacto() {
                     <Clock className="text-[#7F7763]" size={18} />
                   </div>
                   <div className="flex-1 text-left">
-                    <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 w-full">
-                      <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Lunes a Jueves</span>
-                      <span className="font-sans text-[13px] text-[#493523] text-right">9:00 – 21:00</span>
+                    <div className="grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 w-full">
+                      <span className="font-sans text-[14px] text-[#7F7763] min-w-[128px]">Lunes a Jueves</span>
+                      <span className="font-sans text-[14px] text-[#493523] text-right">9:00 – 21:00</span>
                      
                       
-                      <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Viernes</span>
-                      <span className="font-sans text-[13px] text-[#493523] text-right">8:00 – 14:00 | 17:00 - 19:00</span>
+                      <span className="font-sans text-[14px] text-[#7F7763] min-w-[128px]">Viernes</span>
+                      <span className="font-sans text-[14px] text-[#493523] text-right">8:00 – 14:00 | 17:00 - 19:00</span>
                       
-                      <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Sáb · Dom</span>
-                      <span className="font-sans text-[13px] text-[#493523] text-right">Cerrado</span>
+                      <span className="font-sans text-[14px] text-[#7F7763] min-w-[128px]">Sáb · Dom</span>
+                      <span className="font-sans text-[14px] text-[#493523] text-right">Cerrado</span>
                     </div>
                   </div>
                 </div>
@@ -125,7 +125,7 @@ export default function Contacto() {
                     </svg>
                   </a>
                 </div>
-                <p className="mt-4 text-[13px] text-[#7F7763] font-sans text-center leading-[1.7] max-w-[280px] mx-auto mb-0">
+                <p className="mt-4 text-[14px] text-[#7F7763] font-sans text-center leading-[1.7] max-w-[280px] mx-auto mb-0">
                   Síguenos en Instagram y TikTok para ver cómo se vive el movimiento en MOVE.
                 </p>
               </div>

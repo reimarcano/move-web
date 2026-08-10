@@ -151,7 +151,7 @@ export default function Home() {
               className="inline-block rounded-[100px] border-[1.5px] bg-[#493523] text-[#F6F3EC] border-[#493523] uppercase tracking-[0.12em] transition-all duration-300 ease-in-out hover:-translate-y-[1px] hover:bg-[#7F7763] hover:border-[#7F7763] hover:text-[#F6F3EC]"
               style={{
                 padding: "14px 32px",
-                fontFamily: "Arial, sans-serif",
+                fontFamily: "var(--font-sans)",
                 fontSize: "12px",
               }}
             >

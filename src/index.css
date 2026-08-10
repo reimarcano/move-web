@@ -1,12 +1,28 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "MOVE Times Roman";
+  src: url("/fonts/move-times-roman-regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MOVE Times Roman";
+  src: url("/fonts/move-times-roman-italic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 @theme {
-  --font-serif: "Times New Roman Condensed", "Times New Roman", ui-serif, Georgia, serif;
-  --font-sans: "Arial", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "MOVE Times Roman", "Times New Roman", ui-serif, Georgia, serif;
+  --font-sans: "MOVE Times Roman", "Times New Roman", ui-serif, Georgia, serif;
 
   /* Official MOVE Palette */
   --color-base: #F6F3EC;
@@ -30,10 +46,10 @@ html {
   --btn-hover-bg: var(--color-mid);
   --btn-radius: 100px;
   --btn-padding: 14px 32px;
-  --btn-font-size: 12px;
+  --btn-font-size: 13px;
   --btn-letter-spacing: 0.12em;
   --btn-transition: all 0.3s ease;
-  --btn-font: Arial, sans-serif;
+  --btn-font: var(--font-sans);
   --btn-weight: 400;
   --btn-transform: uppercase;
   
@@ -276,7 +292,7 @@ html {
 
   .nav-link {
     font-family: var(--font-sans);
-    font-size: 11px;
+    font-size: 12px;
     color: var(--color-texto-move);
     letter-spacing: 0.12em;
     text-transform: uppercase;

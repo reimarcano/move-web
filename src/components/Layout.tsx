@@ -233,7 +233,7 @@ export default function Layout() {
               <h4 
                 className="mb-5 font-normal"
                 style={{ 
-                  fontFamily: 'Arial, sans-serif',
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '10px',
                   color: 'rgba(246,243,236,0.45)',
                   textTransform: 'uppercase',
@@ -244,7 +244,7 @@ export default function Layout() {
               </h4>
               <p 
                 style={{ 
-                  fontFamily: 'Arial, sans-serif',
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '13px',
                   color: 'rgba(246,243,236,0.70)',
                   lineHeight: '1.8'
@@ -256,7 +256,7 @@ export default function Layout() {
               <p 
                 className="mt-4 font-normal"
                 style={{ 
-                  fontFamily: 'Arial, sans-serif',
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '12px',
                   color: 'rgba(246,243,236,0.45)',
                   lineHeight: '1.8'
@@ -275,7 +275,7 @@ export default function Layout() {
               <h4 
                 className="mb-5 font-normal"
                 style={{ 
-                  fontFamily: 'Arial, sans-serif',
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '10px',
                   color: 'rgba(246,243,236,0.45)',
                   textTransform: 'uppercase',
@@ -292,8 +292,8 @@ export default function Layout() {
                   className="flex items-center gap-[10px] transition-all duration-200 ease-in-out group"
                   aria-label="Contactar por WhatsApp"
                   style={{ 
-                    fontFamily: 'Arial, sans-serif',
-                    fontSize: '13px',
+                    fontFamily: 'var(--font-sans)',
+                  fontSize: '13px',
                     color: 'rgba(246,243,236,0.70)'
                   }}
                 >
@@ -309,8 +309,8 @@ export default function Layout() {
                   className="flex items-center gap-[10px] transition-all duration-200 ease-in-out group"
                   aria-label="Seguir en Instagram"
                   style={{ 
-                    fontFamily: 'Arial, sans-serif',
-                    fontSize: '13px',
+                    fontFamily: 'var(--font-sans)',
+                  fontSize: '13px',
                     color: 'rgba(246,243,236,0.70)'
                   }}
                 >
@@ -328,8 +328,8 @@ export default function Layout() {
                   className="flex items-center gap-[10px] transition-all duration-200 ease-in-out group"
                   aria-label="Seguir en TikTok"
                   style={{ 
-                    fontFamily: 'Arial, sans-serif',
-                    fontSize: '13px',
+                    fontFamily: 'var(--font-sans)',
+                  fontSize: '13px',
                     color: 'rgba(246,243,236,0.70)'
                   }}
                 >
@@ -346,7 +346,7 @@ export default function Layout() {
               <h4 
                 className="mb-5 font-normal"
                 style={{ 
-                  fontFamily: 'Arial, sans-serif',
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '10px',
                   color: 'rgba(246,243,236,0.45)',
                   textTransform: 'uppercase',
@@ -368,8 +368,8 @@ export default function Layout() {
                     to={link.path}
                     className="transition-colors duration-200 ease-in-out hover:text-[#F6F3EC]"
                     style={{ 
-                      fontFamily: 'Arial, sans-serif',
-                      fontSize: '13px',
+                      fontFamily: 'var(--font-sans)',
+                  fontSize: '13px',
                       color: 'rgba(246,243,236,0.70)',
                       lineHeight: '2',
                       display: 'block'
@@ -390,7 +390,7 @@ export default function Layout() {
             <p 
               className="m-0 text-center md:text-left font-normal"
               style={{ 
-                fontFamily: 'Arial, sans-serif',
+                fontFamily: 'var(--font-sans)',
                 fontSize: '11px',
                 color: 'rgba(246,243,236,0.35)'
               }}
@@ -400,7 +400,7 @@ export default function Layout() {
             <p 
               className="m-0 text-center md:text-right font-normal"
               style={{ 
-                fontFamily: 'Arial, sans-serif',
+                fontFamily: 'var(--font-sans)',
                 fontSize: '11px',
                 color: 'rgba(246,243,236,0.35)'
               }}
