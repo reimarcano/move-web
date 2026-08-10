@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx server.ts",
     "start": "node dist/server.js",
-    "build": "vite build && esbuild server.ts --bundle --platform=node --format=esm --outfile=dist/server.js --external:express --external:dotenv --external:vite",
+    "build": "vite build && tsx scripts/prerender-metadata.ts && esbuild server.ts --bundle --platform=node --format=esm --outfile=dist/server.js --external:express --external:dotenv --external:vite",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"

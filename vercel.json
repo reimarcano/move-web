@@ -1,8 +1,10 @@
 {
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/clases", "destination": "/clases/index.html" },
+    { "source": "/precios", "destination": "/precios/index.html" },
+    { "source": "/estudio", "destination": "/estudio/index.html" },
+    { "source": "/eventos", "destination": "/eventos/index.html" },
+    { "source": "/contacto", "destination": "/contacto/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
