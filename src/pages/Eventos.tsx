@@ -476,9 +476,14 @@ export default function Eventos() {
           <span className="font-sans text-[10px] text-[#7F7763] uppercase tracking-[0.18em] block mb-4">
             EXPERIENCIAS MOVE
           </span>
-          <h1 className="font-serif text-[32px] md:text-[52px] text-[#493523] leading-[1.2] font-normal max-w-full md:max-w-[680px]">
-            Algunos momentos no se explican. <span className="italic">Se viven.</span>
-          </h1>
+        <h1 className="font-serif text-[32px] md:text-[52px] text-[#493523] leading-[1.2] font-normal max-w-full md:max-w-[680px]">
+          <span className="block md:whitespace-nowrap">
+            Algunos momentos no se explican.
+          </span>
+          <span className="block italic">
+            Se viven.
+          </span>
+        </h1>
           <p className="font-sans text-[14px] md:text-[15px] text-[#7F7763] leading-[1.75] mt-6">
             Retiros y brunches diseñados con la misma intención que cada clase de MOVE — para que salgas diferente a como entraste.
           </p>
