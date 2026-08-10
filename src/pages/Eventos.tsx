@@ -476,9 +476,14 @@ export default function Eventos() {
           <span className="font-sans text-[10px] text-[#7F7763] uppercase tracking-[0.18em] block mb-4">
             EXPERIENCIAS MOVE
           </span>
-          <h1 className="font-serif text-[32px] md:text-[52px] text-[#493523] leading-[1.2] font-normal max-w-full md:max-w-[680px]">
-            Algunos momentos no se explican. <span className="italic">Se viven.</span>
-          </h1>
+        <h1 className="font-serif text-[32px] md:text-[52px] text-[#493523] leading-[1.2] font-normal max-w-full md:max-w-[680px]">
+          <span className="block md:whitespace-nowrap">
+            Algunos momentos no se explican.
+          </span>
+          <span className="block italic">
+            Se viven.
+          </span>
+        </h1>
           <p className="font-sans text-[14px] md:text-[15px] text-[#7F7763] leading-[1.75] mt-6">
             Retiros y brunches diseñados con la misma intención que cada clase de MOVE, para que salgas diferente a como entraste.
           </p>
@@ -614,10 +619,10 @@ export default function Eventos() {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="mr-[8px]">
                 <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#F6F3EC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              APUNTARME A LA LISTA DE ESPERA
+              APÚNTAME A LA LISTA DE ESPERA
             </a>
             <p className="font-sans text-[12px] text-[#7F7763] mt-[12px]">
-              Te respondemos en horario de estudio.
+              Te respondemos en horario laboral.
             </p>
           </div>
         </div>
