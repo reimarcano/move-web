@@ -2,34 +2,34 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import movePilatesMadrid05 from '../assets/move-pilates-madrid-05.webp';
 // Gallery 1: Nuestro Espacio
 const espacioImages = [
-  '/assets/01-move-pilates-pozuelo.jpg',
-  '/assets/02-move-pilates-pozuelo.jpg',
-  '/assets/03-move-pilates-pozuelo.jpg',
-  '/assets/04-move-pilates-pozuelo.jpg',
-  '/assets/05-move-pilates-pozuelo.jpg',
-  '/assets/06-move-pilates-pozuelo.jpg',
-  '/assets/07-move-pilates-pozuelo.jpg',
-  '/assets/08-move-pilates-pozuelo.jpg',
-  '/assets/09-move-pilates-pozuelo.jpg',
+  '/assets/01-move-pilates-pozuelo.webp',
+  '/assets/02-move-pilates-pozuelo.webp',
+  '/assets/03-move-pilates-pozuelo.webp',
+  '/assets/04-move-pilates-pozuelo.webp',
+  '/assets/05-move-pilates-pozuelo.webp',
+  '/assets/06-move-pilates-pozuelo.webp',
+  '/assets/07-move-pilates-pozuelo.webp',
+  '/assets/08-move-pilates-pozuelo.webp',
+  '/assets/09-move-pilates-pozuelo.webp',
 ];
 
 // Gallery 2: Nuestras Clases
 const clasesImages = [
-  '/assets/move-pilates-madrid-01.jpg',
-  '/assets/move-pilates-madrid-02.jpg',
-  '/assets/move-pilates-madrid-03.jpg',
-  '/assets/move-pilates-madrid-04.jpg',
+  '/assets/move-pilates-madrid-01.webp',
+  '/assets/move-pilates-madrid-02.webp',
+  '/assets/move-pilates-madrid-03.webp',
+  '/assets/move-pilates-madrid-04.webp',
   movePilatesMadrid05,
-  '/assets/move-pilates-madrid-06.jpg',
-  '/assets/move-pilates-madrid-07.jpg',
-  '/assets/move-pilates-madrid-08.jpg',
-  '/assets/move-pilates-madrid-09.jpg',
-  '/assets/move-pilates-madrid-10.jpg',
-  '/assets/move-pilates-madrid-11.jpg',
-  '/assets/move-pilates-madrid-12.jpg',
-  '/assets/move-pilates-madrid-13.jpg',
-  '/assets/move-pilates-madrid-14.jpg',
-  '/assets/move-pilates-madrid-15.jpg',
+  '/assets/move-pilates-madrid-06.webp',
+  '/assets/move-pilates-madrid-07.webp',
+  '/assets/move-pilates-madrid-08.webp',
+  '/assets/move-pilates-madrid-09.webp',
+  '/assets/move-pilates-madrid-10.webp',
+  '/assets/move-pilates-madrid-11.webp',
+  '/assets/move-pilates-madrid-12.webp',
+  '/assets/move-pilates-madrid-13.webp',
+  '/assets/move-pilates-madrid-14.webp',
+  '/assets/move-pilates-madrid-15.webp',
 ];
 
 export default function NuestroEstudio() {
