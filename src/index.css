@@ -16,13 +16,37 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "MOVE Arial";
+  src: url("/fonts/move-arial-regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MOVE Arial";
+  src: url("/fonts/move-arial-italic.ttf") format("truetype");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MOVE Arial";
+  src: url("/fonts/move-arial-bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 @theme {
   --font-serif: "MOVE Times Roman", "Times New Roman", ui-serif, Georgia, serif;
-  --font-sans: "MOVE Times Roman", "Times New Roman", ui-serif, Georgia, serif;
+  --font-sans: "MOVE Arial", Arial, ui-sans-serif, system-ui, sans-serif;
 
   /* Official MOVE Palette */
   --color-base: #F6F3EC;
