@@ -145,7 +145,8 @@ export default function Pricing() {
                       <span className="font-sans text-[13px] text-[#493523] text-right">8:00 – 21:00</span>
                       
                       <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Viernes</span>
-                      <span className="font-sans text-[13px] text-[#493523] text-right">8:00 – 20:00</span>
+                      <span className="font-sans text-[13px] text-[#493523] text-right">8:00 – 14:00 | 17:00 – 19:00</span>
+
                       
                       <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Sáb · Dom</span>
                       <span className="font-sans text-[13px] text-[#493523] text-right">Cerrado</span>
