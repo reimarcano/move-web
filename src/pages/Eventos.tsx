@@ -570,7 +570,7 @@ export default function Eventos() {
             </h2>
             <div className="w-10 h-[1px] bg-[#D8D0BF] mx-auto my-8"></div>
             <p className="font-sans text-[15px] text-[#7F7763] max-w-[640px] mx-auto leading-[1.85]">
-              Una mañana con intención. Empezamos moviéndonos — con la misma atención y el mismo cuidado con el que trabajamos cada clase en MOVE. Después, la mesa. Buena comida, espacio para respirar y la conversación que surge sola cuando el cuerpo ya está en calma. Lo organizamos en el estudio o en espacios seleccionados con criterio — cafés de especialidad, lugares donde el detalle importa tanto como aquí. Cada edición tiene su propio escenario. Lo que no cambia es lo que se genera entre quienes vienen: presencia, conexión y la sensación de haber dedicado bien el tiempo.
+              Una mañana con intención. Empezamos moviéndonos con la misma atención y el mismo cuidado con el que trabajamos cada clase en MOVE. Después, la mesa. Buena comida, espacio para respirar y la conversación que surge sola cuando el cuerpo ya está en calma. Lo organizamos en el estudio o en espacios seleccionados con criterio — cafés de especialidad, lugares donde el detalle importa tanto como aquí. Cada edición tiene su propio escenario. Lo que no cambia es lo que se genera entre quienes vienen: presencia, conexión y la sensación de haber dedicado bien el tiempo.
             </p>
             <p className="mt-6 font-serif italic text-[18px] text-[#7F7763]">
               "Un formato corto. Una mañana que se queda."
@@ -619,10 +619,10 @@ export default function Eventos() {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="mr-[8px]">
                 <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#F6F3EC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              APUNTARME A LA LISTA DE ESPERA
+              APÚNTAME A LA LISTA DE ESPERA
             </a>
             <p className="font-sans text-[12px] text-[#7F7763] mt-[12px]">
-              Te respondemos en horario de estudio.
+              Te respondemos en horario laboral.
             </p>
           </div>
         </div>
