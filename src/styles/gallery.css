@@ -247,7 +247,7 @@
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
-  font-family: Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: 11px;
   color: var(--color-soft);
   letter-spacing: 0.1em;
