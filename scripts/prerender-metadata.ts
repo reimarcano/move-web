@@ -32,6 +32,9 @@ function metadataFor(pathname: string, title: string, description: string) {
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
     <meta property="og:image" content="${OG_IMAGE}" />
+    <meta property="og:image:secure_url" content="${OG_IMAGE}" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:alt" content="MOVE Pilates Boutique, estudio de Pilates Reformer en Pozuelo de Alarcón" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="es_ES" />
@@ -39,7 +42,8 @@ function metadataFor(pathname: string, title: string, description: string) {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
-    <meta name="twitter:image" content="${OG_IMAGE}" />`;
+    <meta name="twitter:image" content="${OG_IMAGE}" />
+    <meta name="twitter:image:alt" content="MOVE Pilates Boutique, estudio de Pilates Reformer en Pozuelo de Alarcón" />`;
 }
 
 async function prerenderMetadata() {
