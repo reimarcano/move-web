@@ -41,7 +41,7 @@ const seoByPath: Record<
     title:
       'Clases de Pilates Reformer · MOVE · Pozuelo de Alarcón',
     description:
-      'Descubre las clases de Pilates Reformer de MOVE en Pozuelo de Alarcón: grupos reducidos y sesiones privadas adaptadas a ti.',
+      'Clases de Pilates Reformer en Pozuelo de Alarcón. Grupos de máximo 4 personas y sesiones privadas 1:1. Reserva tu clase',
   },
   '/precios': {
     title:
