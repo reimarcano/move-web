@@ -6,7 +6,7 @@ export default function Classes() {
     <div className="w-full">
       <section className="px-6 text-center max-w-4xl mx-auto section-padding-claro">
         <h1 className="mb-text-xl reveal font-serif text-[#493523] font-normal">
-          Muévete bien. <span className="italic">Siéntete mejor.</span>
+          Pilates Reformer. <span className="italic">en Pozuelo de Alarcón.</span>
         </h1>
 
         <p className="reveal reveal-delay-1 mx-auto">
