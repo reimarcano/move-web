@@ -46,7 +46,7 @@ export default function Layout() {
 
   const navLinks = [
     { name: 'Clases', path: '/clases' },
-    { name: 'Tarifas', path: '/precios' },
+    { name: 'Precios', path: '/precios' },
     { name: 'Eventos', path: '/eventos' },
     { name: 'Nuestro Estudio', path: '/estudio' },
     { name: 'Contacto', path: '/contacto' },
