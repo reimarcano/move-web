@@ -33,10 +33,6 @@ const clasesImages = [
 ];
 
 export default function NuestroEstudio() {
-  useEffect(() => {
-    document.title = "Nuestro Estudio | MOVE Pilates Boutique Pozuelo de Alarcón";
-    document.querySelector('meta[name="description"]')?.setAttribute('content', 'Descubre el espacio de MOVE Pilates Boutique en Pozuelo de Alarcón. Un estudio íntimo diseñado con intención, con Pilates Reformer en grupos de máximo 4 personas. Entra y conócenos.');
-  }, []);
   const [isEspacioExpanded, setIsEspacioExpanded] = useState(false);
   const [isClasesExpanded, setIsClasesExpanded] = useState(false);
   const [lightbox, setLightbox] = useState<{ isOpen: boolean; images: string[]; index: number; alt: string }>({

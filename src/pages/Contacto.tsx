@@ -1,12 +1,6 @@
-import React, { useEffect } from 'react';
 import { MapPin, Clock, Phone, Mail, Instagram } from 'lucide-react';
 
 export default function Contacto() {
- useEffect(() => {
-  document.title = "Contacto | MOVE Pilates Boutique Pozuelo de Alarcón";
-  document.querySelector('meta[name="description"]')?.setAttribute('content', 'Contacta con MOVE Pilates Boutique en Pozuelo de Alarcón. Av. de Europa, 31, local 7. Escríbenos por WhatsApp o Instagram y te reservamos tu primera clase de bienvenida.');
-}, []);
-
   return (
     <div className="bg-crema-base min-h-screen pb-0">
       {/* Header Section */}
