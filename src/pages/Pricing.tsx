@@ -9,7 +9,7 @@ export default function Pricing() {
     <div className="w-full pb-0">
       <section className="px-6 text-center max-w-4xl mx-auto section-padding-claro pb-0">
         <h1 className="mb-0 reveal">
-          Encuentra tu <span className="italic">plan.</span>
+          Encuentra <span className="italic">tu plan.</span>
         </h1>
       </section>
 
