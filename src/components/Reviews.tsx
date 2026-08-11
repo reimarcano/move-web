@@ -229,7 +229,7 @@ export default function Reviews() {
             href="https://www.google.com/maps/place//data=!4m2!3m1!1s0xd4187ede06d0267:0x6d55b452244d1c6a?sa=X&ved=1t:8290&ictx=111"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline flex items-center justify-center gap-2 mx-auto w-fit"
+            className="btn-outline flex items-center justify-center gap-2 mx-auto w-fit whitespace-nowrap px-5 text-[11px] tracking-[0.09em] sm:px-8 sm:text-[12px] sm:tracking-[0.12em]"
           >
             <GoogleLogo />
             Ver todas las reseñas en Google
