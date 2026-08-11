@@ -101,15 +101,19 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     <CookieConsentContext.Provider value={value}>
       {children}
       {ready && !consent && !preferencesOpen && (
-        <aside aria-label="Preferencias de cookies" className="fixed bottom-4 left-4 right-4 z-[10001] mx-auto max-w-[560px] rounded-[10px] border border-[#D8D0BF] bg-[#F6F3EC]/95 p-5 shadow-[0_16px_42px_rgba(73,53,35,0.18)] backdrop-blur-md md:bottom-6 md:p-6">
-          <p className="mb-2 font-serif text-[21px] text-[#493523]">Tu privacidad, con calma.</p>
-          <p className="mb-5 text-[13px] leading-[1.65] text-[#5E5146]">Usamos almacenamiento necesario para recordar tu elección. Con tu permiso, activamos por separado Google Analytics y el mapa de Google.</p>
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <button type="button" onClick={() => saveConsent(EMPTY_PREFERENCES)} className="btn-outline w-full text-[10px] sm:w-auto">RECHAZAR</button>
-            <button type="button" onClick={openPreferences} className="btn-outline w-full border-transparent text-[10px] sm:w-auto">CONFIGURAR</button>
-            <button type="button" onClick={() => saveConsent(ALL_PREFERENCES)} className="btn-primary w-full text-[10px] sm:ml-auto sm:w-auto">ACEPTAR</button>
+        <aside aria-label="Preferencias de cookies" className="fixed bottom-3 left-3 right-3 z-[10001] mx-auto max-w-[1040px] rounded-[14px] border border-[#D8D0BF]/90 bg-[#F6F3EC]/95 px-4 py-3.5 shadow-[0_14px_36px_rgba(73,53,35,0.14)] backdrop-blur-md md:bottom-5 md:px-5">
+          <div className="md:flex md:items-center md:gap-6">
+            <div className="min-w-0 flex-1">
+              <p className="mb-1 font-serif text-[18px] text-[#493523]">Tu privacidad, con calma.</p>
+              <p className="mb-0 text-[12px] leading-[1.55] text-[#5E5146]">Usamos almacenamiento necesario para recordar tu elección. Con tu permiso, activamos Google Analytics y el mapa de Google.</p>
+            </div>
+            <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-2 md:mt-0 md:flex-nowrap">
+              <button type="button" onClick={() => saveConsent(EMPTY_PREFERENCES)} className="btn-outline text-[10px]">RECHAZAR</button>
+              <button type="button" onClick={openPreferences} className="btn-outline border-transparent px-2 text-[10px]">CONFIGURAR</button>
+              <button type="button" onClick={() => saveConsent(ALL_PREFERENCES)} className="btn-primary text-[10px]">ACEPTAR</button>
+              <a href="/cookies" className="whitespace-nowrap px-1 text-[10px] text-[#7F7763] underline underline-offset-4">Política de cookies</a>
+            </div>
           </div>
-          <a href="/cookies" className="mt-4 inline-block text-[11px] text-[#7F7763] underline underline-offset-4">Ver política de cookies</a>
         </aside>
       )}
       {preferencesOpen && (
