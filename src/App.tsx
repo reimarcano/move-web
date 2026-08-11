@@ -23,6 +23,9 @@ const Pricing = lazy(() => import('./pages/Pricing'));
 const NuestroEstudio = lazy(() => import('./pages/NuestroEstudio'));
 const Eventos = lazy(() => import('./pages/Eventos'));
 const Contacto = lazy(() => import('./pages/Contacto'));
+const LegalNotice = lazy(() => import('./pages/Legal').then((module) => ({ default: module.LegalNotice })));
+const PrivacyPolicy = lazy(() => import('./pages/Legal').then((module) => ({ default: module.PrivacyPolicy })));
+const CookiePolicy = lazy(() => import('./pages/Legal').then((module) => ({ default: module.CookiePolicy })));
 
 function SeoManager() {
   const location = useLocation();
@@ -84,6 +87,9 @@ function AppContent() {
             <Route path="estudio" element={<NuestroEstudio />} />
             <Route path="eventos" element={<Eventos />} />
             <Route path="contacto" element={<Contacto />} />
+            <Route path="aviso-legal" element={<LegalNotice />} />
+            <Route path="privacidad" element={<PrivacyPolicy />} />
+            <Route path="cookies" element={<CookiePolicy />} />
           </Route>
         </Routes>
       </Suspense>

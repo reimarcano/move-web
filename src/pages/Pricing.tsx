@@ -17,6 +17,7 @@ export default function Pricing() {
       <section className="max-w-4xl mx-auto px-6 section-padding-claro text-negro-move">
         <h2 className="mb-text-lg reveal">Clases Grupales</h2>
         <p className="text-texto-move mb-text-lg reveal reveal-delay-1">Máximo 4 personas por sesión</p>
+        <p className="mb-8 text-[12px] text-[#7F7763] reveal reveal-delay-1">Todos los precios indicados son precios finales e incluyen los impuestos legalmente aplicables.</p>
         
         <dl className="space-y-6">
           <div className="flex justify-between items-end border-b border-negro-move/20 pb-4 reveal reveal-delay-1">
