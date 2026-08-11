@@ -32,6 +32,90 @@ const clasesImages = [
   '/assets/move-pilates-madrid-15.webp',
 ];
 
+interface MobileGalleryProps {
+  images: string[];
+  alt: string;
+  ariaLabel: string;
+  onOpen: (index: number) => void;
+}
+
+function MobileGallery({ images, alt, ariaLabel, onOpen }: MobileGalleryProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const updateActiveIndex = () => {
+    const gallery = scrollRef.current;
+    if (!gallery) return;
+
+    const slides = Array.from(gallery.children) as HTMLElement[];
+    const galleryCenter = gallery.scrollLeft + gallery.clientWidth / 2;
+    const closestIndex = slides.reduce((currentClosest, slide, index) => {
+      const currentDistance = Math.abs(slides[currentClosest].offsetLeft + slides[currentClosest].offsetWidth / 2 - galleryCenter);
+      const nextDistance = Math.abs(slide.offsetLeft + slide.offsetWidth / 2 - galleryCenter);
+      return nextDistance < currentDistance ? index : currentClosest;
+    }, 0);
+
+    setActiveIndex(closestIndex);
+  };
+
+  const scrollToImage = (index: number) => {
+    const gallery = scrollRef.current;
+    const slide = gallery?.children[index] as HTMLElement | undefined;
+    if (!gallery || !slide) return;
+
+    gallery.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
+    setActiveIndex(index);
+  };
+
+  return (
+    <div className="md:hidden">
+      <div
+        ref={scrollRef}
+        role="region"
+        aria-label={ariaLabel}
+        className="-mx-6 flex snap-x snap-mandatory gap-2 overflow-x-auto px-6 pb-1 no-scrollbar"
+        onScroll={updateActiveIndex}
+      >
+        {images.map((src, index) => (
+          <button
+            key={src}
+            type="button"
+            className="group relative aspect-[3/4] w-[82vw] max-w-[320px] shrink-0 snap-center overflow-hidden rounded-[3px] outline-none focus-visible:ring-2 focus-visible:ring-[#493523] focus-visible:ring-offset-2"
+            onClick={() => onOpen(index)}
+            aria-label={`Ver foto ${index + 1} de ${ariaLabel.toLowerCase()}`}
+          >
+            <div className="absolute inset-0 z-10 bg-[#493523] opacity-0 transition-opacity duration-400 group-hover:opacity-15"></div>
+            <img
+              src={src}
+              alt={alt}
+              className="gallery-img h-full w-full object-cover object-top transition-transform duration-400 ease-out group-hover:scale-[1.02]"
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              sizes="82vw"
+              referrerPolicy="no-referrer"
+            />
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-5 flex items-center justify-center gap-3" aria-label="Navegación de la galería">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            onClick={() => scrollToImage(index)}
+            className={`h-2 w-2 rounded-full transition-[width,background-color,opacity] duration-500 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#493523] ${
+              activeIndex === index ? 'w-8 bg-[#493523]' : 'bg-[#7F7763]/70 hover:bg-[#7F7763]'
+            }`}
+            aria-label={`Ir a la foto ${index + 1}`}
+            aria-current={activeIndex === index ? 'true' : undefined}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function NuestroEstudio() {
   const [isEspacioExpanded, setIsEspacioExpanded] = useState(false);
   const [isClasesExpanded, setIsClasesExpanded] = useState(false);
@@ -44,6 +128,8 @@ export default function NuestroEstudio() {
 
   const lastFocusedElement = useRef<HTMLElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dragStartRef = useRef<{ x: number; y: number; pointerId: number } | null>(null);
+  const wheelLockedRef = useRef(false);
 
   const openLightbox = (images: string[], index: number, alt: string) => {
     lastFocusedElement.current = document.activeElement as HTMLElement;
@@ -132,27 +218,45 @@ export default function NuestroEstudio() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightbox.isOpen, closeLightbox, nextImage, prevImage]);
 
-  // Mobile Swipe Support
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const handleDragStart = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    if ((event.target as HTMLElement).closest('button')) return;
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
+    dragStartRef.current = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+    event.currentTarget.setPointerCapture(event.pointerId);
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+  const handleDragEnd = (event: React.PointerEvent<HTMLDivElement>) => {
+    const dragStart = dragStartRef.current;
+    if (!dragStart || dragStart.pointerId !== event.pointerId) return;
+
+    const distanceX = event.clientX - dragStart.x;
+    const distanceY = event.clientY - dragStart.y;
+    dragStartRef.current = null;
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    if (Math.abs(distanceX) > 52 && Math.abs(distanceX) > Math.abs(distanceY)) {
+      if (distanceX < 0) nextImage();
+      else prevImage();
+    }
   };
 
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-    if (isLeftSwipe) nextImage();
-    if (isRightSwipe) prevImage();
-    setTouchStart(null);
-    setTouchEnd(null);
+  const goToImage = (index: number) => {
+    if (index === lightbox.index) return;
+    setLightbox(current => ({ ...current, index }));
+  };
+
+  const handleHorizontalWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    if (Math.abs(event.deltaX) <= Math.abs(event.deltaY) || Math.abs(event.deltaX) < 20 || wheelLockedRef.current) return;
+
+    event.preventDefault();
+    wheelLockedRef.current = true;
+    if (event.deltaX > 0) nextImage();
+    else prevImage();
+    window.setTimeout(() => { wheelLockedRef.current = false; }, 350);
   };
 
   const espacioAlt = "Sala de Pilates Reformer · MOVE Pilates Boutique · Pozuelo de Alarcón";
@@ -184,7 +288,14 @@ export default function NuestroEstudio() {
 
         {/* GRID — NUESTRO ESPACIO */}
         <div className="reveal">
-          <div className="grid grid-cols-2 gap-2 md:gap-[10px] mb-2 md:mb-[10px]" role="list" aria-label="Galería de fotos de nuestro espacio">
+          <MobileGallery
+            images={espacioImages}
+            alt={espacioAlt}
+            ariaLabel="Nuestro espacio"
+            onOpen={(index) => openLightbox(espacioImages, index, espacioAlt)}
+          />
+
+          <div className="hidden md:grid md:grid-cols-2 gap-[10px] mb-[10px]" role="list" aria-label="Galería de fotos de nuestro espacio">
             {espacioImages.slice(0, 4).map((src, idx) => (
               <button 
                 key={idx} 
@@ -233,7 +344,7 @@ export default function NuestroEstudio() {
             </div>
           )}
 
-          <div className="flex justify-center mt-6">
+          <div className="hidden md:flex justify-center mt-6">
             <button
               onClick={() => setIsEspacioExpanded(!isEspacioExpanded)}
               aria-expanded={isEspacioExpanded}
@@ -259,7 +370,14 @@ export default function NuestroEstudio() {
 
         {/* GRID — NUESTRAS CLASES */}
         <div className="reveal">
-          <div className="grid grid-cols-2 gap-2 md:gap-[10px] mb-2 md:mb-[10px]" role="list" aria-label="Galería de fotos de nuestras clases">
+          <MobileGallery
+            images={clasesImages}
+            alt={clasesAlt}
+            ariaLabel="Nuestras clases"
+            onOpen={(index) => openLightbox(clasesImages, index, clasesAlt)}
+          />
+
+          <div className="hidden md:grid md:grid-cols-2 gap-[10px] mb-[10px]" role="list" aria-label="Galería de fotos de nuestras clases">
             {clasesImages.slice(0, 4).map((src, idx) => (
               <button 
                 key={idx} 
@@ -308,7 +426,7 @@ export default function NuestroEstudio() {
             </div>
           )}
 
-          <div className="flex justify-center mt-6">
+          <div className="hidden md:flex justify-center mt-6">
             <button
               onClick={() => setIsClasesExpanded(!isClasesExpanded)}
               aria-expanded={isClasesExpanded}
@@ -376,9 +494,6 @@ export default function NuestroEstudio() {
           aria-modal="true"
           aria-label="Visor de imágenes"
           className="fixed inset-0 z-[9999] bg-[rgba(73,53,35,0.96)] flex items-center justify-center animate-fadeIn group"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
           onClick={(e) => {
             if (e.target === e.currentTarget) closeLightbox();
           }}
@@ -395,39 +510,45 @@ export default function NuestroEstudio() {
             </svg>
           </button>
 
-          {/* Navigation Buttons (Desktop Only) */}
-          <button 
-            className="hidden md:flex fixed left-6 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center z-[10000] bg-[rgba(246,243,236,0.10)] border border-[rgba(246,243,236,0.20)] rounded-full backdrop-blur-[4px] cursor-pointer transition-all duration-300 opacity-0 group-hover:opacity-100 hover:bg-[rgba(246,243,236,0.20)] hover:border-[rgba(246,243,236,0.40)] hover:scale-105 outline-none focus-visible:ring-2 focus-visible:ring-[#F6F3EC]"
-            onClick={(e) => { e.stopPropagation(); prevImage(); }}
-            aria-label="Imagen anterior"
+          <div
+            className="flex w-full max-w-[92vw] md:max-w-[50vw] touch-pan-y select-none flex-col items-center gap-5 px-1 pt-16 pb-14"
+            onClick={(e) => e.stopPropagation()}
+            onPointerDown={handleDragStart}
+            onPointerUp={handleDragEnd}
+            onPointerCancel={handleDragEnd}
+            onWheel={handleHorizontalWheel}
           >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <path d="M11 14L6 9L11 4" stroke="#F6F3EC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+            <div className="lightbox-photo-frame relative overflow-hidden rounded-[2px] bg-[rgba(246,243,236,0.08)]">
+              <img
+                key={lightbox.index}
+                src={lightbox.images[lightbox.index]}
+                alt={`${lightbox.alt} - Imagen ${lightbox.index + 1} de ${lightbox.images.length}`}
+                className="lightbox-photo-fade h-full w-full object-cover"
+              />
+            </div>
 
-          <button 
-            className="hidden md:flex fixed right-6 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center z-[10000] bg-[rgba(246,243,236,0.10)] border border-[rgba(246,243,236,0.20)] rounded-full backdrop-blur-[4px] cursor-pointer transition-all duration-300 opacity-0 group-hover:opacity-100 hover:bg-[rgba(246,243,236,0.20)] hover:border-[rgba(246,243,236,0.40)] hover:scale-105 outline-none focus-visible:ring-2 focus-visible:ring-[#F6F3EC]"
-            onClick={(e) => { e.stopPropagation(); nextImage(); }}
-            aria-label="Imagen siguiente"
-          >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <path d="M7 4L12 9L7 14" stroke="#F6F3EC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+            <div
+              className="flex max-w-full items-center justify-center gap-3"
+              role="group"
+              aria-label="Navegación de la galería"
+            >
+              {lightbox.images.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => goToImage(index)}
+                  className={`h-2 w-2 shrink-0 rounded-full transition-[width,background-color,opacity] duration-500 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F6F3EC] ${
+                    lightbox.index === index ? 'w-8 bg-[#F6F3EC]' : 'bg-[#F6F3EC]/55 hover:bg-[#F6F3EC]/80'
+                  }`}
+                  aria-label={`Ir a la foto ${index + 1}`}
+                  aria-current={lightbox.index === index ? 'true' : undefined}
+                />
+              ))}
+            </div>
 
-          {/* Image */}
-          <div className="relative max-w-[92vw] md:max-w-[50vw] max-h-[85vh] md:max-h-[90vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={lightbox.images[lightbox.index]}
-              alt={`${lightbox.alt} - Imagen ${lightbox.index + 1} de ${lightbox.images.length}`}
-              className="max-w-full max-h-[85vh] md:max-h-[90vh] object-contain rounded-[2px] animate-imageFade"
-            />
-          </div>
-
-          {/* Counter */}
-          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 font-sans text-[11px] text-[#D8D0BF] tracking-[0.1em]" aria-live="polite">
-            {lightbox.index + 1} / {lightbox.images.length}
+            <span className="sr-only" aria-live="polite">
+              Foto {lightbox.index + 1} de {lightbox.images.length}
+            </span>
           </div>
         </div>
       )}
@@ -445,18 +566,27 @@ export default function NuestroEstudio() {
           from { opacity: 0; }
           to { opacity: 1; }
         }
-        @keyframes imageFade {
-          from { opacity: 0.7; }
-          to { opacity: 1; }
+        @keyframes lightboxPhotoFade {
+          from { opacity: 0.55; transform: scale(1.025); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        .lightbox-photo-fade {
+          animation: lightboxPhotoFade 280ms ease-out both;
+        }
+        .lightbox-photo-frame {
+          width: min(82vw, calc((100dvh - 170px) * 0.75));
+          aspect-ratio: 3 / 4;
+        }
+        @media (min-width: 768px) {
+          .lightbox-photo-frame {
+            width: min(48vw, calc((100dvh - 150px) * 0.75));
+          }
         }
         .animate-fadeIn {
           animation: fadeIn 0.3s ease forwards;
         }
-        .animate-imageFade {
-          animation: imageFade 0.2s ease forwards;
-        }
         @media (prefers-reduced-motion: reduce) {
-          .animate-fadeIn, .animate-imageFade, .reveal {
+          .animate-fadeIn, .lightbox-photo-fade, .reveal {
             animation: none !important;
             transition: none !important;
             opacity: 1 !important;

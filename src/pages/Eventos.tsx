@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { X, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 
 // --- Components ---
 
@@ -42,6 +41,8 @@ const EditorialGallery = ({
 
   const lastFocusedElement = useRef<HTMLElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dragStartRef = useRef<{ x: number; y: number; pointerId: number } | null>(null);
+  const wheelLockedRef = useRef(false);
 
   const imageItems = images.map(url => ({ url, type: 'image' as const }));
   
@@ -121,53 +122,43 @@ const EditorialGallery = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightbox.isOpen, nextItem, prevItem]);
 
-  // Mobile Swipe Support
-  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
+  const handleDragStart = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (lightbox.index === -1 || (event.pointerType === 'mouse' && event.button !== 0)) return;
+    if ((event.target as HTMLElement).closest('button, video')) return;
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart({
-      x: e.targetTouches[0].clientX,
-      y: e.targetTouches[0].clientY
-    });
-    setIsDragging(false);
+    dragStartRef.current = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+    event.currentTarget.setPointerCapture(event.pointerId);
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!touchStart) return;
-    
-    const deltaX = Math.abs(e.targetTouches[0].clientX - touchStart.x);
-    const deltaY = Math.abs(e.targetTouches[0].clientY - touchStart.y);
-    
-    if (deltaX > deltaY && deltaX > 10) {
-      setIsDragging(true);
-      // Prevent scrolling when swiping horizontally
-      if (e.cancelable) e.preventDefault();
+  const handleDragEnd = (event: React.PointerEvent<HTMLDivElement>) => {
+    const dragStart = dragStartRef.current;
+    if (!dragStart || dragStart.pointerId !== event.pointerId) return;
+
+    const distanceX = event.clientX - dragStart.x;
+    const distanceY = event.clientY - dragStart.y;
+    dragStartRef.current = null;
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    if (Math.abs(distanceX) > 52 && Math.abs(distanceX) > Math.abs(distanceY)) {
+      if (distanceX < 0) nextItem();
+      else prevItem();
     }
   };
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (!touchStart) return;
-    
-    const touchEndClientX = e.changedTouches[0].clientX;
-    const touchEndClientY = e.changedTouches[0].clientY;
-    
-    const deltaX = touchEndClientX - touchStart.x;
-    const deltaY = touchEndClientY - touchStart.y;
-    
-    // Horizontal swipe for navigation
-    if (isDragging) {
-      if (deltaX < -50) nextItem();
-      if (deltaX > 50) prevItem();
-    } 
-    // Vertical swipe down to close
-    else if (deltaY > 80 && deltaY > Math.abs(deltaX) * 1.5) {
-      closeLightbox();
-    }
+  const handleHorizontalWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    if (lightbox.index === -1 || Math.abs(event.deltaX) <= Math.abs(event.deltaY) || Math.abs(event.deltaX) < 20 || wheelLockedRef.current) return;
 
-    setTouchStart(null);
-    setIsDragging(false);
+    event.preventDefault();
+    wheelLockedRef.current = true;
+    if (event.deltaX > 0) nextItem();
+    else prevItem();
+    window.setTimeout(() => { wheelLockedRef.current = false; }, 350);
   };
+
+  const goToItem = (index: number) => setLightbox(current => ({ ...current, index }));
 
   const visibleCount = 6;
 
@@ -299,9 +290,6 @@ const EditorialGallery = ({
         <div 
           id="lightbox-container"
           className="fixed inset-0 z-[10000] bg-[rgba(73,53,35,0.98)] flex flex-col items-center justify-center animate-fadeIn group"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
           role="dialog"
           aria-modal="true"
           aria-label="Visor de imágenes de eventos"
@@ -321,80 +309,75 @@ const EditorialGallery = ({
             </svg>
           </button>
 
-          {/* Navigation Buttons (Desktop Only) */}
-          {lightbox.index !== -1 && (
-            <>
-              <button 
-                className="hidden md:flex fixed left-6 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center z-[10000] bg-[rgba(246,243,236,0.10)] border border-[rgba(246,243,236,0.20)] rounded-full backdrop-blur-[4px] cursor-pointer transition-all duration-200 opacity-0 group-hover:opacity-100 hover:bg-[rgba(246,243,236,0.20)] hover:border-[rgba(246,243,236,0.40)] hover:scale-105 outline-none focus-visible:ring-2 focus-visible:ring-[#F6F3EC]"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  prevItem();
-                }}
-                aria-label="Imagen anterior"
-              >
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                  <path d="M11 14L6 9L11 4" stroke="#F6F3EC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-
-              <button 
-                className="hidden md:flex fixed right-6 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center z-[10000] bg-[rgba(246,243,236,0.10)] border border-[rgba(246,243,236,0.20)] rounded-full backdrop-blur-[4px] cursor-pointer transition-all duration-200 opacity-0 group-hover:opacity-100 hover:bg-[rgba(246,243,236,0.20)] hover:border-[rgba(246,243,236,0.40)] hover:scale-105 outline-none focus-visible:ring-2 focus-visible:ring-[#F6F3EC]"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  nextItem();
-                }}
-                aria-label="Siguiente imagen"
-              >
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                  <path d="M7 4L12 9L7 14" stroke="#F6F3EC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-            </>
-          )}
-
-          {/* Content */}
-          <div className="relative max-w-[92vw] md:max-w-[50vw] max-h-[75vh] md:max-h-[85vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-            {lightbox.index === -1 ? (
-              <video 
-                src={videoUrl}
-                controls
-                autoPlay
-                className="max-w-full max-h-full object-contain rounded-[2px] animate-fadeIn"
-                aria-label="Video del evento"
-              />
-            ) : items[lightbox.index].type === 'video' ? (
-              <video 
-                src={items[lightbox.index].url}
-                controls
-                autoPlay
-                className="max-w-full max-h-full object-contain rounded-[2px] animate-fadeIn"
-                aria-label="Video del evento"
-              />
-            ) : (
+          <div
+            className="flex w-full max-w-[92vw] md:max-w-[50vw] touch-pan-y select-none flex-col items-center gap-5 px-1 pt-16 pb-14"
+            onClick={(e) => e.stopPropagation()}
+            onPointerDown={handleDragStart}
+            onPointerUp={handleDragEnd}
+            onPointerCancel={handleDragEnd}
+            onWheel={handleHorizontalWheel}
+          >
+            <div className={`relative flex items-center justify-center ${
+              lightbox.index !== -1 && items[lightbox.index].type === 'image'
+                ? 'lightbox-photo-frame overflow-hidden rounded-[2px] bg-[rgba(246,243,236,0.08)]'
+                : 'max-h-[calc(100dvh-170px)] w-full md:max-h-[calc(100dvh-150px)]'
+            }`}>
+              {lightbox.index === -1 ? (
+                <video
+                  src={videoUrl}
+                  controls
+                  autoPlay
+                  className="max-h-[calc(100dvh-170px)] max-w-full object-contain rounded-[2px] md:max-h-[calc(100dvh-150px)]"
+                  aria-label="Video del evento"
+                />
+              ) : items[lightbox.index].type === 'video' ? (
+                <video
+                  src={items[lightbox.index].url}
+                  controls
+                  autoPlay
+                  className="max-h-[calc(100dvh-170px)] max-w-full object-contain rounded-[2px] md:max-h-[calc(100dvh-150px)]"
+                  aria-label="Video del evento"
+                />
+              ) : (
               <img
+                key={lightbox.index}
                 src={items[lightbox.index].url}
                 alt={isRetiro ? customAlt : `Imagen ${lightbox.index + 1} de ${items.length} del evento`}
-                className="max-w-full max-h-full object-contain rounded-[2px] animate-fadeIn"
-                loading="eager"
-                decoding="async"
-                onError={(e) => {
-                  e.currentTarget.style.background = '#D8D0BF';
-                  e.currentTarget.style.opacity = '1';
-                  console.log('Error cargando:', e.currentTarget.src);
-                }}
-              />
+                  className="lightbox-photo-fade h-full w-full object-cover"
+                  loading="eager"
+                  decoding="async"
+                  onError={(e) => {
+                    e.currentTarget.style.background = '#D8D0BF';
+                    e.currentTarget.style.opacity = '1';
+                    console.log('Error cargando:', e.currentTarget.src);
+                  }}
+                />
+              )}
+            </div>
+
+            {lightbox.index !== -1 && items.length > 1 && (
+              <div className="flex max-w-full items-center justify-center gap-3" role="group" aria-label="Navegación de la galería">
+                {items.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => goToItem(index)}
+                    className={`h-2 w-2 shrink-0 rounded-full transition-[width,background-color,opacity] duration-500 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F6F3EC] ${
+                      lightbox.index === index ? 'w-8 bg-[#F6F3EC]' : 'bg-[#F6F3EC]/55 hover:bg-[#F6F3EC]/80'
+                    }`}
+                    aria-label={`Ir al elemento ${index + 1}`}
+                    aria-current={lightbox.index === index ? 'true' : undefined}
+                  />
+                ))}
+              </div>
+            )}
+
+            {lightbox.index !== -1 && (
+              <span className="sr-only" aria-live="polite">
+                Elemento {lightbox.index + 1} de {items.length}
+              </span>
             )}
           </div>
-
-          {/* Counter */}
-          {lightbox.index !== -1 && (
-            <div 
-              className="fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 font-sans text-[11px] text-[#D8D0BF] tracking-[0.1em] z-[10001]"
-              aria-live="polite"
-            >
-              {lightbox.index + 1} / {items.length}
-            </div>
-          )}
         </div>
       )}
 
@@ -403,11 +386,27 @@ const EditorialGallery = ({
           from { opacity: 0; }
           to { opacity: 1; }
         }
+        @keyframes lightboxPhotoFade {
+          from { opacity: 0.55; transform: scale(1.025); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        .lightbox-photo-fade {
+          animation: lightboxPhotoFade 280ms ease-out both;
+        }
+        .lightbox-photo-frame {
+          width: min(82vw, calc((100dvh - 170px) * 0.75));
+          aspect-ratio: 3 / 4;
+        }
+        @media (min-width: 768px) {
+          .lightbox-photo-frame {
+            width: min(48vw, calc((100dvh - 150px) * 0.75));
+          }
+        }
         .animate-fadeIn {
           animation: fadeIn 0.3s ease forwards;
         }
         @media (prefers-reduced-motion: reduce) {
-          .animate-fadeIn {
+          .animate-fadeIn, .lightbox-photo-fade {
             animation: none !important;
             transition: none !important;
             opacity: 1 !important;
