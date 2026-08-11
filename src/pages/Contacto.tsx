@@ -1,6 +1,8 @@
 import { MapPin, Clock, Phone, Mail, Instagram } from 'lucide-react';
+import { useCookieConsent } from '../components/CookieConsent';
 
 export default function Contacto() {
+  const { mapsAllowed, openPreferences } = useCookieConsent();
   return (
     <div className="bg-crema-base min-h-screen pb-0">
       {/* Header Section */}
@@ -137,8 +139,8 @@ export default function Contacto() {
       {/* Map Section */}
       <section className="bg-casi-negro py-[10px] w-full">
         <div className="w-full h-[280px] md:h-[400px]">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.471644747444!2d-3.8057241!3d40.4354898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4187ede06d0267%3A0x6d55b452244d1c6a!2sMOVE%20Pilates%20Boutique!5e0!3m2!1ses!2ses!4v1710165000000!5m2!1ses!2ses" 
+          {mapsAllowed ? <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.471644747444!2d-3.8057241!3d40.4354898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4187ede06d0267%3A0x6d55b452244d1c6a!2sMOVE%20Pilates%20Boutique!5e0!3m2!1ses!2ses!4v1710165000000!5m2!1ses!2ses"
             width="100%" 
             height="100%" 
             style={{ border: 0 }} 
@@ -146,7 +148,14 @@ export default function Contacto() {
             loading="lazy" 
             referrerPolicy="no-referrer-when-downgrade"
             title="Ubicación de MOVE Pilates Boutique"
-          ></iframe>
+          ></iframe> : <div className="flex h-full flex-col items-center justify-center bg-[#493523] px-6 text-center text-[#F6F3EC]">
+            <p className="mb-2 font-serif text-[25px] text-[#F6F3EC]">Encuéntranos en Pozuelo.</p>
+            <p className="mb-5 max-w-md text-[14px] text-[#F6F3EC]/80">El mapa de Google está desactivado hasta que aceptes las cookies opcionales.</p>
+            <div className="flex flex-col items-center gap-3 sm:flex-row">
+              <button type="button" onClick={openPreferences} className="btn-outline-inverted text-[10px]">CONFIGURAR COOKIES</button>
+              <a href="https://www.google.com/maps/search/?api=1&query=Av.+de+Europa+31,+local+7,+28224+Pozuelo+de+Alarc%C3%B3n" target="_blank" rel="noreferrer" className="text-[12px] text-[#F6F3EC] underline underline-offset-4">Abrir ubicación en Google Maps</a>
+            </div>
+          </div>}
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Menu, X, Instagram, MessageCircle } from 'lucide-react';
+import { CookieSettingsButton } from './CookieConsent';
 
 export default function Layout() {
   const [isVisible, setIsVisible] = useState(true);
@@ -379,6 +380,12 @@ export default function Layout() {
                   </Link>
                 ))}
               </nav>
+              <div className="mt-5 border-t border-[#F6F3EC]/15 pt-4">
+                <Link to="/aviso-legal" className="block text-[12px] leading-7 text-[#F6F3EC]/70 transition-colors hover:text-[#F6F3EC]">Aviso legal</Link>
+                <Link to="/privacidad" className="block text-[12px] leading-7 text-[#F6F3EC]/70 transition-colors hover:text-[#F6F3EC]">Privacidad</Link>
+                <Link to="/cookies" className="block text-[12px] leading-7 text-[#F6F3EC]/70 transition-colors hover:text-[#F6F3EC]">Cookies</Link>
+                <CookieSettingsButton className="mt-2 text-left text-[12px] leading-7 text-[#F6F3EC]/70 underline underline-offset-4 transition-colors hover:text-[#F6F3EC]" />
+              </div>
             </div>
           </div>
 

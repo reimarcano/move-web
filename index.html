@@ -9,40 +9,6 @@
     <link rel="manifest" href="/site.webmanifest" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- GOOGLE ANALYTICS 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWGZ9S0QMF"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-RWGZ9S0QMF');
-            document.addEventListener('click', function (event) {
-        const target = event.target;
-
-        if (!(target instanceof Element)) return;
-
-        const link = target.closest('a');
-
-        if (!link) return;
-
-        const href = link.getAttribute('href') || '';
-        let method = '';
-
-        if (href.includes('wa.me/34654495508')) {
-          method = 'whatsapp';
-        } else if (href.startsWith('tel:+34654495508')) {
-          method = 'phone';
-        } else {
-          return;
-        }
-
-        gtag('event', 'generate_lead', {
-          method: method,
-          lead_source: window.location.pathname || '/'
-        });
-      });
-    </script>
-
     <!-- SCHEMA.ORG — Local Business (unified with reviews) -->
     <script type="application/ld+json">
     {

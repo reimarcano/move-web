@@ -1,10 +1,26 @@
 {
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-src https://www.google.com; form-action 'self'; upgrade-insecure-requests" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()" },
+        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
+      ]
+    }
+  ],
   "rewrites": [
     { "source": "/clases", "destination": "/clases/index.html" },
     { "source": "/precios", "destination": "/precios/index.html" },
     { "source": "/estudio", "destination": "/estudio/index.html" },
     { "source": "/eventos", "destination": "/eventos/index.html" },
     { "source": "/contacto", "destination": "/contacto/index.html" },
+    { "source": "/aviso-legal", "destination": "/aviso-legal/index.html" },
+    { "source": "/privacidad", "destination": "/privacidad/index.html" },
+    { "source": "/cookies", "destination": "/cookies/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
