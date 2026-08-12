@@ -135,11 +135,10 @@ export default function Home() {
           </picture>
         </div>
 
-        <div className="absolute left-1/2 -translate-x-1/2 text-center w-full max-w-[900px] z-10 px-6 md:px-10 top-[5%]">
-          <h1 className="mb-0 reveal font-serif text-negro-move font-normal">
-            Tu centro de <span className="italic">Pilates Reformer</span>
-            <br />
-            en Pozuelo de Alarcón
+        <div className="absolute left-1/2 -translate-x-1/2 text-center w-full max-w-[900px] z-10 px-4 md:px-10 top-[5%]">
+          <h1 className="mb-0 reveal font-serif text-negro-move font-normal text-[clamp(18px,5.75vw,26px)] leading-[1.2] md:text-[48px]">
+            <span className="block whitespace-nowrap">Tu centro de <span className="italic">Pilates Reformer</span></span>
+            <span className="block whitespace-nowrap">en Pozuelo de Alarcón</span>
           </h1>
 
           <div className="reveal reveal-delay-1 mt-4">
