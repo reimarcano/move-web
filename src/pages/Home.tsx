@@ -153,14 +153,12 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
               aria-label="Reserva tu primera clase por WhatsApp"
-              className="inline-block rounded-[100px] border-[1.5px] bg-[#493523] text-[#F6F3EC] border-[#493523] uppercase tracking-[0.12em] transition-all duration-300 ease-in-out hover:-translate-y-[1px] hover:bg-[#7F7763] hover:border-[#7F7763] hover:text-[#F6F3EC]"
+              className="inline-block whitespace-nowrap rounded-[100px] border-[1.5px] border-[#493523] bg-[#493523] px-4 py-2 text-[9px] uppercase tracking-[0.09em] text-[#F6F3EC] transition-all duration-300 ease-in-out hover:-translate-y-[1px] hover:border-[#7F7763] hover:bg-[#7F7763] hover:text-[#F6F3EC] sm:px-8 sm:py-3.5 sm:text-[12px] sm:tracking-[0.12em]"
               style={{
-                padding: "14px 32px",
                 fontFamily: "Arial, sans-serif",
-                fontSize: "12px",
               }}
             >
-              Reserva tu primera clase de cortesía
+              Reserva tu clase de cortesía
             </a>
           </div>
         </div>
