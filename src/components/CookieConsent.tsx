@@ -104,7 +104,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
         <aside aria-label="Preferencias de cookies" className="fixed bottom-2 left-2 right-2 z-[10001] mx-auto max-w-[1040px] rounded-[11px] border border-[#D8D0BF]/90 bg-[#F6F3EC]/95 px-3 py-2.5 shadow-[0_12px_30px_rgba(73,53,35,0.12)] backdrop-blur-md sm:bottom-4 sm:rounded-[14px] sm:px-5 sm:py-3.5">
           <div className="sm:flex sm:items-center sm:gap-6">
             <div className="min-w-0 flex-1">
-              <p className="mb-2 text-[11px] leading-[1.4] text-[#5E5146] sm:hidden">Usamos cookies necesarias y, con tu permiso, analítica y Google Maps. Puedes elegir tus preferencias. <a href="/cookies" className="text-[#7F7763] underline underline-offset-2">Política</a></p>
+              <p className="mb-2 text-[9px] leading-[1.35] text-[#5E5146] sm:hidden">Usamos cookies necesarias para que la web funcione. Si lo autorizas, también usamos Google Analytics para entender cómo se utiliza el sitio y Google Maps para mostrar nuestra ubicación. Puedes aceptar, rechazar o personalizar tu elección. <a href="/cookies" className="text-[#7F7763] underline underline-offset-2">Política</a></p>
               <div className="hidden sm:block">
                 <p className="mb-1 font-serif text-[18px] text-[#493523]">Configuración de cookies</p>
                 <p className="mb-0 text-[12px] leading-[1.55] text-[#5E5146]">Utilizamos cookies necesarias para que la web funcione correctamente. Si lo autorizas, activamos Google Analytics para comprender de forma agregada el uso del sitio y Google Maps para mostrar nuestra ubicación. Puedes aceptar, rechazar o personalizar tu elección.</p>
