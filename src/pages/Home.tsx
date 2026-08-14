@@ -23,14 +23,14 @@ const features = [
     iconAlt: "Elemento visual de MOVE para clases grupales",
     iconSize: 150,
     title: "Máximo 4 personas",
-    description: "Clases reducidas para un acompañamiento más cercano y consciente.",
+    description: "Grupos reducidos de máximo 4 personas para un acompañamiento cercano y consciente.",
   },
   {
     icon: "/ELEMENTOS DE MARCA MOVE-sesiones privadas.png",
     iconAlt: "Elemento visual de MOVE para sesiones privadas",
     iconSize: 86,
     title: "Sesiones privadas",
-    description: "Un espacio adaptado a tu ritmo, tus objetivos y tu momento vital.",
+    description: "Atención personalizada, adaptada a tu ritmo, tus objetivos y tu momento vital.",
   },
   {
     icon: "/ELEMENTOS DE MARCA MOVE-atencion personalizada.png",
