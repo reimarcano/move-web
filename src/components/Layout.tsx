@@ -267,7 +267,7 @@ export default function Layout() {
                 Martes    9:00 – 21:00<br />
                 Miércoles 9:00 – 21:00<br />
                 Jueves    9:00 – 21:00<br />
-                Vie:      8:00 – 14:00 | 17:00 – 19:00
+                Vie:      8:00 – 14:00 | 17:00 – 18:00
               </p>
             </div>
 

@@ -76,7 +76,7 @@ export default function Contacto() {
                      
                       
                       <span className="font-sans text-[14px] text-[#7F7763] min-w-[128px]">Viernes</span>
-                      <span className="font-sans text-[14px] text-[#493523] text-right">8:00 – 14:00 | 17:00 - 19:00</span>
+                      <span className="font-sans text-[14px] text-[#493523] text-right">8:00 – 14:00 | 17:00 – 18:00</span>
                       
                       <span className="font-sans text-[14px] text-[#7F7763] min-w-[128px]">Sáb · Dom</span>
                       <span className="font-sans text-[14px] text-[#493523] text-right">Cerrado</span>

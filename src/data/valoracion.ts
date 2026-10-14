@@ -1,4 +1,4 @@
-export const VALORACION_PRECIO = 15;
+export const VALORACION_PRECIO = 18;
 
 export const VALORACION_WHATSAPP_URL =
   "https://wa.me/34654495508?text=" +
