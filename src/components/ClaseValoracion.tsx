@@ -13,8 +13,10 @@ export default function ClaseValoracion() {
         </h2>
         <p className="font-sans text-[14px] leading-[1.7] text-[#F6F3EC]/90 mb-0">
           Tu clase de prueba de 50 minutos: conocemos tu nivel, tu postura y tus objetivos para
-          recomendarte el plan que mejor encaja contigo. Si te apuntas, descontamos los{" "}
-          {VALORACION_PRECIO} € de tu primer mes o bono.
+          recomendarte el plan que mejor encaja contigo.
+        </p>
+        <p className="font-sans text-[14px] leading-[1.7] text-[#F6F3EC]/90 mt-4 mb-0">
+          Si te apuntas, descontamos los {VALORACION_PRECIO} € de tu primer mes o bono.
         </p>
       </div>
       <a
