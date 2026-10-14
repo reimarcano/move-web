@@ -15,7 +15,7 @@ export const seoByPath: Record<string, { title: string; description: string }> =
   '/precios': {
     title: 'Tarifas Pilates Reformer · Move · Pozuelo de Alarcón',
     description:
-      'Consulta las tarifas de Pilates Reformer de Move Pilates Boutique en Pozuelo de Alarcón: bonos, clases grupales y sesiones privadas.',
+      'Tarifas de Pilates Reformer en Pozuelo de Alarcón: clase de valoración por 15 €, clases grupales de máximo 4 personas desde 115 €/mes y bonos de sesiones privadas.',
   },
   '/eventos': {
     title: 'Retiros y Experiencias · Move · Pozuelo de Alarcón',

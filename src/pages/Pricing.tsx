@@ -1,8 +1,60 @@
-import { useState, useRef } from 'react';
 import Reviews from '../components/Reviews';
-import emailjs from '@emailjs/browser';
-import { motion, AnimatePresence } from 'motion/react';
-import { MapPin, Clock, Phone, Mail, Instagram } from 'lucide-react';
+import ClaseValoracion from '../components/ClaseValoracion';
+
+const WHATSAPP_URL = 'https://wa.me/34654495508';
+
+interface Plan {
+  nombre: string;
+  descripcion: string;
+  precio: string;
+  unidad?: string;
+  detalle?: string;
+  recomendado?: boolean;
+}
+
+const planesGrupales: Plan[] = [
+  { nombre: '1 clase / semana', descripcion: 'Para crear el hábito y conocer el método.', precio: '115 €', unidad: '/mes' },
+  { nombre: '2 clases / semana', descripcion: 'El ritmo ideal para notar cambios en fuerza, postura y movilidad.', precio: '190 €', unidad: '/mes', recomendado: true },
+  { nombre: '3 clases / semana', descripcion: 'Para avanzar más rápido con un entrenamiento constante.', precio: '220 €', unidad: '/mes' },
+];
+
+const sesionesPrivadas: Plan[] = [
+  { nombre: 'Bono 4 sesiones', descripcion: 'Para empezar con una base sólida o trabajar un objetivo concreto.', precio: '210 €', detalle: '52,50 € / sesión' },
+  { nombre: 'Bono 8 sesiones', descripcion: 'Para un seguimiento continuo y personalizado.', precio: '400 €', detalle: '50 € / sesión' },
+];
+
+function PlanRow({ plan, delay }: { plan: Plan; delay: number }) {
+  return (
+    <div className={`flex justify-between items-start gap-6 border-b border-negro-move/20 py-6 reveal reveal-delay-${delay}`}>
+      <dt className="mb-0">
+        <span className="block font-sans font-medium text-[15px] text-texto-move">
+          {plan.nombre}
+          {plan.recomendado && (
+            <span className="ml-3 align-[2px] inline-block rounded-[100px] border border-[#493523] px-[10px] py-[2px] text-[9px] uppercase tracking-[0.15em] text-[#493523] font-normal">
+              Recomendado
+            </span>
+          )}
+        </span>
+        <span className="block mt-1 font-sans text-[13px] leading-[1.6] text-[#7F7763]">{plan.descripcion}</span>
+      </dt>
+      <dd className="mb-0 text-right shrink-0">
+        <span className="price-highlight block">
+          {plan.precio}
+          {plan.unidad && <span className="text-sm font-sans font-light opacity-70">{plan.unidad}</span>}
+        </span>
+        {plan.detalle && <span className="block mt-1 font-sans text-[12px] text-[#7F7763]">{plan.detalle}</span>}
+      </dd>
+    </div>
+  );
+}
+
+function SectionTitle({ first, italic }: { first: string; italic: string }) {
+  return (
+    <h2 className="mb-3 reveal font-serif font-normal text-[34px] md:text-[48px] leading-[1.1]">
+      {first} <span className="italic">{italic}</span>
+    </h2>
+  );
+}
 
 export default function Pricing() {
   return (
@@ -13,194 +65,50 @@ export default function Pricing() {
         </h1>
       </section>
 
-      {/* Clases Grupales */}
+      {/* Clase de valoración */}
+      <section className="max-w-4xl mx-auto px-6 pt-12 md:pt-16">
+        <ClaseValoracion />
+      </section>
+
+      {/* Clases grupales */}
+      <section className="max-w-4xl mx-auto px-6 section-padding-claro pb-0 text-negro-move">
+        <SectionTitle first="Clases" italic="grupales" />
+        <p className="font-sans text-[14px] text-texto-move mb-4 reveal reveal-delay-1">
+          Pilates Reformer en Pozuelo de Alarcón, en grupos de máximo 4 personas. Clases de 50 minutos.
+        </p>
+        <dl className="mb-0">
+          {planesGrupales.map((plan, i) => (
+            <PlanRow key={plan.nombre} plan={plan} delay={i + 1} />
+          ))}
+        </dl>
+        <p className="mt-4 mb-0 font-sans text-[12px] text-[#7F7763] reveal">Validez de 35 días.</p>
+      </section>
+
+      {/* Sesiones privadas */}
       <section className="max-w-4xl mx-auto px-6 section-padding-claro text-negro-move">
-        <h2 className="mb-text-lg reveal">Clases Grupales</h2>
-        <p className="text-texto-move mb-text-lg reveal reveal-delay-1">Máximo 4 personas por sesión</p>
-        <p className="mb-8 text-[12px] text-[#7F7763] reveal reveal-delay-1">Todos los precios indicados son precios finales e incluyen los impuestos legalmente aplicables.</p>
-        
-        <dl className="space-y-6">
-          <div className="flex justify-between items-end border-b border-negro-move/20 pb-4 reveal reveal-delay-1">
-            <dt className="mb-0 font-medium text-texto-move">1 clase / semana</dt>
-            <dd className="price-highlight mb-0">115 €<span className="text-sm font-sans font-light opacity-70">/mes</span></dd>
-          </div>
-          <div className="flex justify-between items-end border-b border-negro-move/20 pb-4 reveal reveal-delay-2">
-            <dt className="mb-0 font-medium text-texto-move">2 clases / semana</dt>
-            <dd className="price-highlight mb-0">190 €<span className="text-sm font-sans font-light opacity-70">/mes</span></dd>
-          </div>
-          <div className="flex justify-between items-end border-b border-negro-move/20 pb-4 reveal reveal-delay-3">
-            <dt className="mb-0 font-medium text-texto-move">3 clases / semana</dt>
-            <dd className="price-highlight mb-0">220 €<span className="text-sm font-sans font-light opacity-70">/mes</span></dd>
-          </div>
+        <SectionTitle first="Sesiones" italic="privadas" />
+        <p className="font-sans text-[14px] text-texto-move mb-4 reveal reveal-delay-1">
+          Sesiones 1:1 de 50 minutos en Reformer Torre, diseñadas a tu medida, también para embarazo, posparto u objetivos concretos.
+        </p>
+        <dl className="mb-0">
+          {sesionesPrivadas.map((plan, i) => (
+            <PlanRow key={plan.nombre} plan={plan} delay={i + 1} />
+          ))}
         </dl>
-      </section>
 
-      {/* Sesiones Privadas */}
-      <section className="max-w-4xl mx-auto px-6 section-padding-claro pt-0 text-negro-move">
-        <h2 className="mb-text-lg reveal">Sesiones Privadas</h2>
-        <p className="text-texto-move mb-text-lg reveal reveal-delay-1">Atención 1:1 · Totalmente personalizada</p>
-        
-        <dl className="space-y-6">
-          <div className="flex justify-between items-end border-b border-negro-move/20 pb-4 reveal reveal-delay-1">
-            <dt className="mb-0 font-medium text-texto-move">Bono 4 sesiones</dt>
-            <dd className="price-highlight mb-0">210 €<span className="text-sm font-sans font-light opacity-70">/bono</span></dd>
-          </div>
-          <div className="flex justify-between items-end border-b border-negro-move/20 pb-4 reveal reveal-delay-2">
-            <dt className="mb-0 font-medium text-texto-move">Bono 8 sesiones</dt>
-            <dd className="price-highlight mb-0">400 €<span className="text-sm font-sans font-light opacity-70">/bono</span></dd>
-          </div>
-        </dl>
-      </section>
+        <p className="mt-10 mb-0 font-sans text-[12px] leading-[1.7] text-[#7F7763] reveal">
+          Todos los planes incluyen descuentos en eventos MOVE. Precios finales con impuestos incluidos.
+        </p>
 
-      {/* Primera Vez - Aligned Style */}
-      <section className="max-w-4xl mx-auto px-6 section-padding-claro pt-0 reveal">
-        <div className="bg-[#F0EADE] border border-[#D8D0BF] rounded-[8px] p-10 md:p-16 text-center">
-          <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-[#493523] mb-6 block">Clase de Bienvenida</span>
-          
-          <h2 className="font-serif text-3xl md:text-5xl text-[#493523] mb-6 leading-tight font-normal">
-            Tu primera sesión <br />
-            <span className="italic font-light">por 12 €.</span>
-          </h2>
-          
-          <p 
-  className="font-sans text-sm md:text-base max-w-lg mx-auto mb-10 leading-relaxed font-medium"
-  style={{ color: '#493523' }}
->
-  Descubre nuestro método en una sesión de bienvenida.
-</p>
-          
-          <a 
-            href="https://wa.me/34654495508" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="btn-primary inline-block"
-          >
-            SOLICITAR PLAZA
+        <div className="mt-10 text-center reveal">
+          <p className="font-serif italic text-[22px] text-negro-move mb-5">¿Tienes dudas sobre qué plan elegir?</p>
+          <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="btn-primary inline-block">
+            Escríbenos por WhatsApp
           </a>
         </div>
       </section>
 
       <Reviews />
-
-      {/* Contact Information Card */}
-      <section className="max-w-7xl mx-auto px-6 section-padding-claro pt-0">
-        <div className="flex justify-center">
-          <div className="bg-[#F0EADE] border border-[#D8D0BF] rounded-[8px] p-[32px_24px] md:p-[48px] flex flex-col max-w-2xl w-full reveal">
-            <h2 className="font-serif text-[28px] md:text-[32px] text-[#493523] font-normal mb-10 text-center">
-              Información de contacto
-            </h2>
-            
-            <div className="w-full flex flex-col items-center">
-              <div className="w-fit">
-                {/* DIRECCIÓN */}
-                <div className="flex items-start gap-3 md:gap-4 mb-6 md:mb-7">
-                  <div className="w-5 shrink-0 mt-[2px]">
-                    <MapPin className="text-[#7F7763]" size={18} />
-                  </div>
-                  <div className="flex-1 text-left">
-                    <p className="font-sans text-[14px] text-[#493523] leading-[1.8] mb-0">
-                      Av. de Europa, 31, local 7<br />
-                      Acceso desde Calle Berna<br />
-                      28224 Pozuelo de Alarcón, Madrid
-                    </p>
-                  </div>
-                </div>
-
-                {/* TELÉFONO */}
-                <div className="flex items-start gap-3 md:gap-4 mb-6 md:mb-7">
-                  <div className="w-5 shrink-0 mt-[2px]">
-                    <Phone className="text-[#7F7763]" size={18} />
-                  </div>
-                  <div className="flex-1 text-left">
-                    <a href="tel:+34654495508" className="font-sans text-[14px] text-[#493523] hover:text-[#7F7763] transition-all duration-200 no-underline">
-                      +34 654 49 55 08
-                    </a>
-                  </div>
-                </div>
-
-                {/* EMAIL */}
-                <div className="flex items-start gap-3 md:gap-4 mb-6 md:mb-7">
-                  <div className="w-5 shrink-0 mt-[2px]">
-                    <Mail className="text-[#7F7763]" size={18} />
-                  </div>
-                  <div className="flex-1 text-left">
-                    <a href="mailto:movebygenesis@gmail.com" className="font-sans text-[14px] text-[#493523] hover:text-[#7F7763] transition-all duration-200 no-underline">
-                      movebygenesis@gmail.com
-                    </a>
-                  </div>
-                </div>
-
-                {/* HORARIO */}
-                <div className="flex items-start gap-3 md:gap-4 mb-6 md:mb-7">
-                  <div className="w-5 shrink-0 mt-[2px]">
-                    <Clock className="text-[#7F7763]" size={18} />
-                  </div>
-                  <div className="flex-1 text-left">
-                    <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 w-full">
-                      <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Lunes a Jueves</span>
-                      <span className="font-sans text-[13px] text-[#493523] text-right">9:00 – 21:00</span>
-                      
-                      <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Viernes</span>
-                      <span className="font-sans text-[13px] text-[#493523] text-right">8:00 – 14:00 | 17:00 – 19:00</span>
-
-                      
-                      <span className="font-sans text-[13px] text-[#7F7763] min-w-[140px]">Sábados y Domingos</span>
-                      <span className="font-sans text-[13px] text-[#493523] text-right">Cerrado</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Separador antes del botón WhatsApp */}
-              <div className="border-t border-[#D8D0BF] my-8 w-full"></div>
-
-              {/* BOTÓN WHATSAPP */}
-              <div className="text-center">
-                <a 
-                  href="https://wa.me/34654495508" 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="btn-primary inline-block w-full md:w-auto"
-                >
-                  ESCRIBIR POR WHATSAPP
-                </a>
-              </div>
-
-              {/* Separador antes de redes sociales */}
-              <div className="border-t border-[#D8D0BF] my-8 w-full"></div>
-
-              {/* ICONOS REDES SOCIALES */}
-              <div className="flex flex-col items-center">
-                <div className="flex justify-center gap-[16px]">
-                  <a 
-                    href="https://instagram.com/move.pilatesboutique" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="w-[44px] h-[44px] rounded-full bg-[#493523] flex items-center justify-center text-[#F6F3EC] transition-all duration-200 hover:bg-[#7F7763] hover:-translate-y-[2px]"
-                    aria-label="Instagram"
-                  >
-                    <Instagram size={20} />
-                  </a>
-                  <a 
-                    href="https://tiktok.com/@movepilatesboutique" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="w-[44px] h-[44px] rounded-full bg-[#493523] flex items-center justify-center text-[#F6F3EC] transition-all duration-200 hover:bg-[#7F7763] hover:-translate-y-[2px]"
-                    aria-label="TikTok"
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
-                    </svg>
-                  </a>
-                </div>
-                <p className="mt-4 text-[13px] text-[#7F7763] font-sans text-center leading-[1.7] max-w-[280px] mx-auto mb-0">
-                  Síguenos en Instagram y TikTok para ver cómo se vive el movimiento en MOVE.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

@@ -3,13 +3,12 @@ import { ChevronDown } from "lucide-react";
 import { faqs } from "../data/faqs";
 
 import Reviews from "../components/Reviews";
+import ClaseValoracion from "../components/ClaseValoracion";
+import { VALORACION_WHATSAPP_URL } from "../data/valoracion";
 
 /* ────────────────────────────────────────────
    Constants
    ──────────────────────────────────────────── */
-
-const WHATSAPP_CTA_URL =
-  "https://wa.me/34654495508?text=Hola%2C%20me%20gustar%C3%ADa%20reservar%20mi%20clase%20de%20bienvenida%20en%20MOVE%20Pilates%20Boutique.%20%C2%BFPod%C3%A9is%20indicarme%20disponibilidad%3F";
 
 const WHATSAPP_URL = "https://wa.me/34654495508";
 
@@ -143,10 +142,10 @@ export default function Home() {
 
           <div className="reveal reveal-delay-1 mt-4">
             <a
-              href={WHATSAPP_CTA_URL}
+              href={VALORACION_WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
-              aria-label="Reserva tu clase de bienvenida por WhatsApp"
+              aria-label="Reserva tu clase de valoración por WhatsApp"
               className="inline-block rounded-[100px] border-[1.5px] bg-[#493523] text-[#F6F3EC] border-[#493523] uppercase tracking-[0.12em] transition-all duration-300 ease-in-out hover:-translate-y-[1px] hover:bg-[#7F7763] hover:border-[#7F7763] hover:text-[#F6F3EC]"
               style={{
                 padding: "14px 32px",
@@ -154,7 +153,7 @@ export default function Home() {
                 fontSize: "12px",
               }}
             >
-              Reserva tu clase de bienvenida
+              Reserva tu clase de valoración
             </a>
           </div>
         </div>
@@ -302,6 +301,13 @@ export default function Home() {
 
       {/* ── Reviews (lazy loaded) ── */}
       <Reviews />
+
+      {/* ── Clase de valoración ── */}
+      <section className="bg-crema-base px-6 pb-20 md:pb-24">
+        <div className="max-w-4xl mx-auto">
+          <ClaseValoracion />
+        </div>
+      </section>
     </div>
   );
 }
