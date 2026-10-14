@@ -42,11 +42,11 @@ export const faqs: FAQ[] = [
   {
     question: "¿Tenéis clase de prueba?",
     answer:
-      "Sí. Como cortesía, te invitamos a descubrir nuestro método con una clase de bienvenida sin coste. Escríbenos por WhatsApp al +34 654 49 55 08 para confirmar disponibilidad.",
+      "Sí. Puedes descubrir nuestro método con una clase de bienvenida por 12 €. Escríbenos por WhatsApp al +34 654 49 55 08 para confirmar disponibilidad.",
   },
   {
     question: "¿Cuáles son las tarifas de Move Pilates Reformer en Pozuelo?",
     answer:
-      "Clases grupales (máx. 4 personas): 115 €/mes con 1 sesión por semana · 190 €/mes con 2 sesiones · 220 €/mes con 3 sesiones. Sesiones privadas 1:1: Bono 4 sesiones por 210 € · Bono 8 sesiones por 400 €. Todos los planes incluyen descuentos en eventos MOVE y tienen caducidad de 35 días.",
+      "Clase de bienvenida: 12 €. Clases grupales (máx. 4 personas): 115 €/mes con 1 sesión por semana · 190 €/mes con 2 sesiones · 220 €/mes con 3 sesiones. Sesiones privadas 1:1: Bono 4 sesiones por 210 € · Bono 8 sesiones por 400 €. Todos los planes incluyen descuentos en eventos MOVE y tienen caducidad de 35 días.",
   },
 ];

@@ -59,14 +59,14 @@ export default function Pricing() {
           
           <h2 className="font-serif text-3xl md:text-5xl text-[#493523] mb-6 leading-tight font-normal">
             Tu primera sesión <br />
-            <span className="italic font-light">sin coste.</span>
+            <span className="italic font-light">por 12 €.</span>
           </h2>
           
           <p 
   className="font-sans text-sm md:text-base max-w-lg mx-auto mb-10 leading-relaxed font-medium"
   style={{ color: '#493523' }}
 >
-  Te invitamos a descubrir nuestro método.
+  Descubre nuestro método en una sesión de bienvenida.
 </p>
           
           <a 

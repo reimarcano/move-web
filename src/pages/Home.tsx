@@ -9,7 +9,7 @@ import Reviews from "../components/Reviews";
    ──────────────────────────────────────────── */
 
 const WHATSAPP_CTA_URL =
-  "https://wa.me/34654495508?text=Hola%2C%20me%20gustar%C3%ADa%20reservar%20mi%20primera%20clase%20gratuita%20en%20MOVE%20Pilates%20Boutique.%20%C2%BFPod%C3%A9is%20indicarme%20disponibilidad%3F";
+  "https://wa.me/34654495508?text=Hola%2C%20me%20gustar%C3%ADa%20reservar%20mi%20clase%20de%20bienvenida%20en%20MOVE%20Pilates%20Boutique.%20%C2%BFPod%C3%A9is%20indicarme%20disponibilidad%3F";
 
 const WHATSAPP_URL = "https://wa.me/34654495508";
 
@@ -146,7 +146,7 @@ export default function Home() {
               href={WHATSAPP_CTA_URL}
               target="_blank"
               rel="noreferrer"
-              aria-label="Reserva tu primera clase por WhatsApp"
+              aria-label="Reserva tu clase de bienvenida por WhatsApp"
               className="inline-block rounded-[100px] border-[1.5px] bg-[#493523] text-[#F6F3EC] border-[#493523] uppercase tracking-[0.12em] transition-all duration-300 ease-in-out hover:-translate-y-[1px] hover:bg-[#7F7763] hover:border-[#7F7763] hover:text-[#F6F3EC]"
               style={{
                 padding: "14px 32px",
@@ -154,7 +154,7 @@ export default function Home() {
                 fontSize: "12px",
               }}
             >
-              Reserva tu primera clase de cortesía
+              Reserva tu clase de bienvenida
             </a>
           </div>
         </div>
