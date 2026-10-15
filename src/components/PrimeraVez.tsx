@@ -24,45 +24,29 @@ export default function PrimeraVez() {
   const imgRef = useRef<HTMLImageElement>(null);
   const stepsRef = useRef<HTMLOListElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const priceRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const band = bandRef.current;
     const img = imgRef.current;
     const steps = stepsRef.current;
     const title = titleRef.current;
-    const price = priceRef.current;
-    if (!band || !img || !steps || !title || !price) return;
+    if (!band || !img || !steps || !title) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const items = Array.from(steps.children) as HTMLElement[];
     const clamp = (v: number) => Math.max(0, Math.min(1, v));
     let raf = 0;
-    let countRaf = 0;
-
-    // El precio cuenta hasta su valor al aparecer
-    const countUp = () => {
-      const t0 = performance.now();
-      const tick = (t: number) => {
-        const k = Math.min(1, (t - t0) / 1100);
-        price.textContent = `${Math.round(VALORACION_PRECIO * (1 - Math.pow(1 - k, 3)))} €`;
-        if (k < 1) countRaf = requestAnimationFrame(tick);
-      };
-      countRaf = requestAnimationFrame(tick);
-    };
 
     const io = new IntersectionObserver(
       (entries) =>
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           entry.target.classList.add("is-in");
-          if (entry.target === price && !reduce) countUp();
           io.unobserve(entry.target);
         }),
       { rootMargin: "0px 0px -12% 0px" },
     );
     io.observe(title);
-    io.observe(price);
 
     const frame = () => {
       raf = 0;
@@ -92,7 +76,6 @@ export default function PrimeraVez() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       cancelAnimationFrame(raf);
-      cancelAnimationFrame(countRaf);
       io.disconnect();
     };
   }, []);
@@ -130,7 +113,7 @@ export default function PrimeraVez() {
             encontrar el plan que mejor encaja contigo.
           </p>
 
-          <FichaValoracion priceRef={priceRef} className="reveal reveal-delay-2" />
+          <FichaValoracion className="reveal reveal-delay-2" />
 
           <ol className="pv-steps" ref={stepsRef}>
             {pasos.map((paso, i) => (
