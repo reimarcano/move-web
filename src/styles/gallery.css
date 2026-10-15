@@ -7,7 +7,7 @@
 
 .gallery-label {
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: var(--fs-micro);
   color: var(--color-mid);
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -79,7 +79,7 @@
 .genesis-text-card h3 {
   font-family: var(--font-serif);
   color: var(--color-dark);
-  font-size: 22px;
+  font-size: var(--fs-h3);
   margin-bottom: 0;
 }
 
@@ -96,7 +96,7 @@
 
 .genesis-bio {
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: var(--fs-small);
   color: var(--color-dark);
   opacity: 0.75;
   line-height: 1.8;
@@ -248,7 +248,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: var(--fs-micro);
   color: var(--color-soft);
   letter-spacing: 0.1em;
   z-index: 10001;

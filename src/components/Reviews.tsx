@@ -123,7 +123,7 @@ const ReviewCard: React.FC<{
           <div className="w-9 h-9 rounded-full bg-tostado flex items-center justify-center" aria-hidden="true">
             <span className="font-serif text-[16px] text-marron-move leading-none">{review.initial}</span>
           </div>
-          <p className="font-sans text-[13px] text-marron-move font-normal leading-none mb-0">{review.name}</p>
+          <p className="font-sans text-small text-marron-move font-normal leading-none mb-0">{review.name}</p>
         </div>
         <div className="opacity-60 w-4 h-4"><GoogleLogo /></div>
       </div>
@@ -135,14 +135,14 @@ const ReviewCard: React.FC<{
       </div>
 
       <div className="mt-3">
-        <p ref={textRef} className={`font-sans text-[14px] text-texto-move leading-[1.75] ${!isExpanded ? 'line-clamp-3' : ''}`}>
+        <p ref={textRef} className={`font-sans text-small text-texto-move leading-[1.75] ${!isExpanded ? 'line-clamp-3' : ''}`}>
           {review.text}
         </p>
         {isTruncated && !isExpanded && (
           <button
             type="button"
             onClick={onExpand}
-            className="font-sans text-[12px] text-marron-move mt-1 hover:underline focus:outline-none"
+            className="font-sans text-label text-marron-move mt-1 hover:underline focus:outline-none"
             aria-expanded="false"
             aria-label={`Leer más sobre la reseña de ${review.name}`}
           >
@@ -231,7 +231,7 @@ export default function Reviews() {
             href="https://www.google.com/maps/place//data=!4m2!3m1!1s0xd4187ede06d0267:0x6d55b452244d1c6a?sa=X&ved=1t:8290&ictx=111"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline flex items-center justify-center gap-2 mx-auto w-fit whitespace-nowrap px-5 text-[11px] tracking-[0.09em] sm:px-8 sm:text-[12px] sm:tracking-[0.12em]"
+            className="btn-outline flex items-center justify-center gap-2 mx-auto w-fit whitespace-nowrap px-5 text-micro tracking-[0.09em] sm:px-8 sm:text-label sm:tracking-[0.12em]"
           >
             <GoogleLogo />
             Ver todas las reseñas en Google

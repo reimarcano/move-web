@@ -102,12 +102,12 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
       {children}
       {ready && !consent && !preferencesOpen && (
         <aside aria-label="Preferencias de cookies" className="fixed bottom-2 left-2 right-2 z-[10001] mx-auto max-w-[760px] rounded-[11px] border border-[#D8D0BF]/90 bg-[#F6F3EC]/95 px-3 py-2.5 text-center shadow-[0_12px_30px_rgba(73,53,35,0.12)] backdrop-blur-md sm:bottom-3 sm:max-w-[780px] sm:rounded-[14px] sm:px-5 sm:py-3">
-          <p className="mx-auto mb-2 text-[10px] leading-[1.35] text-[#5E5146] sm:hidden">Usamos cookies necesarias y, con tu permiso, para mejorar tu experiencia y mostrarte nuestra ubicación. <a href="/cookies" className="text-[#7F7763] underline underline-offset-2">Política</a></p>
-          <p className="mx-auto mb-2 hidden max-w-[700px] text-[11px] leading-[1.5] text-[#5E5146] sm:block">Utilizamos cookies necesarias para que la web funcione y, si lo autorizas, para mejorar nuestros servicios, analizar el uso de la web y mostrarte nuestra ubicación con Google Maps. Consulta nuestra <a href="/cookies" className="text-[#7F7763] underline underline-offset-2">Política de cookies</a>.</p>
+          <p className="mx-auto mb-2 text-label leading-[1.4] text-[#5E5146] sm:hidden">Usamos cookies necesarias y, con tu permiso, para mejorar tu experiencia y mostrarte nuestra ubicación. <a href="/cookies" className="text-[#7F7763] underline underline-offset-2">Política</a></p>
+          <p className="mx-auto mb-2 hidden max-w-[700px] text-label leading-[1.5] text-[#5E5146] sm:block">Utilizamos cookies necesarias para que la web funcione y, si lo autorizas, para mejorar nuestros servicios, analizar el uso de la web y mostrarte nuestra ubicación con Google Maps. Consulta nuestra <a href="/cookies" className="text-[#7F7763] underline underline-offset-2">Política de cookies</a>.</p>
           <div className="grid grid-cols-3 gap-1.5 sm:mx-auto sm:flex sm:w-fit sm:items-center sm:gap-x-2">
-            <button type="button" onClick={() => saveConsent(EMPTY_PREFERENCES)} className="btn-outline w-full !px-1.5 !py-2 text-[9px] sm:w-auto sm:!px-3 sm:text-[10px]">RECHAZAR</button>
-            <button type="button" onClick={openPreferences} className="btn-outline w-full border-transparent !px-1.5 !py-2 text-[9px] sm:w-auto sm:!px-3 sm:text-[10px]">PERSONALIZAR</button>
-            <button type="button" onClick={() => saveConsent(ALL_PREFERENCES)} className="btn-primary w-full !px-1.5 !py-2 text-[9px] sm:w-auto sm:!px-3 sm:text-[10px]">ACEPTAR</button>
+            <button type="button" onClick={() => saveConsent(EMPTY_PREFERENCES)} className="btn-outline w-full !px-1.5 !py-2 text-micro sm:w-auto sm:!px-3">RECHAZAR</button>
+            <button type="button" onClick={openPreferences} className="btn-outline w-full border-transparent !px-1.5 !py-2 text-micro sm:w-auto sm:!px-3">PERSONALIZAR</button>
+            <button type="button" onClick={() => saveConsent(ALL_PREFERENCES)} className="btn-primary w-full !px-1.5 !py-2 text-micro sm:w-auto sm:!px-3">ACEPTAR</button>
           </div>
         </aside>
       )}
@@ -115,21 +115,21 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
         <div className="fixed inset-0 z-[10002] flex items-end bg-[#493523]/30 p-4 backdrop-blur-[2px] sm:items-center sm:justify-center" role="presentation">
           <section role="dialog" aria-modal="true" aria-labelledby="cookie-settings-title" className="w-full max-w-[520px] rounded-[10px] bg-[#F6F3EC] p-6 shadow-[0_20px_60px_rgba(73,53,35,0.28)] md:p-8">
             <p className="m-eyebrow mb-3">Preferencias</p>
-            <h2 id="cookie-settings-title" className="mb-4 text-[28px]">Elige cómo quieres <span className="italic">navegar.</span></h2>
+            <h2 id="cookie-settings-title" className="mb-4 text-h3">Elige cómo quieres <span className="italic">navegar.</span></h2>
             <div className="space-y-4 border-y border-[#D8D0BF] py-5">
-              <div><p className="mb-1 text-[15px] font-medium text-[#493523]">Necesarias</p><p className="mb-0 text-[13px] text-[#5E5146]">Guardan tu elección de privacidad. Siempre activas.</p></div>
+              <div><p className="mb-1 text-body font-medium text-[#493523]">Necesarias</p><p className="mb-0 text-small text-[#5E5146]">Guardan tu elección de privacidad. Siempre activas.</p></div>
               <label className="flex cursor-pointer items-start gap-3 rounded-[6px] p-2 transition-colors hover:bg-[#EAE2D3]">
                 <input type="checkbox" checked={draft.analytics} onChange={(event) => setDraft((current) => ({ ...current, analytics: event.target.checked }))} className="mt-1 h-4 w-4 accent-[#493523]" />
-                <span><span className="block text-[15px] font-medium text-[#493523]">Analítica</span><span className="block text-[13px] text-[#5E5146]">Google Analytics nos ayuda a conocer el uso agregado de la web.</span></span>
+                <span><span className="block text-body font-medium text-[#493523]">Analítica</span><span className="block text-small text-[#5E5146]">Google Analytics nos ayuda a conocer el uso agregado de la web.</span></span>
               </label>
               <label className="flex cursor-pointer items-start gap-3 rounded-[6px] p-2 transition-colors hover:bg-[#EAE2D3]">
                 <input type="checkbox" checked={draft.maps} onChange={(event) => setDraft((current) => ({ ...current, maps: event.target.checked }))} className="mt-1 h-4 w-4 accent-[#493523]" />
-                <span><span className="block text-[15px] font-medium text-[#493523]">Mapa de Google</span><span className="block text-[13px] text-[#5E5146]">Permite mostrar la ubicación integrada en la página de Contacto.</span></span>
+                <span><span className="block text-body font-medium text-[#493523]">Mapa de Google</span><span className="block text-small text-[#5E5146]">Permite mostrar la ubicación integrada en la página de Contacto.</span></span>
               </label>
             </div>
             <div className="mt-6 flex flex-col gap-2 sm:flex-row">
-              <button type="button" onClick={() => saveConsent(EMPTY_PREFERENCES)} className="btn-outline w-full text-[10px] sm:w-auto">SÓLO NECESARIAS</button>
-              <button type="button" onClick={() => saveConsent(draft)} className="btn-primary w-full text-[10px] sm:ml-auto sm:w-auto">GUARDAR SELECCIÓN</button>
+              <button type="button" onClick={() => saveConsent(EMPTY_PREFERENCES)} className="btn-outline w-full sm:w-auto">SÓLO NECESARIAS</button>
+              <button type="button" onClick={() => saveConsent(draft)} className="btn-primary w-full sm:ml-auto sm:w-auto">GUARDAR SELECCIÓN</button>
             </div>
           </section>
         </div>

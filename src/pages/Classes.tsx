@@ -81,7 +81,7 @@ export default function Classes() {
                 IDEAL PARA
               </h3>
 
-              <p className="text-[14px] leading-[1.75] text-texto-move mb-0">
+              <p className="text-body leading-[1.75] text-texto-move mb-0">
                 Nuestras clases grupales de Pilates Reformer en Pozuelo están
                 pensadas para personas que quieren mejorar su postura, ganar
                 fuerza, moverse con más control y entrenar en un entorno
@@ -100,7 +100,7 @@ export default function Classes() {
                 ESPECIALIDADES
               </h3>
 
-              <p className="text-[14px] leading-[1.75] text-texto-move mb-0">
+              <p className="text-body leading-[1.75] text-texto-move mb-0">
                 Dolor de espalda y postura: trabajamos fuerza profunda,
                 movilidad y control corporal para ayudar a mejorar la postura y
                 reducir tensiones.
@@ -171,7 +171,7 @@ export default function Classes() {
                 IDEAL PARA
               </h3>
 
-              <p className="text-[14px] leading-[1.75] text-texto-move mb-0">
+              <p className="text-body leading-[1.75] text-texto-move mb-0">
                 Las sesiones privadas de Pilates Reformer están pensadas para
                 quienes buscan un trabajo más individualizado, ya sea por su
                 momento físico, sus objetivos o su preferencia por una atención
@@ -189,7 +189,7 @@ export default function Classes() {
                 ENFOQUE DEPORTIVO
               </h3>
 
-              <p className="text-[14px] leading-[1.75] text-texto-move mb-0">
+              <p className="text-body leading-[1.75] text-texto-move mb-0">
                 También son ideales para deportistas que quieren mejorar
                 movilidad, estabilidad, control postural y calidad de movimiento
                 como complemento a su entrenamiento.
@@ -218,7 +218,7 @@ export default function Classes() {
 
       {/* Aviso */}
       <div className="max-w-3xl mx-auto px-6 text-center pt-section-xl reveal">
-        <p className="text-[12px] text-texto-move/70 leading-relaxed italic">
+        <p className="text-label text-texto-move/70 leading-relaxed italic">
           Si estás en proceso de recuperación o tienes una lesión activa, es
           importante consultarlo antes de comenzar. En casos que lo requieran,
           trabajamos con alta médica para garantizar una práctica segura y bien
@@ -228,7 +228,7 @@ export default function Classes() {
 
       {/* CTA */}
       <section className="section-padding-claro px-6 text-center reveal">
-        <h3 className="font-serif text-negro-move text-[24px] md:text-[32px] mb-8 italic">
+        <h3 className="font-serif text-negro-move text-h3 mb-8 italic">
           ¿No sabes cuál es tu formato?
         </h3>
 

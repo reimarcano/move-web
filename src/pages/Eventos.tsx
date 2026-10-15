@@ -275,7 +275,7 @@ const EditorialGallery = ({
             <div className="col-span-2 flex justify-center mt-2">
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="bg-transparent text-[#493523] border-[1.5px] border-[#493523] rounded-full px-7 py-3 font-sans text-[12px] uppercase tracking-[0.12em] hover:bg-[#493523] hover:text-[#F6F3EC] transition-all duration-300"
+                className="bg-transparent text-[#493523] border-[1.5px] border-[#493523] rounded-full px-7 py-3 font-sans text-label uppercase tracking-[0.12em] hover:bg-[#493523] hover:text-[#F6F3EC] transition-all duration-300"
                 aria-expanded={isExpanded}
               >
                 {isExpanded ? 'VER MENOS' : 'VER TODAS LAS FOTOS'}
@@ -481,12 +481,12 @@ export default function Eventos() {
             Se viven.
           </span>
         </h1>
-          <p className="font-sans text-[14px] md:text-[15px] text-[#7F7763] leading-[1.75] mt-6">
+          <p className="font-sans text-lead text-[#7F7763] leading-[1.75] mt-6">
             Retiros y brunches diseñados con la misma intención que cada clase de MOVE, para que salgas diferente a como entraste.
           </p>
           <button 
             onClick={scrollToWaitlist}
-            className="bg-[#493523] text-[#F6F3EC] border-[1.5px] border-[#493523] rounded-full px-8 py-3.5 font-sans text-[12px] uppercase tracking-[0.12em] hover:bg-transparent hover:text-[#493523] transition-all duration-300 mt-10 block w-fit"
+            className="bg-[#493523] text-[#F6F3EC] border-[1.5px] border-[#493523] rounded-full px-8 py-3.5 font-sans text-label uppercase tracking-[0.12em] hover:bg-transparent hover:text-[#493523] transition-all duration-300 mt-10 block w-fit"
             aria-label="Ir al formulario de lista de espera"
           >
             QUIERO ESTAR EN LA PRÓXIMA
@@ -516,14 +516,14 @@ export default function Eventos() {
             <h2 className="mb-0">
               Retiros de <span className="italic">bienestar.</span>
             </h2>
-            <p className="label-balanced font-sans text-[15px] text-[#7F7763] leading-[1.75] mt-4 mb-0">
+            <p className="label-balanced font-sans text-body text-[#7F7763] leading-[1.75] mt-4 mb-0">
               Un espacio para desconectar, moverte y volver <span className="whitespace-nowrap">a ti.</span>
             </p>
             <div className="w-10 h-[1px] bg-[#D8D0BF] mx-auto my-8"></div>
-            <p className="font-sans text-[15px] text-[#7F7763] max-w-[640px] mx-auto leading-[1.85]">
+            <p className="font-sans text-body text-[#7F7763] max-w-[640px] mx-auto leading-[1.85]">
               Los organizamos en lugares donde la naturaleza no es el decorado. Es parte esencial de la experiencia. Entornos a las afueras de Madrid donde el aire, la luz y el silencio ya hacen su trabajo antes de que empiece nada. Cada retiro es diferente, pero todos comparten la misma estructura invisible: movimiento consciente en suelo, una mesa con comida real elaborada con cuidado y talleres diseñados para conectar. Arteterapia, sound healing y prácticas que le hablan al cuerpo de formas que las palabras no siempre alcanzan. No hay agenda apretada ni nada que demostrar. Solo tiempo de calidad contigo, en un entorno que lo hace posible.
             </p>
-            <p className="mt-6 font-serif italic text-[18px] text-[#7F7763]">
+            <p className="mt-6 font-serif italic text-sub text-[#7F7763]">
               "Cada edición tiene su propio carácter. Lo que no cambia es la intención."
             </p>
           </div>
@@ -540,12 +540,12 @@ export default function Eventos() {
 
           {/* CTA SECCIÓN */}
           <div className="mt-16 text-center reveal px-6">
-            <p className="font-sans text-[14px] text-[#7F7763] mb-6">
+            <p className="font-sans text-small text-[#7F7763] mb-6">
               ¿Quieres estar en el próximo retiro MOVE?
             </p>
             <button 
               onClick={scrollToWaitlist}
-              className="bg-[#493523] text-[#F6F3EC] border-[1.5px] border-[#493523] rounded-full px-8 py-3.5 font-sans text-[12px] uppercase tracking-[0.12em] hover:bg-transparent hover:text-[#493523] transition-all duration-300"
+              className="bg-[#493523] text-[#F6F3EC] border-[1.5px] border-[#493523] rounded-full px-8 py-3.5 font-sans text-label uppercase tracking-[0.12em] hover:bg-transparent hover:text-[#493523] transition-all duration-300"
             >
               APÚNTAME A LA LISTA DE ESPERA
             </button>
@@ -566,10 +566,10 @@ export default function Eventos() {
               Pilates <span className="italic">Brunch.</span>
             </h2>
             <div className="w-10 h-[1px] bg-[#D8D0BF] mx-auto my-8"></div>
-            <p className="font-sans text-[15px] text-[#7F7763] max-w-[640px] mx-auto leading-[1.85]">
+            <p className="font-sans text-body text-[#7F7763] max-w-[640px] mx-auto leading-[1.85]">
               Una mañana con intención. Empezamos moviéndonos con la misma atención y el mismo cuidado con el que trabajamos cada clase en MOVE. Después, la mesa. Buena comida, espacio para respirar y la conversación que surge sola cuando el cuerpo ya está en calma. Lo organizamos en el estudio o en espacios seleccionados con criterio. Cafés de especialidad y lugares donde el detalle importa tanto como aquí. Cada edición tiene su propio escenario. Lo que no cambia es lo que se genera entre quienes vienen: presencia, conexión y la sensación de haber dedicado bien el tiempo.
             </p>
-            <p className="mt-6 font-serif italic text-[18px] text-[#7F7763]">
+            <p className="mt-6 font-serif italic text-sub text-[#7F7763]">
               "Un formato corto. Una mañana que se queda."
             </p>
           </div>
@@ -583,12 +583,12 @@ export default function Eventos() {
 
           {/* CTA SECCIÓN */}
           <div className="mt-16 text-center reveal px-6">
-            <p className="font-sans text-[14px] text-[#7F7763] mb-6">
+            <p className="font-sans text-small text-[#7F7763] mb-6">
               ¿Quieres estar en el próximo Pilates Brunch?
             </p>
             <button 
               onClick={scrollToWaitlist}
-              className="bg-[#493523] text-[#F6F3EC] border-[1.5px] border-[#493523] rounded-full px-8 py-3.5 font-sans text-[12px] uppercase tracking-[0.12em] hover:bg-transparent hover:text-[#493523] transition-all duration-300"
+              className="bg-[#493523] text-[#F6F3EC] border-[1.5px] border-[#493523] rounded-full px-8 py-3.5 font-sans text-label uppercase tracking-[0.12em] hover:bg-transparent hover:text-[#493523] transition-all duration-300"
             >
               APÚNTAME A LA LISTA DE ESPERA
             </button>
@@ -603,7 +603,7 @@ export default function Eventos() {
           <h2>
             La próxima experiencia <span className="italic">MOVE.</span>
           </h2>
-          <p className="font-sans text-[15px] text-[#7F7763] max-w-[480px] mx-auto leading-[1.8] mt-4">
+          <p className="font-sans text-body text-[#7F7763] max-w-[480px] mx-auto leading-[1.8] mt-4">
             Si quieres estar en el siguiente evento, déjanos tu contacto.
           </p>
 
@@ -612,14 +612,14 @@ export default function Eventos() {
               href="https://wa.me/34654495508"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center bg-[#493523] text-[#F6F3EC] border-[1.5px] border-[#493523] rounded-[100px] px-[32px] py-[14px] font-sans text-[12px] uppercase tracking-[0.12em] transition-all duration-300 ease-in-out hover:bg-[#7F7763] hover:border-[#7F7763] hover:-translate-y-[1px]"
+              className="inline-flex items-center bg-[#493523] text-[#F6F3EC] border-[1.5px] border-[#493523] rounded-[100px] px-[32px] py-[14px] font-sans text-label uppercase tracking-[0.12em] transition-all duration-300 ease-in-out hover:bg-[#7F7763] hover:border-[#7F7763] hover:-translate-y-[1px]"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="mr-[8px]">
                 <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#F6F3EC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               APÚNTAME A LA LISTA DE ESPERA
             </a>
-            <p className="font-sans text-[12px] text-[#7F7763] mt-[12px]">
+            <p className="font-sans text-label text-[#7F7763] mt-[12px]">
               Te respondemos en horario laboral.
             </p>
           </div>

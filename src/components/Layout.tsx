@@ -161,7 +161,7 @@ export default function Layout() {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="text-3xl font-serif text-negro-move"
+                  className="text-h2 font-serif text-negro-move"
                   aria-current={location.pathname === link.path ? 'page' : undefined}
                 >
                   {link.name}
@@ -180,7 +180,7 @@ export default function Layout() {
       {/* WhatsApp Bubble */}
       <div className="fixed bottom-5 right-5 md:bottom-7 md:right-7 z-[9999] group">
         {/* Tooltip */}
-        <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-negro-move text-crema-move text-[12px] px-3 py-1.5 rounded-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none hidden md:block font-sans">
+        <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-negro-move text-crema-move text-label px-3 py-1.5 rounded-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none hidden md:block font-sans">
           ¿Hablamos?
         </div>
         
@@ -227,7 +227,7 @@ export default function Layout() {
                 style={{ 
                   fontFamily: 'var(--font-serif)',
                   fontStyle: 'italic',
-                  fontSize: '13px',
+                  fontSize: 'var(--fs-small)',
                   color: 'rgba(246,243,236,0.55)',
                   letterSpacing: 'normal'
                 }}
@@ -242,7 +242,7 @@ export default function Layout() {
                 className="mb-5 font-normal"
                 style={{ 
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '10px',
+                  fontSize: 'var(--fs-micro)',
                   color: 'rgba(246,243,236,0.45)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.15em'
@@ -253,7 +253,7 @@ export default function Layout() {
               <p 
                 style={{ 
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '13px',
+                  fontSize: 'var(--fs-small)',
                   color: 'rgba(246,243,236,0.70)',
                   lineHeight: '1.8'
                 }}
@@ -265,7 +265,7 @@ export default function Layout() {
                 className="mt-4 font-normal"
                 style={{ 
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '12px',
+                  fontSize: 'var(--fs-label)',
                   color: 'rgba(246,243,236,0.45)',
                   lineHeight: '1.8'
                 }}
@@ -284,7 +284,7 @@ export default function Layout() {
                 className="mb-5 font-normal"
                 style={{ 
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '10px',
+                  fontSize: 'var(--fs-micro)',
                   color: 'rgba(246,243,236,0.45)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.15em'
@@ -301,7 +301,7 @@ export default function Layout() {
                   aria-label="Contactar por WhatsApp"
                   style={{ 
                     fontFamily: 'var(--font-sans)',
-                  fontSize: '13px',
+                  fontSize: 'var(--fs-small)',
                     color: 'rgba(246,243,236,0.70)'
                   }}
                 >
@@ -318,7 +318,7 @@ export default function Layout() {
                   aria-label="Seguir en Instagram"
                   style={{ 
                     fontFamily: 'var(--font-sans)',
-                  fontSize: '13px',
+                  fontSize: 'var(--fs-small)',
                     color: 'rgba(246,243,236,0.70)'
                   }}
                 >
@@ -337,7 +337,7 @@ export default function Layout() {
                   aria-label="Seguir en TikTok"
                   style={{ 
                     fontFamily: 'var(--font-sans)',
-                  fontSize: '13px',
+                  fontSize: 'var(--fs-small)',
                     color: 'rgba(246,243,236,0.70)'
                   }}
                 >
@@ -355,7 +355,7 @@ export default function Layout() {
                 className="mb-5 font-normal"
                 style={{ 
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '10px',
+                  fontSize: 'var(--fs-micro)',
                   color: 'rgba(246,243,236,0.45)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.15em'
@@ -377,7 +377,7 @@ export default function Layout() {
                     className="transition-colors duration-200 ease-in-out hover:text-[#F6F3EC]"
                     style={{ 
                       fontFamily: 'var(--font-sans)',
-                  fontSize: '13px',
+                  fontSize: 'var(--fs-small)',
                       color: 'rgba(246,243,236,0.70)',
                       lineHeight: '2',
                       display: 'block'
@@ -388,10 +388,10 @@ export default function Layout() {
                 ))}
               </nav>
               <div className="mt-5 border-t border-[#F6F3EC]/15 pt-4">
-                <Link to="/aviso-legal" className="block text-[12px] leading-7 text-[#F6F3EC]/70 transition-colors hover:text-[#F6F3EC]">Aviso legal</Link>
-                <Link to="/privacidad" className="block text-[12px] leading-7 text-[#F6F3EC]/70 transition-colors hover:text-[#F6F3EC]">Privacidad</Link>
-                <Link to="/cookies" className="block text-[12px] leading-7 text-[#F6F3EC]/70 transition-colors hover:text-[#F6F3EC]">Cookies</Link>
-                <CookieSettingsButton className="mt-2 text-left text-[12px] leading-7 text-[#F6F3EC]/70 underline underline-offset-4 transition-colors hover:text-[#F6F3EC]" />
+                <Link to="/aviso-legal" className="block text-label leading-7 text-[#F6F3EC]/70 transition-colors hover:text-[#F6F3EC]">Aviso legal</Link>
+                <Link to="/privacidad" className="block text-label leading-7 text-[#F6F3EC]/70 transition-colors hover:text-[#F6F3EC]">Privacidad</Link>
+                <Link to="/cookies" className="block text-label leading-7 text-[#F6F3EC]/70 transition-colors hover:text-[#F6F3EC]">Cookies</Link>
+                <CookieSettingsButton className="mt-2 text-left text-label leading-7 text-[#F6F3EC]/70 underline underline-offset-4 transition-colors hover:text-[#F6F3EC]" />
               </div>
             </div>
           </div>
@@ -405,7 +405,7 @@ export default function Layout() {
               className="m-0 text-center md:text-left font-normal"
               style={{ 
                 fontFamily: 'var(--font-sans)',
-                fontSize: '11px',
+                fontSize: 'var(--fs-micro)',
                 color: 'rgba(246,243,236,0.35)'
               }}
             >
@@ -415,7 +415,7 @@ export default function Layout() {
               className="m-0 text-center md:text-right font-normal"
               style={{ 
                 fontFamily: 'var(--font-sans)',
-                fontSize: '11px',
+                fontSize: 'var(--fs-micro)',
                 color: 'rgba(246,243,236,0.35)'
               }}
             >

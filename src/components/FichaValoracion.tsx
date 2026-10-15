@@ -1,20 +1,13 @@
-import type { Ref } from "react";
 import { VALORACION_PRECIO } from "../data/valoracion";
 
 /* Ficha de la clase de valoración: precio, duración y el grupo reducido destacado.
    Compartida por el Home (bloque "¿Primera vez en MOVE?") y la página de Precios. */
-export default function FichaValoracion({
-  priceRef,
-  className = "",
-}: {
-  priceRef?: Ref<HTMLElement>;
-  className?: string;
-}) {
+export default function FichaValoracion({ className = "" }: { className?: string }) {
   return (
     <dl className={`pv-specs ${className}`}>
       <div>
         <dt>Precio</dt>
-        <dd ref={priceRef}>{VALORACION_PRECIO} €</dd>
+        <dd>{VALORACION_PRECIO} €</dd>
       </div>
       <div>
         <dt>Duración</dt>

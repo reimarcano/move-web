@@ -270,7 +270,7 @@ export default function NuestroEstudio() {
         <h1 className="mb-0">
           Un espacio para <span className="italic">conectarte.</span>
         </h1>
-        <p className="font-sans text-[#7F7763] text-[14px] md:text-[15px] max-w-[560px] mx-auto leading-[1.85] mt-6 mb-0">
+        <p className="font-sans text-[#7F7763] text-lead max-w-[560px] mx-auto leading-[1.85] mt-6 mb-0">
           Cada detalle de MOVE está pensado para que te sientas a gusto, en confianza y presente desde el momento en que entras.
         </p>
       </section>
@@ -279,7 +279,7 @@ export default function NuestroEstudio() {
       <section className="px-6 md:px-[8%] mb-[60px] md:mb-[100px]">
         <div className="reveal">
           <span className="m-eyebrow mb-4">Nuestro espacio</span>
-          <h2 className="font-serif text-[#493523] text-[24px] md:text-[32px] font-normal leading-tight">
+          <h2 className="font-serif text-[#493523] text-h2 font-normal leading-tight">
             Diseñado para que te sientas <span className="italic">bien.</span>
           </h2>
           <div className="w-10 h-[1px] bg-[#D8D0BF] mt-6 mb-8"></div>
@@ -347,7 +347,7 @@ export default function NuestroEstudio() {
             <button
               onClick={() => setIsEspacioExpanded(!isEspacioExpanded)}
               aria-expanded={isEspacioExpanded}
-              className="bg-transparent text-[#493523] border-[1.5px] border-[#493523] rounded-full px-7 py-3 font-sans text-[12px] uppercase tracking-[0.12em] hover:bg-[#493523] hover:text-[#F6F3EC] transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-[#493523] focus-visible:ring-offset-2"
+              className="bg-transparent text-[#493523] border-[1.5px] border-[#493523] rounded-full px-7 py-3 font-sans text-label uppercase tracking-[0.12em] hover:bg-[#493523] hover:text-[#F6F3EC] transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-[#493523] focus-visible:ring-offset-2"
             >
               {isEspacioExpanded ? 'VER MENOS' : 'VER TODAS LAS FOTOS'}
             </button>
@@ -359,7 +359,7 @@ export default function NuestroEstudio() {
       <section className="px-6 md:px-[8%] mt-[60px] md:mt-[100px] mb-[60px] md:mb-[100px]">
         <div className="reveal">
           <span className="m-eyebrow mb-4">Nuestras clases</span>
-          <h2 className="font-serif text-[#493523] text-[24px] md:text-[32px] font-normal leading-tight">
+          <h2 className="font-serif text-[#493523] text-h2 font-normal leading-tight">
             El movimiento en <span className="italic">cada sesión.</span>
           </h2>
           <div className="w-10 h-[1px] bg-[#D8D0BF] mt-6 mb-8"></div>
@@ -427,7 +427,7 @@ export default function NuestroEstudio() {
             <button
               onClick={() => setIsClasesExpanded(!isClasesExpanded)}
               aria-expanded={isClasesExpanded}
-              className="bg-transparent text-[#493523] border-[1.5px] border-[#493523] rounded-full px-7 py-3 font-sans text-[12px] uppercase tracking-[0.12em] hover:bg-[#493523] hover:text-[#F6F3EC] transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-[#493523] focus-visible:ring-offset-2"
+              className="bg-transparent text-[#493523] border-[1.5px] border-[#493523] rounded-full px-7 py-3 font-sans text-label uppercase tracking-[0.12em] hover:bg-[#493523] hover:text-[#F6F3EC] transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-[#493523] focus-visible:ring-offset-2"
             >
               {isClasesExpanded ? 'VER MENOS' : 'VER TODAS LAS FOTOS'}
             </button>
@@ -453,14 +453,14 @@ export default function NuestroEstudio() {
 
           {/* COLUMNA DERECHA */}
           <div className="w-full md:w-1/2 bg-[#D8D0BF] p-8 md:p-14 flex flex-col justify-center">
-            <span className="font-sans text-[#7F7763] text-[10px] uppercase tracking-[0.15em] block">
+            <span className="font-sans text-[#7F7763] text-micro uppercase tracking-[0.15em] block">
               FUNDADORA E INSTRUCTORA
             </span>
             <div className="w-7 h-[1px] bg-[#7F7763] my-4"></div>
-            <h3 className="font-serif text-[#493523] text-[26px] font-normal leading-tight mb-5">
+            <h3 className="font-serif text-[#493523] text-h3 font-normal leading-tight mb-5">
               Génesis Romero
             </h3>
-            <p className="font-sans text-[#493523] text-[14px] md:text-[15px] leading-[1.85] mb-0">
+            <p className="font-sans text-[#493523] text-body leading-[1.85] mb-0">
               Instructora y fundadora de Move Pilates boutique en Pozuelo de Alarcón. Cada clase que diseña parte de una convicción: que moverse bien cambia cómo te sientes, cómo te mueves y cómo te habitas a ti mismo.
             </p>
           </div>
@@ -469,14 +469,14 @@ export default function NuestroEstudio() {
 
       {/* CTA FINAL */}
       <section className="mt-[60px] md:mt-[100px] py-[56px] md:py-[80px] px-6 md:px-[8%] text-center reveal">
-        <h3 className="font-sans text-[#493523] text-[14px] mb-6 font-normal">
+        <h3 className="font-sans text-[#493523] text-body mb-6 font-normal">
           ¿Quieres conocer el estudio en persona?
         </h3>
         <a
           href="https://wa.me/34654495508"
           target="_blank"
           rel="noreferrer"
-          className="inline-block bg-[#493523] text-[#F6F3EC] border-[1.5px] border-[#493523] rounded-full px-8 py-3.5 font-sans text-[12px] uppercase tracking-[0.12em] hover:bg-transparent hover:text-[#493523] transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-[#F6F3EC] focus-visible:ring-offset-2"
+          className="inline-block bg-[#493523] text-[#F6F3EC] border-[1.5px] border-[#493523] rounded-full px-8 py-3.5 font-sans text-label uppercase tracking-[0.12em] hover:bg-transparent hover:text-[#493523] transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-[#F6F3EC] focus-visible:ring-offset-2"
           aria-label="Escríbenos por WhatsApp para más información"
         >
           ESCRÍBENOS

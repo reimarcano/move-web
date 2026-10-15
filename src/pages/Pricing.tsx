@@ -36,14 +36,14 @@ function PlanLinea({ plan }: { plan: Plan }) {
   return (
     <li className="py-4 reveal">
       <div className="flex items-baseline gap-3">
-        <span className={`font-serif text-[19px] md:text-[21px] text-[#493523] whitespace-nowrap ${plan.conNombre ? "italic md:text-[24px]" : ""}`}>{plan.nombre}</span>
+        <span className={`font-serif text-sub text-[#493523] whitespace-nowrap ${plan.conNombre ? "italic" : ""}`}>{plan.nombre}</span>
         <span aria-hidden="true" className="flex-1 border-b border-dotted border-[#493523]/35 -translate-y-[5px]" />
-        <span className="font-serif text-[22px] md:text-[24px] text-[#493523] whitespace-nowrap">{plan.precio}</span>
+        <span className="font-serif text-sub text-[#493523] whitespace-nowrap">{plan.precio}</span>
       </div>
-      <p className="mt-1 mb-0 font-sans text-[12px] italic text-[#7F7763]">
+      <p className="mt-1 mb-0 font-sans text-label italic text-[#7F7763]">
         {plan.detalle}
         {plan.recomendado && (
-          <span className="ml-3 not-italic inline-block align-[1px] rounded-[100px] bg-[#493523] px-3 py-[3px] text-[9px] uppercase tracking-[0.25em] text-[#F6F3EC]">
+          <span className="ml-3 not-italic inline-block align-[1px] rounded-[100px] bg-[#493523] px-3 py-[3px] text-micro uppercase tracking-[0.16em] text-[#F6F3EC]">
             Más elegido
           </span>
         )}
@@ -73,7 +73,7 @@ export default function Pricing() {
     <div className="w-full pb-0">
       <section className="px-6 text-center max-w-4xl mx-auto section-padding-claro pb-10 md:pb-14">
         <p className={`${eyebrow} mb-3 reveal`}>Tarifas</p>
-        <h1 className="m-title reveal">
+        <h1 className="m-title text-display reveal">
           Encuentra <span className="italic">tu plan.</span>
         </h1>
       </section>
@@ -122,11 +122,11 @@ export default function Pricing() {
           </div>
 
           <Seccion titulo="Clases" italica="grupales" subtitulo="Reformer · Máx. 4 personas · 50 min" planes={planesGrupales} />
-          <p className="mt-1 mb-14 font-sans text-[11px] text-[#7F7763] reveal">Validez de 35 días</p>
+          <p className="mt-1 mb-14 font-sans text-label text-[#7F7763] reveal">Validez de 35 días</p>
 
           <Seccion titulo="Sesiones" italica="privadas" subtitulo="1:1 en Reformer Torre · 50 min" planes={sesionesPrivadas} />
 
-          <p className="mt-12 mb-3 font-sans text-[11px] leading-[1.8] text-[#7F7763] reveal">
+          <p className="mt-12 mb-3 font-sans text-label leading-[1.8] text-[#7F7763] reveal">
             Todos los planes incluyen descuentos en eventos MOVE. Precios en euros, impuestos incluidos.
           </p>
           <div className="mt-12 pt-10 border-t border-[#493523]/15 text-center reveal">

@@ -136,8 +136,8 @@ export default function Home() {
         </div>
 
         <div className="absolute left-1/2 -translate-x-1/2 text-center w-full max-w-[900px] z-10 px-4 md:px-10 top-[5%]">
-          <h1 className="mb-0 reveal font-serif text-negro-move font-normal text-[clamp(18px,5.75vw,26px)] leading-[1.2] md:text-[48px]">
-            <span className="block whitespace-nowrap">Tu centro de <span className="italic">Pilates Reformer</span></span>
+          <h1 className="mb-0 reveal font-serif text-negro-move font-normal text-[min(var(--fs-display),8.6vw)] leading-[1.15]">
+            <span className="block md:whitespace-nowrap">Tu centro de <span className="block italic md:inline">Pilates Reformer</span></span>
             <span className="block whitespace-nowrap">en Pozuelo de Alarcón</span>
           </h1>
 
@@ -201,7 +201,6 @@ export default function Home() {
                   className="mb-3"
                   style={{
                     fontFamily: "var(--font-serif)",
-                    fontSize: "24px",
                     lineHeight: "1.2",
                     color: "#493523",
                   }}
@@ -211,7 +210,6 @@ export default function Home() {
                 <p
                   className="max-w-[250px] mx-auto"
                   style={{
-                    fontSize: "15px",
                     lineHeight: "1.75",
                     color: "rgba(73, 53, 35, 0.82)",
                   }}
@@ -228,7 +226,7 @@ export default function Home() {
       <section className="m-section bg-marron-move text-crema-move text-center">
         <div className="max-w-5xl mx-auto">
           <span className="m-eyebrow m-eyebrow-light mb-6 reveal">Nuestra filosofía</span>
-          <h2 className="text-crema-move mb-0 font-serif italic reveal">
+          <h2 className="text-crema-move mb-0 font-serif italic text-h3 leading-[1.4] reveal">
             &ldquo;Move no es solo un estudio de Pilates Reformer, es un refugio en Pozuelo de
             Alarcón diseñado con intención, sensibilidad y propósito. Un espacio donde cada
             detalle está pensado para invitarte a reconectar contigo.&rdquo;
@@ -254,10 +252,10 @@ export default function Home() {
               </picture>
             </div>
             <div className="mt-3 text-center">
-              <p className="font-sans text-[13px] text-crema-move/55 text-center tracking-[0.05em] mb-0">
+              <p className="font-sans text-small text-crema-move/55 text-center tracking-[0.05em] mb-0">
                 Génesis Romero
               </p>
-              <p className="font-sans text-[11px] text-crema-move/55 text-center uppercase tracking-[0.1em] mb-0">
+              <p className="font-sans text-micro text-crema-move/55 text-center uppercase tracking-[0.1em] mb-0">
                 Fundadora de MOVE
               </p>
             </div>
