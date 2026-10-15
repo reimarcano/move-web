@@ -20,9 +20,9 @@ export default function PlanesGrupales() {
         {planesGrupales.map((plan, i) => (
           <article
             key={plan.nombre}
-            className={`pl-card reveal reveal-delay-${i + 1}${plan.masElegido ? " is-key" : ""}`}
+            className={`m-card pl-card reveal reveal-delay-${i + 1}${plan.masElegido ? " is-key" : ""}`}
           >
-            {plan.masElegido && <span className="pl-badge">Más elegido</span>}
+            {plan.masElegido && <span className="m-badge pl-badge">Más elegido</span>}
             <span className="pl-freq">{plan.frecuencia}</span>
             <h3>{plan.nombre}</h3>
             <p className="pl-lema">{plan.lema}</p>
@@ -31,7 +31,7 @@ export default function PlanesGrupales() {
               <span>/ mes</span>
             </p>
             <p className="pl-per">{plan.porClase} por clase</p>
-            <ul className="pl-perks">
+            <ul className="m-list pl-perks">
               {ventajasGrupales.map((v) => (
                 <li key={v}>{v}</li>
               ))}
@@ -49,7 +49,7 @@ export default function PlanesGrupales() {
         ))}
       </div>
 
-      <div className="pl-foot reveal">
+      <div className="m-foot reveal">
         <p className="m-closing">¿Prefieres sesiones privadas 1:1? Bonos desde 210 €.</p>
         <Link to="/precios" className="btn-outline">
           Ver todas las tarifas

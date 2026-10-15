@@ -116,33 +116,33 @@ const ReviewCard: React.FC<{
     <article
       role="listitem"
       aria-label={`Reseña de ${review.name}`}
-      className={`h-full bg-arena rounded-card card-padding transition-[min-height] duration-300 ${isExpanded ? 'min-h-[460px] md:min-h-[500px]' : 'min-h-[330px] md:min-h-[360px]'} reveal reveal-delay-${(index % 5) + 1}`}
+      className={`m-card h-full transition-[min-height] duration-300 ${isExpanded ? 'min-h-[460px] md:min-h-[500px]' : 'min-h-[330px] md:min-h-[360px]'} reveal reveal-delay-${(index % 5) + 1}`}
     >
       <div className="flex justify-between items-start mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-tostado flex items-center justify-center" aria-hidden="true">
-            <span className="font-serif text-[16px] text-marron-move leading-none">{review.initial}</span>
+          <div className="w-9 h-9 rounded-full bg-soft flex items-center justify-center" aria-hidden="true">
+            <span className="font-serif text-lead text-dark leading-none">{review.initial}</span>
           </div>
-          <p className="font-sans text-small text-marron-move font-normal leading-none mb-0">{review.name}</p>
+          <p className="font-sans text-small text-dark leading-none mb-0">{review.name}</p>
         </div>
         <div className="opacity-60 w-4 h-4"><GoogleLogo /></div>
       </div>
 
       <div className="flex gap-[2px] mt-4" aria-label={`Calificación de ${review.rating} estrellas`}>
         {[...Array(review.rating)].map((_, starIndex) => (
-          <StarIcon key={starIndex} size={12} className="text-marron-move" />
+          <StarIcon key={starIndex} size={12} className="text-dark" />
         ))}
       </div>
 
       <div className="mt-3">
-        <p ref={textRef} className={`font-sans text-small text-texto-move leading-[1.75] ${!isExpanded ? 'line-clamp-3' : ''}`}>
+        <p ref={textRef} className={`m-text text-small ${!isExpanded ? 'line-clamp-3' : ''}`}>
           {review.text}
         </p>
         {isTruncated && !isExpanded && (
           <button
             type="button"
             onClick={onExpand}
-            className="font-sans text-label text-marron-move mt-1 hover:underline focus:outline-none"
+            className="font-sans text-label text-dark mt-1 hover:underline focus:outline-none"
             aria-expanded="false"
             aria-label={`Leer más sobre la reseña de ${review.name}`}
           >
@@ -178,11 +178,11 @@ export default function Reviews() {
   };
 
   return (
-    <section className="bg-crema-base m-section">
+    <section className="m-section">
       <div className="max-w-[1000px] mx-auto">
-        <div className="m-head reveal">
-          <span className="m-eyebrow">Reseñas en Google</span>
-          <h2 className="m-title">
+        <div className="m-head">
+          <span className="m-eyebrow reveal">Reseñas en Google</span>
+          <h2 className="m-title reveal reveal-delay-1">
             Lo que dicen <em>nuestros alumnos.</em>
           </h2>
         </div>
@@ -219,19 +219,19 @@ export default function Reviews() {
               key={slideIndex}
               type="button"
               onClick={() => goToSlide(slideIndex)}
-              className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-marron-move focus-visible:ring-offset-2 ${activeSlide === slideIndex ? 'w-5 bg-marron-move' : 'w-2 bg-tostado hover:bg-marron-move'}`}
+              className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-dark focus-visible:ring-offset-2 ${activeSlide === slideIndex ? 'w-5 bg-dark' : 'w-2 bg-soft hover:bg-dark'}`}
               aria-label={`Ir a las reseñas ${slideIndex * reviewsPerSlide + 1} a ${Math.min((slideIndex + 1) * reviewsPerSlide, reviewsData.length)}`}
               aria-current={activeSlide === slideIndex ? 'true' : undefined}
             />
           ))}
         </div>
 
-        <div className="mt-section-md text-center reveal">
+        <div className="m-foot reveal">
           <a
             href="https://www.google.com/maps/place//data=!4m2!3m1!1s0xd4187ede06d0267:0x6d55b452244d1c6a?sa=X&ved=1t:8290&ictx=111"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline flex items-center justify-center gap-2 mx-auto w-fit whitespace-nowrap px-5 text-micro tracking-[0.09em] sm:px-8 sm:text-label sm:tracking-[0.12em]"
+            className="btn-outline flex items-center justify-center gap-2 w-fit whitespace-nowrap px-5 text-micro tracking-[0.09em] sm:px-8 sm:text-label sm:tracking-[0.12em]"
           >
             <GoogleLogo />
             Ver todas las reseñas en Google

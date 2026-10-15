@@ -17,8 +17,8 @@ const pasos = [
   },
 ];
 
-/* Bloque "¿Primera vez en MOVE?" del Home: clase de valoración en banda de contraste.
-   Al hacer scroll la banda se expande, la foto hace parallax y los pasos se rellenan. */
+/* Bloque "¿Primera vez en MOVE?" del Home: clase de valoración en cinta marrón a sangre.
+   Al hacer scroll la foto hace parallax y los pasos se rellenan. */
 export default function PrimeraVez() {
   const bandRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -53,7 +53,6 @@ export default function PrimeraVez() {
       const vh = window.innerHeight;
       if (!reduce) {
         const b = band.getBoundingClientRect();
-        band.style.setProperty("--p", clamp((vh - b.top) / (vh * 0.7)).toFixed(3));
         const k = clamp((vh - b.top) / (vh + b.height));
         img.style.transform = `translateY(${((k - 0.5) * -14).toFixed(2)}%)`;
       }
@@ -81,15 +80,15 @@ export default function PrimeraVez() {
   }, []);
 
   return (
-    <section className="primera-vez" id="primera-vez" aria-labelledby="primera-vez-titulo">
-      <div className="pv-intro">
+    <section className="m-section primera-vez" id="primera-vez" aria-labelledby="primera-vez-titulo">
+      <div className="m-head">
         <span className="m-eyebrow reveal">¿Primera vez en MOVE?</span>
-        <p className="pv-intro-text m-title-sm reveal reveal-delay-1">
+        <p className="m-title-sm mt-3.5 reveal reveal-delay-1">
           Empieza con una clase <em>pensada para ti.</em>
         </p>
       </div>
 
-      <div className="pv-band" ref={bandRef}>
+      <div className="m-band pv-band" ref={bandRef}>
         <figure className="pv-photo">
           <img
             ref={imgRef}
