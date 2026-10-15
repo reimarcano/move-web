@@ -903,37 +903,26 @@ html {
 }
 }
 
-/* ── Galería de Instagram antes del footer ── */
-.ig-feed { --ig-tile: clamp(220px, 22vw, 340px); --ig-gap: 14px; background: var(--color-arena); padding: 96px 0 104px; overflow: hidden; }
-.ig-head { max-width: 1180px; margin: 0 auto 40px; padding: 0 24px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
-.ig-head .m-title { margin-top: 10px; }
-.ig-handle { display: flex; align-items: center; gap: 14px; padding: 16px 22px; border: 1px solid var(--color-soft); border-radius: 10px; color: var(--color-dark); background: rgba(255, 255, 255, 0.35); transition: background-color 200ms ease, border-color 200ms ease; flex-shrink: 0; }
-.ig-handle:hover { background: var(--color-base); border-color: var(--color-mid); }
-.ig-handle span { display: flex; flex-direction: column; gap: 4px; }
-.ig-handle strong { font-family: var(--font-sans); font-weight: 700; font-size: var(--fs-body); }
-.ig-handle small { font-family: var(--font-sans); font-size: var(--fs-micro); letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-mid); }
+/* ── Galería de Instagram antes del footer (Ventanas) ── */
+.ig-feed { --ig-tile: clamp(240px, 22vw, 320px); --ig-gap: 16px; background: var(--color-arena); padding: 112px 0 120px; overflow: hidden; }
+.ig-head { max-width: 1180px; margin: 0 auto 56px; padding: 0 24px; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+.ig-follow { padding-bottom: 6px; border-bottom: 1px solid rgba(73, 53, 35, 0.35); font-family: var(--font-sans); font-size: var(--fs-small); letter-spacing: 0.06em; color: var(--color-dark); transition: border-color 500ms cubic-bezier(0.22, 1, 0.36, 1); }
+.ig-follow:hover { border-color: var(--color-dark); }
 
-.ig-viewport { -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
-.ig-track { display: flex; gap: var(--ig-gap); width: max-content; margin: 0; padding: 0; list-style: none; animation: ig-marquee calc(var(--ig-count, 8) * 7.5s) linear infinite; }
-.ig-viewport:hover .ig-track, .ig-track:focus-within { animation-play-state: paused; }
-@keyframes ig-marquee {
-  /* La pista contiene dos copias: al desplazar una copia entera (+ su hueco) el bucle no se nota */
-  to { transform: translateX(calc(-50% - var(--ig-gap) / 2)); }
-}
-
-.ig-tile { position: relative; display: block; width: var(--ig-tile); aspect-ratio: 1; border-radius: 8px; overflow: hidden; background: var(--color-soft); }
-.ig-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1); }
-.ig-tile:hover img { transform: scale(1.04); }
-.ig-tile:focus-visible { outline: 2px solid var(--color-dark); outline-offset: 3px; }
-.ig-badge { position: absolute; right: 14px; bottom: 14px; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--color-dark); color: var(--color-base); }
+/* La tira la mueve InstagramFeed.tsx (avance continuo + paralaje dentro de cada marco) */
+.ig-track { display: flex; gap: var(--ig-gap); width: max-content; margin: 0; padding: 0; list-style: none; will-change: transform; }
+.ig-tile { position: relative; display: block; width: var(--ig-tile); aspect-ratio: 1; border-radius: 2px; overflow: hidden; background: var(--color-soft); }
+.ig-tile img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+.ig-tile:focus-visible { outline: 1px solid var(--color-dark); outline-offset: 4px; }
+.ig-badge { position: absolute; right: 14px; bottom: 14px; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--color-dark); color: var(--color-base); transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1); }
+.ig-tile:hover .ig-badge { transform: scale(1.08); }
 
 @media (max-width: 900px) {
-  .ig-feed { --ig-tile: 62vw; --ig-gap: 10px; padding: 72px 0 80px; }
-  .ig-head { flex-direction: column; align-items: flex-start; padding: 0 16px; margin-bottom: 28px; }
-  .ig-track { animation-duration: calc(var(--ig-count, 8) * 5.5s); }
+  .ig-feed { --ig-tile: 64vw; --ig-gap: 10px; padding: 80px 0 88px; }
+  .ig-head { flex-direction: column; align-items: flex-start; padding: 0 16px; margin-bottom: 36px; gap: 20px; }
 }
 
+/* Sin animación: la tira se recorre a mano */
 @media (prefers-reduced-motion: reduce) {
-  .ig-track { animation: none; }
-  .ig-viewport { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .ig-strip { overflow-x: auto; }
 }
