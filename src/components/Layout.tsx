@@ -4,6 +4,9 @@ import { Menu, X, Instagram, MessageCircle } from 'lucide-react';
 import { CookieSettingsButton } from './CookieConsent';
 import InstagramFeed from './InstagramFeed';
 
+// Páginas clave donde se muestra la galería de Instagram antes del footer
+const INSTAGRAM_FEED_PATHS = ['/', '/precios', '/estudio'];
+
 export default function Layout() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -201,7 +204,7 @@ export default function Layout() {
       </div>
 
       {/* Galería de Instagram */}
-      <InstagramFeed />
+      {INSTAGRAM_FEED_PATHS.includes(location.pathname.replace(/\/$/, '') || '/') && <InstagramFeed />}
 
       {/* Footer */}
       <footer className="bg-[#493523] text-[#F6F3EC] py-12 md:py-16 px-[24px] md:px-[8%]">
