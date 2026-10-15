@@ -32,6 +32,9 @@ const clasesImages = [
   '/assets/move-pilates-madrid-15.webp',
 ];
 
+const tileClass = 'es-tile group relative aspect-[3/4] cursor-zoom-in overflow-hidden rounded-inner outline-none focus-visible:ring-2 focus-visible:ring-dark focus-visible:ring-offset-2';
+const imgClass = 'gallery-img h-full w-full object-cover object-top transition-transform duration-400 ease-out group-hover:scale-[1.02]';
+
 interface MobileGalleryProps {
   images: string[];
   alt: string;
@@ -73,22 +76,21 @@ function MobileGallery({ images, alt, ariaLabel, onOpen }: MobileGalleryProps) {
         ref={scrollRef}
         role="region"
         aria-label={ariaLabel}
-        className="-mx-6 flex snap-x snap-mandatory gap-2 overflow-x-auto px-6 pb-1 no-scrollbar"
+        className="es-strip flex snap-x snap-mandatory gap-2 overflow-x-auto pb-1 no-scrollbar"
         onScroll={updateActiveIndex}
       >
         {images.map((src, index) => (
           <button
             key={src}
             type="button"
-            className="group relative aspect-[3/4] w-[82vw] max-w-[320px] shrink-0 snap-center overflow-hidden rounded-[3px] outline-none focus-visible:ring-2 focus-visible:ring-[#493523] focus-visible:ring-offset-2"
+            className={`${tileClass} w-[82vw] max-w-[320px] shrink-0 snap-center`}
             onClick={() => onOpen(index)}
             aria-label={`Ver foto ${index + 1} de ${ariaLabel.toLowerCase()}`}
           >
-            <div className="absolute inset-0 z-10 bg-[#493523] opacity-0 transition-opacity duration-400 group-hover:opacity-15"></div>
             <img
               src={src}
               alt={alt}
-              className="gallery-img h-full w-full object-cover object-top transition-transform duration-400 ease-out group-hover:scale-[1.02]"
+              className={imgClass}
               loading={index === 0 ? 'eager' : 'lazy'}
               decoding="async"
               sizes="82vw"
@@ -98,14 +100,14 @@ function MobileGallery({ images, alt, ariaLabel, onOpen }: MobileGalleryProps) {
         ))}
       </div>
 
-      <div className="mt-5 flex items-center justify-center gap-3" aria-label="Navegación de la galería">
+      <div className="mt-5 flex items-center justify-center gap-2" aria-label="Navegación de la galería">
         {images.map((_, index) => (
           <button
             key={index}
             type="button"
             onClick={() => scrollToImage(index)}
-            className={`h-2 w-2 rounded-full transition-[width,background-color,opacity] duration-500 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#493523] ${
-              activeIndex === index ? 'w-8 bg-[#493523]' : 'bg-[#7F7763]/70 hover:bg-[#7F7763]'
+            className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-dark focus-visible:ring-offset-2 ${
+              activeIndex === index ? 'w-5 bg-dark' : 'w-2 bg-soft hover:bg-dark'
             }`}
             aria-label={`Ir a la foto ${index + 1}`}
             aria-current={activeIndex === index ? 'true' : undefined}
@@ -116,9 +118,109 @@ function MobileGallery({ images, alt, ariaLabel, onOpen }: MobileGalleryProps) {
   );
 }
 
+/* Galería de una sección: tira en móvil; en escritorio, cuatro fotos y el resto al desplegar */
+function GaleriaEstudio({ antetitulo, titulo, cursiva, images, alt, ariaLabel, onOpen }: {
+  antetitulo: string;
+  titulo: string;
+  cursiva: string;
+  images: string[];
+  alt: string;
+  ariaLabel: string;
+  onOpen: (index: number) => void;
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const etiqueta = ariaLabel.toLowerCase();
+
+  useEffect(() => {
+    markLoadedImages();
+  }, [isExpanded]);
+
+  return (
+    <section className="m-section pt-0">
+      <div className="m-head">
+        <span className="m-eyebrow reveal">{antetitulo}</span>
+        <h2 className="m-title reveal reveal-delay-1">
+          {titulo} <em>{cursiva}</em>
+        </h2>
+      </div>
+
+      <div className="es-gallery reveal">
+        <MobileGallery images={images} alt={alt} ariaLabel={ariaLabel} onOpen={onOpen} />
+
+        <div className="hidden md:grid md:grid-cols-2 gap-[10px]" role="list" aria-label={`Galería de fotos de ${etiqueta}`}>
+          {images.slice(0, 4).map((src, idx) => (
+            <button
+              key={idx}
+              role="listitem"
+              className={tileClass}
+              onClick={() => onOpen(idx)}
+              aria-label={`Ver foto ${idx + 1} de ${etiqueta}`}
+            >
+              <img
+                src={src}
+                alt={alt}
+                className={imgClass}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                referrerPolicy="no-referrer"
+              />
+            </button>
+          ))}
+        </div>
+
+        {isExpanded && (
+          <div className="hidden md:grid md:grid-cols-3 gap-[10px] mt-[10px] animate-fadeIn" role="list" aria-label={`Más fotos de ${etiqueta}`}>
+            {images.slice(4).map((src, idx) => (
+              <button
+                key={idx + 4}
+                role="listitem"
+                className={tileClass}
+                onClick={() => onOpen(idx + 4)}
+                aria-label={`Ver foto ${idx + 5} de ${etiqueta}`}
+              >
+                <img
+                  src={src}
+                  alt={alt}
+                  className={imgClass}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  referrerPolicy="no-referrer"
+                />
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div className="hidden md:flex justify-center mt-8">
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            aria-expanded={isExpanded}
+            className="btn-outline"
+          >
+            {isExpanded ? 'Ver menos' : 'Ver todas las fotos'}
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* Las fotos aparecen con un fundido al cargar; si fallan, queda el fondo arena */
+function markLoadedImages() {
+  document.querySelectorAll<HTMLImageElement>('.gallery-img:not(.loaded)').forEach((img) => {
+    if (img.complete && img.naturalWidth > 0) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+      img.addEventListener('error', () => img.classList.add('loaded'), { once: true });
+    }
+  });
+}
+
 export default function NuestroEstudio() {
-  const [isEspacioExpanded, setIsEspacioExpanded] = useState(false);
-  const [isClasesExpanded, setIsClasesExpanded] = useState(false);
   const [lightbox, setLightbox] = useState<{ isOpen: boolean; images: string[]; index: number; alt: string }>({
     isOpen: false,
     images: [],
@@ -166,19 +268,8 @@ export default function NuestroEstudio() {
   }, [lightbox.isOpen]);
 
   useEffect(() => {
-    const images = document.querySelectorAll('.gallery-img');
-    images.forEach((img: any) => {
-      if (img.complete && img.naturalWidth > 0) {
-        img.classList.add('loaded');
-      } else {
-        img.addEventListener('load', () => img.classList.add('loaded'));
-        img.addEventListener('error', () => {
-          img.style.background = '#D8D0BF';
-          img.style.opacity = '1';
-        });
-      }
-    });
-  }, [isEspacioExpanded, isClasesExpanded]);
+    markLoadedImages();
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -186,16 +277,16 @@ export default function NuestroEstudio() {
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowRight') nextImage();
       if (e.key === 'ArrowLeft') prevImage();
-      
+
       // Focus trapping
       if (e.key === 'Tab') {
         const focusableElements = document.querySelectorAll(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         );
-        const lightboxElements = Array.from(focusableElements).filter(el => 
+        const lightboxElements = Array.from(focusableElements).filter(el =>
           document.getElementById('lightbox-container')?.contains(el)
         );
-        
+
         if (lightboxElements.length > 0) {
           const firstElement = lightboxElements[0] as HTMLElement;
           const lastElement = lightboxElements[lightboxElements.length - 1] as HTMLElement;
@@ -263,247 +354,101 @@ export default function NuestroEstudio() {
   const clasesAlt = "Clase de Pilates Reformer · MOVE · Pozuelo de Alarcón · Madrid";
 
   return (
-    <div className="bg-[#F6F3EC] min-h-screen font-sans selection:bg-[#493523] selection:text-[#F6F3EC]">
-      {/* H1 — ENCABEZADO PRINCIPAL */}
-      <section className="pt-section-xl pb-[60px] px-6 md:px-0 text-center reveal">
-        <span className="m-eyebrow mb-4">Nuestro estudio</span>
-        <h1 className="mb-0">
-          Un espacio para <span className="italic">conectarte.</span>
-        </h1>
-        <p className="font-sans text-[#7F7763] text-lead max-w-[560px] mx-auto leading-[1.85] mt-6 mb-0">
-          Cada detalle de MOVE está pensado para que te sientas a gusto, en confianza y presente desde el momento en que entras.
-        </p>
+    <div className="w-full">
+      {/* Cabecera */}
+      <section className="m-section">
+        <div className="m-head mb-0">
+          <span className="m-eyebrow reveal">Nuestro estudio</span>
+          <h1 className="m-title text-display reveal reveal-delay-1">
+            Un espacio para <em>conectarte.</em>
+          </h1>
+          <p className="m-intro reveal reveal-delay-2">
+            Cada detalle de MOVE está pensado para que te sientas a gusto, en confianza y presente desde el momento en que entras.
+          </p>
+        </div>
       </section>
 
-      {/* SECCIÓN 1 — NUESTRO ESPACIO */}
-      <section className="px-6 md:px-[8%] mb-[60px] md:mb-[100px]">
-        <div className="reveal">
-          <span className="m-eyebrow mb-4">Nuestro espacio</span>
-          <h2 className="font-serif text-[#493523] text-h2 font-normal leading-tight">
-            Diseñado para que te sientas <span className="italic">bien.</span>
-          </h2>
-          <div className="w-10 h-[1px] bg-[#D8D0BF] mt-6 mb-8"></div>
-        </div>
+      <GaleriaEstudio
+        antetitulo="Nuestro espacio"
+        titulo="Diseñado para que te sientas"
+        cursiva="bien."
+        images={espacioImages}
+        alt={espacioAlt}
+        ariaLabel="Nuestro espacio"
+        onOpen={(index) => openLightbox(espacioImages, index, espacioAlt)}
+      />
 
-        {/* GRID — NUESTRO ESPACIO */}
-        <div className="reveal">
-          <MobileGallery
-            images={espacioImages}
-            alt={espacioAlt}
-            ariaLabel="Nuestro espacio"
-            onOpen={(index) => openLightbox(espacioImages, index, espacioAlt)}
+      <GaleriaEstudio
+        antetitulo="Nuestras clases"
+        titulo="El movimiento en"
+        cursiva="cada sesión."
+        images={clasesImages}
+        alt={clasesAlt}
+        ariaLabel="Nuestras clases"
+        onOpen={(index) => openLightbox(clasesImages, index, clasesAlt)}
+      />
+
+      {/* Quién te guía: cinta marrón con la foto a sangre */}
+      <section className="m-band es-guide">
+        <figure className="es-guide-photo">
+          <img
+            src="/assets/GENESIS%20ROMERO.jpg"
+            alt="Génesis Romero · Fundadora e instructora de MOVE Pilates Boutique · Pozuelo de Alarcón"
+            className="gallery-img"
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
           />
+        </figure>
 
-          <div className="hidden md:grid md:grid-cols-2 gap-[10px] mb-[10px]" role="list" aria-label="Galería de fotos de nuestro espacio">
-            {espacioImages.slice(0, 4).map((src, idx) => (
-              <button 
-                key={idx} 
-                role="listitem"
-                className="relative overflow-hidden group rounded-[3px] aspect-[3/4] cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-[#493523] focus-visible:ring-offset-2"
-                onClick={() => openLightbox(espacioImages, idx, espacioAlt)}
-                aria-label={`Ver foto ${idx + 1} de nuestro espacio`}
-              >
-                <div className="absolute inset-0 bg-[#493523] opacity-0 group-hover:opacity-15 transition-opacity duration-400 z-10"></div>
-                <img
-                  src={src}
-                  alt={espacioAlt}
-                  className="gallery-img w-full h-full object-cover object-top transition-transform duration-400 ease-out group-hover:scale-[1.02]"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  referrerPolicy="no-referrer"
-                />
-              </button>
-            ))}
-          </div>
-          
-          {isEspacioExpanded && (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-[10px] mt-2 md:mt-[10px] animate-fadeIn" role="list" aria-label="Más fotos de nuestro espacio">
-              {espacioImages.slice(4).map((src, idx) => (
-                <button 
-                  key={idx + 4} 
-                  role="listitem"
-                  className="relative overflow-hidden group rounded-[3px] aspect-[3/4] cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-[#493523] focus-visible:ring-offset-2"
-                  onClick={() => openLightbox(espacioImages, idx + 4, espacioAlt)}
-                  aria-label={`Ver foto ${idx + 5} de nuestro espacio`}
-                >
-                  <div className="absolute inset-0 bg-[#493523] opacity-0 group-hover:opacity-15 transition-opacity duration-400 z-10"></div>
-                  <img
-                    src={src}
-                    alt={espacioAlt}
-                    className="gallery-img w-full h-full object-cover object-top transition-transform duration-400 ease-out group-hover:scale-[1.02]"
-                    loading="lazy"
-                    decoding="async"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    referrerPolicy="no-referrer"
-                  />
-                </button>
-              ))}
-            </div>
-          )}
-
-          <div className="hidden md:flex justify-center mt-6">
-            <button
-              onClick={() => setIsEspacioExpanded(!isEspacioExpanded)}
-              aria-expanded={isEspacioExpanded}
-              className="bg-transparent text-[#493523] border-[1.5px] border-[#493523] rounded-full px-7 py-3 font-sans text-label uppercase tracking-[0.12em] hover:bg-[#493523] hover:text-[#F6F3EC] transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-[#493523] focus-visible:ring-offset-2"
-            >
-              {isEspacioExpanded ? 'VER MENOS' : 'VER TODAS LAS FOTOS'}
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* SECCIÓN 2 — NUESTRAS CLASES */}
-      <section className="px-6 md:px-[8%] mt-[60px] md:mt-[100px] mb-[60px] md:mb-[100px]">
-        <div className="reveal">
-          <span className="m-eyebrow mb-4">Nuestras clases</span>
-          <h2 className="font-serif text-[#493523] text-h2 font-normal leading-tight">
-            El movimiento en <span className="italic">cada sesión.</span>
+        <div className="es-guide-copy">
+          <span className="m-eyebrow m-eyebrow-light reveal">Fundadora e instructora</span>
+          <h2 className="m-title m-title-light reveal reveal-delay-1">
+            Génesis <em>Romero.</em>
           </h2>
-          <div className="w-10 h-[1px] bg-[#D8D0BF] mt-6 mb-8"></div>
-        </div>
-
-        {/* GRID — NUESTRAS CLASES */}
-        <div className="reveal">
-          <MobileGallery
-            images={clasesImages}
-            alt={clasesAlt}
-            ariaLabel="Nuestras clases"
-            onOpen={(index) => openLightbox(clasesImages, index, clasesAlt)}
-          />
-
-          <div className="hidden md:grid md:grid-cols-2 gap-[10px] mb-[10px]" role="list" aria-label="Galería de fotos de nuestras clases">
-            {clasesImages.slice(0, 4).map((src, idx) => (
-              <button 
-                key={idx} 
-                role="listitem"
-                className="relative overflow-hidden group rounded-[3px] aspect-[3/4] cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-[#493523] focus-visible:ring-offset-2"
-                onClick={() => openLightbox(clasesImages, idx, clasesAlt)}
-                aria-label={`Ver foto ${idx + 1} de nuestras clases`}
-              >
-                <div className="absolute inset-0 bg-[#493523] opacity-0 group-hover:opacity-15 transition-opacity duration-400 z-10"></div>
-                <img
-                  src={src}
-                  alt={clasesAlt}
-                  className="gallery-img w-full h-full object-cover object-top transition-transform duration-400 ease-out group-hover:scale-[1.02]"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  referrerPolicy="no-referrer"
-                />
-              </button>
-            ))}
-          </div>
-
-          {isClasesExpanded && (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-[10px] mt-2 md:mt-[10px] animate-fadeIn" role="list" aria-label="Más fotos de nuestras clases">
-              {clasesImages.slice(4).map((src, idx) => (
-                <button 
-                  key={idx + 4} 
-                  role="listitem"
-                  className="relative overflow-hidden group rounded-[3px] aspect-[3/4] cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-[#493523] focus-visible:ring-offset-2"
-                  onClick={() => openLightbox(clasesImages, idx + 4, clasesAlt)}
-                  aria-label={`Ver foto ${idx + 5} de nuestras clases`}
-                >
-                  <div className="absolute inset-0 bg-[#493523] opacity-0 group-hover:opacity-15 transition-opacity duration-400 z-10"></div>
-                  <img
-                    src={src}
-                    alt={clasesAlt}
-                    className="gallery-img w-full h-full object-cover object-top transition-transform duration-400 ease-out group-hover:scale-[1.02]"
-                    loading="lazy"
-                    decoding="async"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    referrerPolicy="no-referrer"
-                  />
-                </button>
-              ))}
-            </div>
-          )}
-
-          <div className="hidden md:flex justify-center mt-6">
-            <button
-              onClick={() => setIsClasesExpanded(!isClasesExpanded)}
-              aria-expanded={isClasesExpanded}
-              className="bg-transparent text-[#493523] border-[1.5px] border-[#493523] rounded-full px-7 py-3 font-sans text-label uppercase tracking-[0.12em] hover:bg-[#493523] hover:text-[#F6F3EC] transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-[#493523] focus-visible:ring-offset-2"
-            >
-              {isClasesExpanded ? 'VER MENOS' : 'VER TODAS LAS FOTOS'}
-            </button>
-          </div>
+          <p className="m-text reveal reveal-delay-2">
+            Instructora y fundadora de Move Pilates boutique en Pozuelo de Alarcón. Cada clase que diseña parte de una convicción: que moverse bien cambia cómo te sientes, cómo te mueves y cómo te habitas a ti mismo.
+          </p>
         </div>
       </section>
 
-      {/* SECCIÓN 3 — QUIÉN TE GUÍA */}
-      <section className="mt-[60px] md:mt-[100px] reveal">
-        <div className="flex flex-col md:flex-row w-full min-h-[560px]">
-          {/* COLUMNA IZQUIERDA — FOTO GÉNESIS */}
-          <div className="w-full md:w-1/2 h-[380px] md:h-auto overflow-hidden">
-            <img
-              src="/assets/GENESIS%20ROMERO.jpg"
-              alt="Génesis Romero · Fundadora e instructora de MOVE Pilates Boutique · Pozuelo de Alarcón"
-              className="gallery-img w-full h-full object-cover object-top"
-              loading="lazy"
-              fetchPriority="high"
-              decoding="async"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-
-          {/* COLUMNA DERECHA */}
-          <div className="w-full md:w-1/2 bg-[#D8D0BF] p-8 md:p-14 flex flex-col justify-center">
-            <span className="font-sans text-[#7F7763] text-micro uppercase tracking-[0.15em] block">
-              FUNDADORA E INSTRUCTORA
-            </span>
-            <div className="w-7 h-[1px] bg-[#7F7763] my-4"></div>
-            <h3 className="font-serif text-[#493523] text-h3 font-normal leading-tight mb-5">
-              Génesis Romero
-            </h3>
-            <p className="font-sans text-[#493523] text-body leading-[1.85] mb-0">
-              Instructora y fundadora de Move Pilates boutique en Pozuelo de Alarcón. Cada clase que diseña parte de una convicción: que moverse bien cambia cómo te sientes, cómo te mueves y cómo te habitas a ti mismo.
-            </p>
-          </div>
+      {/* Cierre */}
+      <section className="m-section">
+        <div className="m-foot mt-0 reveal">
+          <p className="m-closing">¿Quieres conocer el estudio en persona?</p>
+          <a
+            href="https://wa.me/34654495508"
+            target="_blank"
+            rel="noreferrer"
+            className="btn-primary"
+            aria-label="Escríbenos por WhatsApp para más información"
+          >
+            Escríbenos
+          </a>
         </div>
-      </section>
-
-      {/* CTA FINAL */}
-      <section className="mt-[60px] md:mt-[100px] py-[56px] md:py-[80px] px-6 md:px-[8%] text-center reveal">
-        <h3 className="font-sans text-[#493523] text-body mb-6 font-normal">
-          ¿Quieres conocer el estudio en persona?
-        </h3>
-        <a
-          href="https://wa.me/34654495508"
-          target="_blank"
-          rel="noreferrer"
-          className="inline-block bg-[#493523] text-[#F6F3EC] border-[1.5px] border-[#493523] rounded-full px-8 py-3.5 font-sans text-label uppercase tracking-[0.12em] hover:bg-transparent hover:text-[#493523] transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-[#F6F3EC] focus-visible:ring-offset-2"
-          aria-label="Escríbenos por WhatsApp para más información"
-        >
-          ESCRÍBENOS
-        </a>
       </section>
 
       {/* LIGHTBOX COMPARTIDO */}
       {lightbox.isOpen && (
-        <div 
+        <div
           id="lightbox-container"
           role="dialog"
           aria-modal="true"
           aria-label="Visor de imágenes"
-          className="fixed inset-0 z-[9999] bg-[rgba(73,53,35,0.96)] flex items-center justify-center animate-fadeIn group"
+          className="fixed inset-0 z-[9999] bg-dark/96 flex items-center justify-center animate-fadeIn group"
           onClick={(e) => {
             if (e.target === e.currentTarget) closeLightbox();
           }}
         >
           {/* Close Button */}
-          <button 
+          <button
             ref={closeButtonRef}
             onClick={closeLightbox}
-            className="fixed top-4 right-4 md:top-5 md:right-6 w-12 h-12 flex items-center justify-center z-[10001] bg-[rgba(246,243,236,0.10)] border border-[rgba(246,243,236,0.20)] rounded-full backdrop-blur-[4px] cursor-pointer transition-all duration-200 hover:bg-[rgba(246,243,236,0.20)] hover:border-[rgba(246,243,236,0.40)] hover:scale-105 outline-none focus-visible:ring-2 focus-visible:ring-[#F6F3EC]"
+            className="fixed top-4 right-4 md:top-5 md:right-6 w-12 h-12 flex items-center justify-center z-[10001] bg-base/10 border border-paper-line rounded-full backdrop-blur-[4px] cursor-pointer text-base transition-all duration-200 hover:bg-base/20 hover:border-base/40 hover:scale-105 outline-none focus-visible:ring-2 focus-visible:ring-base"
             aria-label="Cerrar visor de imágenes"
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M1 1L13 13M13 1L1 13" stroke="#F6F3EC" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
           </button>
 
@@ -515,7 +460,7 @@ export default function NuestroEstudio() {
             onPointerCancel={handleDragEnd}
             onWheel={handleHorizontalWheel}
           >
-            <div className="lightbox-photo-frame relative overflow-hidden rounded-[2px] bg-[rgba(246,243,236,0.08)]">
+            <div className="lightbox-photo-frame relative overflow-hidden rounded-[2px] bg-base/8">
               <img
                 key={lightbox.index}
                 src={lightbox.images[lightbox.index]}
@@ -534,8 +479,8 @@ export default function NuestroEstudio() {
                   key={index}
                   type="button"
                   onClick={() => goToImage(index)}
-                  className={`h-2 w-2 shrink-0 rounded-full transition-[width,background-color,opacity] duration-500 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F6F3EC] ${
-                    lightbox.index === index ? 'w-8 bg-[#F6F3EC]' : 'bg-[#F6F3EC]/55 hover:bg-[#F6F3EC]/80'
+                  className={`h-2 w-2 shrink-0 rounded-full transition-[width,background-color,opacity] duration-500 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base ${
+                    lightbox.index === index ? 'w-8 bg-base' : 'bg-base/55 hover:bg-base/80'
                   }`}
                   aria-label={`Ir a la foto ${index + 1}`}
                   aria-current={lightbox.index === index ? 'true' : undefined}
@@ -551,14 +496,6 @@ export default function NuestroEstudio() {
       )}
 
       <style>{`
-        .gallery-img {
-          background-color: #D8D0BF;
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-        .gallery-img.loaded {
-          opacity: 1;
-        }
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
@@ -583,11 +520,10 @@ export default function NuestroEstudio() {
           animation: fadeIn 0.3s ease forwards;
         }
         @media (prefers-reduced-motion: reduce) {
-          .animate-fadeIn, .lightbox-photo-fade, .reveal {
+          .animate-fadeIn, .lightbox-photo-fade {
             animation: none !important;
             transition: none !important;
             opacity: 1 !important;
-            transform: none !important;
           }
         }
       `}</style>

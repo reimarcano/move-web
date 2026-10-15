@@ -934,6 +934,26 @@ html {
 .ev-separador { margin-bottom: var(--section-y); }
 .ev-gallery { max-width: 960px; margin: 0 auto; }
 
+/* ── Nuestro estudio · galerías y quién te guía ── */
+.es-gallery { max-width: 960px; margin: 0 auto; }
+.es-strip { margin-inline: calc(var(--section-x) * -1); padding-inline: var(--section-x); }
+.es-tile::after { content: ""; position: absolute; inset: 0; background: var(--color-dark); opacity: 0; transition: opacity 400ms var(--ease-move); pointer-events: none; }
+.es-tile:hover::after { opacity: 0.15; }
+.gallery-img { background-color: var(--color-soft); opacity: 0; transition: opacity 400ms ease; }
+.gallery-img.loaded { opacity: 1; }
+
+.es-guide { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; }
+.es-guide-photo { margin: 0; overflow: hidden; }
+.es-guide-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.es-guide-copy { padding: var(--section-y) max(var(--section-x), calc((100vw - 1180px) / 2)) var(--section-y) 72px; display: flex; flex-direction: column; justify-content: center; }
+.es-guide-copy .m-text { max-width: 46ch; margin-top: 20px; color: var(--color-paper-2); }
+
+@media (max-width: 900px) {
+  .es-guide { grid-template-columns: 1fr; min-height: 0; }
+  .es-guide-photo { height: 380px; }
+  .es-guide-copy { padding: 48px var(--section-x) var(--section-y); }
+}
+
 /* ── Home · Preguntas frecuentes ── */
 .fq-list { border-bottom: 1px solid var(--color-line-strong); }
 .fq-item { border-top: 1px solid var(--color-line-strong); }
