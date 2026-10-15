@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Menu, X, Instagram, MessageCircle } from 'lucide-react';
 import { CookieSettingsButton } from './CookieConsent';
+import InstagramFeed from './InstagramFeed';
 
 export default function Layout() {
   const [isVisible, setIsVisible] = useState(true);
@@ -198,6 +199,9 @@ export default function Layout() {
           </svg>
         </a>
       </div>
+
+      {/* Galería de Instagram */}
+      <InstagramFeed />
 
       {/* Footer */}
       <footer className="bg-[#493523] text-[#F6F3EC] py-12 md:py-16 px-[24px] md:px-[8%]">
