@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 import { faqs } from "../data/faqs";
 
 import Reviews from "../components/Reviews";
-import ClaseValoracion from "../components/ClaseValoracion";
+import PrimeraVez from "../components/PrimeraVez";
 import { VALORACION_WHATSAPP_URL } from "../data/valoracion";
 
 /* ────────────────────────────────────────────
@@ -159,6 +159,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── ¿Primera vez en MOVE? (clase de valoración) ── */}
+      <PrimeraVez />
+
       {/* ── Features Section ── */}
       <section className="w-full bg-[#F6F3EC]">
         <div className="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-24 reveal">
@@ -301,13 +304,6 @@ export default function Home() {
 
       {/* ── Reviews (lazy loaded) ── */}
       <Reviews />
-
-      {/* ── Clase de valoración ── */}
-      <section className="bg-crema-base px-6 pb-20 md:pb-24">
-        <div className="max-w-4xl mx-auto">
-          <ClaseValoracion />
-        </div>
-      </section>
     </div>
   );
 }
