@@ -475,7 +475,7 @@ export default function Eventos() {
           <span className="font-sans text-[10px] text-[#7F7763] uppercase tracking-[0.18em] block mb-4">
             EXPERIENCIAS MOVE
           </span>
-        <h1 className="font-serif text-[32px] md:text-[52px] text-[#493523] leading-[1.2] font-normal max-w-full md:max-w-[680px]">
+        <h1 className="max-w-full md:max-w-[680px]">
           <span className="block md:whitespace-nowrap">
             Algunos momentos no se explican.
           </span>
@@ -516,7 +516,7 @@ export default function Eventos() {
             <span className="label-balanced font-sans text-[10px] text-[#7F7763] uppercase tracking-[0.18em] block mb-4">
               Un espacio para desconectar, moverte y volver <span className="whitespace-nowrap">a ti</span>
             </span>
-            <h2 className="font-serif text-[26px] md:text-[36px] text-[#493523] font-normal">
+            <h2>
               Retiros de bienestar
             </h2>
             <div className="w-10 h-[1px] bg-[#D8D0BF] mx-auto my-8"></div>
@@ -564,7 +564,7 @@ export default function Eventos() {
             <span className="font-sans text-[10px] text-[#7F7763] uppercase tracking-[0.18em] block mb-4">
               UNA EXPERIENCIA MOVE
             </span>
-            <h2 className="font-serif text-[26px] md:text-[36px] text-[#493523] font-normal">
+            <h2>
               Pilates Brunch
             </h2>
             <div className="w-10 h-[1px] bg-[#D8D0BF] mx-auto my-8"></div>
@@ -601,7 +601,7 @@ export default function Eventos() {
       {/* Upcoming Section (Waitlist) */}
       <section id="lista-espera" className="bg-[#F6F3EC] py-[56px] px-[24px] md:py-[80px] md:px-[8%] mt-[100px] md:mt-[100px]">
         <div className="max-w-[560px] mx-auto text-center reveal">
-          <h2 className="font-serif text-[26px] md:text-[36px] text-[#493523]">
+          <h2>
             La próxima experiencia <span className="italic">MOVE.</span>
           </h2>
           <p className="font-sans text-[15px] text-[#7F7763] max-w-[480px] mx-auto leading-[1.8] mt-4">

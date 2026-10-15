@@ -265,8 +265,8 @@ export default function NuestroEstudio() {
   return (
     <div className="bg-[#F6F3EC] min-h-screen font-sans selection:bg-[#493523] selection:text-[#F6F3EC]">
       {/* H1 — ENCABEZADO PRINCIPAL */}
-      <section className="pt-[80px] pb-[60px] md:pt-[80px] md:pb-[60px] px-6 md:px-0 text-center reveal">
-        <h1 className="font-serif text-[#493523] text-[32px] md:text-[48px] font-normal leading-tight">
+      <section className="pt-section-xl pb-[60px] px-6 md:px-0 text-center reveal">
+        <h1 className="mb-0">
           Un espacio para <span className="italic">conectarte.</span>
         </h1>
         <p className="font-sans text-[#7F7763] text-[14px] md:text-[15px] max-w-[560px] mx-auto leading-[1.85] mt-6 mb-0">

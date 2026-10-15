@@ -6,8 +6,8 @@ const LAST_UPDATED = '11 de agosto de 2026';
 function LegalLayout({ eyebrow, title, children }: { eyebrow: string; title: string; children: ReactNode }) {
   return (
     <div className="bg-crema-base">
-      <section className="mx-auto max-w-4xl px-6 pb-12 pt-16 text-center md:pb-16 md:pt-24">
-        <p className="mb-3 text-[11px] uppercase tracking-[0.16em] text-[#7F7763]">{eyebrow}</p>
+      <section className="mx-auto max-w-4xl px-6 pb-12 pt-section-xl text-center md:pb-16">
+        <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.18em] text-[#7F7763]">{eyebrow}</p>
         <h1 className="mb-0">{title}</h1>
       </section>
       <article className="mx-auto max-w-3xl px-6 pb-20 md:pb-28">
@@ -21,7 +21,7 @@ function LegalLayout({ eyebrow, title, children }: { eyebrow: string; title: str
 }
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
-  return <section className="mb-9 last:mb-0"><h2 className="mb-3 text-[24px] md:text-[27px]">{title}</h2>{children}</section>;
+  return <section className="mb-9 last:mb-0"><h2 className="mb-3">{title}</h2>{children}</section>;
 }
 
 export function LegalNotice() {

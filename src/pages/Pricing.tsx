@@ -22,7 +22,7 @@ const sesionesPrivadas: Plan[] = [
   { nombre: 'Bono 8 sesiones', precio: 400, detalle: '50 € por sesión' },
 ];
 
-const eyebrow = 'font-sans text-[10px] uppercase tracking-[0.3em] text-[#7F7763]';
+const eyebrow = 'font-sans text-[10px] uppercase tracking-[0.18em] text-[#7F7763]';
 
 /* Línea de carta: nombre · · · · · precio, con el detalle en cursiva debajo */
 function PlanLinea({ plan }: { plan: Plan }) {
@@ -95,7 +95,7 @@ export default function Pricing() {
           {/* Primera vez: clase de valoración */}
           <div className="bg-[#F0EADE] rounded-[8px] px-6 py-8 md:px-10 text-center mb-14 reveal">
             <p className={`${eyebrow} mb-3`}>Primera vez en MOVE</p>
-            <h2 className="mb-0 font-serif font-normal text-[28px] md:text-[32px] leading-[1.2] text-[#493523]">
+            <h2 className="mb-0">
               Clase de <span className="italic">Valoración</span>
             </h2>
             <p className="font-serif text-[36px] text-[#493523] mt-2 mb-2">{VALORACION_PRECIO} €</p>

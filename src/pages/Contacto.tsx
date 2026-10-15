@@ -20,7 +20,7 @@ export default function Contacto() {
         <div className="flex justify-center">
           {/* Info Card */}
           <div className="bg-[#F0EADE] border border-[#D8D0BF] rounded-[8px] p-[32px_24px] md:p-[48px] flex flex-col max-w-2xl w-full">
-            <h2 className="font-serif text-[28px] md:text-[32px] text-[#493523] font-normal mb-10 text-center">
+            <h2 className="mb-10 text-center">
               Información de contacto
             </h2>
             
