@@ -213,6 +213,10 @@ html {
   --btn-primary-text: var(--color-base);
   --btn-hover-bg: var(--color-mid);
   --btn-radius: 100px;
+
+  /* Radios: piezas exteriores (fotos, bandas, tarjetas) y elementos dentro de ellas */
+  --radius-card: 24px;
+  --radius-inner: 16px;
   --btn-padding: 14px 32px;
   --btn-font-size: 13px;
   --btn-letter-spacing: 0.12em;
@@ -765,13 +769,13 @@ html {
   grid-template-columns: 5fr 7fr;
   background: var(--color-dark);
   color: var(--color-base);
-  border-radius: calc(48px - var(--p) * 24px);
+  border-radius: calc(var(--radius-card) * (2 - var(--p)));
   transform: scale(calc(0.92 + var(--p) * 0.08));
   transform-origin: center top;
   will-change: transform;
 }
 
-.pv-photo { position: relative; height: 100%; min-height: 620px; margin: 0; border-radius: 18px; overflow: hidden; }
+.pv-photo { position: relative; height: 100%; min-height: 620px; margin: 0; border-radius: var(--radius-inner); overflow: hidden; }
 .pv-photo img { position: absolute; inset: -12% 0; width: 100%; height: 124%; object-fit: cover; object-position: center 35%; will-change: transform; }
 
 .pv-copy { padding: 56px 40px 48px 72px; display: flex; flex-direction: column; justify-content: center; }
@@ -795,7 +799,7 @@ html {
 .pv-steps p { margin: 0; font-family: var(--font-sans); font-size: 14px; line-height: 1.6; color: rgba(246, 243, 236, 0.72); }
 
 /* Ficha de la clase: tres datos en una sola pieza, con el grupo reducido destacado */
-.pv-specs { display: grid; grid-template-columns: 1fr 1fr 1.25fr; margin: 36px 0 8px; border: 1px solid rgba(246, 243, 236, 0.22); border-radius: 18px; overflow: hidden; }
+.pv-specs { display: grid; grid-template-columns: 1fr 1fr 1.25fr; margin: 36px 0 8px; border: 1px solid rgba(246, 243, 236, 0.22); border-radius: var(--radius-inner); overflow: hidden; }
 .pv-specs > div { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 6px; }
 .pv-specs > div + div { border-left: 1px solid rgba(246, 243, 236, 0.22); }
 .pv-specs dt { font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(246, 243, 236, 0.6); }
@@ -809,12 +813,25 @@ html {
 .pv-btn { display: inline-block; border-radius: 100px; background: var(--color-base); color: var(--color-dark); font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 14px 32px; transition: all 0.3s ease; }
 .pv-btn:hover { background: #fff; transform: translateY(-1px); }
 
+/* Versión tarjeta (página de Precios): misma banda, ficha y botón que el Home */
+.pv-card { background: var(--color-dark); color: var(--color-base); border-radius: var(--radius-card); padding: 44px 32px 40px; text-align: center; }
+.pv-card-title { margin: 14px 0 12px; font-family: var(--font-serif); font-weight: 400; color: var(--color-base); font-size: clamp(32px, 3.4vw, 44px); line-height: 1.08; }
+.pv-card-lead { max-width: 40ch; margin: 0 auto; font-family: var(--font-sans); font-size: 15px; line-height: 1.7; color: rgba(246, 243, 236, 0.86); }
+.pv-card .pv-specs { grid-template-columns: 0.85fr 1fr 1.2fr; margin: 28px 0 14px; text-align: left; }
+.pv-card .pv-specs > div { padding: 18px 16px 20px; }
+.pv-card .pv-specs dd { font-size: clamp(26px, 2.4vw, 34px); }
+.pv-card .pv-specs .pv-spec-key .pv-spec-note { font-size: 11px; }
+.pv-card-note { margin: 0 0 26px; font-family: var(--font-sans); font-size: 12px; font-style: italic; color: rgba(246, 243, 236, 0.66); }
+
 @media (max-width: 900px) {
   .primera-vez { padding: 80px 12px 10px; }
   .pv-intro { margin: 0 8px 36px; }
-  .pv-band { grid-template-columns: 1fr; padding: 14px; border-radius: calc(32px - var(--p) * 8px); }
+  .pv-band { grid-template-columns: 1fr; padding: 14px; border-radius: calc(var(--radius-card) * (1.33 - var(--p) * 0.33)); }
   .pv-photo { min-height: 0; height: 62vh; }
   .pv-copy { padding: 44px 10px 26px; }
+  .pv-card { padding: 36px 16px 32px; }
+  .pv-card .pv-specs > div { padding: 16px 12px 18px; }
+  .pv-card .pv-specs dd { font-size: 24px; }
   .pv-specs > div { padding: 16px 12px 18px; }
   .pv-specs dt { font-size: 9px; letter-spacing: 0.18em; }
   .pv-specs dd { font-size: 26px; }
@@ -824,6 +841,6 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   .primera-vez .reveal { filter: none; }
-  .pv-band { transform: none; border-radius: 24px; }
+  .pv-band { transform: none; border-radius: var(--radius-card); }
   .pv-mask > span { transform: none; transition: none; }
 }

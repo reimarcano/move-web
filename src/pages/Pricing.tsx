@@ -1,6 +1,7 @@
 import { MessageCircle } from 'lucide-react';
 import Reviews from '../components/Reviews';
-import { VALORACION_PRECIO, VALORACION_WHATSAPP_URL } from '../data/valoracion';
+import FichaValoracion from '../components/FichaValoracion';
+import { VALORACION_WHATSAPP_URL } from '../data/valoracion';
 
 const WHATSAPP_URL = 'https://wa.me/34654495508';
 
@@ -71,19 +72,19 @@ export default function Pricing() {
         </h1>
       </section>
 
-      <div className="max-w-[1180px] mx-auto md:px-10 grid lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div className="max-w-[1180px] mx-auto md:px-10 grid lg:grid-cols-2 lg:gap-16">
         {/* Foto del estudio: franja en móvil, fija al bajar en escritorio */}
-        <div className="lg:sticky lg:top-24 lg:self-start">
+        <div className="px-6 md:px-0 lg:sticky lg:top-24 lg:self-start">
           <picture>
             <source
               type="image/webp"
               srcSet="/assets/move-pilates-pozuelo-tarifas-800.webp 800w, /assets/move-pilates-pozuelo-tarifas-1400.webp 1400w"
-              sizes="(min-width: 1024px) 520px, 100vw"
+              sizes="(min-width: 1024px) 560px, 100vw"
             />
             <img
               src="/assets/move-pilates-pozuelo-tarifas-1400.jpg"
               alt="Alumna en el Reformer de MOVE Pilates Boutique, Pozuelo de Alarcón"
-              className="w-full h-[340px] md:h-[440px] lg:h-[calc(100vh-8rem)] lg:max-h-[760px] object-cover object-[center_20%] md:rounded-[8px]"
+              className="w-full h-[340px] md:h-[440px] lg:h-[calc(100vh-8rem)] lg:max-h-[640px] object-cover object-[center_20%] rounded-card"
               loading="lazy"
               decoding="async"
             />
@@ -92,23 +93,23 @@ export default function Pricing() {
 
         {/* Carta de tarifas */}
         <div className="px-6 md:px-0 pt-10 lg:pt-0 pb-16 md:pb-24 text-[#493523]">
-          {/* Primera vez: clase de valoración */}
-          <div className="bg-[#F0EADE] rounded-[8px] px-6 py-8 md:px-10 text-center mb-14 reveal">
-            <p className={`${eyebrow} mb-3`}>Primera vez en MOVE</p>
-            <h2 className="mb-0">
-              Clase de <span className="italic">Valoración</span>
+          {/* Primera vez: clase de valoración, con el mismo lenguaje que el Home */}
+          <div className="pv-card mb-14 reveal">
+            <span className="pv-eyebrow pv-eyebrow-light">¿Primera vez en MOVE?</span>
+            <h2 className="pv-card-title">
+              Tu clase de <em>Valoración</em>
             </h2>
-            <p className="font-serif text-[36px] text-[#493523] mt-2 mb-2">{VALORACION_PRECIO} €</p>
-            <p className="font-sans text-[13px] leading-[1.6] text-[#493523] max-w-[320px] mx-auto mb-1">
-              50 minutos para conocer tu nivel, tu postura y tus objetivos.
+            <p className="pv-card-lead">
+              Tu primera sesión guiada para conocer tu nivel, tu postura y tus objetivos.
             </p>
-            <p className="font-sans text-[12px] italic text-[#7F7763] mb-6">Se descuenta de tu primer mes o bono</p>
+            <FichaValoracion />
+            <p className="pv-card-note">Se descuenta de tu primer mes o bono.</p>
             <a
               href={VALORACION_WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
               aria-label="Reservar clase de valoración por WhatsApp"
-              className="btn-primary inline-block"
+              className="pv-btn"
             >
               Reservar mi clase
             </a>

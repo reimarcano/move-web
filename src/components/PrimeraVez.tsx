@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { VALORACION_PRECIO, VALORACION_WHATSAPP_URL } from "../data/valoracion";
+import FichaValoracion from "./FichaValoracion";
 
 const pasos = [
   {
@@ -129,22 +130,7 @@ export default function PrimeraVez() {
             encontrar el plan que mejor encaja contigo.
           </p>
 
-          {/* Ficha: precio, duración y el diferencial (grupo reducido) destacado */}
-          <dl className="pv-specs reveal reveal-delay-2">
-            <div>
-              <dt>Precio</dt>
-              <dd ref={priceRef}>{VALORACION_PRECIO} €</dd>
-            </div>
-            <div>
-              <dt>Duración</dt>
-              <dd>50 min</dd>
-            </div>
-            <div className="pv-spec-key">
-              <dt>Grupo</dt>
-              <dd>Máx. 4</dd>
-              <dd className="pv-spec-note">personas por clase</dd>
-            </div>
-          </dl>
+          <FichaValoracion priceRef={priceRef} className="reveal reveal-delay-2" />
 
           <ol className="pv-steps" ref={stepsRef}>
             {pasos.map((paso, i) => (
