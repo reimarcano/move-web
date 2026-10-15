@@ -881,7 +881,8 @@ html {
 .pl-card.is-key .pl-freq, .pl-card.is-key .pl-lema, .pl-card.is-key .pl-per { color: var(--color-paper-3); }
 .pl-card.is-key .pl-price { color: var(--color-base); }
 .pl-card.is-key .pl-perks { border-top-color: var(--color-paper-line); }
-.pl-badge { position: absolute; top: 22px; right: 22px; background: var(--color-base); color: var(--color-dark); font-family: var(--font-sans); font-size: var(--fs-micro); letter-spacing: 0.16em; text-transform: uppercase; padding: 7px 12px; border-radius: 100px; }
+.pl-badge { position: absolute; top: 22px; right: 22px; }
+.pl-card.is-key .m-badge { background: var(--color-base); color: var(--color-dark); }
 
 @media (max-width: 900px) {
   .pl-grid { grid-template-columns: 1fr; gap: 14px; }
@@ -931,6 +932,8 @@ html {
 .m-foot { max-width: 1180px; margin: var(--foot-gap) auto 0; display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
 .m-text { margin: 0; font-family: var(--font-sans); font-size: var(--fs-body); line-height: 1.75; color: var(--color-ink-2); }
 .m-quote { margin: 0; font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: var(--fs-h3); line-height: 1.4; color: var(--color-base); text-wrap: pretty; }
+/* Etiqueta "Más elegido": marrón sobre crema; invertida dentro de la tarjeta destacada */
+.m-badge { display: inline-block; padding: 7px 12px; border-radius: 100px; background: var(--color-dark); color: var(--color-base); font-family: var(--font-sans); font-size: var(--fs-micro); line-height: 1; letter-spacing: 0.16em; text-transform: uppercase; }
 .m-card { padding: var(--card-pad); border-radius: var(--radius-card); background: var(--color-arena); color: var(--color-dark); }
 
 /* Cinta marrón a sangre: los momentos de marca de cada página */

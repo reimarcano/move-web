@@ -22,7 +22,7 @@ export default function PlanesGrupales() {
             key={plan.nombre}
             className={`m-card pl-card reveal reveal-delay-${i + 1}${plan.masElegido ? " is-key" : ""}`}
           >
-            {plan.masElegido && <span className="pl-badge">Más elegido</span>}
+            {plan.masElegido && <span className="m-badge pl-badge">Más elegido</span>}
             <span className="pl-freq">{plan.frecuencia}</span>
             <h3>{plan.nombre}</h3>
             <p className="pl-lema">{plan.lema}</p>
