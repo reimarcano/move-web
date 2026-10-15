@@ -2,6 +2,7 @@ import { MessageCircle } from 'lucide-react';
 import Reviews from '../components/Reviews';
 import FichaValoracion from '../components/FichaValoracion';
 import { VALORACION_WHATSAPP_URL } from '../data/valoracion';
+import { planesGrupales as planes } from '../data/planes';
 
 const WHATSAPP_URL = 'https://wa.me/34654495508';
 
@@ -10,13 +11,18 @@ interface Plan {
   precio: number;
   detalle: string;
   recomendado?: boolean;
+  /* Nombre propio del plan, en cursiva como en el Home */
+  conNombre?: boolean;
 }
 
-const planesGrupales: Plan[] = [
-  { nombre: '1 clase / semana', precio: 115, detalle: 'al mes · 28,75 € por clase' },
-  { nombre: '2 clases / semana', precio: 190, detalle: 'al mes · 23,75 € por clase', recomendado: true },
-  { nombre: '3 clases / semana', precio: 220, detalle: 'al mes · 18,33 € por clase' },
-];
+/* Mismos nombres que en el Home: Movimiento, Transición, Transformación */
+const planesGrupales: Plan[] = planes.map((p) => ({
+  nombre: p.nombre,
+  precio: p.precio,
+  detalle: `${p.frecuencia} · al mes · ${p.porClase} por clase`,
+  recomendado: p.masElegido,
+  conNombre: true,
+}));
 
 const sesionesPrivadas: Plan[] = [
   { nombre: 'Bono 4 sesiones', precio: 210, detalle: '52,50 € por sesión' },
@@ -30,7 +36,7 @@ function PlanLinea({ plan }: { plan: Plan }) {
   return (
     <li className="py-4 reveal">
       <div className="flex items-baseline gap-3">
-        <span className="font-serif text-[19px] md:text-[21px] text-[#493523] whitespace-nowrap">{plan.nombre}</span>
+        <span className={`font-serif text-[19px] md:text-[21px] text-[#493523] whitespace-nowrap ${plan.conNombre ? "italic md:text-[24px]" : ""}`}>{plan.nombre}</span>
         <span aria-hidden="true" className="flex-1 border-b border-dotted border-[#493523]/35 -translate-y-[5px]" />
         <span className="font-serif text-[22px] md:text-[24px] text-[#493523] whitespace-nowrap">{plan.precio}</span>
       </div>
@@ -38,7 +44,7 @@ function PlanLinea({ plan }: { plan: Plan }) {
         {plan.detalle}
         {plan.recomendado && (
           <span className="ml-3 not-italic inline-block align-[1px] rounded-[100px] bg-[#493523] px-3 py-[3px] text-[9px] uppercase tracking-[0.25em] text-[#F6F3EC]">
-            Recomendado
+            Más elegido
           </span>
         )}
       </p>

@@ -4,6 +4,7 @@ import { faqs } from "../data/faqs";
 
 import Reviews from "../components/Reviews";
 import PrimeraVez from "../components/PrimeraVez";
+import PlanesGrupales from "../components/PlanesGrupales";
 import { VALORACION_WHATSAPP_URL } from "../data/valoracion";
 
 /* ────────────────────────────────────────────
@@ -266,6 +267,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── Planes de clases grupales ── */}
+      <PlanesGrupales />
 
       {/* ── FAQ Section ── */}
       <section className="bg-tostado section-padding-oscuro px-6">

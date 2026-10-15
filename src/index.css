@@ -844,3 +844,44 @@ html {
   .pv-band { transform: none; border-radius: var(--radius-card); }
   .pv-mask > span { transform: none; transition: none; }
 }
+
+/* ── Home · Planes de clases grupales ── */
+.planes { background: var(--color-base); padding: 112px 24px; }
+.pl-head { max-width: 1180px; margin: 0 auto 56px; }
+.pl-title { margin: 14px 0 16px; font-family: var(--font-serif); font-weight: 400; color: var(--color-dark); font-size: clamp(36px, 4.4vw, 58px); line-height: 1.06; }
+.pl-intro { max-width: 46ch; margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 1.7; color: rgba(73, 53, 35, 0.8); }
+
+.pl-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+.pl-card { position: relative; display: flex; flex-direction: column; padding: 36px 32px 32px; border-radius: var(--radius-card); background: #EFEAE0; color: var(--color-dark); }
+.pl-freq { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(73, 53, 35, 0.7); }
+.pl-card h3 { margin: 10px 0 6px; font-family: var(--font-serif); font-weight: 400; font-style: italic; font-size: 40px; line-height: 1.1; color: inherit; }
+.pl-lema { margin: 0; font-family: var(--font-sans); font-size: 15px; color: rgba(73, 53, 35, 0.8); }
+.pl-price { display: flex; align-items: baseline; gap: 8px; margin: 28px 0 4px; color: var(--color-dark); }
+.pl-price b { font-family: var(--font-serif); font-weight: 400; font-size: 64px; line-height: 1; }
+.pl-price span { font-family: var(--font-sans); font-size: 13px; }
+.pl-per { margin: 0; font-family: var(--font-sans); font-size: 12px; font-style: italic; color: var(--color-mid); }
+.pl-perks { list-style: none; margin: 26px 0 30px; padding: 22px 0 0; border-top: 1px solid rgba(73, 53, 35, 0.16); display: grid; gap: 10px; font-family: var(--font-sans); font-size: 14px; }
+.pl-perks li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; align-items: baseline; }
+.pl-perks li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.55; transform: translateY(-2px); }
+.pl-btn { margin-top: auto; display: block; text-align: center; border-radius: 100px; border: 1.5px solid var(--color-dark); color: var(--color-dark); font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 14px 24px; transition: all 0.3s ease; }
+.pl-btn:hover { background: var(--color-dark); color: var(--color-base); }
+
+/* El más elegido: en marrón y ligeramente elevado */
+.pl-card.is-key { top: -14px; background: var(--color-dark); color: var(--color-base); }
+.pl-card.is-key .pl-freq, .pl-card.is-key .pl-lema, .pl-card.is-key .pl-per { color: rgba(246, 243, 236, 0.72); }
+.pl-card.is-key .pl-price { color: var(--color-base); }
+.pl-card.is-key .pl-perks { border-top-color: rgba(246, 243, 236, 0.2); }
+.pl-card.is-key .pl-btn { background: var(--color-base); border-color: var(--color-base); color: var(--color-dark); }
+.pl-card.is-key .pl-btn:hover { background: #fff; }
+.pl-badge { position: absolute; top: 22px; right: 22px; background: var(--color-base); color: var(--color-dark); font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; padding: 7px 12px; border-radius: 100px; }
+
+.pl-foot { max-width: 1180px; margin: 44px auto 0; display: flex; justify-content: space-between; align-items: center; gap: 12px 20px; flex-wrap: wrap; font-family: var(--font-sans); font-size: 13px; color: var(--color-mid); }
+.pl-foot a { color: var(--color-dark); text-decoration: underline; text-underline-offset: 4px; }
+
+@media (max-width: 900px) {
+  .planes { padding: 80px 16px; }
+  .pl-head { margin-bottom: 36px; }
+  .pl-grid { grid-template-columns: 1fr; gap: 14px; }
+  .pl-card { padding: 30px 24px 26px; }
+  .pl-card.is-key { top: 0; order: -1; }
+}
