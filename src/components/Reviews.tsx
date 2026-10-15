@@ -183,7 +183,7 @@ export default function Reviews() {
         <div className="m-head reveal">
           <span className="m-eyebrow">Reseñas en Google</span>
           <h2 className="m-title">
-            Lo que dicen <em>nuestros alumnos</em>
+            Lo que dicen <em>nuestros alumnos.</em>
           </h2>
         </div>
 

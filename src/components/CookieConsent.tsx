@@ -114,8 +114,8 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
       {preferencesOpen && (
         <div className="fixed inset-0 z-[10002] flex items-end bg-[#493523]/30 p-4 backdrop-blur-[2px] sm:items-center sm:justify-center" role="presentation">
           <section role="dialog" aria-modal="true" aria-labelledby="cookie-settings-title" className="w-full max-w-[520px] rounded-[10px] bg-[#F6F3EC] p-6 shadow-[0_20px_60px_rgba(73,53,35,0.28)] md:p-8">
-            <p className="mb-2 text-[11px] uppercase tracking-[0.16em] text-[#7F7763]">Preferencias</p>
-            <h2 id="cookie-settings-title" className="mb-4 text-[28px]">Elige cómo quieres navegar.</h2>
+            <p className="m-eyebrow mb-3">Preferencias</p>
+            <h2 id="cookie-settings-title" className="mb-4 text-[28px]">Elige cómo quieres <span className="italic">navegar.</span></h2>
             <div className="space-y-4 border-y border-[#D8D0BF] py-5">
               <div><p className="mb-1 text-[15px] font-medium text-[#493523]">Necesarias</p><p className="mb-0 text-[13px] text-[#5E5146]">Guardan tu elección de privacidad. Siempre activas.</p></div>
               <label className="flex cursor-pointer items-start gap-3 rounded-[6px] p-2 transition-colors hover:bg-[#EAE2D3]">

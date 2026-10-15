@@ -613,6 +613,18 @@ html {
   .reveal-delay-4 { transition-delay: 0.4s; }
   .reveal-delay-5 { transition-delay: 0.5s; }
 
+  /* Titulares con firma: la cursiva llega la última, con un leve desenfoque */
+  :is(h1, h2):is(.reveal, .reveal *) :is(em, .italic) {
+    opacity: 0;
+    filter: blur(6px);
+    transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.26s, filter 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.26s;
+  }
+  .reveal.visible :is(h1, h2) :is(em, .italic),
+  :is(h1, h2).reveal.visible :is(em, .italic) {
+    opacity: 1;
+    filter: none;
+  }
+
   /* Reviews Carousel Styles */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -636,6 +648,7 @@ html {
       transform: none;
       transition: none;
     }
+    :is(h1, h2):is(.reveal, .reveal *) :is(em, .italic) { opacity: 1; filter: none; transition: none; }
   }
 
   /* WhatsApp Bubble Effects */

@@ -274,7 +274,7 @@ export default function Home() {
           <div className="m-head reveal">
             <span className="m-eyebrow">Antes de empezar</span>
             <h2 className="m-title">
-              Preguntas <em>frecuentes</em>
+              Preguntas <em>frecuentes.</em>
             </h2>
           </div>
 

@@ -7,8 +7,9 @@ export default function Contacto() {
     <div className="bg-crema-base min-h-screen pb-0">
       {/* Header Section */}
       <section className="px-6 max-w-4xl mx-auto text-center section-padding-claro">
+        <span className="m-eyebrow mb-4">Contacto</span>
         <h1 className="mb-text-xl">
-          Estamos aquí para ti.
+          Estamos aquí <span className="italic">para ti.</span>
         </h1>
         <p className="mb-0">
         Elige cómo quieres contactar con MOVE Pilates Boutique en Pozuelo de Alarcón.
@@ -20,8 +21,9 @@ export default function Contacto() {
         <div className="flex justify-center">
           {/* Info Card */}
           <div className="bg-[#F0EADE] border border-[#D8D0BF] rounded-[8px] p-[32px_24px] md:p-[48px] flex flex-col max-w-2xl w-full">
+            <span className="m-eyebrow mb-4 text-center">Información de contacto</span>
             <h2 className="mb-10 text-center">
-              Información de contacto
+              Ven a <span className="italic">conocernos.</span>
             </h2>
             
             <div className="w-full flex flex-col items-center">

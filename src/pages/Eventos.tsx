@@ -472,9 +472,7 @@ export default function Eventos() {
       {/* Hero Section */}
       <section className="relative bg-[#F6F3EC] md:h-[70vh] w-full flex items-center px-6 md:px-[8%] py-[60px] md:py-0">
         <div className="max-w-4xl reveal">
-          <span className="font-sans text-[10px] text-[#7F7763] uppercase tracking-[0.18em] block mb-4">
-            EXPERIENCIAS MOVE
-          </span>
+          <span className="m-eyebrow mb-4">Experiencias MOVE</span>
         <h1 className="max-w-full md:max-w-[680px]">
           <span className="block md:whitespace-nowrap">
             Algunos momentos no se explican.
@@ -502,8 +500,9 @@ export default function Eventos() {
       {/* Stats Section (Contador de prueba social) */}
       <section className="bg-[#493523] py-[60px] md:py-[80px] px-6">
         <div className="max-w-5xl mx-auto text-center reveal">
-          <h2 className="font-serif text-[32px] md:text-[42px] text-[#F6F3EC] font-normal uppercase tracking-[0.05em]">
-            experiencias <span className="italic">Move</span>
+          <span className="m-eyebrow m-eyebrow-light">Retiros · Pilates Brunch</span>
+          <h2 className="m-title m-title-light mb-0">
+            Experiencias <span className="italic">MOVE.</span>
           </h2>
         </div>
       </section>
@@ -513,12 +512,13 @@ export default function Eventos() {
         <div className="max-w-[1200px] mx-auto">
           {/* ENCABEZADO */}
           <div className="text-center reveal px-6">
-            <span className="label-balanced font-sans text-[10px] text-[#7F7763] uppercase tracking-[0.18em] block mb-4">
-              Un espacio para desconectar, moverte y volver <span className="whitespace-nowrap">a ti</span>
-            </span>
-            <h2>
-              Retiros de bienestar
+            <span className="m-eyebrow mb-4">Una experiencia MOVE</span>
+            <h2 className="mb-0">
+              Retiros de <span className="italic">bienestar.</span>
             </h2>
+            <p className="label-balanced font-sans text-[15px] text-[#7F7763] leading-[1.75] mt-4 mb-0">
+              Un espacio para desconectar, moverte y volver <span className="whitespace-nowrap">a ti.</span>
+            </p>
             <div className="w-10 h-[1px] bg-[#D8D0BF] mx-auto my-8"></div>
             <p className="font-sans text-[15px] text-[#7F7763] max-w-[640px] mx-auto leading-[1.85]">
               Los organizamos en lugares donde la naturaleza no es el decorado. Es parte esencial de la experiencia. Entornos a las afueras de Madrid donde el aire, la luz y el silencio ya hacen su trabajo antes de que empiece nada. Cada retiro es diferente, pero todos comparten la misma estructura invisible: movimiento consciente en suelo, una mesa con comida real elaborada con cuidado y talleres diseñados para conectar. Arteterapia, sound healing y prácticas que le hablan al cuerpo de formas que las palabras no siempre alcanzan. No hay agenda apretada ni nada que demostrar. Solo tiempo de calidad contigo, en un entorno que lo hace posible.
@@ -561,11 +561,9 @@ export default function Eventos() {
         <div className="max-w-[1200px] mx-auto">
           {/* ENCABEZADO */}
           <div className="text-center reveal px-6">
-            <span className="font-sans text-[10px] text-[#7F7763] uppercase tracking-[0.18em] block mb-4">
-              UNA EXPERIENCIA MOVE
-            </span>
+            <span className="m-eyebrow mb-4">Una experiencia MOVE</span>
             <h2>
-              Pilates Brunch
+              Pilates <span className="italic">Brunch.</span>
             </h2>
             <div className="w-10 h-[1px] bg-[#D8D0BF] mx-auto my-8"></div>
             <p className="font-sans text-[15px] text-[#7F7763] max-w-[640px] mx-auto leading-[1.85]">
@@ -601,6 +599,7 @@ export default function Eventos() {
       {/* Upcoming Section (Waitlist) */}
       <section id="lista-espera" className="bg-[#F6F3EC] py-[56px] px-[24px] md:py-[80px] md:px-[8%] mt-[100px] md:mt-[100px]">
         <div className="max-w-[560px] mx-auto text-center reveal">
+          <span className="m-eyebrow mb-4">Lista de espera</span>
           <h2>
             La próxima experiencia <span className="italic">MOVE.</span>
           </h2>

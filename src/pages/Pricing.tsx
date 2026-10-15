@@ -55,10 +55,10 @@ function PlanLinea({ plan }: { plan: Plan }) {
 function Seccion({ titulo, italica, subtitulo, planes }: { titulo: string; italica: string; subtitulo: string; planes: Plan[] }) {
   return (
     <section>
+      <p className={`${eyebrow} mb-3 reveal`}>{subtitulo}</p>
       <h2 className="m-title-sm mb-3 reveal">
-        {titulo} <span className="italic">{italica}</span>
+        {titulo} <span className="italic">{italica}.</span>
       </h2>
-      <p className={`${eyebrow} mb-2 reveal`}>{subtitulo}</p>
       <ul className="list-none p-0 m-0">
         {planes.map((plan) => (
           <PlanLinea key={plan.nombre} plan={plan} />
@@ -103,7 +103,7 @@ export default function Pricing() {
           <div className="pv-card mb-14 reveal">
             <span className="m-eyebrow m-eyebrow-light">¿Primera vez en MOVE?</span>
             <h2 className="pv-card-title">
-              Tu clase de <em>Valoración</em>
+              Tu clase de <em>Valoración.</em>
             </h2>
             <p className="pv-card-lead">
               Tu primera sesión guiada para conocer tu nivel, tu postura y tus objetivos.

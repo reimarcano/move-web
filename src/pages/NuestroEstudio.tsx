@@ -266,6 +266,7 @@ export default function NuestroEstudio() {
     <div className="bg-[#F6F3EC] min-h-screen font-sans selection:bg-[#493523] selection:text-[#F6F3EC]">
       {/* H1 — ENCABEZADO PRINCIPAL */}
       <section className="pt-section-xl pb-[60px] px-6 md:px-0 text-center reveal">
+        <span className="m-eyebrow mb-4">Nuestro estudio</span>
         <h1 className="mb-0">
           Un espacio para <span className="italic">conectarte.</span>
         </h1>
@@ -277,9 +278,7 @@ export default function NuestroEstudio() {
       {/* SECCIÓN 1 — NUESTRO ESPACIO */}
       <section className="px-6 md:px-[8%] mb-[60px] md:mb-[100px]">
         <div className="reveal">
-          <span className="font-sans text-[#7F7763] text-[10px] uppercase tracking-[0.18em] mb-4 block">
-            NUESTRO ESPACIO
-          </span>
+          <span className="m-eyebrow mb-4">Nuestro espacio</span>
           <h2 className="font-serif text-[#493523] text-[24px] md:text-[32px] font-normal leading-tight">
             Diseñado para que te sientas <span className="italic">bien.</span>
           </h2>
@@ -359,9 +358,7 @@ export default function NuestroEstudio() {
       {/* SECCIÓN 2 — NUESTRAS CLASES */}
       <section className="px-6 md:px-[8%] mt-[60px] md:mt-[100px] mb-[60px] md:mb-[100px]">
         <div className="reveal">
-          <span className="font-sans text-[#7F7763] text-[10px] uppercase tracking-[0.18em] mb-4 block">
-            NUESTRAS CLASES
-          </span>
+          <span className="m-eyebrow mb-4">Nuestras clases</span>
           <h2 className="font-serif text-[#493523] text-[24px] md:text-[32px] font-normal leading-tight">
             El movimiento en <span className="italic">cada sesión.</span>
           </h2>

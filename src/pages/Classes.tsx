@@ -5,8 +5,9 @@ export default function Classes() {
   return (
     <div className="w-full">
       <section className="px-6 text-center max-w-4xl mx-auto section-padding-claro">
+        <span className="m-eyebrow mb-4 reveal">Nuestras clases</span>
         <h1 className="mb-text-xl reveal font-serif text-[#493523] font-normal">
-          Pilates Reformer <span className="italic">en Pozuelo de Alarcón.</span>
+          Pilates Reformer en <span className="italic">Pozuelo de Alarcón.</span>
         </h1>
 
         <p className="reveal reveal-delay-1 mx-auto">
@@ -31,7 +32,10 @@ export default function Classes() {
           </div>
 
           <div className="order-1 md:order-2 md:pl-8 reveal reveal-delay-1">
-            <h2 className="mb-text-lg text-negro-move">Clases Grupales de Pilates Reformer</h2>
+            <span className="m-eyebrow mb-4">Clases grupales · Máx. 4 personas</span>
+            <h2 className="mb-text-lg text-negro-move">
+              Pilates Reformer <span className="italic">en grupo.</span>
+            </h2>
 
             <p className="text-texto-move font-sans mb-text-lg">
               Pilates Reformer en grupos reducidos · Máximo 4 personas · 50
@@ -119,8 +123,9 @@ export default function Classes() {
       <section className="bg-crema-base section-padding-claro px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="md:pr-8 reveal">
+            <span className="m-eyebrow mb-4">Sesiones privadas · 1 a 1</span>
             <h2 className="text-negro-move mb-text-lg">
-              Sesiones Privadas de Pilates Reformer
+              Pilates Reformer <span className="italic">solo para ti.</span>
             </h2>
 
             <p className="text-texto-move font-sans mb-text-lg">

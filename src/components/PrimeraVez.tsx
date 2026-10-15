@@ -123,7 +123,7 @@ export default function PrimeraVez() {
           <span className="m-eyebrow m-eyebrow-light reveal">Empieza aquí</span>
           <h2 id="primera-vez-titulo" className="pv-title" ref={titleRef}>
             <span className="pv-mask"><span>Tu clase de</span></span>
-            <span className="pv-mask"><span><em>Valoración</em></span></span>
+            <span className="pv-mask"><span><em>Valoración.</em></span></span>
           </h2>
           <p className="pv-lead reveal reveal-delay-1">
             Tu primera sesión de Pilates Reformer, guiada de principio a fin, para conocerte y

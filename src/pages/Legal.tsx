@@ -4,11 +4,15 @@ import { CookieSettingsButton } from '../components/CookieConsent';
 const LAST_UPDATED = '11 de agosto de 2026';
 
 function LegalLayout({ eyebrow, title, children }: { eyebrow: string; title: string; children: ReactNode }) {
+  // La última palabra del título va en cursiva, como en el resto de titulares
+  const cut = title.lastIndexOf(' ');
   return (
     <div className="bg-crema-base">
       <section className="mx-auto max-w-4xl px-6 pb-12 pt-section-xl text-center md:pb-16">
-        <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.18em] text-[#7F7763]">{eyebrow}</p>
-        <h1 className="mb-0">{title}</h1>
+        <p className="m-eyebrow mb-4">{eyebrow}</p>
+        <h1 className="mb-0">
+          {title.slice(0, cut)} <span className="italic">{title.slice(cut + 1)}.</span>
+        </h1>
       </section>
       <article className="mx-auto max-w-3xl px-6 pb-20 md:pb-28">
         <div className="rounded-[8px] border border-[#D8D0BF] bg-[#F0EADE] px-6 py-7 md:px-10 md:py-10">
