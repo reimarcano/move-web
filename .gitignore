@@ -6,3 +6,7 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Maquetas de diseño y configuración local de Claude (se quedan en el equipo, fuera del repo)
+maquetas-*/
+.claude/
