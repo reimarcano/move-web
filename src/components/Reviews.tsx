@@ -116,7 +116,7 @@ const ReviewCard: React.FC<{
     <article
       role="listitem"
       aria-label={`Reseña de ${review.name}`}
-      className={`h-full bg-white border border-tostado rounded-[12px] card-padding shadow-[0_2px_16px_rgba(73,53,35,0.06)] transition-[min-height] duration-300 ${isExpanded ? 'min-h-[460px] md:min-h-[500px]' : 'min-h-[330px] md:min-h-[360px]'} reveal reveal-delay-${(index % 5) + 1}`}
+      className={`h-full bg-arena rounded-card card-padding transition-[min-height] duration-300 ${isExpanded ? 'min-h-[460px] md:min-h-[500px]' : 'min-h-[330px] md:min-h-[360px]'} reveal reveal-delay-${(index % 5) + 1}`}
     >
       <div className="flex justify-between items-start mb-4">
         <div className="flex items-center gap-3">
@@ -178,13 +178,15 @@ export default function Reviews() {
   };
 
   return (
-    <section className="bg-crema-base section-padding-claro px-6">
+    <section className="bg-crema-base m-section">
       <div className="max-w-[1000px] mx-auto">
-        <div className="text-center mb-section-md reveal">
-          <h2 className="font-serif italic text-marron-move text-[24px] md:text-[32px] font-normal mb-0">Lo que dicen nuestros alumnos</h2>
+        <div className="m-head reveal">
+          <span className="m-eyebrow">Reseñas en Google</span>
+          <h2 className="m-title">
+            Lo que dicen <em>nuestros alumnos</em>
+          </h2>
         </div>
 
-        <div className="w-[60px] h-[1px] bg-tostado mx-auto mb-section-md reveal" />
 
         <div
           ref={carouselRef}

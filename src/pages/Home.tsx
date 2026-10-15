@@ -147,12 +147,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
               aria-label="Reserva tu clase de prueba por WhatsApp"
-              className="inline-block rounded-[100px] border-[1.5px] bg-[#493523] text-[#F6F3EC] border-[#493523] uppercase tracking-[0.12em] transition-all duration-300 ease-in-out hover:-translate-y-[1px] hover:bg-[#7F7763] hover:border-[#7F7763] hover:text-[#F6F3EC]"
-              style={{
-                padding: "14px 32px",
-                fontFamily: "var(--font-sans)",
-                fontSize: "12px",
-              }}
+              className="btn-primary"
             >
               Reserva tu clase de prueba
             </a>
@@ -164,12 +159,13 @@ export default function Home() {
       <PrimeraVez />
 
       {/* ── Features Section ── */}
-      <section className="w-full bg-[#F6F3EC]">
-        <div className="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-24 reveal">
-          <div className="mb-12 text-center">
-            <span className="font-sans text-[12px] tracking-[0.18em] uppercase text-[rgba(73,53,35,0.7)]">
-              La experiencia MOVE
-            </span>
+      <section className="w-full bg-[#F6F3EC] m-section">
+        <div className="mx-auto max-w-[1180px] reveal">
+          <div className="m-head">
+            <span className="m-eyebrow">La experiencia MOVE</span>
+            <h2 className="m-title">
+              Lo que nos hace <em>diferentes.</em>
+            </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-10 text-center">
@@ -229,8 +225,9 @@ export default function Home() {
       </section>
 
       {/* ── Philosophy Section ── */}
-      <section className="section-padding-oscuro px-6 bg-marron-move text-crema-move text-center">
+      <section className="m-section bg-marron-move text-crema-move text-center">
         <div className="max-w-5xl mx-auto">
+          <span className="m-eyebrow m-eyebrow-light mb-6 reveal">Nuestra filosofía</span>
           <h2 className="text-crema-move mb-0 font-serif italic reveal">
             &ldquo;Move no es solo un estudio de Pilates Reformer, es un refugio en Pozuelo de
             Alarcón diseñado con intención, sensibilidad y propósito. Un espacio donde cada
@@ -272,10 +269,14 @@ export default function Home() {
       <PlanesGrupales />
 
       {/* ── FAQ Section ── */}
-      <section className="bg-tostado section-padding-oscuro px-6">
-        <div className="max-w-[720px] mx-auto">
-          <h2 className="text-center text-negro-move mb-text-lg reveal">Preguntas frecuentes</h2>
-          <div className="w-10 h-[1px] bg-negro-move mx-auto mb-section-md reveal reveal-delay-1" />
+      <section className="bg-arena m-section">
+        <div className="max-w-[760px] mx-auto">
+          <div className="m-head reveal">
+            <span className="m-eyebrow">Antes de empezar</span>
+            <h2 className="m-title">
+              Preguntas <em>frecuentes</em>
+            </h2>
+          </div>
 
           <div className="border-b border-negro-move reveal reveal-delay-2">
             {faqs.map((faq, index) => (
@@ -290,9 +291,7 @@ export default function Home() {
           </div>
 
           <div className="mt-section-md text-center reveal">
-            <h3 className="font-serif text-negro-move text-[22px] mb-text-md italic">
-              ¿Tienes más preguntas?
-            </h3>
+            <h3 className="m-closing mb-5">¿Tienes más preguntas?</h3>
             <a
               href={WHATSAPP_URL}
               target="_blank"

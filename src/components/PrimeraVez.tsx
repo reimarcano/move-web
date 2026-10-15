@@ -100,8 +100,8 @@ export default function PrimeraVez() {
   return (
     <section className="primera-vez" id="primera-vez" aria-labelledby="primera-vez-titulo">
       <div className="pv-intro">
-        <span className="pv-eyebrow reveal">¿Primera vez en MOVE?</span>
-        <p className="pv-intro-text reveal reveal-delay-1">
+        <span className="m-eyebrow reveal">¿Primera vez en MOVE?</span>
+        <p className="pv-intro-text m-title-sm reveal reveal-delay-1">
           Empieza con una clase <em>pensada para ti.</em>
         </p>
       </div>
@@ -120,7 +120,7 @@ export default function PrimeraVez() {
         </figure>
 
         <div className="pv-copy">
-          <span className="pv-eyebrow pv-eyebrow-light reveal">Empieza aquí</span>
+          <span className="m-eyebrow m-eyebrow-light reveal">Empieza aquí</span>
           <h2 id="primera-vez-titulo" className="pv-title" ref={titleRef}>
             <span className="pv-mask"><span>Tu clase de</span></span>
             <span className="pv-mask"><span><em>Valoración</em></span></span>
@@ -150,7 +150,7 @@ export default function PrimeraVez() {
               target="_blank"
               rel="noreferrer"
               aria-label="Reservar clase de valoración por WhatsApp"
-              className="pv-btn"
+              className="btn-inverted"
             >
               Reservar mi clase
             </a>

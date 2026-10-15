@@ -29,7 +29,7 @@ const sesionesPrivadas: Plan[] = [
   { nombre: 'Bono 8 sesiones', precio: 400, detalle: '50 € por sesión' },
 ];
 
-const eyebrow = 'font-sans text-[10px] uppercase tracking-[0.18em] text-[#7F7763]';
+const eyebrow = 'm-eyebrow';
 
 /* Línea de carta: nombre · · · · · precio, con el detalle en cursiva debajo */
 function PlanLinea({ plan }: { plan: Plan }) {
@@ -55,7 +55,7 @@ function PlanLinea({ plan }: { plan: Plan }) {
 function Seccion({ titulo, italica, subtitulo, planes }: { titulo: string; italica: string; subtitulo: string; planes: Plan[] }) {
   return (
     <section>
-      <h2 className="mb-1 font-serif font-normal text-[30px] md:text-[34px] leading-[1.15] text-[#493523] reveal">
+      <h2 className="m-title-sm mb-3 reveal">
         {titulo} <span className="italic">{italica}</span>
       </h2>
       <p className={`${eyebrow} mb-2 reveal`}>{subtitulo}</p>
@@ -73,7 +73,7 @@ export default function Pricing() {
     <div className="w-full pb-0">
       <section className="px-6 text-center max-w-4xl mx-auto section-padding-claro pb-10 md:pb-14">
         <p className={`${eyebrow} mb-3 reveal`}>Tarifas</p>
-        <h1 className="mb-0 reveal">
+        <h1 className="m-title reveal">
           Encuentra <span className="italic">tu plan.</span>
         </h1>
       </section>
@@ -101,7 +101,7 @@ export default function Pricing() {
         <div className="px-6 md:px-0 pt-10 lg:pt-0 pb-16 md:pb-24 text-[#493523]">
           {/* Primera vez: clase de valoración, con el mismo lenguaje que el Home */}
           <div className="pv-card mb-14 reveal">
-            <span className="pv-eyebrow pv-eyebrow-light">¿Primera vez en MOVE?</span>
+            <span className="m-eyebrow m-eyebrow-light">¿Primera vez en MOVE?</span>
             <h2 className="pv-card-title">
               Tu clase de <em>Valoración</em>
             </h2>
@@ -115,22 +115,22 @@ export default function Pricing() {
               target="_blank"
               rel="noreferrer"
               aria-label="Reservar clase de valoración por WhatsApp"
-              className="pv-btn"
+              className="btn-inverted"
             >
               Reservar mi clase
             </a>
           </div>
 
-          <Seccion titulo="Clases" italica="Grupales" subtitulo="Reformer · Máx. 4 personas · 50 min" planes={planesGrupales} />
+          <Seccion titulo="Clases" italica="grupales" subtitulo="Reformer · Máx. 4 personas · 50 min" planes={planesGrupales} />
           <p className="mt-1 mb-14 font-sans text-[11px] text-[#7F7763] reveal">Validez de 35 días</p>
 
-          <Seccion titulo="Sesiones" italica="Privadas" subtitulo="1:1 en Reformer Torre · 50 min" planes={sesionesPrivadas} />
+          <Seccion titulo="Sesiones" italica="privadas" subtitulo="1:1 en Reformer Torre · 50 min" planes={sesionesPrivadas} />
 
           <p className="mt-12 mb-3 font-sans text-[11px] leading-[1.8] text-[#7F7763] reveal">
             Todos los planes incluyen descuentos en eventos MOVE. Precios en euros, impuestos incluidos.
           </p>
           <div className="mt-12 pt-10 border-t border-[#493523]/15 text-center reveal">
-            <p className="font-serif italic text-[22px] text-[#493523] mb-5">¿Dudas sobre qué plan elegir?</p>
+            <p className="m-closing mb-5">¿Dudas sobre qué plan elegir?</p>
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="btn-outline inline-flex items-center gap-2">
               <MessageCircle size={16} aria-hidden="true" />
               Escríbenos por WhatsApp
