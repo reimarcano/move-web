@@ -902,7 +902,7 @@ html {
 .ig-handle small { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-mid); }
 
 .ig-viewport { -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
-.ig-track { display: flex; gap: var(--ig-gap); width: max-content; margin: 0; padding: 0; list-style: none; animation: ig-marquee 60s linear infinite; }
+.ig-track { display: flex; gap: var(--ig-gap); width: max-content; margin: 0; padding: 0; list-style: none; animation: ig-marquee calc(var(--ig-count, 8) * 7.5s) linear infinite; }
 .ig-viewport:hover .ig-track, .ig-track:focus-within { animation-play-state: paused; }
 @keyframes ig-marquee {
   /* La pista contiene dos copias: al desplazar una copia entera (+ su hueco) el bucle no se nota */
@@ -918,7 +918,7 @@ html {
 @media (max-width: 900px) {
   .ig-feed { --ig-tile: 62vw; --ig-gap: 10px; padding: 72px 0 80px; }
   .ig-head { flex-direction: column; align-items: flex-start; padding: 0 16px; margin-bottom: 28px; }
-  .ig-track { animation-duration: 45s; }
+  .ig-track { animation-duration: calc(var(--ig-count, 8) * 5.5s); }
 }
 
 @media (prefers-reduced-motion: reduce) {

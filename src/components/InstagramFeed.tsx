@@ -32,13 +32,14 @@ export default function InstagramFeed() {
       </div>
 
       <div className="ig-viewport">
-        <ul className="ig-track">
+        {/* La duración depende del número de fotos para que la velocidad no cambie */}
+        <ul className="ig-track" style={{ "--ig-count": instagramPosts.length } as React.CSSProperties}>
           {loop.map((post, i) => {
             const clone = i >= instagramPosts.length;
             return (
               <li key={i} aria-hidden={clone || undefined}>
                 <a
-                  href={post.href ?? INSTAGRAM_URL}
+                  href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="ig-tile"
