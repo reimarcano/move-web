@@ -34,7 +34,7 @@ export default function Contacto() {
                     <MapPin className="text-[#7F7763]" size={18} />
                   </div>
                   <div className="flex-1 text-left">
-                    <p className="font-sans text-[15px] text-[#493523] leading-[1.8] mb-0">
+                    <p className="font-sans text-body text-[#493523] leading-[1.8] mb-0">
                       Av. de Europa, 31, local 7<br />
                       Acceso desde Calle Berna<br />
                       28224 Pozuelo de Alarcón, Madrid
@@ -48,7 +48,7 @@ export default function Contacto() {
                     <Phone className="text-[#7F7763]" size={18} />
                   </div>
                   <div className="flex-1 text-left">
-                    <a href="tel:+34654495508" className="font-sans text-[15px] text-[#493523] hover:text-[#7F7763] transition-all duration-200 no-underline">
+                    <a href="tel:+34654495508" className="font-sans text-body text-[#493523] hover:text-[#7F7763] transition-all duration-200 no-underline">
                       +34 654 49 55 08
                     </a>
                   </div>
@@ -60,7 +60,7 @@ export default function Contacto() {
                     <Mail className="text-[#7F7763]" size={18} />
                   </div>
                   <div className="flex-1 text-left">
-                    <a href="mailto:movebygenesis@gmail.com" className="font-sans text-[15px] text-[#493523] hover:text-[#7F7763] transition-all duration-200 no-underline">
+                    <a href="mailto:movebygenesis@gmail.com" className="font-sans text-body text-[#493523] hover:text-[#7F7763] transition-all duration-200 no-underline">
                       movebygenesis@gmail.com
                     </a>
                   </div>
@@ -73,18 +73,18 @@ export default function Contacto() {
                   </div>
                   <div className="flex-1 text-left">
                     <div className="grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 w-full">
-                      <span className="font-sans text-[14px] text-[#7F7763] min-w-[128px]">Lunes y Miércoles</span>
-                      <span className="font-sans text-[14px] text-[#493523] text-right">8:00 – 21:00</span>
+                      <span className="font-sans text-small text-[#7F7763] min-w-[128px]">Lunes y Miércoles</span>
+                      <span className="font-sans text-small text-[#493523] text-right">8:00 – 21:00</span>
 
-                      <span className="font-sans text-[14px] text-[#7F7763] min-w-[128px]">Martes y Jueves</span>
-                      <span className="font-sans text-[14px] text-[#493523] text-right">9:00 – 21:00</span>
+                      <span className="font-sans text-small text-[#7F7763] min-w-[128px]">Martes y Jueves</span>
+                      <span className="font-sans text-small text-[#493523] text-right">9:00 – 21:00</span>
                      
                       
-                      <span className="font-sans text-[14px] text-[#7F7763] min-w-[128px]">Viernes</span>
-                      <span className="font-sans text-[14px] text-[#493523] text-right">8:00 – 14:00 | 17:00 – 18:00</span>
+                      <span className="font-sans text-small text-[#7F7763] min-w-[128px]">Viernes</span>
+                      <span className="font-sans text-small text-[#493523] text-right">8:00 – 14:00 | 17:00 – 18:00</span>
                       
-                      <span className="font-sans text-[14px] text-[#7F7763] min-w-[128px]">Sáb · Dom</span>
-                      <span className="font-sans text-[14px] text-[#493523] text-right">Cerrado</span>
+                      <span className="font-sans text-small text-[#7F7763] min-w-[128px]">Sáb · Dom</span>
+                      <span className="font-sans text-small text-[#493523] text-right">Cerrado</span>
                     </div>
                   </div>
                 </div>
@@ -132,7 +132,7 @@ export default function Contacto() {
                     </svg>
                   </a>
                 </div>
-                <p className="mt-4 text-[14px] text-[#7F7763] font-sans text-center leading-[1.7] max-w-[280px] mx-auto mb-0">
+                <p className="mt-4 text-small text-[#7F7763] font-sans text-center leading-[1.7] max-w-[280px] mx-auto mb-0">
                   Síguenos en Instagram y TikTok para ver cómo se vive el movimiento en MOVE.
                 </p>
               </div>
@@ -154,11 +154,11 @@ export default function Contacto() {
             referrerPolicy="no-referrer-when-downgrade"
             title="Ubicación de MOVE Pilates Boutique"
           ></iframe> : <div className="flex h-full flex-col items-center justify-center bg-[#493523] px-6 text-center text-[#F6F3EC]">
-            <p className="mb-2 font-serif text-[25px] text-[#F6F3EC]">Encuéntranos en Pozuelo.</p>
-            <p className="mb-5 max-w-md text-[14px] text-[#F6F3EC]/80">El mapa de Google está desactivado hasta que aceptes las cookies opcionales.</p>
+            <p className="mb-2 font-serif text-h3 text-[#F6F3EC]">Encuéntranos en Pozuelo.</p>
+            <p className="mb-5 max-w-md text-small text-[#F6F3EC]/80">El mapa de Google está desactivado hasta que aceptes las cookies opcionales.</p>
             <div className="flex flex-col items-center gap-3 sm:flex-row">
-              <button type="button" onClick={openPreferences} className="btn-outline-inverted text-[10px]">CONFIGURAR COOKIES</button>
-              <a href="https://www.google.com/maps/search/?api=1&query=Av.+de+Europa+31,+local+7,+28224+Pozuelo+de+Alarc%C3%B3n" target="_blank" rel="noreferrer" className="text-[12px] text-[#F6F3EC] underline underline-offset-4">Abrir ubicación en Google Maps</a>
+              <button type="button" onClick={openPreferences} className="btn-outline-inverted">CONFIGURAR COOKIES</button>
+              <a href="https://www.google.com/maps/search/?api=1&query=Av.+de+Europa+31,+local+7,+28224+Pozuelo+de+Alarc%C3%B3n" target="_blank" rel="noreferrer" className="text-label text-[#F6F3EC] underline underline-offset-4">Abrir ubicación en Google Maps</a>
             </div>
           </div>}
         </div>
