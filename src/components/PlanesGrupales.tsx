@@ -31,7 +31,7 @@ export default function PlanesGrupales() {
               <span>/ mes</span>
             </p>
             <p className="pl-per">{plan.porClase} por clase</p>
-            <ul className="pl-perks">
+            <ul className="m-list pl-perks">
               {ventajasGrupales.map((v) => (
                 <li key={v}>{v}</li>
               ))}

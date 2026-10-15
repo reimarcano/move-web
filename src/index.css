@@ -871,9 +871,7 @@ html {
 .pl-price b { font-family: var(--font-serif); font-weight: 400; font-size: var(--fs-h2); line-height: 1; }
 .pl-price span { font-family: var(--font-sans); font-size: var(--fs-small); }
 .pl-per { margin: 0; font-family: var(--font-sans); font-size: var(--fs-label); font-style: italic; color: var(--color-mid); }
-.pl-perks { list-style: none; margin: 26px 0 30px; padding: 22px 0 0; border-top: 1px solid var(--color-line); display: grid; gap: 10px; font-family: var(--font-sans); font-size: var(--fs-small); }
-.pl-perks li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; align-items: baseline; }
-.pl-perks li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.55; transform: translateY(-2px); }
+.pl-perks { margin: 26px 0 30px; padding-top: 22px; border-top: 1px solid var(--color-line); font-size: var(--fs-small); }
 .pl-btn { margin-top: auto; display: block; padding-left: 24px; padding-right: 24px; }
 
 /* El más elegido: en marrón y ligeramente elevado */
@@ -913,6 +911,23 @@ html {
   .ph-photo { width: 136px; height: 136px; }
 }
 
+/* ── Clases · formatos (grupales y privadas) ── */
+.cl-row { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.cl-row.is-flipped .cl-photo { order: 2; }
+.cl-photo { margin: 0; aspect-ratio: 3 / 4; border-radius: var(--radius-card); overflow: hidden; background: var(--color-soft); }
+.cl-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.cl-ficha { margin: 14px 0 0; font-family: var(--font-sans); font-size: var(--fs-label); font-style: italic; color: var(--color-mid); }
+.cl-list { margin: 32px 0 40px; font-size: var(--fs-body); color: var(--color-ink-2); }
+.cl-block { padding: 24px 0; border-top: 1px solid var(--color-line); }
+.cl-block .m-eyebrow { margin-bottom: 12px; }
+.cl-block .m-text + .m-text { margin-top: 14px; }
+.cl-aviso { max-width: 60ch; margin: 0 0 24px; font-family: var(--font-sans); font-size: var(--fs-label); font-style: italic; line-height: 1.8; color: var(--color-ink-3); }
+
+@media (max-width: 900px) {
+  .cl-row { grid-template-columns: 1fr; gap: 40px; }
+  .cl-photo, .cl-row.is-flipped .cl-photo { order: 2; }
+}
+
 /* ── Home · Preguntas frecuentes ── */
 .fq-list { border-bottom: 1px solid var(--color-line-strong); }
 .fq-item { border-top: 1px solid var(--color-line-strong); }
@@ -934,6 +949,10 @@ html {
 .m-quote { margin: 0; font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: var(--fs-h3); line-height: 1.4; color: var(--color-base); text-wrap: pretty; }
 /* Etiqueta "Más elegido": marrón sobre crema; invertida dentro de la tarjeta destacada */
 .m-badge { display: inline-block; padding: 7px 12px; border-radius: 100px; background: var(--color-dark); color: var(--color-base); font-family: var(--font-sans); font-size: var(--fs-micro); line-height: 1; letter-spacing: 0.16em; text-transform: uppercase; }
+/* Lista con punto: ventajas de planes y formatos */
+.m-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-family: var(--font-sans); }
+.m-list li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; align-items: baseline; }
+.m-list li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.55; transform: translateY(-2px); }
 .m-card { padding: var(--card-pad); border-radius: var(--radius-card); background: var(--color-arena); color: var(--color-dark); }
 
 /* Cinta marrón a sangre: los momentos de marca de cada página */
