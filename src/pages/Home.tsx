@@ -68,36 +68,29 @@ function FAQItem({
   }, [isOpen]);
 
   return (
-    <div className="border-t border-negro-move">
+    <div className={`fq-item${isOpen ? " is-open" : ""}`}>
       <button
         onClick={onToggle}
-        className="w-full flex justify-between items-center py-[22px] text-left group"
+        className="fq-q"
         aria-expanded={isOpen}
         aria-controls={`faq-answer-${index}`}
         id={`faq-question-${index}`}
       >
-        <span className="faq-question text-negro-move pr-4">{faq.question}</span>
-        <span
-          className={`text-negro-move flex-shrink-0 transition-transform duration-[350ms] ease-in-out ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
-          aria-hidden="true"
-        >
-          <ChevronDown size={18} strokeWidth={1.5} />
-        </span>
+        <span>{faq.question}</span>
+        <ChevronDown className="fq-chevron" size={18} strokeWidth={1.5} aria-hidden="true" />
       </button>
       <div
         id={`faq-answer-${index}`}
         role="region"
         aria-labelledby={`faq-question-${index}`}
         ref={contentRef}
-        className="overflow-hidden transition-all duration-[400ms] ease-in-out"
+        className="fq-a"
         style={{
           maxHeight: `${height}px`,
           opacity: isOpen ? 1 : 0,
         }}
       >
-        <div className="pr-10 pb-[22px] faq-answer text-negro-move/75">{faq.answer}</div>
+        <p className="m-text">{faq.answer}</p>
       </div>
     </div>
   );
@@ -158,125 +151,75 @@ export default function Home() {
       {/* ── ¿Primera vez en MOVE? (clase de valoración) ── */}
       <PrimeraVez />
 
-      {/* ── Features Section ── */}
-      <section className="w-full bg-[#F6F3EC] m-section">
-        <div className="mx-auto max-w-[1180px] reveal">
-          <div className="m-head">
-            <span className="m-eyebrow">La experiencia MOVE</span>
-            <h2 className="m-title">
-              Lo que nos hace <em>diferentes.</em>
-            </h2>
-          </div>
+      {/* ── Lo que nos hace diferentes ── */}
+      <section className="m-section">
+        <div className="m-head">
+          <span className="m-eyebrow reveal">La experiencia MOVE</span>
+          <h2 className="m-title reveal reveal-delay-1">
+            Lo que nos hace <em>diferentes.</em>
+          </h2>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-10 text-center">
-            {features.map((feature, index) => (
-              <div
-                key={feature.title}
-                className={`flex flex-col items-center reveal reveal-delay-${index + 1}`}
-              >
-                <div
-                  className="mb-8 rounded-full flex items-center justify-center"
-                  style={{
-                    width: "92px",
-                    height: "92px",
-                    borderColor: "rgba(73, 53, 35, 0.55)",
-                    borderWidth: "1.5px",
-                    borderStyle: "solid",
-                    background: "#F6F3EC",
-                  }}
-                >
-                  <img
-                    src={feature.icon}
-                    alt={feature.iconAlt}
-                    width={feature.iconSize}
-                    height={feature.iconSize}
-                    loading="lazy"
-                    decoding="async"
-                    style={{
-                      objectFit: "contain",
-                    }}
-                  />
-                </div>
-                <h3
-                  className="mb-3"
-                  style={{
-                    fontFamily: "var(--font-serif)",
-                    lineHeight: "1.2",
-                    color: "#493523",
-                  }}
-                >
-                  {feature.title}
-                </h3>
-                <p
-                  className="max-w-[250px] mx-auto"
-                  style={{
-                    lineHeight: "1.75",
-                    color: "rgba(73, 53, 35, 0.82)",
-                  }}
-                >
-                  {feature.description}
-                </p>
+        <div className="ft-grid">
+          {features.map((feature, index) => (
+            <div key={feature.title} className={`ft-item reveal reveal-delay-${index + 1}`}>
+              <div className="ft-icon">
+                <img
+                  src={feature.icon}
+                  alt={feature.iconAlt}
+                  width={feature.iconSize}
+                  height={feature.iconSize}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
-            ))}
-          </div>
+              <h3 className="m-title-sm">{feature.title}</h3>
+              <p className="m-text">{feature.description}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ── Philosophy Section ── */}
-      <section className="m-section bg-marron-move text-crema-move text-center">
-        <div className="max-w-5xl mx-auto">
-          <span className="m-eyebrow m-eyebrow-light mb-6 reveal">Nuestra filosofía</span>
-          <h2 className="text-crema-move mb-0 font-serif italic text-h3 leading-[1.4] reveal">
-            &ldquo;Move no es solo un estudio de Pilates Reformer, es un refugio en Pozuelo de
-            Alarcón diseñado con intención, sensibilidad y propósito. Un espacio donde cada
-            detalle está pensado para invitarte a reconectar contigo.&rdquo;
-          </h2>
-          <div className="mt-section-lg flex flex-col items-center reveal reveal-delay-2">
-            <div className="w-48 h-48 rounded-full overflow-hidden border-2 border-crema-move/20 shadow-2xl">
-              <picture className="block w-full h-full">
-                <source srcSet="/assets/foto-genesis.webp" type="image/webp" />
-                <img
-                  src="/assets/foto-genesis.jpg"
-                  alt="Retrato de Génesis Romero, fundadora de MOVE Pilates Boutique"
-                  className="w-full h-full object-cover"
-                  width={192}
-                  height={192}
-                  loading="lazy"
-                  decoding="async"
-                  style={{
-                    objectPosition: "center 42%",
-                    transform: "scale(1.4)",
-                  }}
-                  referrerPolicy="no-referrer"
-                />
-              </picture>
-            </div>
-            <div className="mt-3 text-center">
-              <p className="font-sans text-small text-crema-move/55 text-center tracking-[0.05em] mb-0">
-                Génesis Romero
-              </p>
-              <p className="font-sans text-micro text-crema-move/55 text-center uppercase tracking-[0.1em] mb-0">
-                Fundadora de MOVE
-              </p>
-            </div>
-          </div>
+      {/* ── Nuestra filosofía ── */}
+      <section className="m-section m-band ph-band">
+        <span className="m-eyebrow m-eyebrow-light reveal">Nuestra filosofía</span>
+        <h2 className="m-quote reveal reveal-delay-1">
+          &ldquo;Move no es solo un estudio de Pilates Reformer, es un refugio en Pozuelo de
+          Alarcón diseñado con intención, sensibilidad y propósito. Un espacio donde cada
+          detalle está pensado para invitarte a reconectar contigo.&rdquo;
+        </h2>
+        <div className="ph-sign reveal reveal-delay-2">
+          <picture className="ph-photo">
+            <source srcSet="/assets/foto-genesis.webp" type="image/webp" />
+            <img
+              src="/assets/foto-genesis.jpg"
+              alt="Retrato de Génesis Romero, fundadora de MOVE Pilates Boutique"
+              width={192}
+              height={192}
+              loading="lazy"
+              decoding="async"
+              referrerPolicy="no-referrer"
+            />
+          </picture>
+          <p className="ph-name">Génesis Romero</p>
+          <span className="m-eyebrow m-eyebrow-light">Fundadora de MOVE</span>
         </div>
       </section>
 
       {/* ── Planes de clases grupales ── */}
       <PlanesGrupales />
 
-      {/* ── FAQ Section ── */}
-      <section className="bg-arena m-section">
+      {/* ── Preguntas frecuentes ── */}
+      <section className="m-section bg-arena">
         <div className="max-w-[760px] mx-auto">
-          <div className="m-head reveal">
-            <span className="m-eyebrow">Antes de empezar</span>
-            <h2 className="m-title">
+          <div className="m-head">
+            <span className="m-eyebrow reveal">Antes de empezar</span>
+            <h2 className="m-title reveal reveal-delay-1">
               Preguntas <em>frecuentes.</em>
             </h2>
           </div>
 
-          <div className="border-b border-negro-move reveal reveal-delay-2">
+          <div className="fq-list reveal reveal-delay-2">
             {faqs.map((faq, index) => (
               <FAQItem
                 key={index}
@@ -288,8 +231,8 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mt-section-md text-center reveal">
-            <h3 className="m-closing mb-5">¿Tienes más preguntas?</h3>
+          <div className="m-foot reveal">
+            <p className="m-closing">¿Tienes más preguntas?</p>
             <a
               href={WHATSAPP_URL}
               target="_blank"

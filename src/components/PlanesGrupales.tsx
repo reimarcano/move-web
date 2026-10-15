@@ -20,7 +20,7 @@ export default function PlanesGrupales() {
         {planesGrupales.map((plan, i) => (
           <article
             key={plan.nombre}
-            className={`pl-card reveal reveal-delay-${i + 1}${plan.masElegido ? " is-key" : ""}`}
+            className={`m-card pl-card reveal reveal-delay-${i + 1}${plan.masElegido ? " is-key" : ""}`}
           >
             {plan.masElegido && <span className="pl-badge">Más elegido</span>}
             <span className="pl-freq">{plan.frecuencia}</span>
@@ -49,7 +49,7 @@ export default function PlanesGrupales() {
         ))}
       </div>
 
-      <div className="pl-foot reveal">
+      <div className="m-foot reveal">
         <p className="m-closing">¿Prefieres sesiones privadas 1:1? Bonos desde 210 €.</p>
         <Link to="/precios" className="btn-outline">
           Ver todas las tarifas
