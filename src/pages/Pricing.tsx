@@ -1,112 +1,136 @@
+import { MessageCircle } from 'lucide-react';
 import Reviews from '../components/Reviews';
-import ClaseValoracion from '../components/ClaseValoracion';
+import { VALORACION_PRECIO, VALORACION_WHATSAPP_URL } from '../data/valoracion';
 
 const WHATSAPP_URL = 'https://wa.me/34654495508';
 
 interface Plan {
   nombre: string;
-  descripcion: string;
-  precio: string;
-  unidad?: string;
-  detalle?: string;
+  precio: number;
+  detalle: string;
   recomendado?: boolean;
 }
 
 const planesGrupales: Plan[] = [
-  { nombre: '1 clase / semana', descripcion: 'Para crear el hábito y conocer el método.', precio: '115 €', unidad: '/mes' },
-  { nombre: '2 clases / semana', descripcion: 'El ritmo ideal para notar cambios en fuerza, postura y movilidad.', precio: '190 €', unidad: '/mes', recomendado: true },
-  { nombre: '3 clases / semana', descripcion: 'Para avanzar más rápido con un entrenamiento constante.', precio: '220 €', unidad: '/mes' },
+  { nombre: '1 clase / semana', precio: 115, detalle: 'al mes · 28,75 € por clase' },
+  { nombre: '2 clases / semana', precio: 190, detalle: 'al mes · 23,75 € por clase', recomendado: true },
+  { nombre: '3 clases / semana', precio: 220, detalle: 'al mes · 18,33 € por clase' },
 ];
 
 const sesionesPrivadas: Plan[] = [
-  { nombre: 'Bono 4 sesiones', descripcion: 'Para empezar con una base sólida o trabajar un objetivo concreto.', precio: '210 €', detalle: '52,50 € / sesión' },
-  { nombre: 'Bono 8 sesiones', descripcion: 'Para un seguimiento continuo y personalizado.', precio: '400 €', detalle: '50 € / sesión' },
+  { nombre: 'Bono 4 sesiones', precio: 210, detalle: '52,50 € por sesión' },
+  { nombre: 'Bono 8 sesiones', precio: 400, detalle: '50 € por sesión' },
 ];
 
-function PlanRow({ plan, delay }: { plan: Plan; delay: number }) {
+const eyebrow = 'font-sans text-[10px] uppercase tracking-[0.3em] text-[#7F7763]';
+
+/* Línea de carta: nombre · · · · · precio, con el detalle en cursiva debajo */
+function PlanLinea({ plan }: { plan: Plan }) {
   return (
-    <div className={`flex justify-between items-start gap-6 border-b border-negro-move/20 py-6 reveal reveal-delay-${delay}`}>
-      <dt className="mb-0">
-        <span className="block font-sans font-medium text-[15px] text-texto-move">
-          {plan.nombre}
-          {plan.recomendado && (
-            <span className="ml-3 align-[2px] inline-block rounded-[100px] border border-[#493523] px-[10px] py-[2px] text-[9px] uppercase tracking-[0.15em] text-[#493523] font-normal">
-              Recomendado
-            </span>
-          )}
-        </span>
-        <span className="block mt-1 font-sans text-[13px] leading-[1.6] text-[#7F7763]">{plan.descripcion}</span>
-      </dt>
-      <dd className="mb-0 text-right shrink-0">
-        <span className="price-highlight block">
-          {plan.precio}
-          {plan.unidad && <span className="text-sm font-sans font-light opacity-70">{plan.unidad}</span>}
-        </span>
-        {plan.detalle && <span className="block mt-1 font-sans text-[12px] text-[#7F7763]">{plan.detalle}</span>}
-      </dd>
-    </div>
+    <li className="py-4 reveal">
+      <div className="flex items-baseline gap-3">
+        <span className="font-serif text-[19px] md:text-[21px] text-[#493523] whitespace-nowrap">{plan.nombre}</span>
+        <span aria-hidden="true" className="flex-1 border-b border-dotted border-[#493523]/35 -translate-y-[5px]" />
+        <span className="font-serif text-[22px] md:text-[24px] text-[#493523] whitespace-nowrap">{plan.precio}</span>
+      </div>
+      <p className="mt-1 mb-0 font-sans text-[12px] italic text-[#7F7763]">
+        {plan.detalle}
+        {plan.recomendado && (
+          <span className="ml-3 not-italic inline-block align-[1px] rounded-[100px] bg-[#493523] px-3 py-[3px] text-[9px] uppercase tracking-[0.25em] text-[#F6F3EC]">
+            Recomendado
+          </span>
+        )}
+      </p>
+    </li>
   );
 }
 
-function SectionTitle({ first, italic }: { first: string; italic: string }) {
+function Seccion({ titulo, italica, subtitulo, planes }: { titulo: string; italica: string; subtitulo: string; planes: Plan[] }) {
   return (
-    <h2 className="mb-3 reveal font-serif font-normal text-[34px] md:text-[48px] leading-[1.1]">
-      {first} <span className="italic">{italic}</span>
-    </h2>
+    <section>
+      <h2 className="mb-1 font-serif font-normal text-[30px] md:text-[34px] leading-[1.15] text-[#493523] reveal">
+        {titulo} <span className="italic">{italica}</span>
+      </h2>
+      <p className={`${eyebrow} mb-2 reveal`}>{subtitulo}</p>
+      <ul className="list-none p-0 m-0">
+        {planes.map((plan) => (
+          <PlanLinea key={plan.nombre} plan={plan} />
+        ))}
+      </ul>
+    </section>
   );
 }
 
 export default function Pricing() {
   return (
     <div className="w-full pb-0">
-      <section className="px-6 text-center max-w-4xl mx-auto section-padding-claro pb-0">
+      <section className="px-6 text-center max-w-4xl mx-auto section-padding-claro pb-10 md:pb-14">
+        <p className={`${eyebrow} mb-3 reveal`}>Tarifas</p>
         <h1 className="mb-0 reveal">
           Encuentra <span className="italic">tu plan.</span>
         </h1>
       </section>
 
-      {/* Clase de valoración */}
-      <section className="max-w-4xl mx-auto px-6 pt-12 md:pt-16">
-        <ClaseValoracion />
-      </section>
-
-      {/* Clases grupales */}
-      <section className="max-w-4xl mx-auto px-6 section-padding-claro pb-0 text-negro-move">
-        <SectionTitle first="Clases" italic="grupales" />
-        <p className="font-sans text-[14px] text-texto-move mb-4 reveal reveal-delay-1">
-          Pilates Reformer en Pozuelo de Alarcón, en grupos de máximo 4 personas. Clases de 50 minutos.
-        </p>
-        <dl className="mb-0">
-          {planesGrupales.map((plan, i) => (
-            <PlanRow key={plan.nombre} plan={plan} delay={i + 1} />
-          ))}
-        </dl>
-        <p className="mt-4 mb-0 font-sans text-[12px] text-[#7F7763] reveal">Validez de 35 días.</p>
-      </section>
-
-      {/* Sesiones privadas */}
-      <section className="max-w-4xl mx-auto px-6 section-padding-claro text-negro-move">
-        <SectionTitle first="Sesiones" italic="privadas" />
-        <p className="font-sans text-[14px] text-texto-move mb-4 reveal reveal-delay-1">
-          Sesiones 1:1 de 50 minutos en Reformer Torre, diseñadas a tu medida, también para embarazo, posparto u objetivos concretos.
-        </p>
-        <dl className="mb-0">
-          {sesionesPrivadas.map((plan, i) => (
-            <PlanRow key={plan.nombre} plan={plan} delay={i + 1} />
-          ))}
-        </dl>
-
-        <p className="mt-10 mb-0 font-sans text-[12px] leading-[1.7] text-[#7F7763] reveal">
-          Todos los planes incluyen descuentos en eventos MOVE. Precios finales con impuestos incluidos.
-        </p>
-
-        <div className="mt-10 text-center reveal">
-          <p className="font-serif italic text-[22px] text-negro-move mb-5">¿Tienes dudas sobre qué plan elegir?</p>
-          <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="btn-primary inline-block">
-            Escríbenos por WhatsApp
-          </a>
+      <div className="max-w-[1180px] mx-auto md:px-10 grid lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        {/* Foto del estudio: franja en móvil, fija al bajar en escritorio */}
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <picture>
+            <source
+              type="image/webp"
+              srcSet="/assets/move-pilates-pozuelo-tarifas-800.webp 800w, /assets/move-pilates-pozuelo-tarifas-1400.webp 1400w"
+              sizes="(min-width: 1024px) 520px, 100vw"
+            />
+            <img
+              src="/assets/move-pilates-pozuelo-tarifas-1400.jpg"
+              alt="Alumna en el Reformer de MOVE Pilates Boutique, Pozuelo de Alarcón"
+              className="w-full h-[340px] md:h-[440px] lg:h-[calc(100vh-8rem)] lg:max-h-[760px] object-cover object-[center_20%] md:rounded-[8px]"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
-      </section>
+
+        {/* Carta de tarifas */}
+        <div className="px-6 md:px-0 pt-10 lg:pt-0 pb-16 md:pb-24 text-[#493523]">
+          {/* Primera vez: clase de valoración */}
+          <div className="bg-[#F0EADE] rounded-[8px] px-6 py-8 md:px-10 text-center mb-14 reveal">
+            <p className={`${eyebrow} mb-3`}>Primera vez en MOVE</p>
+            <h2 className="mb-0 font-serif font-normal text-[28px] md:text-[32px] leading-[1.2] text-[#493523]">
+              Clase de <span className="italic">Valoración</span>
+            </h2>
+            <p className="font-serif text-[36px] text-[#493523] mt-2 mb-2">{VALORACION_PRECIO} €</p>
+            <p className="font-sans text-[13px] leading-[1.6] text-[#493523] max-w-[320px] mx-auto mb-1">
+              50 minutos para conocer tu nivel, tu postura y tus objetivos.
+            </p>
+            <p className="font-sans text-[12px] italic text-[#7F7763] mb-6">Se descuenta de tu primer mes o bono</p>
+            <a
+              href={VALORACION_WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Reservar clase de valoración por WhatsApp"
+              className="btn-primary inline-block"
+            >
+              Reservar mi clase
+            </a>
+          </div>
+
+          <Seccion titulo="Clases" italica="Grupales" subtitulo="Reformer · Máx. 4 personas · 50 min" planes={planesGrupales} />
+          <p className="mt-1 mb-14 font-sans text-[11px] text-[#7F7763] reveal">Validez de 35 días</p>
+
+          <Seccion titulo="Sesiones" italica="Privadas" subtitulo="1:1 en Reformer Torre · 50 min" planes={sesionesPrivadas} />
+
+          <p className="mt-12 mb-3 font-sans text-[11px] leading-[1.8] text-[#7F7763] reveal">
+            Todos los planes incluyen descuentos en eventos MOVE. Precios en euros, impuestos incluidos.
+          </p>
+          <div className="mt-12 pt-10 border-t border-[#493523]/15 text-center reveal">
+            <p className="font-serif italic text-[22px] text-[#493523] mb-5">¿Dudas sobre qué plan elegir?</p>
+            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="btn-outline inline-flex items-center gap-2">
+              <MessageCircle size={16} aria-hidden="true" />
+              Escríbenos por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
 
       <Reviews />
     </div>

@@ -9,7 +9,7 @@ export default function ClaseValoracion() {
           Empieza aquí · {VALORACION_PRECIO} €
         </span>
         <h2 className="font-serif font-normal text-[#F6F3EC] text-[30px] md:text-[40px] leading-[1.15] mb-4">
-          Clase de <span className="italic">valoración</span>
+          Clase de <span className="italic">Valoración</span>
         </h2>
         <p className="font-sans text-[14px] leading-[1.7] text-[#F6F3EC]/90 mb-0">
           Tu clase de prueba de 50 minutos: conocemos tu nivel, tu postura y tus objetivos para
