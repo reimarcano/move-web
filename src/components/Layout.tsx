@@ -97,9 +97,9 @@ export default function Layout() {
             <div className="flex justify-center">
               <Link to="/" className="flex items-center" aria-label="Ir a la página de inicio">
                 <img 
-                  src="/assets/LOGO REDUCIDO-09.png" 
+                  src="/assets/logo-move.webp" 
                   alt="Logo de MOVE Pilates Boutique" 
-                  className="h-10 md:h-12 w-auto object-contain"
+                  className="h-6 w-auto object-contain"
                   referrerPolicy="no-referrer"
                 />
               </Link>
@@ -124,9 +124,9 @@ export default function Layout() {
           <div className="flex md:hidden justify-between items-center h-full">
             <Link to="/" className="flex items-center" aria-label="Ir a la página de inicio">
               <img 
-                src="/assets/LOGO REDUCIDO-09.png" 
+                src="/assets/logo-move.webp" 
                 alt="Logo de MOVE Pilates Boutique" 
-                className="h-8 w-auto object-contain"
+                className="h-[21px] w-auto object-contain"
                 referrerPolicy="no-referrer"
               />
             </Link>
