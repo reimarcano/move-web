@@ -954,6 +954,27 @@ html {
   .es-guide-copy { padding: 48px var(--section-x) var(--section-y); }
 }
 
+/* ── Contacto · ficha y mapa ── */
+.ct-card { max-width: 672px; margin: 0 auto; }
+.ct-card .m-title { margin-bottom: 36px; }
+.ct-datos { width: fit-content; margin: 0 auto; display: grid; gap: 24px; }
+.ct-dato { display: flex; align-items: flex-start; gap: 14px; }
+.ct-link { font-family: var(--font-sans); font-size: var(--fs-body); color: var(--color-dark); transition: color 200ms var(--ease-move); }
+.ct-link:hover { color: var(--color-mid); }
+.ct-horario { margin: 0; display: grid; grid-template-columns: minmax(128px, 1fr) auto; gap: 4px 12px; font-family: var(--font-sans); font-size: var(--fs-small); }
+.ct-horario dt { color: var(--color-mid); }
+.ct-horario dd { margin: 0; color: var(--color-dark); text-align: right; }
+.ct-bloque { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--color-line); text-align: center; }
+.ct-social { transition: background-color 200ms var(--ease-move), transform 200ms var(--ease-move); }
+.ct-social:hover { background: var(--color-mid); transform: translateY(-2px); }
+.ct-map { height: 400px; }
+.ct-map-off { height: 100%; padding: 0 var(--section-x); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; }
+.ct-map-off .m-text { color: var(--color-paper-2); margin-bottom: 6px; }
+
+@media (max-width: 900px) {
+  .ct-map { height: 320px; }
+}
+
 /* ── Home · Preguntas frecuentes ── */
 .fq-list { border-bottom: 1px solid var(--color-line-strong); }
 .fq-item { border-top: 1px solid var(--color-line-strong); }
