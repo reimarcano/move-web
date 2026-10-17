@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { ChevronDown } from "lucide-react";
 import { faqs } from "../data/faqs";
 
+import HeroInmersivo from "../components/HeroInmersivo";
 import Reviews from "../components/Reviews";
 import PrimeraVez from "../components/PrimeraVez";
+import TextoRespira from "../components/TextoRespira";
 import PlanesGrupales from "../components/PlanesGrupales";
-import { VALORACION_WHATSAPP_URL } from "../data/valoracion";
 
 /* ────────────────────────────────────────────
    Constants
@@ -68,7 +68,8 @@ function FAQItem({
   }, [isOpen]);
 
   return (
-    <div className={`fq-item${isOpen ? " is-open" : ""}`}>
+    /* El estado abierto va en un atributo: la clase la gestiona la animación de entrada */
+    <div className="fq-item reveal" data-open={isOpen} style={{ "--i": index } as React.CSSProperties}>
       <button
         onClick={onToggle}
         className="fq-q"
@@ -76,8 +77,10 @@ function FAQItem({
         aria-controls={`faq-answer-${index}`}
         id={`faq-question-${index}`}
       >
-        <span>{faq.question}</span>
-        <ChevronDown className="fq-chevron" size={18} strokeWidth={1.5} aria-hidden="true" />
+        <span className="fq-n" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+        <span className="fq-text">{faq.question}</span>
+        {/* Más que gira hasta formar un menos */}
+        <span className="fq-toggle" aria-hidden="true" />
       </button>
       <div
         id={`faq-answer-${index}`}
@@ -109,44 +112,8 @@ export default function Home() {
 
   return (
     <div className="w-full">
-      {/* ── Hero Section ── */}
-      <section className="relative h-screen flex items-start justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <picture className="block w-full h-full">
-            <source srcSet="/assets/move_portada_pilates-pozuelo.webp" type="image/webp" />
-            <img
-              src="/assets/move_portada_pilates-pozuelo.jpg"
-              alt="Estudio de Pilates Reformer MOVE en Pozuelo de Alarcón"
-              className="w-full h-full object-cover"
-              width={1920}
-              height={1080}
-              style={{ objectPosition: "center 20%" }}
-              referrerPolicy="no-referrer"
-              fetchPriority="high"
-              decoding="async"
-            />
-          </picture>
-        </div>
-
-        <div className="absolute left-1/2 -translate-x-1/2 text-center w-full max-w-[900px] z-10 px-4 md:px-10 top-[5%]">
-          <h1 className="mb-0 reveal font-serif text-negro-move font-normal text-[min(var(--fs-display),8.6vw)] leading-[1.15]">
-            <span className="block md:whitespace-nowrap">Tu centro de <span className="block italic md:inline">Pilates Reformer</span></span>
-            <span className="block whitespace-nowrap">en Pozuelo de Alarcón</span>
-          </h1>
-
-          <div className="reveal reveal-delay-1 mt-4">
-            <a
-              href={VALORACION_WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Reserva tu clase de prueba por WhatsApp"
-              className="btn-primary"
-            >
-              Reserva tu clase de prueba
-            </a>
-          </div>
-        </div>
-      </section>
+      {/* ── Portada inmersiva ── */}
+      <HeroInmersivo />
 
       {/* ── ¿Primera vez en MOVE? (clase de valoración) ── */}
       <PrimeraVez />
@@ -162,8 +129,16 @@ export default function Home() {
 
         <div className="ft-grid">
           {features.map((feature, index) => (
-            <div key={feature.title} className={`ft-item reveal reveal-delay-${index + 1}`}>
+            <div
+              key={feature.title}
+              className={`ft-item reveal reveal-delay-${index + 1}`}
+              style={{ "--i": index } as React.CSSProperties}
+            >
               <div className="ft-icon">
+                {/* El círculo se dibuja desde un punto, como el muelle de la portada */}
+                <svg className="ft-ring" viewBox="0 0 92 92" aria-hidden="true">
+                  <circle cx="46" cy="46" r="45.5" pathLength={1} />
+                </svg>
                 <img
                   src={feature.icon}
                   alt={feature.iconAlt}
@@ -183,11 +158,11 @@ export default function Home() {
       {/* ── Nuestra filosofía ── */}
       <section className="m-section m-band ph-band">
         <span className="m-eyebrow m-eyebrow-light reveal">Nuestra filosofía</span>
-        <h2 className="m-quote reveal reveal-delay-1">
-          &ldquo;Move no es solo un estudio de Pilates Reformer, es un refugio en Pozuelo de
-          Alarcón diseñado con intención, sensibilidad y propósito. Un espacio donde cada
-          detalle está pensado para invitarte a reconectar contigo.&rdquo;
-        </h2>
+        <TextoRespira
+          as="h2"
+          className="m-quote"
+          text="“Move no es solo un estudio de Pilates Reformer, es un refugio en Pozuelo de Alarcón diseñado con intención, sensibilidad y propósito. Un espacio donde cada detalle está pensado para invitarte a reconectar contigo.”"
+        />
         <div className="ph-sign reveal reveal-delay-2">
           <picture className="ph-photo">
             <source srcSet="/assets/foto-genesis.webp" type="image/webp" />
@@ -211,15 +186,28 @@ export default function Home() {
 
       {/* ── Preguntas frecuentes ── */}
       <section className="m-section bg-arena">
-        <div className="max-w-[760px] mx-auto">
-          <div className="m-head">
+        {/* Dos columnas editoriales: la cabecera queda fija mientras se lee la lista */}
+        <div className="fq-layout">
+          <div className="fq-aside">
             <span className="m-eyebrow reveal">Antes de empezar</span>
             <h2 className="m-title reveal reveal-delay-1">
               Preguntas <em>frecuentes.</em>
             </h2>
+            <div className="fq-contact reveal reveal-delay-2">
+              <p className="m-closing">¿Tienes más preguntas?</p>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary"
+                aria-label="Escríbenos por WhatsApp para más información"
+              >
+                Escríbenos por WhatsApp
+              </a>
+            </div>
           </div>
 
-          <div className="fq-list reveal reveal-delay-2">
+          <div className="fq-list">
             {faqs.map((faq, index) => (
               <FAQItem
                 key={index}
@@ -229,19 +217,6 @@ export default function Home() {
                 onToggle={() => toggleFaq(index)}
               />
             ))}
-          </div>
-
-          <div className="m-foot reveal">
-            <p className="m-closing">¿Tienes más preguntas?</p>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-primary"
-              aria-label="Escríbenos por WhatsApp para más información"
-            >
-              Escríbenos por WhatsApp
-            </a>
           </div>
         </div>
       </section>

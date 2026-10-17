@@ -1,20 +1,14 @@
 import { useEffect, useRef } from "react";
 import { INSTAGRAM_HANDLE, INSTAGRAM_URL, instagramPosts } from "../data/instagram";
 
-const InstagramIcon = ({ size = 24 }: { size?: number }) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-  </svg>
-);
-
 const SPEED = 35; // px/s: avance calmado hacia la izquierda
 
 /* Galería "Sigue el movimiento" antes del footer.
    Ventanas: los marcos avanzan solos hacia la izquierda en bucle (la pista va duplicada) y la foto,
    dentro de cada marco, se desplaza algo más despacio, como si cada marco fuera una ventana al estudio.
-   Con el cursor encima la tira frena con suavidad hasta detenerse; cada foto abre Instagram. */
+   Con el cursor encima la tira frena con suavidad hasta detenerse; cada foto abre Instagram.
+   Formato vertical de Instagram (4:5) y sin iconos encima: al pasar, la foto respira y
+   aparece el usuario sobre un filete fino. */
 export default function InstagramFeed() {
   const stripRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLUListElement>(null);
@@ -128,9 +122,7 @@ export default function InstagramFeed() {
                   aria-label={`${post.alt} — ver en Instagram`}
                 >
                   <img src={post.src} alt="" decoding="async" draggable={false} />
-                  <span className="ig-badge">
-                    <InstagramIcon size={18} />
-                  </span>
+                  <span className="ig-caption" aria-hidden="true">@{INSTAGRAM_HANDLE}</span>
                 </a>
               </li>
             );

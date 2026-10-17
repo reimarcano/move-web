@@ -4,6 +4,7 @@ const allReviews = [
   {
     id: 1,
     name: 'Irene Jiménez Pérez',
+    destacado: 'Génesis es una gran instructora, muy pendiente de todos los alumnos.',
     initial: 'I',
     rating: 5,
     text: 'Encantada con Move! Génesis es una gran instructora, muy pendiente de todos los alumnos para darles una atención personalizada y las clases son variadas y dinámicas. Además el estudio es precioso!!',
@@ -11,6 +12,7 @@ const allReviews = [
   {
     id: 2,
     name: 'Reinaldo Marcano',
+    destacado: 'Gracias a Génesis, he notado mucha mejoría en mis dolores de rodillas y de espalda.',
     initial: 'R',
     rating: 5,
     text: 'Las clases en Move Pilates Boutique en Pozuelo, son en grupos muy reducidos, lo que permite un trato súper personalizado. Gracias a Génesis, he notado mucha mejoría en mis dolores de rodillas y de espalda. El estudio es muy acogedor y dispone de vestuarios con duchas. Si buscas un estudio de pilates de calidad en Madrid, este es el lugar. Lo recomiendo al 100%',
@@ -18,6 +20,7 @@ const allReviews = [
   {
     id: 3,
     name: 'Melanie Previdi',
+    destacado: 'Un espacio limpio, ordenado, máquinas en perfecto estado.',
     initial: 'M',
     rating: 5,
     text: 'Es un centro realmente profesional. Un espacio limpio, ordenado, máquinas en perfecto estado. Clases reducidas que permite que la instructora tenga con cada alumno mucha atención al detalle. Perfecto para aparcar.',
@@ -25,6 +28,7 @@ const allReviews = [
   {
     id: 4,
     name: 'Eriko Pereira Villa',
+    destacado: 'Los grupos son reducidos de máximo 4 personas y siempre están pendientes de ti y de corregirte.',
     initial: 'E',
     rating: 5,
     text: 'Llevo entrenando 1 mes en Move Pilates Boutique y estoy encantado. El espacio es acogedor, todo cuidado al detalle y en perfecto estado. Destaco que los grupos son reducidos de máximo 4 personas y siempre están pendientes de ti y de corregirte. Génesis es una gran profesional y ha conseguido que disfrute de las clases de pilates.',
@@ -32,6 +36,7 @@ const allReviews = [
   {
     id: 5,
     name: 'Adriana Seijo',
+    destacado: 'El centro es precioso, muy cuidado y con un ambiente agradable que invita a desconectar.',
     initial: 'A',
     rating: 5,
     text: '¡Me encanta este centro de pilates! Génesis es una instructora excepcional: muy profesional, atenta y siempre pendiente de que hagas los ejercicios correctamente, adaptándolos a tu nivel si es necesario. El centro es precioso, muy cuidado y con un ambiente agradable que invita a desconectar y concentrarte en tu bienestar.',
@@ -39,6 +44,7 @@ const allReviews = [
   {
     id: 6,
     name: 'Luz Marina Di Rubbo',
+    destacado: 'Génesis es una instructora increíble, muy profesional, atenta y siempre pendiente de cada detalle.',
     initial: 'L',
     rating: 5,
     text: 'Quiero recomendar este estudio de pilates porque la experiencia ha sido excelente. Génesis es una instructora increíble, muy profesional, atenta y siempre pendiente de cada detalle durante la clase. El estudio es hermoso, muy cuidado y con un ambiente súper agradable y cómodo para entrenar.',
@@ -46,6 +52,7 @@ const allReviews = [
   {
     id: 7,
     name: 'Stephanie Lopez',
+    destacado: 'La clase es deliciosa, dinámica, relajante y muy bien guiada.',
     initial: 'S',
     rating: 5,
     text: 'Conocí este nuevo centro de pilates y me encantó. La clase es deliciosa, dinámica, relajante y muy bien guiada. Génesis corrige con mucha atención y logra que disfrutes cada ejercicio. Tengo una lesión en la espalda y noto muchísimo cómo me está ayudando a mejorar.',
@@ -53,6 +60,7 @@ const allReviews = [
   {
     id: 8,
     name: 'Dayana Perez',
+    destacado: 'Sigue siendo mi lugar seguro: me siento cuidada, escuchada y guiada.',
     initial: 'D',
     rating: 5,
     text: 'Este centro de pilates ha sido un regalo en mi vida. Me acompañó durante el embarazo, ayudándome a mantenerme activa y conectar con mi cuerpo. Ahora, en el postparto, sigue siendo mi lugar seguro: me siento cuidada, escuchada y guiada. Es un espacio de bienestar físico y emocional.',
@@ -60,6 +68,7 @@ const allReviews = [
   {
     id: 9,
     name: 'Miriam Moros',
+    destacado: 'Sin duda el mejor sitio para hacer pilates en Madrid.',
     initial: 'M',
     rating: 5,
     text: 'Sin duda el mejor sitio para hacer pilates en Madrid. Las clases, Génesis y el espacio son increíbles: perfectos para desconectar y relajarse mientras haces deporte. Es mi sitio de confianza.',
@@ -95,148 +104,147 @@ const StarIcon: React.FC<{ size?: number; className?: string }> = ({ size = 18, 
   </svg>
 );
 
-type Review = (typeof reviewsData)[number];
+const DWELL_MS = 8000;
 
-const ReviewCard: React.FC<{
-  review: Review;
-  index: number;
-  isExpanded: boolean;
-  onExpand: () => void;
-}> = ({ review, index, isExpanded, onExpand }) => {
-  const textRef = useRef<HTMLParagraphElement>(null);
-  const [isTruncated, setIsTruncated] = useState(false);
-
-  useEffect(() => {
-    if (textRef.current) {
-      setIsTruncated(textRef.current.scrollHeight > textRef.current.clientHeight);
-    }
-  }, [review.text]);
-
-  return (
-    <article
-      role="listitem"
-      aria-label={`Reseña de ${review.name}`}
-      className={`m-card h-full transition-[min-height] duration-300 ${isExpanded ? 'min-h-[460px] md:min-h-[500px]' : 'min-h-[330px] md:min-h-[360px]'} reveal reveal-delay-${(index % 5) + 1}`}
-    >
-      <div className="flex justify-between items-start mb-4">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-soft flex items-center justify-center" aria-hidden="true">
-            <span className="font-serif text-lead text-dark leading-none">{review.initial}</span>
-          </div>
-          <p className="font-sans text-small text-dark leading-none mb-0">{review.name}</p>
-        </div>
-        <div className="opacity-60 w-4 h-4"><GoogleLogo /></div>
-      </div>
-
-      <div className="flex gap-[2px] mt-4" aria-label={`Calificación de ${review.rating} estrellas`}>
-        {[...Array(review.rating)].map((_, starIndex) => (
-          <StarIcon key={starIndex} size={12} className="text-dark" />
-        ))}
-      </div>
-
-      <div className="mt-3">
-        <p ref={textRef} className={`m-text text-small ${!isExpanded ? 'line-clamp-3' : ''}`}>
-          {review.text}
-        </p>
-        {isTruncated && !isExpanded && (
-          <button
-            type="button"
-            onClick={onExpand}
-            className="font-sans text-label text-dark mt-1 hover:underline focus:outline-none"
-            aria-expanded="false"
-            aria-label={`Leer más sobre la reseña de ${review.name}`}
-          >
-            leer más
-          </button>
-        )}
-      </div>
-    </article>
-  );
-};
-
+/* Reseñas: una voz cada vez. Cada reseña se resume en una frase destacada (cita
+   literal de la propia reseña) y el texto completo queda a un clic, en letra pequeña. Debajo, un raíl de segmentos finos
+   (la misma gramática de filetes que el resto de la página) que avanza con calma y se pausa al pasar el
+   ratón, al enfocar o al tocar. Se navega con los segmentos, deslizando o con ← →. Todas las reseñas comparten celda, así la altura
+   es la de la más larga y nada salta al cambiar. */
 export default function Reviews() {
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [reviewsPerSlide, setReviewsPerSlide] = useState(() => (typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 3));
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [expandedSlides, setExpandedSlides] = useState<Set<number>>(() => new Set());
+  const sectionRef = useRef<HTMLElement>(null);
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [expanded, setExpanded] = useState<number | null>(null);
+  const [inView, setInView] = useState(false);
+  const touchX = useRef<number | null>(null);
+  const total = reviewsData.length;
+
+  const reduceMotion = useMemo(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    [],
+  );
 
   useEffect(() => {
-    const updateReviewsPerSlide = () => setReviewsPerSlide(window.innerWidth < 768 ? 1 : 3);
-    window.addEventListener('resize', updateReviewsPerSlide);
-    return () => window.removeEventListener('resize', updateReviewsPerSlide);
+    const section = sectionRef.current;
+    if (!section) return;
+    const io = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.35 });
+    io.observe(section);
+    return () => io.disconnect();
   }, []);
 
-  const slides = useMemo(() => Array.from(
-    { length: Math.ceil(reviewsData.length / reviewsPerSlide) },
-    (_, index) => reviewsData.slice(index * reviewsPerSlide, (index + 1) * reviewsPerSlide),
-  ), [reviewsPerSlide]);
+  /* Avanza solo mientras se ve, sin pausa y sin preferencia de movimiento reducido */
+  useEffect(() => {
+    if (paused || expanded !== null || !inView || reduceMotion) return;
+    const timer = window.setTimeout(() => setActive((current) => (current + 1) % total), DWELL_MS);
+    return () => window.clearTimeout(timer);
+  }, [active, paused, expanded, inView, reduceMotion, total]);
 
-  useEffect(() => setActiveSlide(0), [reviewsPerSlide]);
-
-  const goToSlide = (slideIndex: number) => {
-    carouselRef.current?.scrollTo({ left: carouselRef.current.clientWidth * slideIndex, behavior: 'smooth' });
+  const go = (index: number) => {
+    setExpanded(null);
+    setActive((index + total) % total);
   };
 
   return (
-    <section className="m-section">
-      <div className="max-w-[1000px] mx-auto">
-        <div className="m-head">
-          <span className="m-eyebrow reveal">Reseñas en Google</span>
-          <h2 className="m-title reveal reveal-delay-1">
-            Lo que dicen <em>nuestros alumnos.</em>
-          </h2>
+    <section ref={sectionRef} className="m-section rv-section" aria-labelledby="resenas-titulo">
+      <div className="m-head">
+        <span className="m-eyebrow reveal">Reseñas en Google</span>
+        <h2 id="resenas-titulo" className="m-title reveal reveal-delay-1">
+          Lo que dicen <em>nuestros alumnos.</em>
+        </h2>
+        {/* Valoración de Google: logo, nota y estrellas en una sola línea limpia */}
+        <p className="rv-score reveal reveal-delay-2">
+          <GoogleLogo />
+          <span className="rv-score-value">5,0</span>
+          <span className="rv-stars" aria-label="5 estrellas en Google">
+            {[0, 1, 2, 3, 4].map((star) => (
+              <StarIcon key={star} size={12} />
+            ))}
+          </span>
+        </p>
+      </div>
+
+      <div
+        className="rv-stage reveal reveal-delay-2"
+        role="region"
+        aria-roledescription="carrusel"
+        aria-label="Reseñas de alumnos en Google"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
+        onKeyDown={(event) => {
+          if (event.key === 'ArrowRight') go(active + 1);
+          if (event.key === 'ArrowLeft') go(active - 1);
+        }}
+        onTouchStart={(event) => {
+          touchX.current = event.touches[0].clientX;
+          setPaused(true);
+        }}
+        onTouchEnd={(event) => {
+          if (touchX.current !== null) {
+            const dx = event.changedTouches[0].clientX - touchX.current;
+            if (Math.abs(dx) > 40) go(active + (dx < 0 ? 1 : -1));
+          }
+          touchX.current = null;
+        }}
+      >
+        <div className="rv-quotes">
+          {reviewsData.map((review, index) => (
+            <figure
+              key={review.id}
+              className={`rv-quote${index === active ? ' is-active' : ''}`}
+              aria-hidden={index !== active}
+              aria-roledescription="reseña"
+              aria-label={`${index + 1} de ${total}`}
+            >
+              {/* Frase destacada: una cita literal de la propia reseña */}
+              <blockquote cite="https://www.google.com/maps">
+                <p className="rv-highlight">{review.destacado}</p>
+              </blockquote>
+              <figcaption>
+                <span className="rv-name">{review.name}</span>
+                <span className="rv-source">Reseña en Google</span>
+              </figcaption>
+              <details className="rv-full" open={expanded === index} onToggle={(event) => {
+                const isOpen = (event.currentTarget as HTMLDetailsElement).open;
+                setExpanded(isOpen ? index : (current) => (current === index ? null : current));
+              }}>
+                <summary>Leer reseña completa</summary>
+                <p>{review.text}</p>
+              </details>
+            </figure>
+          ))}
         </div>
 
-
-        <div
-          ref={carouselRef}
-          role="region"
-          aria-label="Galería de reseñas de Google"
-          className="flex overflow-x-auto scroll-smooth scroll-snap-x-mandatory no-scrollbar pb-2"
-          onScroll={(event) => {
-            const { scrollLeft, clientWidth } = event.currentTarget;
-            if (clientWidth) setActiveSlide(Math.round(scrollLeft / clientWidth));
-          }}
-        >
-          {slides.map((slide, slideIndex) => (
-            <div key={slideIndex} role="list" className="min-w-full px-3 scroll-snap-align-start grid auto-rows-fr grid-cols-1 md:grid-cols-3 gap-6">
-              {slide.map((review, reviewIndex) => (
-                <ReviewCard
-                  key={review.id}
-                  review={review}
-                  index={slideIndex * reviewsPerSlide + reviewIndex}
-                  isExpanded={expandedSlides.has(slideIndex)}
-                  onExpand={() => setExpandedSlides((current) => new Set(current).add(slideIndex))}
+        {/* Raíl: un segmento de línea por reseña; el de la que está sonando se oscurece */}
+        <div className="rv-rail">
+          <ol className="rv-nodes">
+            {reviewsData.map((review, index) => (
+              <li key={review.id}>
+                <button
+                  type="button"
+                  className={`rv-node${index <= active ? ' is-on' : ''}${index === active ? ' is-active' : ''}`}
+                  onClick={() => go(index)}
+                  aria-label={`Ver la reseña de ${review.name}`}
+                  aria-current={index === active ? 'true' : undefined}
                 />
-              ))}
-            </div>
-          ))}
+              </li>
+            ))}
+          </ol>
         </div>
+      </div>
 
-        <div className="flex items-center justify-center gap-2 mt-6" aria-label="Navegación de reseñas">
-          {slides.map((_, slideIndex) => (
-            <button
-              key={slideIndex}
-              type="button"
-              onClick={() => goToSlide(slideIndex)}
-              className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-dark focus-visible:ring-offset-2 ${activeSlide === slideIndex ? 'w-5 bg-dark' : 'w-2 bg-soft hover:bg-dark'}`}
-              aria-label={`Ir a las reseñas ${slideIndex * reviewsPerSlide + 1} a ${Math.min((slideIndex + 1) * reviewsPerSlide, reviewsData.length)}`}
-              aria-current={activeSlide === slideIndex ? 'true' : undefined}
-            />
-          ))}
-        </div>
-
-        <div className="m-foot reveal">
-          <a
-            href="https://www.google.com/maps/place//data=!4m2!3m1!1s0xd4187ede06d0267:0x6d55b452244d1c6a?sa=X&ved=1t:8290&ictx=111"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline flex items-center justify-center gap-2 w-fit whitespace-nowrap px-5 text-micro tracking-[0.09em] sm:px-8 sm:text-label sm:tracking-[0.12em]"
-          >
-            <GoogleLogo />
-            Ver todas las reseñas en Google
-          </a>
-        </div>
+      <div className="m-foot reveal">
+        <a
+          href="https://www.google.com/maps/place//data=!4m2!3m1!1s0xd4187ede06d0267:0x6d55b452244d1c6a?sa=X&ved=1t:8290&ictx=111"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-outline flex items-center justify-center gap-2 w-fit whitespace-nowrap px-5 text-micro tracking-[0.09em] sm:px-8 sm:text-label sm:tracking-[0.12em]"
+        >
+          <GoogleLogo />
+          Ver todas las reseñas en Google
+        </a>
       </div>
     </section>
   );
