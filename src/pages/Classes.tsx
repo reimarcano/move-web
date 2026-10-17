@@ -1,5 +1,7 @@
+import { useRef } from "react";
 import clasesGrupales from "../assets/move-pilates-pozuelo-grupos-01.webp";
 import sesionesPrivadas from "../assets/move-pilates-madrid-05.webp";
+import { useNaceDelBorde } from "../hooks/useNaceDelBorde";
 
 interface Formato {
   foto: string;
@@ -7,7 +9,10 @@ interface Formato {
   antetitulo: string;
   titulo: string;
   cursiva: string;
-  ficha: string;
+  /* Ficha con la misma anatomía que los pasos de la home: etiqueta ··· valor.
+     Cada característica se dice una sola vez: el antetítulo nombra el formato, los
+     datos cuantifican y las ventajas cuentan solo lo que los datos no dicen. */
+  datos: [string, string][];
   ventajas: string[];
   bloques: { titulo: string; parrafos: string[] }[];
   /* Foto a la derecha en escritorio */
@@ -18,12 +23,14 @@ const formatos: Formato[] = [
   {
     foto: clasesGrupales,
     alt: "Clases grupales de Pilates Reformer en MOVE · Pozuelo de Alarcón · Madrid",
-    antetitulo: "Clases grupales · Máx. 4 personas",
+    antetitulo: "Clases grupales",
     titulo: "Pilates Reformer",
     cursiva: "en grupo.",
-    ficha: "Pilates Reformer en grupos reducidos · Máximo 4 personas · 50 minutos",
+    datos: [
+      ["Grupo", "Máx. 4 personas"],
+      ["Duración", "50 min"],
+    ],
     ventajas: [
-      "Grupos reducidos de máximo 4 personas",
       "Corrección técnica y ajustes individuales en cada clase",
       "Progresión adaptada a tu nivel",
       "Entrenamiento guiado, seguro y personalizado",
@@ -49,10 +56,13 @@ const formatos: Formato[] = [
   {
     foto: sesionesPrivadas,
     alt: "Sesiones privadas de Pilates Reformer en MOVE · Pozuelo de Alarcón · Madrid",
-    antetitulo: "Sesiones privadas · 1 a 1",
+    antetitulo: "Sesiones privadas",
     titulo: "Pilates Reformer",
     cursiva: "solo para ti.",
-    ficha: "Atención 1:1 · Valoración inicial · Plan adaptado a ti",
+    datos: [
+      ["Atención", "1:1"],
+      ["Duración", "50 min"],
+    ],
     ventajas: [
       "Valoración inicial completa",
       "Plan personalizado según tu cuerpo, nivel y objetivos",
@@ -79,11 +89,15 @@ const formatos: Formato[] = [
   },
 ];
 
-/* Un formato de clase: foto + ficha, ventajas y bloques de detalle */
+/* Un formato de clase. La foto va a sangre desde su borde, nace desde él y, en escritorio,
+   se queda fija a pantalla completa mientras se lee el formato: una ventana a la clase. */
 function FormatoClase({ formato }: { formato: Formato }) {
+  const fotoRef = useRef<HTMLElement>(null);
+  useNaceDelBorde(fotoRef, formato.fotoDerecha ? "derecha" : "izquierda");
+
   return (
     <div className={`cl-row${formato.fotoDerecha ? " is-flipped" : ""}`}>
-      <figure className="cl-photo reveal">
+      <figure className="cl-photo" ref={fotoRef}>
         <img src={formato.foto} alt={formato.alt} loading="lazy" decoding="async" />
       </figure>
 
@@ -92,13 +106,26 @@ function FormatoClase({ formato }: { formato: Formato }) {
         <h2 className="m-title reveal reveal-delay-1">
           {formato.titulo} <em>{formato.cursiva}</em>
         </h2>
-        <p className="cl-ficha reveal reveal-delay-1">{formato.ficha}</p>
 
-        <ul className="m-list cl-list">
-          {formato.ventajas.map((v, i) => (
-            <li key={v} className={`reveal reveal-delay-${i + 1}`}>{v}</li>
+        <ul className="cl-datos reveal reveal-delay-2">
+          {formato.datos.map(([etiqueta, valor]) => (
+            <li key={etiqueta} className="m-dato">
+              <span className="m-dato-label">{etiqueta}</span>
+              <span className="m-dato-leader" aria-hidden="true" />
+              <span className="m-dato-value">{valor}</span>
+            </li>
           ))}
         </ul>
+
+        {/* Ventajas numeradas y separadas por filetes, como las preguntas frecuentes */}
+        <ol className="cl-list">
+          {formato.ventajas.map((v, i) => (
+            <li key={v} className="reveal" style={{ "--i": i } as React.CSSProperties}>
+              <span className="cl-n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <span>{v}</span>
+            </li>
+          ))}
+        </ol>
 
         {formato.bloques.map((bloque) => (
           <div key={bloque.titulo} className="cl-block reveal">
