@@ -152,16 +152,14 @@ export default function Reviews() {
         <h2 id="resenas-titulo" className="m-title reveal reveal-delay-1">
           Lo que dicen <em>nuestros alumnos.</em>
         </h2>
-        <p className="m-dato rv-score reveal reveal-delay-2">
-          <span className="m-dato-label">Google</span>
-          <span className="m-dato-leader" aria-hidden="true" />
-          <span className="m-dato-value">
-            5,0
-            <span className="rv-stars" aria-label="5 estrellas">
-              {[0, 1, 2, 3, 4].map((star) => (
-                <StarIcon key={star} size={11} />
-              ))}
-            </span>
+        {/* Valoración de Google: logo, nota y estrellas en una sola línea limpia */}
+        <p className="rv-score reveal reveal-delay-2">
+          <GoogleLogo />
+          <span className="rv-score-value">5,0</span>
+          <span className="rv-stars" aria-label="5 estrellas en Google">
+            {[0, 1, 2, 3, 4].map((star) => (
+              <StarIcon key={star} size={12} />
+            ))}
           </span>
         </p>
       </div>
