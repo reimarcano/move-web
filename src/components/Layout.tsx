@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Menu, X, Instagram, MessageCircle } from 'lucide-react';
 import { CookieSettingsButton } from './CookieConsent';
 import InstagramFeed from './InstagramFeed';
+import { useScrollSereno } from '../hooks/useScrollSereno';
 
 // Páginas clave donde se muestra la galería de Instagram antes del footer
 const INSTAGRAM_FEED_PATHS = ['/', '/precios', '/estudio'];
@@ -12,6 +13,9 @@ export default function Layout() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+
+  // Scroll sereno en toda la web: cada gesto de rueda avanza algo menos y llega con inercia
+  useScrollSereno();
 
   useEffect(() => {
     const handleScroll = () => {

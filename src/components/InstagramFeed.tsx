@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { INSTAGRAM_HANDLE, INSTAGRAM_URL, instagramPosts } from "../data/instagram";
 
-const SPEED = 35; // px/s: avance calmado hacia la izquierda
+const SPEED = 42; // px/s: avance calmado hacia la izquierda (+20% sobre los 35 iniciales)
 
 /* Galería "Sigue el movimiento" antes del footer.
    Ventanas: los marcos avanzan solos hacia la izquierda en bucle (la pista va duplicada) y la foto,
