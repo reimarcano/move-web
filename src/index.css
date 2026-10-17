@@ -991,21 +991,40 @@ html {
   .ph-photo { width: 136px; height: 136px; }
 }
 
-/* ── Clases · formatos (grupales y privadas) ── */
-.cl-row { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+/* ── Clases · formatos (grupales y privadas) ──
+   La fila sale del margen de la sección: la foto arranca en el borde de la pantalla y,
+   en escritorio, se queda fija a pantalla completa mientras se lee el formato. */
+.cl-row { margin-inline: calc(var(--section-x) * -1); display: grid; grid-template-columns: 50% minmax(0, 1fr); align-items: start; }
+.cl-row + .cl-row { margin-top: var(--section-y); }
+.cl-photo { position: sticky; top: 0; height: 100svh; margin: 0; overflow: hidden; background: var(--color-soft); will-change: clip-path; }
+.cl-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
+.cl-copy { max-width: calc(1180px / 2); padding: 12svh 64px 12svh 80px; }
 .cl-row.is-flipped .cl-photo { order: 2; }
-.cl-photo { margin: 0; aspect-ratio: 3 / 4; border-radius: var(--radius-card); overflow: hidden; background: var(--color-soft); }
-.cl-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-.cl-ficha { margin: 14px 0 0; font-family: var(--font-sans); font-size: var(--fs-label); font-style: italic; color: var(--color-mid); }
-.cl-list { margin: 32px 0 40px; font-size: var(--fs-body); color: var(--color-ink-2); }
+.cl-row.is-flipped .cl-copy { justify-self: end; padding: 12svh 80px 12svh 64px; }
+
+.cl-datos { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 12px; max-width: 420px; }
+.cl-datos .m-dato { margin: 0; }
+
+/* Ventajas: numeradas y separadas por filetes que se trazan al entrar */
+.cl-list { list-style: none; margin: 36px 0 32px; padding: 0; border-bottom: 1px solid var(--color-line); }
+.cl-list li { position: relative; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 16px 0; font-family: var(--font-sans); font-size: var(--fs-body); line-height: 1.6; color: var(--color-ink-2); }
+.cl-list li::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--color-line); transform-origin: left; }
+.cl-n { font-family: var(--font-sans); font-size: var(--fs-micro); letter-spacing: 0.16em; color: var(--color-ink-3); }
 .cl-block { padding: 24px 0; border-top: 1px solid var(--color-line); }
+.cl-list + .cl-block { border-top: 0; }
 .cl-block .m-eyebrow { margin-bottom: 12px; }
 .cl-block .m-text + .m-text { margin-top: 14px; }
 .cl-aviso { max-width: 60ch; margin: 0 0 24px; font-family: var(--font-sans); font-size: var(--fs-label); font-style: italic; line-height: 1.8; color: var(--color-ink-3); }
 
+@media (prefers-reduced-motion: no-preference) {
+  .cl-list li.reveal::before { transform: scaleX(0); transition: transform 1.2s var(--ease-move) calc(var(--i, 0) * 0.1s); }
+  .cl-list li.reveal.visible::before { transform: none; }
+}
+
 @media (max-width: 900px) {
-  .cl-row { grid-template-columns: 1fr; gap: 40px; }
-  .cl-photo, .cl-row.is-flipped .cl-photo { order: 2; }
+  .cl-row { grid-template-columns: minmax(0, 1fr); }
+  .cl-photo, .cl-row.is-flipped .cl-photo { position: relative; order: 0; height: 72svh; }
+  .cl-copy, .cl-row.is-flipped .cl-copy { max-width: none; justify-self: stretch; padding: 40px var(--section-x) 0; }
 }
 
 /* ── Eventos · retiros y Pilates Brunch ── */
@@ -1466,3 +1485,35 @@ html {
 .rv-node.is-on { background: var(--color-mid); }
 .rv-node.is-active { background: var(--color-dark); transform: scaleY(2); }
 .rv-node:focus-visible { outline: 1px solid var(--color-dark); outline-offset: 6px; }
+
+/* ── Precios ──
+   La valoración usa la misma cinta que el Home (foto a sangre + marrón); la carta va en
+   dos columnas editoriales con filetes que se trazan al entrar. */
+.pr-band { margin-top: var(--head-gap); }
+.pr-band-note { margin: 18px 0 0; font-family: var(--font-sans); font-size: var(--fs-label); font-style: italic; color: var(--color-paper-3); }
+.pr-band .pv-cta { margin-top: 32px; }
+
+.pr-carta { max-width: 1180px; margin: var(--section-y) auto 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 96px; }
+.pr-title { margin: 12px 0 8px; }
+.pr-list { list-style: none; margin: 0; padding: 0; }
+.pr-row { padding: 20px 0 18px; }
+.pr-line { display: flex; align-items: baseline; gap: 14px; }
+.pr-name { flex: none; font-family: var(--font-serif); font-size: var(--fs-sub); line-height: 1.2; color: var(--color-dark); }
+.pr-name.is-named { font-style: italic; }
+.pr-leader { flex: 1; min-width: 24px; height: 1px; transform: translateY(-0.3em); background: var(--color-line-strong); transform-origin: left; }
+.pr-price { flex: none; font-family: var(--font-serif); font-size: var(--fs-h3); line-height: 1; color: var(--color-dark); font-variant-numeric: tabular-nums; }
+.pr-detail { margin: 6px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-family: var(--font-sans); font-size: var(--fs-small); font-style: italic; color: var(--color-mid); }
+.pr-badge { font-style: normal; }
+/* El más elegido: su filete en marrón */
+.pr-row.is-key .pr-leader { background: var(--color-dark); }
+.pr-note { margin: 10px 0 0; font-family: var(--font-sans); font-size: var(--fs-label); color: var(--color-mid); }
+.pr-legal { max-width: 1180px; margin: 48px auto 0; padding-top: 22px; border-top: 1px solid var(--color-line); font-family: var(--font-sans); font-size: var(--fs-label); line-height: 1.8; color: var(--color-mid); text-align: center; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .pr-row.reveal .pr-leader { transform: translateY(-0.3em) scaleX(0); transition: transform 1.2s var(--ease-move) calc(0.25s + var(--i, 0) * 0.12s); }
+  .pr-row.reveal.visible .pr-leader { transform: translateY(-0.3em); }
+}
+
+@media (max-width: 900px) {
+  .pr-carta { grid-template-columns: minmax(0, 1fr); gap: 56px; }
+}
