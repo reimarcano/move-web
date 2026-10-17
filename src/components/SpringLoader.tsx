@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { abandonIntro, holdIntro, releaseIntro } from '../lib/intro';
 
-const HERO_IMAGE = '/assets/move_portada_pilates-pozuelo.webp';
+const HERO_IMAGE = '/assets/move-portada-reformer-arco-900.webp';
 const LOADER_DURATION = 1050;
 const SESSION_KEY = 'move-spring-loader-seen';
 
@@ -27,12 +28,15 @@ export default function SpringLoader({ active }: { active: boolean }) {
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+  const socketRef = useRef<SVGCircleElement>(null);
 
   useEffect(() => {
     if (!active) {
       setVisible(false);
       return;
     }
+
+    holdIntro();
 
     const reducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
@@ -46,10 +50,12 @@ export default function SpringLoader({ active }: { active: boolean }) {
       (reducedMotion || window.sessionStorage.getItem(SESSION_KEY))
     ) {
       setVisible(false);
+      releaseIntro(null);
       return;
     }
 
     let cancelled = false;
+    let released = false;
     let animationFrame = 0;
     let impactTimeout = 0;
     let closeTimeout = 0;
@@ -67,6 +73,14 @@ export default function SpringLoader({ active }: { active: boolean }) {
       setIsComplete(true);
       impactTimeout = window.setTimeout(() => {
         if (cancelled) return;
+        /* La portada nace desde el punto exacto donde el muelle ha encajado */
+        const socket = socketRef.current?.getBoundingClientRect();
+        released = true;
+        releaseIntro(
+          socket
+            ? { x: socket.left + socket.width / 2, y: socket.top + socket.height / 2 }
+            : null,
+        );
         setIsExiting(true);
         closeTimeout = window.setTimeout(() => {
           if (cancelled) return;
@@ -108,6 +122,7 @@ export default function SpringLoader({ active }: { active: boolean }) {
 
     return () => {
       cancelled = true;
+      if (!released) abandonIntro();
       window.cancelAnimationFrame(animationFrame);
       window.clearTimeout(impactTimeout);
       window.clearTimeout(closeTimeout);
@@ -147,7 +162,7 @@ export default function SpringLoader({ active }: { active: boolean }) {
             </g>
           </g>
           <g className="spring-loader__socket">
-            <circle cx="240" cy="16" r="3.3" />
+            <circle ref={socketRef} cx="240" cy="16" r="3.3" />
             <circle cx="240" cy="16" r="1.45" />
           </g>
         </svg>

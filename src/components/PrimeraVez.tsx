@@ -1,36 +1,47 @@
 import { useEffect, useRef } from "react";
 import { VALORACION_PRECIO, VALORACION_WHATSAPP_URL } from "../data/valoracion";
-import FichaValoracion from "./FichaValoracion";
 
+/* Cada paso lleva su dato, siempre con la misma anatomía (etiqueta ··· valor).
+   El grupo reducido primero (es lo que nos permite conocerte), la duración después
+   y el precio al final, ya en contexto. */
 const pasos = [
   {
     titulo: "Te conocemos",
     texto: "Tu nivel, tu postura, tus objetivos y cualquier molestia o lesión.",
+    etiqueta: "Grupo",
+    dato: "Máx. 4 personas",
   },
   {
     titulo: "Descubres el método",
     texto: "Una sesión guiada y adaptada a tu ritmo para sentir cómo trabaja tu cuerpo.",
+    etiqueta: "Duración",
+    dato: "50 min",
   },
   {
     titulo: "Te recomendamos tu plan",
-    texto: `Y si te apuntas, descontamos los ${VALORACION_PRECIO} € de tu primer mes o bono.`,
+    texto: "El que mejor encaja contigo. Si te apuntas, se descuenta de tu primer mes o bono.",
+    etiqueta: "Precio",
+    dato: String(VALORACION_PRECIO),
   },
 ];
 
 /* Bloque "¿Primera vez en MOVE?" del Home: clase de valoración en cinta marrón a sangre.
-   Al hacer scroll la foto hace parallax y los pasos se rellenan. */
+   La foto va a sangre y nace desde el borde de la pantalla, como el carro del reformer
+   al deslizarse; después hace parallax y la línea de los pasos avanza con el scroll. */
 export default function PrimeraVez() {
   const bandRef = useRef<HTMLDivElement>(null);
+  const photoRef = useRef<HTMLElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const stepsRef = useRef<HTMLOListElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     const band = bandRef.current;
+    const photo = photoRef.current;
     const img = imgRef.current;
     const steps = stepsRef.current;
     const title = titleRef.current;
-    if (!band || !img || !steps || !title) return;
+    if (!band || !photo || !img || !steps || !title) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const items = Array.from(steps.children) as HTMLElement[];
@@ -55,8 +66,19 @@ export default function PrimeraVez() {
         const b = band.getBoundingClientRect();
         const k = clamp((vh - b.top) / (vh + b.height));
         img.style.transform = `translateY(${((k - 0.5) * -14).toFixed(2)}%)`;
+        const p = photo.getBoundingClientRect();
+        const r = clamp((vh - p.top) / (vh * 0.8));
+        const eased = 1 - Math.pow(1 - r, 3);
+        photo.style.clipPath = `inset(0 ${((1 - eased) * 100).toFixed(2)}% 0 0)`;
       }
       const s = steps.getBoundingClientRect();
+      /* La línea va del centro del 01 al centro del 03, ni un píxel más */
+      const first = items[0].querySelector(".pv-n")?.getBoundingClientRect();
+      const last = items[items.length - 1].querySelector(".pv-n")?.getBoundingClientRect();
+      if (first && last) {
+        steps.style.setProperty("--line-top", `${(first.top + first.height / 2 - s.top).toFixed(1)}px`);
+        steps.style.setProperty("--line-bottom", `${(s.bottom - (last.top + last.height / 2)).toFixed(1)}px`);
+      }
       const sp = clamp((vh * 0.7 - s.top) / s.height);
       steps.style.setProperty("--s", sp.toFixed(3));
       items.forEach((li, i) =>
@@ -80,7 +102,7 @@ export default function PrimeraVez() {
   }, []);
 
   return (
-    <section className="m-section primera-vez" id="primera-vez" aria-labelledby="primera-vez-titulo">
+    <section className="m-section primera-vez chapter-sheet" id="primera-vez" aria-labelledby="primera-vez-titulo">
       <div className="m-head">
         <span className="m-eyebrow reveal">¿Primera vez en MOVE?</span>
         <p className="m-title-sm mt-3.5 reveal reveal-delay-1">
@@ -89,7 +111,7 @@ export default function PrimeraVez() {
       </div>
 
       <div className="m-band pv-band" ref={bandRef}>
-        <figure className="pv-photo">
+        <figure className="pv-photo" ref={photoRef}>
           <img
             ref={imgRef}
             src="/assets/move-pilates-madrid-03.webp"
@@ -112,8 +134,6 @@ export default function PrimeraVez() {
             encontrar el plan que mejor encaja contigo.
           </p>
 
-          <FichaValoracion className="reveal reveal-delay-2" />
-
           <ol className="pv-steps" ref={stepsRef}>
             {pasos.map((paso, i) => (
               <li key={paso.titulo} className={`reveal reveal-delay-${i + 1}`}>
@@ -121,6 +141,12 @@ export default function PrimeraVez() {
                 <div>
                   <h3>{paso.titulo}</h3>
                   <p>{paso.texto}</p>
+                  {/* Línea de dato: el punteado se traza cuando la línea llega a su nodo */}
+                  <p className="m-dato">
+                    <span className="m-dato-label">{paso.etiqueta}</span>
+                    <span className="m-dato-leader" aria-hidden="true" />
+                    <span className="m-dato-value">{paso.dato}</span>
+                  </p>
                 </div>
               </li>
             ))}
