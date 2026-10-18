@@ -52,6 +52,8 @@ export function useScrollSereno() {
     const onWheel = (event: WheelEvent) => {
       // Zoom, gestos horizontales o zonas con su propio scroll siguen siendo nativos
       if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+      // Con un visor o un menú abierto (scroll bloqueado) la página no se mueve
+      if (document.body.style.overflow === "hidden") return;
       if (insideScrollable(event.target, event.deltaY)) return;
 
       event.preventDefault();

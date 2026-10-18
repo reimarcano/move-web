@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { faqs } from "../data/faqs";
 
 import HeroInmersivo from "../components/HeroInmersivo";
@@ -6,6 +6,7 @@ import Reviews from "../components/Reviews";
 import PrimeraVez from "../components/PrimeraVez";
 import TextoRespira from "../components/TextoRespira";
 import PlanesGrupales from "../components/PlanesGrupales";
+import FaqItem from "../components/FaqItem";
 
 /* ────────────────────────────────────────────
    Constants
@@ -40,64 +41,6 @@ const features = [
     description: "Técnica, cuidado y sensibilidad en cada sesión de Pilates Reformer.",
   },
 ];
-
-/* ────────────────────────────────────────────
-   FAQ Item component (dynamic height)
-   ──────────────────────────────────────────── */
-
-function FAQItem({
-  faq,
-  index,
-  isOpen,
-  onToggle,
-}: {
-  faq: { question: string; answer: string };
-  index: number;
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    if (isOpen && contentRef.current) {
-      setHeight(contentRef.current.scrollHeight);
-    } else {
-      setHeight(0);
-    }
-  }, [isOpen]);
-
-  return (
-    /* El estado abierto va en un atributo: la clase la gestiona la animación de entrada */
-    <div className="fq-item reveal" data-open={isOpen} style={{ "--i": index } as React.CSSProperties}>
-      <button
-        onClick={onToggle}
-        className="fq-q"
-        aria-expanded={isOpen}
-        aria-controls={`faq-answer-${index}`}
-        id={`faq-question-${index}`}
-      >
-        <span className="fq-n" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-        <span className="fq-text">{faq.question}</span>
-        {/* Más que gira hasta formar un menos */}
-        <span className="fq-toggle" aria-hidden="true" />
-      </button>
-      <div
-        id={`faq-answer-${index}`}
-        role="region"
-        aria-labelledby={`faq-question-${index}`}
-        ref={contentRef}
-        className="fq-a"
-        style={{
-          maxHeight: `${height}px`,
-          opacity: isOpen ? 1 : 0,
-        }}
-      >
-        <p className="m-text">{faq.answer}</p>
-      </div>
-    </div>
-  );
-}
 
 /* ────────────────────────────────────────────
    Home page
@@ -209,7 +152,7 @@ export default function Home() {
 
           <div className="fq-list">
             {faqs.map((faq, index) => (
-              <FAQItem
+              <FaqItem
                 key={index}
                 faq={faq}
                 index={index}
