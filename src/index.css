@@ -1029,23 +1029,31 @@ html {
 
 /* ── Eventos · retiros y Pilates Brunch ── */
 .ev-text { max-width: 640px; margin: 0 auto; line-height: 1.85; }
-.ev-frase { margin-top: 24px; color: var(--color-mid); }
+.ev-frase { max-width: 32ch; margin: var(--section-y) auto 48px; text-align: center; color: var(--color-dark); text-wrap: balance; }
 .ev-separador { margin-bottom: var(--section-y); }
-.ev-gallery { max-width: 960px; margin: 0 auto; }
+/* Galería: las formaciones salen del margen de la sección (ver GaleriaFormaciones) */
+.ev-gallery { margin-inline: calc(var(--section-x) * -1); }
 
 /* ── Nuestro estudio · galerías y quién te guía ── */
-.es-gallery { max-width: 960px; margin: 0 auto; }
-.es-strip { margin-inline: calc(var(--section-x) * -1); padding-inline: var(--section-x); }
-.es-tile::after { content: ""; position: absolute; inset: 0; background: var(--color-dark); opacity: 0; transition: opacity 400ms var(--ease-move); pointer-events: none; }
-.es-tile:hover::after { opacity: 0.15; }
 .gallery-img { background-color: var(--color-soft); opacity: 0; transition: opacity 400ms ease; }
 .gallery-img.loaded { opacity: 1; }
 
 .es-guide { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; }
-.es-guide-photo { margin: 0; overflow: hidden; }
+.es-guide-photo { margin: 0; overflow: hidden; will-change: clip-path; }
 .es-guide-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 .es-guide-copy { padding: var(--section-y) max(var(--section-x), calc((100vw - 1180px) / 2)) var(--section-y) 72px; display: flex; flex-direction: column; justify-content: center; }
 .es-guide-copy .m-text { max-width: 46ch; margin-top: 20px; color: var(--color-paper-2); }
+/* Estudio · mosaico de detalles: cuatro fotos a sangre, sin textos */
+.es-detalles { list-style: none; margin: 0 calc(var(--section-x) * -1); padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; }
+.es-detalle__foto { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; background: var(--color-soft); will-change: clip-path; }
+.es-detalle__foto img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.4s var(--ease-move); }
+.es-detalle:hover .es-detalle__foto img { transform: scale(1.03); }
+@media (max-width: 767px) {
+  .es-detalles { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  }
+.es-direccion { margin: 6px 0 0; font-family: var(--font-sans); font-size: var(--fs-label); color: var(--color-mid); }
+.es-direccion a { color: var(--color-dark); border-bottom: 1px solid var(--color-line-strong); text-decoration: none; transition: border-color 0.3s var(--ease-move); }
+.es-direccion a:hover { border-color: var(--color-dark); }
 
 @media (max-width: 900px) {
   .es-guide { grid-template-columns: 1fr; min-height: 0; }
@@ -1159,6 +1167,9 @@ html {
 .ig-follow:hover { background-size: 100% 1px; }
 
 /* La tira la mueve InstagramFeed.tsx (avance continuo + paralaje dentro de cada marco) */
+/* El gesto horizontal es de la tira (se arrastra con el dedo); el vertical, de la página */
+.ig-strip { touch-action: pan-y; -webkit-user-select: none; user-select: none; }
+.ig-tile img { -webkit-user-drag: none; }
 .ig-track { display: flex; gap: var(--ig-gap); width: max-content; margin: 0; padding: 0; list-style: none; will-change: transform; }
 .ig-tile { position: relative; display: block; width: var(--ig-tile); aspect-ratio: 4 / 5; overflow: hidden; background: var(--color-soft); }
 .ig-tile img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
@@ -1175,7 +1186,7 @@ html {
 
 /* Sin animación: la tira se recorre a mano */
 @media (prefers-reduced-motion: reduce) {
-  .ig-strip { overflow-x: auto; }
+  .ig-strip { overflow-x: auto; touch-action: auto; }
 }
 
 /* ────────────────────────────────────────────
@@ -1517,3 +1528,129 @@ html {
 @media (max-width: 900px) {
   .pr-carta { grid-template-columns: minmax(0, 1fr); gap: 56px; }
 }
+
+/* ── Eventos · Apertura de cine ──
+   La promesa arriba; el vídeo nace de un punto (como la foto de la home) y llena la escena. */
+.cine { position: relative; height: 320svh; margin-top: -3.5rem; background: var(--color-base); }
+.cine__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; transform-origin: 50% 35%; }
+.cine__title { position: absolute; inset: 0; z-index: 3; margin: 0; font-weight: 400; pointer-events: none; }
+.cine__promise { position: absolute; left: 0; right: 0; top: calc(3.5rem + 7svh); padding: 0 var(--section-x); display: block; text-align: center; font-family: var(--font-serif); font-size: min(8.6vw, var(--fs-display)); line-height: 1.12; color: var(--color-dark); text-wrap: balance; }
+.cine__eyebrow { margin-bottom: 14px; }
+/* Respeta la escala: "Se viven." es parte del H1 y nunca lo supera */
+.cine__answer { position: absolute; left: 0; right: 0; bottom: 30svh; padding: 0 var(--section-x); text-align: center; font-family: var(--font-serif); font-style: italic; font-size: var(--fs-display); line-height: 1.1; color: var(--color-base); }
+
+.cine__space { position: absolute; inset: 0; display: grid; place-items: center; perspective: 1400px; }
+.cine__frame { position: relative; width: 100vw; height: 100svh; overflow: hidden; background: var(--color-dark); will-change: clip-path; }
+.cine__frame video, .cine__frame img { width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 50% 62%; }
+/* El punto de origen, con el mismo anillo que late en la home */
+.cine__seed { position: absolute; z-index: 2; left: 50%; width: 0; height: 0; pointer-events: none; }
+.cine__veil { position: absolute; inset: 0; background: linear-gradient(to top, rgb(73 53 35 / 0.78) 0%, rgb(73 53 35 / 0.25) 45%, rgb(73 53 35 / 0) 70%); pointer-events: none; }
+
+/* Pie y acciones siempre dentro del ancho del vídeo */
+.cine__details { position: absolute; z-index: 3; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 6svh); width: min(100vw, var(--cine-w, 100vw)); transform: translateX(-50%); padding: 0 20px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+.cine__caption { margin: 0; max-width: 100%; font-family: var(--font-sans); font-size: var(--fs-micro); letter-spacing: 0.16em; line-height: 1.6; text-transform: uppercase; color: var(--color-paper-2); text-wrap: balance; }
+.cine__actions { display: flex; flex-direction: column-reverse; align-items: center; gap: 14px; max-width: 100%; }
+.cine__cta { max-width: 100%; white-space: normal; }
+.cine__sound { padding: 0 0 3px; border: 0; border-bottom: 1px solid var(--color-paper-3); background: none; font-family: var(--font-sans); font-size: var(--fs-label); letter-spacing: 0.08em; color: var(--color-base); cursor: pointer; transition: border-color 0.3s var(--ease-move); }
+.cine__sound:hover { border-color: var(--color-base); }
+.cine__sound:focus-visible { outline: 1px solid var(--color-base); outline-offset: 4px; }
+.cine__cue { position: absolute; z-index: 3; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 2.5svh); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-dark); }
+
+@media (min-width: 768px) {
+  .cine { margin-top: -4rem; }
+  .cine__promise { top: calc(4rem + 7svh); }
+  /* En escritorio el vídeo vertical se queda en una columna de cine a toda altura */
+  .cine { --cine-w: min(56.25svh, 46vw); }
+  .cine__frame { width: var(--cine-w); }
+}
+
+.ev-intro { margin: 0 auto var(--head-gap); }
+.cine--static + .chapter-sheet { margin-top: 0; border-radius: 0; box-shadow: none; }
+.cine--static { height: auto; }
+.cine--static .cine__stage { position: relative; height: 100svh; }
+
+
+/* ── Eventos · Ritual: cada experiencia como una secuencia de momentos ──
+   Escritorio: foto a sangre fija que cambia con cada momento + momentos junto a una línea.
+   Móvil: cada momento con su foto a sangre. */
+.ritual { margin-inline: calc(var(--section-x) * -1); }
+.ritual__panel { display: none; }
+.ritual__list { list-style: none; margin: 0; padding: 0; }
+.ritual__momento { padding: 0 var(--section-x) 56px; }
+.ritual__foto { display: block; width: 100%; height: 62svh; margin: 0 0 28px; object-fit: cover; object-position: center 35%; }
+.ritual__momento:nth-child(n) .ritual__foto { margin-inline: calc(var(--section-x) * -1); width: calc(100% + var(--section-x) * 2); }
+.ritual__n { display: block; font-family: var(--font-sans); font-size: var(--fs-micro); letter-spacing: 0.2em; color: var(--color-ink-3); }
+.ritual__titulo { margin: 10px 0 10px; font-family: var(--font-serif); font-weight: 400; font-style: italic; font-size: var(--fs-h3); line-height: 1.15; color: var(--color-dark); }
+.ritual__texto { max-width: 42ch; margin: 0; font-family: var(--font-sans); font-size: var(--fs-body); line-height: 1.75; color: var(--color-ink-2); }
+
+@media (min-width: 900px) {
+  .ritual { display: grid; grid-template-columns: 50% minmax(0, 1fr); align-items: start; }
+  .ritual__panel { display: block; position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--color-soft); will-change: clip-path; }
+  .ritual__panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; opacity: 0; transform: scale(1.06); transition: opacity 1.1s var(--ease-move), transform 1.6s var(--ease-move); }
+  .ritual__panel img.is-active { opacity: 1; transform: none; }
+  .ritual__foto { display: none; }
+  /* Los momentos avanzan junto a una línea fina que se rellena */
+  .ritual__list { --ritual-p: 0; position: relative; max-width: 540px; margin-left: 96px; padding: 30svh 0; }
+  .ritual__list::before, .ritual__list::after { content: ""; position: absolute; left: 0; top: 30svh; bottom: 30svh; width: 1px; }
+  .ritual__list::before { background: var(--color-line); }
+  .ritual__list::after { background: var(--color-dark); transform-origin: top; transform: scaleY(var(--ritual-p)); transition: transform 0.9s var(--ease-move); }
+  .ritual__momento { min-height: 56svh; display: flex; flex-direction: column; justify-content: center; padding: 0 0 0 48px; opacity: 0.3; transition: opacity 0.8s var(--ease-move); }
+  .ritual__momento.is-active { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ritual__panel img, .ritual__momento, .ritual__list::after { transition: none; }
+}
+
+/* ── Eventos · Galería en formaciones ──
+   Punto → anillo → columna con la foto activa grande en el centro. Sin textos al lado. */
+.formacion { position: relative; height: var(--formacion-h); }
+.formacion__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.formacion__item { position: absolute; left: 50%; top: 50%; height: var(--formacion-alto, 70svh); aspect-ratio: 9 / 14; padding: 0; border: 0; overflow: hidden; background: var(--color-soft); cursor: pointer; transform-origin: 50% 50%; will-change: transform, opacity; }
+.formacion__item img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; -webkit-user-drag: none; user-select: none; }
+.formacion__item:focus-visible { outline: 1px solid var(--color-dark); outline-offset: 4px; }
+
+/* El logo de MOVE en el centro del anillo: las fotos salen de él */
+.formacion__logo { position: absolute; left: 50%; top: 50%; z-index: 0; width: min(150px, 30vw); height: auto; opacity: 0; transform: translate(-50%, -50%) scale(0.7); pointer-events: none; will-change: transform, opacity; }
+
+/* Movimiento reducido: una tira plana que se desliza */
+.formacion--static .formacion__logo { display: none; }
+.formacion--static { height: auto; }
+.formacion--static .formacion__stage { position: relative; height: auto; overflow: visible; display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
+.formacion--static .formacion__item { position: relative; left: auto; top: auto; flex: none; height: 60svh; transform: none; }
+
+/* ── Visor de fotos ── */
+.visor { position: fixed; inset: 0; z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; padding: 64px 16px 40px; background: rgb(73 53 35 / 0.97); animation: visor-in 0.35s var(--ease-move) both; }
+.visor__close { position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border: 1px solid var(--color-paper-line); border-radius: 50%; background: none; cursor: pointer; }
+.visor__close span, .visor__close span::before { position: absolute; left: 13px; right: 13px; top: 50%; height: 1px; background: var(--color-base); transform: rotate(45deg); content: ""; }
+.visor__close span::before { left: 0; right: 0; transform: rotate(90deg); }
+.visor__close:focus-visible { outline: 1px solid var(--color-base); outline-offset: 4px; }
+.visor__frame { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; touch-action: pan-y; user-select: none; }
+.visor__frame img { width: min(86vw, calc((100svh - 190px) * 0.6)); aspect-ratio: 9 / 15; object-fit: cover; animation: visor-foto 0.4s var(--ease-move) both; -webkit-user-drag: none; }
+.visor__frame figcaption { max-width: 46ch; font-family: var(--font-sans); font-size: var(--fs-label); font-style: italic; line-height: 1.5; text-align: center; color: var(--color-paper-3); }
+.visor__nav { display: flex; gap: 6px; max-width: 100%; flex-wrap: wrap; justify-content: center; }
+.visor__nav button { position: relative; width: 22px; height: 1px; padding: 0; border: 0; background: var(--color-paper-line); cursor: pointer; transition: background 0.4s var(--ease-move), transform 0.4s var(--ease-move); }
+.visor__nav button::before { content: ""; position: absolute; inset: -12px 0; }
+.visor__nav button.is-active { background: var(--color-base); transform: scaleY(2); }
+.visor__nav button:focus-visible { outline: 1px solid var(--color-base); outline-offset: 6px; }
+@keyframes visor-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes visor-foto { from { opacity: 0.4; transform: scale(1.03); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .visor, .visor__frame img { animation: none; } }
+
+/* ── Eventos · Galería horizontal ──
+   Fila de fotos grandes a sangre que avanza con el scroll; cada foto, una ventana. */
+.horizontal { position: relative; height: 300svh; }
+.horizontal__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; align-items: center; }
+.horizontal__track { display: flex; gap: 12px; padding: 0 max(var(--section-x), 6vw); will-change: transform; }
+.horizontal__item { position: relative; flex: none; height: min(76svh, 760px); aspect-ratio: 4 / 5; /* todas iguales */ padding: 0; border: 0; overflow: hidden; background: var(--color-soft); cursor: zoom-in; }
+.horizontal__item img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; will-change: transform; -webkit-user-drag: none; user-select: none; }
+.horizontal__item:focus-visible { outline: 1px solid var(--color-dark); outline-offset: -4px; }
+
+@media (max-width: 767px) {
+  .horizontal__track { gap: 8px; padding: 0 var(--section-x); }
+  .horizontal__item { height: 66svh; aspect-ratio: 3 / 4.4; }
+}
+
+/* Movimiento reducido: una tira que se desliza a mano */
+.horizontal--static { height: auto; }
+.horizontal--static .horizontal__stage { position: relative; height: auto; overflow-x: auto; scrollbar-width: none; }

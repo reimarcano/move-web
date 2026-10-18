@@ -55,7 +55,20 @@ async function prerenderMetadata() {
         pathname === '/'
           ? templatePath
           : path.join(distDirectory, pathname.slice(1), 'index.html');
-      const output = template.replace('</head>', `${metadataFor(pathname, seo.title, seo.description)}\n  </head>`);
+      // Datos estructurados propios de la página, escritos en el HTML (los leen también
+      // los buscadores y asistentes de IA que no ejecutan JavaScript)
+      const jsonLd = (seo.jsonLd ?? [])
+        .map((data) => `    <script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`)
+        .join('\n');
+      // Resumen en texto plano para quien lea la página sin JavaScript
+      const resumen = seo.resumen
+        ? `<noscript><main><h1>${escapeHtml(seo.resumen.titulo)}</h1>${seo.resumen.parrafos
+            .map((parrafo) => `<p>${escapeHtml(parrafo)}</p>`)
+            .join('')}</main></noscript>`
+        : '';
+      const output = template
+        .replace('</head>', `${metadataFor(pathname, seo.title, seo.description)}\n${jsonLd}\n  </head>`)
+        .replace('<div id="root"></div>', `<div id="root"></div>${resumen}`);
 
       await mkdir(path.dirname(outputPath), { recursive: true });
       await writeFile(outputPath, output);

@@ -56,8 +56,8 @@ export default function Layout() {
   const navLinks = [
     { name: 'Clases', path: '/clases' },
     { name: 'Precios', path: '/precios' },
-    { name: 'Eventos', path: '/eventos' },
     { name: 'Nuestro Estudio', path: '/estudio' },
+    { name: 'Eventos', path: '/eventos' },
     { name: 'Contacto', path: '/contacto' },
   ];
 
@@ -371,8 +371,8 @@ export default function Layout() {
                 {[
                   { name: 'Clases', path: '/clases' },
                   { name: 'Tarifas', path: '/precios' },
-                  { name: 'Eventos', path: '/eventos' },
                   { name: 'Nuestro Estudio', path: '/estudio' },
+                  { name: 'Eventos', path: '/eventos' },
                   { name: 'Contacto', path: '/contacto' },
                 ].map((link) => (
                   <Link
