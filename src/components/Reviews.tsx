@@ -1,92 +1,69 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
-const allReviews = [
+/* Reseñas copiadas literalmente de la ficha de Google (revisadas el 19/10/2026):
+   mismo texto, saltos de línea y erratas. La frase destacada es un fragmento literal;
+   los puntos suspensivos marcan dónde se corta. No editar el texto: si cambia en Google,
+   se vuelve a copiar. Orden: de lo que más se busca (grupos reducidos, Reformer, empezar,
+   postparto…) a lo más general. */
+const reviewsData = [
   {
-    id: 1,
-    name: 'Irene Jiménez Pérez',
-    destacado: 'Génesis es una gran instructora, muy pendiente de todos los alumnos.',
-    initial: 'I',
-    rating: 5,
-    text: 'Encantada con Move! Génesis es una gran instructora, muy pendiente de todos los alumnos para darles una atención personalizada y las clases son variadas y dinámicas. Además el estudio es precioso!!',
-  },
-  {
-    id: 2,
-    name: 'Reinaldo Marcano',
-    destacado: 'Gracias a Génesis, he notado mucha mejoría en mis dolores de rodillas y de espalda.',
-    initial: 'R',
-    rating: 5,
-    text: 'Las clases en Move Pilates Boutique en Pozuelo, son en grupos muy reducidos, lo que permite un trato súper personalizado. Gracias a Génesis, he notado mucha mejoría en mis dolores de rodillas y de espalda. El estudio es muy acogedor y dispone de vestuarios con duchas. Si buscas un estudio de pilates de calidad en Madrid, este es el lugar. Lo recomiendo al 100%',
-  },
-  {
-    id: 3,
-    name: 'Melanie Previdi',
-    destacado: 'Un espacio limpio, ordenado, máquinas en perfecto estado.',
-    initial: 'M',
-    rating: 5,
-    text: 'Es un centro realmente profesional. Un espacio limpio, ordenado, máquinas en perfecto estado. Clases reducidas que permite que la instructora tenga con cada alumno mucha atención al detalle. Perfecto para aparcar.',
-  },
-  {
-    id: 4,
+    id: 'eriko',
     name: 'Eriko Pereira Villa',
-    destacado: 'Los grupos son reducidos de máximo 4 personas y siempre están pendientes de ti y de corregirte.',
-    initial: 'E',
-    rating: 5,
-    text: 'Llevo entrenando 1 mes en Move Pilates Boutique y estoy encantado. El espacio es acogedor, todo cuidado al detalle y en perfecto estado. Destaco que los grupos son reducidos de máximo 4 personas y siempre están pendientes de ti y de corregirte. Génesis es una gran profesional y ha conseguido que disfrute de las clases de pilates.',
+    destacado: '…los grupos son reducidos de máximo 4 personas y siempre están pendientes de ti y de corregirte.',
+    text: 'Llevo entrenando 1 mes en Move Pilates Boutique y estoy encantado, el espacio es acogedor, todo cuidado al detalle muy minimalista, aesthetic y en perfecto estado, además una de las cosas que más destaco es que los grupos son reducidos de máximo 4 personas y siempre están pendientes de ti y de corregirte.\n\nPor otro lado la coach, Génesis es una gran profesional, y está consiguiendo que verdaderamente me gusten y disfrute de las clases de pilates, haciendo que se me pase la hora volando.\n\nSin lugar a dudas recomiendo a cualquier persona que pruebe tanto pilates, como pilates en este centro porque le va a encantar!',
   },
   {
-    id: 5,
+    id: 'elvira',
+    name: 'Elvira Falco',
+    destacado: 'El local es precioso y está impecable, lo que hace que entrenar sea un gusto.',
+    text: '¡No puedo estar más feliz con este centro! El local es precioso y está impecable, lo que hace que entrenar sea un gusto. Las máquinas y el resto del equipamiento son de primerísima calidad.\nMención especial para Génesis; es una profesional increíble, atenta y técnica. Además, la gestión de cambios de clase es súper eficiente, algo que se agradece mucho. Desde que empecé con el Pilates Reformer aquí, mi salud ha dado un giro: ya no tengo dolores de espalda, mi postura ha mejorado notablemente y, como corredora, he notado un rendimiento mucho mayor en el running. ¡Recomendable al 100%!',
+  },
+  {
+    id: 'zuly',
+    name: 'Zuly Verastegui',
+    destacado: '…te explica las posiciones acorde a tu nivel…',
+    text: 'He ido a mi primera clase de pilates en este centro y que acierto, genesis es paciente y te explica las posiciones acorde a tu nivel, esta pendiente de que no te lesiones y ayudarte lo más posible a cumplir la posiciones, 100% recomendada',
+  },
+  {
+    id: 'linette',
+    name: 'Linette Dos Santos',
+    destacado: 'Su profesionalidad y dedicación se nota en cada clase.',
+    text: 'Genesis es excelente. Su profesionalidad y dedicación se nota en cada clase. El pilates fue clave en mi recuperación post parto. El centro es precioso y te hace sentir muy cómoda. Recomiendo al 100%',
+  },
+  {
+    id: 'javier',
+    name: 'Javier Montero Martínez',
+    destacado: 'Adapta la sesión para cualquier tipo de público.',
+    text: 'Génesis es una excelente profesional, guía la sesión de tal forma que se hace adictivo!! Adapta la sesión para cualquier tipo de público. Pienso que lo debería de probar todo el mundo!! Un abrazo,',
+  },
+  {
+    id: 'adriana',
     name: 'Adriana Seijo',
-    destacado: 'El centro es precioso, muy cuidado y con un ambiente agradable que invita a desconectar.',
-    initial: 'A',
-    rating: 5,
-    text: '¡Me encanta este centro de pilates! Génesis es una instructora excepcional: muy profesional, atenta y siempre pendiente de que hagas los ejercicios correctamente, adaptándolos a tu nivel si es necesario. El centro es precioso, muy cuidado y con un ambiente agradable que invita a desconectar y concentrarte en tu bienestar.',
+    destacado: 'Génesis es una instructora excepcional: muy profesional, atenta y siempre pendiente de que hagas los ejercicios correctamente…',
+    text: '¡Me encanta este centro de pilates! Desde el primer día, la experiencia ha sido increíble. Génesis es una instructora excepcional: muy profesional, atenta y siempre pendiente de que hagas los ejercicios correctamente, adaptándolos a tu nivel si es necesario. Transmite mucha confianza y motivación en cada clase.\n\nEl centro es precioso, muy cuidado y con un ambiente súper agradable que invita a desconectar y concentrarte en tu bienestar. Sin duda, es el lugar ideal para practicar pilates, mejorar tu condición física y sentirte mejor tanto por dentro como por fuera.\n\n¡Totalmente recomendable!',
   },
   {
-    id: 6,
-    name: 'Luz Marina Di Rubbo',
-    destacado: 'Génesis es una instructora increíble, muy profesional, atenta y siempre pendiente de cada detalle.',
-    initial: 'L',
-    rating: 5,
-    text: 'Quiero recomendar este estudio de pilates porque la experiencia ha sido excelente. Génesis es una instructora increíble, muy profesional, atenta y siempre pendiente de cada detalle durante la clase. El estudio es hermoso, muy cuidado y con un ambiente súper agradable y cómodo para entrenar.',
-  },
-  {
-    id: 7,
+    id: 'stephanie',
     name: 'Stephanie Lopez',
     destacado: 'La clase es deliciosa, dinámica, relajante y muy bien guiada.',
-    initial: 'S',
-    rating: 5,
-    text: 'Conocí este nuevo centro de pilates y me encantó. La clase es deliciosa, dinámica, relajante y muy bien guiada. Génesis corrige con mucha atención y logra que disfrutes cada ejercicio. Tengo una lesión en la espalda y noto muchísimo cómo me está ayudando a mejorar.',
+    text: 'Conocí este nuevo centro de pilates y me encantó. Es un lugar muy ameno, con una decoración y un ambiente que transmiten una paz increíble desde que entras. La clase es deliciosa, dinámica, relajante y muy bien guiada. Génesis, corrige con mucha atención y logra que disfrutes cada ejercicio. Tengo una lesión en la espalda y noto muchísimo cómo me está ayudando a mejorar. Sin duda, volveré.',
   },
   {
-    id: 8,
-    name: 'Dayana Perez',
-    destacado: 'Sigue siendo mi lugar seguro: me siento cuidada, escuchada y guiada.',
-    initial: 'D',
-    rating: 5,
-    text: 'Este centro de pilates ha sido un regalo en mi vida. Me acompañó durante el embarazo, ayudándome a mantenerme activa y conectar con mi cuerpo. Ahora, en el postparto, sigue siendo mi lugar seguro: me siento cuidada, escuchada y guiada. Es un espacio de bienestar físico y emocional.',
+    id: 'luz-marina',
+    name: 'Luz Marina Di Rubbo',
+    destacado: 'Si pudiera dar más estrellas las daría!!',
+    text: 'Si pudiera dar más estrellas las daría!! Quiero recomendar este estudio de pilates porque la experiencia ha sido excelente. Génesis es una instructora de pilates increíble, muy profesional, atenta y siempre pendiente de cada detalle durante la clase. Se nota que le gusta lo que hace y transmite mucha confianza.\nAdemás, el estudio es hermoso, muy cuidado y con un ambiente súper agradable y cómodo para entrenar. Sin duda, un lugar al que provoca volver 💛',
   },
   {
-    id: 9,
-    name: 'Miriam Moros',
-    destacado: 'Sin duda el mejor sitio para hacer pilates en Madrid.',
-    initial: 'M',
-    rating: 5,
-    text: 'Sin duda el mejor sitio para hacer pilates en Madrid. Las clases, Génesis y el espacio son increíbles: perfectos para desconectar y relajarse mientras haces deporte. Es mi sitio de confianza.',
+    id: 'alejandra',
+    name: 'Alejandra Chavez',
+    destacado: 'Con paciencia y calma, me ha guiado a mejorar en mis movimientos…',
+    text: 'Las clases con Genesis son maravillosas. Con paciencia y calma, me ha guiado a mejorar en mis movimientos, conectando el cuerpo con la mente, y trabajando cada músculo de manera consciente. Estoy muy feliz con los avances, y agradecida por ser su alumna.',
   },
 ];
 
-// Ordenado por cobertura de intención de búsqueda; Reinaldo queda al final por indicación de MOVE.
-const reviewsData = [
-  allReviews[3], // Move Pilates Boutique, grupos reducidos y clases de pilates
-  allReviews[7], // Pilates en embarazo y postparto
-  allReviews[6], // Pilates y trabajo de espalda
-  allReviews[4], // Centro de pilates y adaptación al nivel
-  allReviews[8], // Pilates en Madrid
-  allReviews[5], // Estudio de pilates y atención al detalle
-  allReviews[0], // Atención personalizada y clases dinámicas
-  allReviews[2], // Centro profesional y clases reducidas
-  allReviews[1], // Reinaldo Marcano, última posición solicitada
-];
+/* Ficha de Google por su identificador estable (sin parámetros de una búsqueda concreta) */
+const GOOGLE_RESENAS_URL = 'https://www.google.com/maps?cid=7878401388043902058';
 
 const GoogleLogo = () => (
   <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-label="Google">
@@ -145,6 +122,34 @@ export default function Reviews() {
     setActive((index + total) % total);
   };
 
+  /* Scroll lateral (trackpad o Mayús + rueda): un gesto = una reseña. Se acumula el
+     desplazamiento horizontal y, al pasar de un umbral, se cambia y se bloquea un momento
+     para que la inercia del trackpad no salte varias de golpe. El vertical no se toca. */
+  const stageRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    let acumulado = 0;
+    let bloqueadoHasta = 0;
+    const onWheel = (event: WheelEvent) => {
+      const dx = event.deltaX || (event.shiftKey ? event.deltaY : 0);
+      if (Math.abs(dx) <= Math.abs(event.deltaY) && !event.shiftKey) return;
+      event.preventDefault(); // evita el gesto de «atrás» del navegador
+      const ahora = performance.now();
+      if (ahora < bloqueadoHasta) return;
+      acumulado += dx;
+      if (Math.abs(acumulado) > 50) {
+        const paso = acumulado > 0 ? 1 : -1;
+        acumulado = 0;
+        bloqueadoHasta = ahora + 700;
+        setExpanded(null);
+        setActive((current) => (current + paso + total) % total);
+      }
+    };
+    stage.addEventListener('wheel', onWheel, { passive: false });
+    return () => stage.removeEventListener('wheel', onWheel);
+  }, [total]);
+
   return (
     <section ref={sectionRef} className="m-section rv-section" aria-labelledby="resenas-titulo">
       <div className="m-head">
@@ -152,11 +157,10 @@ export default function Reviews() {
         <h2 id="resenas-titulo" className="m-title reveal reveal-delay-1">
           Lo que dicen <em>nuestros alumnos.</em>
         </h2>
-        {/* Valoración de Google: logo, nota y estrellas en una sola línea limpia */}
+        {/* Valoración de Google: logo y estrellas, sin nota numérica para que no se quede desactualizada */}
         <p className="rv-score reveal reveal-delay-2">
           <GoogleLogo />
-          <span className="rv-score-value">5,0</span>
-          <span className="rv-stars" aria-label="5 estrellas en Google">
+          <span className="rv-stars" aria-label="Valoración de 5 estrellas en Google">
             {[0, 1, 2, 3, 4].map((star) => (
               <StarIcon key={star} size={12} />
             ))}
@@ -165,6 +169,7 @@ export default function Reviews() {
       </div>
 
       <div
+        ref={stageRef}
         className="rv-stage reveal reveal-delay-2"
         role="region"
         aria-roledescription="carrusel"
@@ -199,7 +204,7 @@ export default function Reviews() {
               aria-label={`${index + 1} de ${total}`}
             >
               {/* Frase destacada: una cita literal de la propia reseña */}
-              <blockquote cite="https://www.google.com/maps">
+              <blockquote cite={GOOGLE_RESENAS_URL}>
                 <p className="rv-highlight">{review.destacado}</p>
               </blockquote>
               <figcaption>
@@ -237,7 +242,7 @@ export default function Reviews() {
 
       <div className="m-foot reveal">
         <a
-          href="https://www.google.com/maps/place//data=!4m2!3m1!1s0xd4187ede06d0267:0x6d55b452244d1c6a?sa=X&ved=1t:8290&ictx=111"
+          href={GOOGLE_RESENAS_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="btn-outline flex items-center justify-center gap-2 w-fit whitespace-nowrap px-5 text-micro tracking-[0.09em] sm:px-8 sm:text-label sm:tracking-[0.12em]"
