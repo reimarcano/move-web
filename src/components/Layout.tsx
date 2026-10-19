@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, type CSSProperties } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Menu, X, Instagram, MessageCircle } from 'lucide-react';
 import { CookieSettingsButton } from './CookieConsent';
 import InstagramFeed from './InstagramFeed';
 import { useScrollSereno } from '../hooks/useScrollSereno';
@@ -11,8 +10,11 @@ const INSTAGRAM_FEED_PATHS = ['/', '/precios', '/estudio'];
 
 export default function Layout() {
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  /* La página entra con un fundido solo al navegar dentro de la web: la primera carga
+     ya llega pintada (HTML precompilado) y no debe parpadear */
+  const [pageEnter, setPageEnter] = useState(false);
+  const firstPath = useRef(true);
   const location = useLocation();
   const pathname = location.pathname.replace(/\/+$/, '') || '/';
 
@@ -24,41 +26,62 @@ export default function Layout() {
   // Scroll sereno en toda la web: cada gesto de rueda avanza algo menos y llega con inercia
   useScrollSereno();
 
+  /* El header se esconde al bajar y vuelve al subir. Un margen de unos píxeles evita
+     que tiemble con el scroll suave o con el pulso del trackpad. */
   useEffect(() => {
+    let lastY = window.scrollY;
+    let raf = 0;
+    const SLACK = 8;
+
+    const update = () => {
+      raf = 0;
+      const y = window.scrollY;
+      if (y < 100) setIsVisible(true);
+      else if (y > lastY + SLACK) setIsVisible(false);
+      else if (y < lastY - SLACK) setIsVisible(true);
+      else return; // dentro del margen: se guarda la referencia
+      lastY = y;
+    };
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down
-        setIsVisible(false);
-      } else {
-        // Scrolling up
-        setIsVisible(true);
-      }
-      
-      setLastScrollY(currentScrollY);
+      if (!raf) raf = requestAnimationFrame(update);
     };
-
     const handleMouseMove = (e: MouseEvent) => {
-      if (e.clientY < 80) {
-        setIsVisible(true);
-      }
+      if (e.clientY < 80) setIsVisible(true);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', handleMouseMove);
-    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => {
+      cancelAnimationFrame(raf);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [lastScrollY]);
+  }, []);
 
+  /* Al cambiar de página se empieza arriba, al instante (sin recorrer la página nueva
+     con el scroll suave) y la página nueva entra con un fundido */
   useEffect(() => {
     setMobileMenuOpen(false);
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     setIsVisible(true);
+    if (firstPath.current) firstPath.current = false;
+    else setPageEnter(true);
   }, [location.pathname]);
+
+  /* Menú móvil abierto: la página no se mueve debajo y Escape lo cierra */
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { name: 'Clases', path: '/clases' },
@@ -83,7 +106,7 @@ export default function Layout() {
 
       {/* Navbar */}
       <header
-        className={`fixed top-0 w-full z-50 bg-crema-base border-b border-tostado transition-transform duration-[350ms] ease-in-out h-14 md:h-16 flex items-center ${
+        className={`fixed top-0 w-full z-50 bg-crema-base border-b border-tostado transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] h-14 md:h-16 flex items-center ${
           isVisible || mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
@@ -143,53 +166,65 @@ export default function Layout() {
             </Link>
 
             <button
-              className="text-negro-move"
+              className={`mnav-toggle${mobileMenuOpen ? ' is-open' : ''}`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
               aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
             >
-              {mobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+              {/* Dos líneas finas que se cruzan al abrir */}
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
             </button>
           </div>
         </div>
 
-        {/* Mobile Nav Overlay */}
-        {mobileMenuOpen && (
-          <div 
-            id="mobile-menu"
-            className="fixed inset-0 top-0 left-0 w-full h-screen bg-crema-base z-[60] flex flex-col items-center justify-center md:hidden animate-in fade-in duration-300"
-          >
-            <button
-              className="absolute top-4 right-6 text-negro-move"
-              onClick={() => setMobileMenuOpen(false)}
-              aria-label="Cerrar menú"
-            >
-              <X size={28} aria-hidden="true" />
-            </button>
-            <nav className="flex flex-col items-center gap-8" aria-label="Navegación móvil">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className="text-h2 font-serif text-negro-move"
-                  aria-current={pathname === link.path ? 'page' : undefined}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        )}
       </header>
+
+      {/* Menú móvil: una hoja crema bajo el header, con los enlaces como filas de filete
+          fino (la misma anatomía que las FAQ) que entran escalonadas */}
+      <div
+        id="mobile-menu"
+        className={`mnav md:hidden${mobileMenuOpen ? ' is-open' : ''}`}
+        aria-hidden={!mobileMenuOpen}
+        inert={!mobileMenuOpen}
+      >
+        <nav className="mnav__list" aria-label="Navegación móvil">
+          {navLinks.map((link, i) => (
+            <Link
+              key={link.name}
+              to={link.path}
+              className={`mnav__link${pathname === link.path ? ' is-current' : ''}`}
+              style={{ '--i': i } as CSSProperties}
+              aria-current={pathname === link.path ? 'page' : undefined}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+        <div className="mnav__foot" style={{ '--i': navLinks.length } as CSSProperties}>
+          <a href="https://wa.me/34654495508" target="_blank" rel="noreferrer">WhatsApp</a>
+          <a href="https://instagram.com/move.pilatesboutique" target="_blank" rel="noreferrer">Instagram</a>
+          <p>Av. de Europa, 31 · Pozuelo de Alarcón</p>
+        </div>
+      </div>
 
       {/* Main Content with padding-top to account for fixed header */}
       <main id="main-content" className="flex-grow pt-14 md:pt-16 shadow-none outline-none" tabIndex={-1}>
-        <Outlet />
+        <div
+          key={pathname}
+          className={pageEnter ? 'page-enter' : undefined}
+          onAnimationEnd={(e) => {
+            if (e.target === e.currentTarget) setPageEnter(false);
+          }}
+        >
+          <Outlet />
+        </div>
       </main>
 
       {/* WhatsApp Bubble */}
-      <div className="fixed bottom-5 right-5 md:bottom-7 md:right-7 z-[9999] group">
+      <div className={`fixed bottom-5 right-5 md:bottom-7 md:right-7 z-[9999] group transition-opacity duration-300${mobileMenuOpen ? ' opacity-0 pointer-events-none' : ''}`}>
         {/* Tooltip */}
         <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-negro-move text-crema-move text-label px-3 py-1.5 rounded-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none hidden md:block font-sans">
           ¿Hablamos?

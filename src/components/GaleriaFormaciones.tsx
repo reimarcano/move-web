@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useMotionValueEvent, useScroll, useSpring } from "motion/react";
 import { useIsDesktop, usePrefersReducedMotion } from "../hooks/useMediaQuery";
 import type { Foto } from "../data/eventos";
+import { MUELLE_SCROLL, POR_FOTO } from "../lib/movimiento";
 
 /* ────────────────────────────────────────────
    Galería en formaciones (Eventos)
@@ -21,10 +22,10 @@ import type { Foto } from "../data/eventos";
    ──────────────────────────────────────────── */
 
 /* Scroll (en svh) del punto al anillo y del anillo a la columna, y por foto en la
-   columna. En ordenador la rueda avanza mucho más que el dedo: allí pide más recorrido */
+   columna (el mismo por foto que la galería horizontal) */
 const RITMO = {
-  escritorio: { intro: 130, porFoto: 90 },
-  movil: { intro: 90, porFoto: 55 },
+  escritorio: { intro: 130, porFoto: POR_FOTO.escritorio },
+  movil: { intro: 90, porFoto: POR_FOTO.movil },
 };
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
@@ -55,7 +56,7 @@ export default function GaleriaFormaciones({
   const ritmo = useIsDesktop() ? RITMO.escritorio : RITMO.movil;
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const progress = useSpring(scrollYProgress, { stiffness: 45, damping: 20, mass: 0.8 });
+  const progress = useSpring(scrollYProgress, MUELLE_SCROLL);
 
   /* Fracciones del recorrido: punto→anillo, anillo→columna y la columna */
   const tramos = () => {

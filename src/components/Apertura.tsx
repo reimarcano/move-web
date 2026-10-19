@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
+import { MUELLE_SCROLL } from "../lib/movimiento";
 
 /* ────────────────────────────────────────────
    Apertura de página (Eventos, Nuestro estudio…)
@@ -50,7 +51,7 @@ export default function Apertura({
   const esVideo = media.tipo === "video";
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.5 });
+  const smooth = useSpring(scrollYProgress, MUELLE_SCROLL);
   const progress = useTransform(smooth, (value) => clamp01(value / STORY_END));
   const sink = useTransform(smooth, (value) => clamp01((value - STORY_END) / (1 - STORY_END)));
 

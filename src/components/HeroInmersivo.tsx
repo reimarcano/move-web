@@ -10,6 +10,7 @@ import {
 import { VALORACION_WHATSAPP_URL } from "../data/valoracion";
 import { onIntro, type IntroOrigin } from "../lib/intro";
 import { useIsDesktop, usePrefersReducedMotion } from "../hooks/useMediaQuery";
+import { MUELLE_SCROLL } from "../lib/movimiento";
 
 /* ────────────────────────────────────────────
    Portada inmersiva
@@ -59,7 +60,7 @@ export default function HeroInmersivo() {
   });
 
   /* Un muelle suave sobre el scroll: el movimiento llega con calma, sin tirones */
-  const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.5 });
+  const smooth = useSpring(scrollYProgress, MUELLE_SCROLL);
   const storyEndRef = useRef(STORY_END.mobile);
   storyEndRef.current = isDesktop ? STORY_END.desktop : STORY_END.mobile;
   const progress = useTransform(smooth, (value) => clamp01(value / storyEndRef.current));

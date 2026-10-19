@@ -40,8 +40,11 @@
   font-display: swap;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Anclas con desplazamiento suave, salvo con movimiento reducido */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 .spring-loader {
@@ -1657,3 +1660,46 @@ html {
 /* Movimiento reducido: una tira que se desliza a mano */
 .horizontal--static { height: auto; }
 .horizontal--static .horizontal__stage { position: relative; height: auto; overflow-x: auto; scrollbar-width: none; }
+
+
+/* ── Cambio de página ──
+   La página nueva entra con un fundido breve (solo opacidad: no altera las escenas
+   fijas ni los visores) */
+@keyframes page-enter { from { opacity: 0; } to { opacity: 1; } }
+.page-enter { animation: page-enter 0.6s var(--ease-move) both; }
+
+/* ── Menú móvil ──
+   Botón de dos líneas finas que se cruzan; una hoja crema bajo el header con los
+   enlaces como filas de filete fino que entran escalonadas (sube, aparece, se enfoca). */
+.mnav-toggle { position: relative; width: 40px; height: 40px; margin-right: -9px; padding: 0; border: 0; background: none; color: var(--color-dark); cursor: pointer; }
+.mnav-toggle span { position: absolute; left: 9px; width: 22px; height: 1px; background: currentColor; transition: transform 0.5s var(--ease-move), top 0.5s var(--ease-move); }
+.mnav-toggle span:first-child { top: 16px; }
+.mnav-toggle span:last-child { top: 23px; }
+.mnav-toggle.is-open span:first-child { top: 19.5px; transform: rotate(45deg); }
+.mnav-toggle.is-open span:last-child { top: 19.5px; transform: rotate(-45deg); }
+.mnav-toggle:focus-visible { outline: 1px solid var(--color-dark); outline-offset: 2px; }
+
+.mnav { position: fixed; inset: 0; z-index: 49; display: flex; flex-direction: column; padding-top: 3.5rem; background: var(--color-base); opacity: 0; visibility: hidden; transition: opacity 0.35s var(--ease-move), visibility 0s linear 0.35s; }
+.mnav.is-open { opacity: 1; visibility: visible; transition: opacity 0.5s var(--ease-move), visibility 0s; }
+.mnav__list { display: flex; flex-direction: column; padding: 5svh var(--section-x) 0; }
+.mnav__link { position: relative; display: block; padding: 18px 0 16px; border-bottom: 1px solid var(--color-line); font-family: var(--font-serif); font-size: var(--fs-h2); line-height: 1.15; color: var(--color-dark); text-decoration: none; }
+/* Página actual: en cursiva y con su filete trazado en oscuro */
+.mnav__link::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--color-dark); transform: scaleX(0); transform-origin: left; }
+.mnav__link.is-current { font-style: italic; }
+.mnav__link.is-current::after { transform: scaleX(1); }
+.mnav__foot { margin-top: auto; padding: 0 var(--section-x) calc(env(safe-area-inset-bottom) + 32px); display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.mnav__foot a { font-family: var(--font-sans); font-size: var(--fs-label); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-dark); text-decoration: none; border-bottom: 1px solid var(--color-line-strong); padding-bottom: 3px; }
+.mnav__foot p { flex-basis: 100%; margin: 6px 0 0; font-family: var(--font-sans); font-size: var(--fs-micro); letter-spacing: 0.08em; color: var(--color-ink-3); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .mnav__link, .mnav__foot { opacity: 0; transform: translateY(14px); filter: blur(4px); transition: opacity 0.2s ease, transform 0.2s ease, filter 0.2s ease; }
+  .mnav.is-open :is(.mnav__link, .mnav__foot) { opacity: 1; transform: none; filter: none; transition: opacity 0.7s var(--ease-move), transform 0.8s var(--ease-move), filter 0.7s var(--ease-move); transition-delay: calc(0.1s + var(--i, 0) * 0.06s); }
+  .mnav__link::after { transition: transform 0.2s ease; }
+  .mnav.is-open .mnav__link.is-current::after { transform: scaleX(1); transition: transform 1s var(--ease-move) 0.45s; }
+  .mnav:not(.is-open) .mnav__link.is-current::after { transform: scaleX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter { animation: none; }
+  .mnav, .mnav.is-open, .mnav-toggle span { transition: none; }
+}

@@ -5,7 +5,8 @@ import { useEffect } from "react";
    teclado, ni la barra de desplazamiento; con movimiento reducido no hace nada. */
 
 const STEP = 0.72; // fracción del desplazamiento de cada gesto de rueda
-const EASE = 0.085; // cuánto se acerca al destino en cada fotograma (más bajo = más calma)
+const EASE = 0.085; // cuánto se acerca al destino en cada fotograma de 60 Hz (más bajo = más calma)
+const FRAME = 1000 / 60;
 const MAX_AHEAD = 1.5; // el destino nunca se aleja más de 1,5 pantallas de donde estás
 
 /* ¿La rueda actúa sobre algo con scroll propio (menú, panel, modal) que aún puede moverse? */
@@ -30,19 +31,24 @@ export function useScrollSereno() {
     let current = 0;
     let last = 0; // última posición que fijamos nosotros
     let raf = 0;
+    let prev = 0; // hora del fotograma anterior
 
     const stop = () => {
       cancelAnimationFrame(raf);
       raf = 0;
     };
 
-    const frame = () => {
+    const frame = (now: number) => {
       // Si algo ajeno ha movido la página (teclado, barra, enlace), cedemos
       if (Math.abs(window.scrollY - last) > 2) {
         stop();
         return;
       }
-      current += (target - current) * EASE;
+      /* El acercamiento depende del tiempo, no de los fotogramas: la misma velocidad
+         en una pantalla de 60 Hz que en una de 120 o 144 Hz */
+      const dt = Math.min(now - (prev || now - FRAME), FRAME * 4);
+      prev = now;
+      current += (target - current) * (1 - Math.pow(1 - EASE, dt / FRAME));
       if (Math.abs(target - current) < 0.5) current = target;
       window.scrollTo({ top: current, behavior: "instant" });
       last = window.scrollY;
@@ -58,7 +64,10 @@ export function useScrollSereno() {
 
       event.preventDefault();
       const y = window.scrollY;
-      if (!raf) target = current = last = y; // un gesto nuevo parte de donde estás
+      if (!raf) {
+        target = current = last = y; // un gesto nuevo parte de donde estás
+        prev = 0;
+      }
 
       const unit = event.deltaMode === 1 ? 32 : event.deltaMode === 2 ? window.innerHeight : 1;
       const max = document.documentElement.scrollHeight - window.innerHeight;

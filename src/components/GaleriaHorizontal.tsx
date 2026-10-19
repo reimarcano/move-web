@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useMotionValueEvent, useScroll, useSpring } from "motion/react";
 import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
 import type { Foto } from "../data/eventos";
+import { MUELLE_SCROLL, POR_FOTO } from "../lib/movimiento";
 
 /* ────────────────────────────────────────────
    Galería horizontal (Eventos)
@@ -13,7 +14,6 @@ import type { Foto } from "../data/eventos";
    Con movimiento reducido es una tira que se desliza a mano.
    ──────────────────────────────────────────── */
 
-const RITMO = { escritorio: 1.5, movil: 1 }; // px de scroll por px de avance
 
 export default function GaleriaHorizontal({
   fotos,
@@ -33,7 +33,7 @@ export default function GaleriaHorizontal({
   const isStatic = prefersReducedMotion === true;
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const progress = useSpring(scrollYProgress, { stiffness: 55, damping: 20, mass: 0.7 });
+  const progress = useSpring(scrollYProgress, MUELLE_SCROLL);
 
   const place = (value: number) => {
     const track = trackRef.current;
@@ -58,7 +58,11 @@ export default function GaleriaHorizontal({
       const track = trackRef.current;
       if (!track) return;
       distancia.current = Math.max(0, track.scrollWidth - window.innerWidth);
-      const ritmo = window.innerWidth >= 768 ? RITMO.escritorio : RITMO.movil;
+      /* Cada foto pide el mismo scroll que una foto de la galería en formaciones */
+      const primera = track.firstElementChild as HTMLElement | null;
+      const paso = primera ? primera.offsetWidth + parseFloat(getComputedStyle(track).columnGap || "0") : 0;
+      const porFoto = (window.innerWidth >= 768 ? POR_FOTO.escritorio : POR_FOTO.movil) * window.innerHeight / 100;
+      const ritmo = paso > 0 ? porFoto / paso : 1; // px de scroll por px de avance
       setAlto(`${Math.round(window.innerHeight + distancia.current * ritmo)}px`);
       place(progress.get());
     };
