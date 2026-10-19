@@ -4,6 +4,7 @@ import { Menu, X, Instagram, MessageCircle } from 'lucide-react';
 import { CookieSettingsButton } from './CookieConsent';
 import InstagramFeed from './InstagramFeed';
 import { useScrollSereno } from '../hooks/useScrollSereno';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 // Páginas clave donde se muestra la galería de Instagram antes del footer
 const INSTAGRAM_FEED_PATHS = ['/', '/precios', '/estudio'];
@@ -13,6 +14,12 @@ export default function Layout() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const pathname = location.pathname.replace(/\/+$/, '') || '/';
+
+  /* Entradas al hacer scroll. Va aquí, dentro del Suspense de las rutas, y no en App:
+     así no toca el HTML precompilado hasta que React lo ha hidratado (lo que está
+     dentro de un Suspense se hidrata en una segunda pasada). */
+  useScrollReveal();
 
   // Scroll sereno en toda la web: cada gesto de rueda avanza algo menos y llega con inercia
   useScrollSereno();
@@ -89,8 +96,8 @@ export default function Layout() {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`nav-link ${location.pathname === link.path ? 'active' : ''}`}
-                  aria-current={location.pathname === link.path ? 'page' : undefined}
+                  className={`nav-link ${pathname === link.path ? 'active' : ''}`}
+                  aria-current={pathname === link.path ? 'page' : undefined}
                 >
                   {link.name}
                 </Link>
@@ -115,8 +122,8 @@ export default function Layout() {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`nav-link ${location.pathname === link.path ? 'active' : ''}`}
-                  aria-current={location.pathname === link.path ? 'page' : undefined}
+                  className={`nav-link ${pathname === link.path ? 'active' : ''}`}
+                  aria-current={pathname === link.path ? 'page' : undefined}
                 >
                   {link.name}
                 </Link>
@@ -166,7 +173,7 @@ export default function Layout() {
                   key={link.name}
                   to={link.path}
                   className="text-h2 font-serif text-negro-move"
-                  aria-current={location.pathname === link.path ? 'page' : undefined}
+                  aria-current={pathname === link.path ? 'page' : undefined}
                 >
                   {link.name}
                 </Link>
@@ -208,7 +215,7 @@ export default function Layout() {
       </div>
 
       {/* Galería de Instagram */}
-      {INSTAGRAM_FEED_PATHS.includes(location.pathname.replace(/\/$/, '') || '/') && <InstagramFeed />}
+      {INSTAGRAM_FEED_PATHS.includes(pathname) && <InstagramFeed />}
 
       {/* Footer */}
       <footer className="bg-[#493523] text-[#F6F3EC] py-12 md:py-16 px-[24px] md:px-[8%]">

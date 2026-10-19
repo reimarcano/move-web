@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { useMotionValueEvent, useReducedMotion, useScroll, useSpring } from "motion/react";
+import { useMotionValueEvent, useScroll, useSpring } from "motion/react";
+import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
 import type { Foto } from "../data/eventos";
 
 /* ────────────────────────────────────────────
@@ -28,7 +29,7 @@ export default function GaleriaHorizontal({
   const imgsRef = useRef<(HTMLImageElement | null)[]>([]);
   const distancia = useRef(0);
   const [alto, setAlto] = useState<string | undefined>(undefined);
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const isStatic = prefersReducedMotion === true;
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });

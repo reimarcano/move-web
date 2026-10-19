@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
 
 /* ────────────────────────────────────────────
    Apertura de página (Eventos, Nuestro estudio…)
@@ -44,7 +45,7 @@ export default function Apertura({
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const isStatic = prefersReducedMotion === true;
   const esVideo = media.tipo === "video";
 

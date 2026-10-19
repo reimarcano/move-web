@@ -3,13 +3,13 @@ import {
   animate,
   motion,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
 } from "motion/react";
 import { VALORACION_WHATSAPP_URL } from "../data/valoracion";
 import { onIntro, type IntroOrigin } from "../lib/intro";
+import { useIsDesktop, usePrefersReducedMotion } from "../hooks/useMediaQuery";
 
 /* ────────────────────────────────────────────
    Portada inmersiva
@@ -41,27 +41,12 @@ const STORY_END = { mobile: 160 / 260, desktop: 180 / 280 };
 const EASE_MOVE = [0.22, 1, 0.36, 1] as const;
 const EASE_GLIDE = [0.65, 0, 0.35, 1] as const;
 
-function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches,
-  );
-
-  useEffect(() => {
-    const query = window.matchMedia("(min-width: 768px)");
-    const onChange = () => setIsDesktop(query.matches);
-    query.addEventListener("change", onChange);
-    return () => query.removeEventListener("change", onChange);
-  }, []);
-
-  return isDesktop;
-}
-
 export default function HeroInmersivo() {
   const sectionRef = useRef<HTMLElement>(null);
   const windowRef = useRef<HTMLDivElement>(null);
   const bornRef = useRef(false);
   const [isBorn, setIsBorn] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const isDesktop = useIsDesktop();
   const seed = isDesktop ? SEED.desktop : SEED.mobile;
   const isStatic = prefersReducedMotion === true;
@@ -124,7 +109,11 @@ export default function HeroInmersivo() {
 
     const birth = (point: IntroOrigin) => {
       if (bornRef.current || !windowRef.current) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       bornRef.current = true;
+      /* El formato real de la pantalla: al hidratar el HTML precompilado el primer
+         render aún es el de móvil, y la portada puede nacer antes de corregirse */
+      const seed = window.matchMedia("(min-width: 768px)").matches ? SEED.desktop : SEED.mobile;
 
       const rect = windowRef.current.getBoundingClientRect();
       const core = {
@@ -162,7 +151,7 @@ export default function HeroInmersivo() {
       unsubscribe();
       window.clearTimeout(fallback);
     };
-  }, [isStatic, seed, originX, originY, baseRadius, pictureX, pictureY]);
+  }, [isStatic, originX, originY, baseRadius, pictureX, pictureY]);
 
   /* Si cambia el formato (móvil ↔ escritorio) después de nacer, el punto se recoloca */
   useEffect(() => {

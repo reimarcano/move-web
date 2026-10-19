@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { useMotionValueEvent, useReducedMotion, useScroll, useSpring } from "motion/react";
+import { useMotionValueEvent, useScroll, useSpring } from "motion/react";
+import { useIsDesktop, usePrefersReducedMotion } from "../hooks/useMediaQuery";
 import type { Foto } from "../data/eventos";
 
 /* ────────────────────────────────────────────
@@ -50,13 +51,11 @@ export default function GaleriaFormaciones({
   const medidas = useRef<Medidas>({ alto: 560, mini: 90, gap: 12, radio: 260, mobile: false });
   const [actual, setActual] = useState(0);
   const [fase, setFase] = useState<"punto" | "anillo" | "fila">("punto");
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const isStatic = prefersReducedMotion === true;
   const total = fotos.length;
   const signo = 1; // las siguientes esperan a la derecha y avanzan hacia la izquierda al bajar
-  const [ritmo] = useState(() =>
-    typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches ? RITMO.escritorio : RITMO.movil,
-  );
+  const ritmo = useIsDesktop() ? RITMO.escritorio : RITMO.movil;
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const progress = useSpring(scrollYProgress, { stiffness: 45, damping: 20, mass: 0.8 });

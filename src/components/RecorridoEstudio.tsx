@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { useReducedMotion } from "motion/react";
+import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
+import { useMediaQuery, usePrefersReducedMotion } from "../hooks/useMediaQuery";
 import type { Foto } from "../data/eventos";
 
 /* ────────────────────────────────────────────
@@ -32,18 +32,9 @@ export default function RecorridoEstudio({
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const hojasRef = useRef<(HTMLDivElement | null)[]>([]);
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const isStatic = prefersReducedMotion === true;
-  const [esMovil, setEsMovil] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches,
-  );
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    const onChange = () => setEsMovil(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
+  const esMovil = useMediaQuery("(max-width: 767px)");
 
   /* En el móvil una foto por hoja, partida en tres franjas */
   const hojas = esMovil ? movil.map((foto) => [foto, foto, foto]) : escritorio;

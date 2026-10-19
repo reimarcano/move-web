@@ -1,6 +1,6 @@
 import { faqs } from './data/faqs';
-import { experiencias, faqsEventos } from './data/eventos';
-import { GENESIS, INTRO_ESTUDIO, momentosEspacio } from './data/estudio';
+import { faqsEventos } from './data/eventos';
+import { GENESIS } from './data/estudio';
 
 export const SITE_URL = 'https://www.movepilatesboutique.com';
 export const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
@@ -22,11 +22,7 @@ export type SeoEntry = {
   description: string;
   /* JSON-LD propio de la página (se escribe en el HTML al compilar) */
   jsonLd?: object[];
-  /* Resumen en texto plano para quien lea la página sin JavaScript */
-  resumen?: { titulo: string; parrafos: string[] };
 };
-
-const [retiros, brunch] = experiencias;
 
 export const seoByPath: Record<string, SeoEntry> = {
   '/': {
@@ -74,14 +70,6 @@ export const seoByPath: Record<string, SeoEntry> = {
       },
       faqPage(faqsEventos),
     ],
-    resumen: {
-      titulo: 'Retiros de bienestar y Pilates Brunch · Move Pilates Boutique',
-      parrafos: [
-        `${retiros.titulo} ${retiros.cursiva} ${retiros.entradilla} ${retiros.momentos.map((m) => `${m.titulo} ${m.texto}`).join(' ')}`,
-        `${brunch.titulo} ${brunch.cursiva} ${brunch.entradilla} ${brunch.momentos.map((m) => `${m.titulo} ${m.texto}`).join(' ')}`,
-        ...faqsEventos.map((f) => `${f.question} ${f.answer}`),
-      ],
-    },
   },
   '/estudio': {
     title: 'Nuestro estudio de Pilates Reformer en Pozuelo · Move',
@@ -98,15 +86,6 @@ export const seoByPath: Record<string, SeoEntry> = {
         description: GENESIS.texto,
       },
     ],
-    resumen: {
-      titulo: 'Nuestro estudio · MOVE Pilates Boutique, Pozuelo de Alarcón',
-      parrafos: [
-        INTRO_ESTUDIO,
-        momentosEspacio.map((m) => `${m.titulo} ${m.texto}`).join(' '),
-        `${GENESIS.nombre} ${GENESIS.apellido} ${GENESIS.rol}. ${GENESIS.texto}`,
-        'Dirección: Av. de Europa, 31, local 7, 28224 Pozuelo de Alarcón, Madrid. Reservas por WhatsApp: +34 654 49 55 08.',
-      ],
-    },
   },
   '/contacto': {
     title: 'Contacto · Move · Pozuelo de Alarcón',
