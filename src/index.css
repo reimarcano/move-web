@@ -1043,14 +1043,45 @@ html {
 .es-guide-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 .es-guide-copy { padding: var(--section-y) max(var(--section-x), calc((100vw - 1180px) / 2)) var(--section-y) 72px; display: flex; flex-direction: column; justify-content: center; }
 .es-guide-copy .m-text { max-width: 46ch; margin-top: 20px; color: var(--color-paper-2); }
-/* Estudio · mosaico de detalles: cuatro fotos a sangre, sin textos */
-.es-detalles { list-style: none; margin: 0 calc(var(--section-x) * -1); padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; }
-.es-detalle__foto { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; background: var(--color-soft); will-change: clip-path; }
-.es-detalle__foto img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.4s var(--ease-move); }
-.es-detalle:hover .es-detalle__foto img { transform: scale(1.03); }
-@media (max-width: 767px) {
-  .es-detalles { grid-template-columns: minmax(0, 1fr); gap: 2px; }
-  }
+/* Estudio · recorrido: hojas de fotos que suben en franjas (ver RecorridoEstudio) */
+/* Empieza bajo la cabecera (que se oculta al bajar) para que las fotos llenen siempre la pantalla */
+.recorrido { --hoja-h: 100svh; position: relative; margin-top: -3.5rem; height: calc((var(--hojas) + 1) * var(--hoja-h)); }
+@media (min-width: 768px) { .recorrido { margin-top: -4rem; } }
+.recorrido__stage { position: sticky; top: 0; height: var(--hoja-h); overflow: hidden; background: var(--color-soft); }
+.recorrido__hoja { position: absolute; inset: 0; display: flex; }
+.recorrido__panel { position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; background: var(--color-soft); }
+.recorrido__hoja:not(.recorrido__hoja--partida) .recorrido__panel + .recorrido__panel { box-shadow: -1px 0 0 var(--color-base); }
+.recorrido__panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(var(--alejar, 1)); -webkit-user-drag: none; user-select: none; }
+/* En el móvil las tres franjas recomponen una sola foto */
+.recorrido__panel img.recorrido__img--partida { width: 300%; max-width: none; left: calc(var(--franja) * -100%); right: auto; }
+.recorrido__velo { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(to top, rgba(30, 22, 17, 0.72) 0%, rgba(30, 22, 17, 0.4) 40%, rgba(30, 22, 17, 0) 72%); }
+.recorrido__texto { position: absolute; z-index: 3; left: max(var(--section-x), calc((100vw - 1180px) / 2)); right: var(--section-x); bottom: clamp(32px, 8svh, 88px); max-width: 620px; }
+.recorrido__titulo { margin: 14px 0 0; font-family: var(--font-serif); font-size: var(--fs-display); font-weight: 400; line-height: 1.1; color: var(--color-base); text-wrap: balance; }
+.recorrido__titulo em { font-style: italic; }
+.recorrido__intro { margin: 16px 0 0; max-width: 44ch; font-size: var(--fs-body, 16px); line-height: 1.6; color: rgba(247, 242, 235, 0.86); }
+.recorrido__texto .btn-inverted { margin-top: 24px; }
+.recorrido__sombra { position: absolute; inset: 0; z-index: 4; background: #1e1611; opacity: 0; pointer-events: none; }
+/* La primera hoja se abre al entrar: las franjas suben una tras otra */
+.recorrido__hoja--primera .recorrido__panel { animation: recorrido-abre 1.5s cubic-bezier(0.65, 0, 0.35, 1) both; animation-delay: calc(0.15s + var(--franja) * 0.16s); }
+.recorrido__hoja--primera .recorrido__panel img { animation: recorrido-acerca 2.6s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(0.15s + var(--franja) * 0.16s); }
+.recorrido__hoja--primera .recorrido__velo { animation: recorrido-aparece 1.2s ease both 0.9s; }
+.recorrido__texto > * { animation: recorrido-sube 1.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.recorrido__texto > :nth-child(1) { animation-delay: 1s; }
+.recorrido__texto > :nth-child(2) { animation-delay: 1.12s; }
+.recorrido__texto > :nth-child(3) { animation-delay: 1.24s; }
+.recorrido__texto > :nth-child(4) { animation-delay: 1.36s; }
+@keyframes recorrido-abre { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes recorrido-acerca { from { scale: 1.14; } to { scale: 1; } }
+@keyframes recorrido-aparece { from { opacity: 0; } to { opacity: 1; } }
+@keyframes recorrido-sube { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+/* Telón: el capítulo siguiente sube sobre la última hoja */
+.recorrido:not(.recorrido--static) + * { position: relative; z-index: 20; margin-top: -100svh; }
+/* Movimiento reducido: fotos a sangre, una debajo de otra */
+.recorrido--static { height: auto; margin-top: 0; }
+.recorrido--static .recorrido__stage { position: relative; top: auto; height: auto; overflow: visible; }
+.recorrido--static .recorrido__hoja { position: relative; height: var(--hoja-h); }
+.recorrido--static * { animation: none !important; }
+@media (prefers-reduced-motion: reduce) { .recorrido * { animation: none !important; } }
 .es-direccion { margin: 6px 0 0; font-family: var(--font-sans); font-size: var(--fs-label); color: var(--color-mid); }
 .es-direccion a { color: var(--color-dark); border-bottom: 1px solid var(--color-line-strong); text-decoration: none; transition: border-color 0.3s var(--ease-move); }
 .es-direccion a:hover { border-color: var(--color-dark); }
@@ -1602,11 +1633,11 @@ html {
   .ritual__panel img, .ritual__momento, .ritual__list::after { transition: none; }
 }
 
-/* ── Eventos · Galería en formaciones ──
+/* ── Nuestro estudio · Galería en formaciones ──
    Punto → anillo → columna con la foto activa grande en el centro. Sin textos al lado. */
 .formacion { position: relative; height: var(--formacion-h); }
 .formacion__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
-.formacion__item { position: absolute; left: 50%; top: 50%; height: var(--formacion-alto, 70svh); aspect-ratio: 9 / 14; padding: 0; border: 0; overflow: hidden; background: var(--color-soft); cursor: pointer; transform-origin: 50% 50%; will-change: transform, opacity; }
+.formacion__item { position: absolute; left: 50%; top: 50%; height: var(--formacion-alto, 70svh); aspect-ratio: 9 / 14; padding: 0; border: 0; overflow: hidden; background: var(--color-soft); cursor: pointer; }
 .formacion__item img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; -webkit-user-drag: none; user-select: none; }
 .formacion__item:focus-visible { outline: 1px solid var(--color-dark); outline-offset: 4px; }
 

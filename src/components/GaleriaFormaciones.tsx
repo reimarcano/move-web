@@ -3,28 +3,31 @@ import { useMotionValueEvent, useReducedMotion, useScroll, useSpring } from "mot
 import type { Foto } from "../data/eventos";
 
 /* ────────────────────────────────────────────
-   Galería en formaciones (Eventos)
+   Galería en formaciones (Nuestro estudio)
    Las fotos cambian de formación con el scroll:
    1. Punto: nacen juntas de un punto, el gesto de la portada y del vídeo.
    2. Anillo: se abren en círculo, como una respiración, y en el centro aparece la M de
       MOVE, como si las fotos salieran de ella.
-   3'. Al ordenarse en columna, la M se recoge y queda oculta bajo la foto grande.
-   3. Columna: se ordenan como un índice y la foto activa crece grande en el centro;
-      al seguir bajando la columna avanza y cada foto pasa a ser la protagonista.
-   Las fotos se mueven siempre en el sentido del scroll: al bajar, las nuevas suben desde
-   abajo y las ya vistas se van por arriba, como el resto de la página.
+   3'. Al ordenarse en fila, la M se recoge y queda oculta bajo la foto grande.
+   3. Fila: se ordenan en horizontal y la foto activa crece grande en el centro; al seguir
+      bajando la fila avanza hacia la izquierda y cada foto pasa a ser la protagonista.
+   El tamaño se fija con ancho y alto, no con `scale`: así el navegador pinta cada foto a
+   su tamaño real y las miniaturas se ven nítidas.
    Sin textos al lado: las fotos hablan solas (su descripción vive en el visor y en
    las etiquetas accesibles). Tocar la foto grande la amplía; tocar una miniatura la
    trae al centro.
    Con movimiento reducido es una tira plana que se desliza.
    ──────────────────────────────────────────── */
 
-/* Scroll (en svh) del punto al anillo y del anillo a la columna, y por foto en la
-   columna. En ordenador la rueda avanza mucho más que el dedo: allí pide más recorrido */
+/* Scroll (en svh) del punto al anillo y del anillo a la fila, y por foto en la
+   fila. En ordenador la rueda avanza mucho más que el dedo: allí pide más recorrido */
 const RITMO = {
   escritorio: { intro: 130, porFoto: 90 },
   movil: { intro: 90, porFoto: 55 },
 };
+
+/* Ancho / alto de cada foto */
+const PROPORCION = 9 / 14;
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
@@ -46,11 +49,11 @@ export default function GaleriaFormaciones({
   const logoRef = useRef<HTMLImageElement>(null);
   const medidas = useRef<Medidas>({ alto: 560, mini: 90, gap: 12, radio: 260, mobile: false });
   const [actual, setActual] = useState(0);
-  const [fase, setFase] = useState<"punto" | "anillo" | "columna">("punto");
+  const [fase, setFase] = useState<"punto" | "anillo" | "fila">("punto");
   const prefersReducedMotion = useReducedMotion();
   const isStatic = prefersReducedMotion === true;
   const total = fotos.length;
-  const signo = 1; // en el sentido del scroll: las siguientes esperan abajo y suben al bajar
+  const signo = 1; // las siguientes esperan a la derecha y avanzan hacia la izquierda al bajar
   const [ritmo] = useState(() =>
     typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches ? RITMO.escritorio : RITMO.movil,
   );
@@ -58,21 +61,22 @@ export default function GaleriaFormaciones({
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const progress = useSpring(scrollYProgress, { stiffness: 45, damping: 20, mass: 0.8 });
 
-  /* Fracciones del recorrido: punto→anillo, anillo→columna y la columna */
+  /* Fracciones del recorrido: punto→anillo, anillo→fila y la fila */
   const tramos = () => {
     const recorrido = ritmo.intro + (total - 1) * ritmo.porFoto;
     return { a: (ritmo.intro * 0.45) / recorrido, b: ritmo.intro / recorrido };
   };
 
-  /* Posición en la columna para una foto a distancia d de la activa */
-  const enColumna = (d: number) => {
+  /* Posición en la fila para una foto a distancia d de la activa */
+  const enFila = (d: number) => {
     const { alto, mini, gap } = medidas.current;
     const ad = Math.abs(d);
     const near = Math.min(ad, 1);
     const far = Math.max(ad - 1, 0);
     const tam = lerp(alto, mini, near); // la activa grande, las demás miniaturas
-    const y = Math.sign(d) * signo * (((alto + mini) / 2 + gap) * near + far * (mini + gap));
-    return { x: 0, y, escala: tam / alto };
+    const ancho = (alto + mini) * PROPORCION;
+    const x = Math.sign(d) * signo * ((ancho / 2 + gap) * near + far * (mini * PROPORCION + gap));
+    return { x, y: 0, escala: tam / alto };
   };
 
   const place = (value: number) => {
@@ -98,26 +102,27 @@ export default function GaleriaFormaciones({
         escala = lerp(0.02, escalaMini, k);
         opacity = lerp(0.6, 1, k);
       } else if (value < b) {
-        /* 2. Del anillo a la columna (la primera foto crece) */
+        /* 2. Del anillo a la fila (la primera foto crece) */
         const k = ease(clamp01((value - a) / (b - a)));
-        const col = enColumna(i);
+        const col = enFila(i);
         x = lerp(anillo.x, col.x, k);
         y = lerp(anillo.y, col.y, k);
         escala = lerp(anillo.escala, col.escala, k);
       } else {
-        /* 3. La columna avanza; cada foto se queda un instante como protagonista */
+        /* 3. La fila avanza; cada foto se queda un instante como protagonista */
         const raw = ((value - b) / (1 - b)) * (total - 1);
         const base = Math.floor(raw);
         activa = Math.min(total - 1, base + (1 - Math.cos(Math.PI * (raw - base))) / 2);
-        const col = enColumna(i - activa);
+        const col = enFila(i - activa);
         x = col.x;
         y = col.y;
         escala = col.escala;
-        /* En móvil solo las vecinas, para no cruzarse con la descripción */
-        opacity = 1 - clamp01(Math.abs(i - activa) - (medidas.current.mobile ? 1.2 : 3.5));
+        /* En el móvil solo las vecinas: las demás quedarían fuera de la pantalla */
+        opacity = 1 - clamp01(Math.abs(i - activa) - (medidas.current.mobile ? 1.6 : 3.5));
       }
 
-      item.style.transform = `translate(-50%, -50%) translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) scale(${escala.toFixed(4)})`;
+      item.style.height = `${(alto * escala).toFixed(1)}px`;
+      item.style.transform = `translate(-50%, -50%) translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
       item.style.opacity = opacity.toFixed(3);
       item.style.zIndex = String(100 - Math.round(Math.abs(i - activa) * 10));
     });
@@ -132,7 +137,7 @@ export default function GaleriaFormaciones({
       logo.style.transform = `translate(-50%, -50%) scale(${(0.7 + entra * 0.3 - sale * 0.2).toFixed(3)})`;
     }
 
-    setFase(value < a ? "punto" : value < b ? "anillo" : "columna");
+    setFase(value < a ? "punto" : value < b ? "anillo" : "fila");
     setActual(Math.min(total - 1, Math.max(0, Math.round(activa))));
   };
 
@@ -141,7 +146,9 @@ export default function GaleriaFormaciones({
     if (isStatic) return;
     const setLayout = () => {
       const mobile = window.innerWidth < 768;
-      const alto = mobile ? Math.min(window.innerHeight * 0.58, window.innerWidth * 1.15) : Math.min(window.innerHeight * 0.7, 680);
+      const alto = mobile
+        ? Math.min(window.innerHeight * 0.58, (window.innerWidth * 0.62) / PROPORCION)
+        : Math.min(window.innerHeight * 0.7, 680);
       medidas.current = {
         mobile,
         alto,
@@ -189,7 +196,7 @@ export default function GaleriaFormaciones({
             }}
             type="button"
             className="formacion__item"
-            onClick={() => (isStatic || (fase === "columna" && i === actual) ? onOpen(i) : goTo(i))}
+            onClick={() => (isStatic || (fase === "fila" && i === actual) ? onOpen(i) : goTo(i))}
             aria-label={i === actual || isStatic ? `Ampliar foto: ${foto.alt}` : `Ver foto: ${foto.alt}`}
           >
             {/* Carga normal: con `lazy` el navegador no ve como visibles las fotos transformadas */}
