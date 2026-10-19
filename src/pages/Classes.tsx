@@ -81,7 +81,7 @@ const formatos: Formato[] = [
         titulo: "Enfoque deportivo",
         parrafos: [
           "También son ideales para deportistas que quieren mejorar movilidad, estabilidad, control postural y calidad de movimiento como complemento a su entrenamiento.",
-          "Trabajamos de forma específica para optimizar tu rendimiento en otras disciplinas, previniendo lesiones y mejorando la eficiencia de cada movimiento a través del control del core y la alineación.",
+          "Trabajamos de forma específica como complemento a otras disciplinas, mejorando el control del core, la alineación y la eficiencia de cada movimiento, algo que puede ayudarte a reducir el riesgo de lesiones.",
         ],
       },
     ],

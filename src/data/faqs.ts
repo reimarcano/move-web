@@ -46,7 +46,7 @@ export const faqs: FAQ[] = [
   {
     question: "¿Ayuda el Pilates Reformer con el dolor de espalda?",
     answer:
-      "Sí. Trabajamos la fuerza profunda, la movilidad y el control postural de forma progresiva y segura. Muchas alumnas de MOVE han reducido sus molestias lumbares y cervicales con una práctica constante. Si tienes una lesión activa, te orientamos sobre el formato más adecuado para ti.",
+      "Puede ser un buen aliado. Trabajamos la fuerza profunda, la movilidad y el control postural de forma progresiva, adaptando cada ejercicio a cómo te encuentras. No sustituye a un tratamiento: si tienes una lesión activa o dolor agudo, consulta antes con tu médico o fisioterapeuta, y te orientamos sobre el formato más adecuado para ti.",
   },
   {
     question: "¿Ofrecéis Pilates para embarazo?",

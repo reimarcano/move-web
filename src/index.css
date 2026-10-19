@@ -1462,7 +1462,6 @@ html {
 /* ── Home · Reseñas: una voz cada vez ── */
 .rv-score { margin: 22px 0 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
 .rv-score svg { width: 18px; height: 18px; }
-.rv-score-value { font-family: var(--font-serif); font-style: italic; font-size: var(--fs-sub); line-height: 1; color: var(--color-dark); }
 .rv-stars { display: inline-flex; gap: 2px; color: var(--color-dark); }
 .rv-stage { max-width: 760px; margin: 0 auto; }
 
@@ -1483,7 +1482,7 @@ html {
 .rv-full summary:hover { color: var(--color-dark); border-color: var(--color-dark); }
 .rv-full summary:focus-visible { outline: 1px solid var(--color-dark); outline-offset: 4px; }
 .rv-full[open] summary { display: none; }
-.rv-full p { margin: 0; font-family: var(--font-sans); font-size: var(--fs-small); line-height: 1.75; color: var(--color-ink-2); }
+.rv-full p { margin: 0; white-space: pre-line;font-family: var(--font-sans); font-size: var(--fs-small); line-height: 1.75; color: var(--color-ink-2); }
 
 /* La frase llega enfocándose, como el resto de titulares */
 @media (prefers-reduced-motion: no-preference) {
