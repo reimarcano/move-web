@@ -21,7 +21,29 @@ export const APERTURA_ESTUDIO = {
 export const INTRO_ESTUDIO =
   "Cada detalle de MOVE está pensado para que te sientas a gusto, en confianza y presente desde el momento en que entras.";
 
-/* El espacio en cuatro detalles */
+/* El recorrido por el estudio: en ordenador, hojas de tres fotos; en el móvil, una foto
+   por hoja (partida en tres franjas, como las cortinas del ventanal) */
+const fotoEspacio = (n: number, alt: string): Foto => ({ src: espacio(n), alt });
+const SALA = fotoEspacio(1, APERTURA_ESTUDIO.descripcion);
+const REFORMERS = fotoEspacio(2, "Reformers de madera alineados en la sala de MOVE Pilates Boutique");
+const PLANTAS = fotoEspacio(3, "Plantas y luz natural en la sala de MOVE Pilates Boutique");
+const RINCON = fotoEspacio(4, "Rincón con aparador, plantas y hervidor bajo el logotipo de MOVE");
+const TARJETA = fotoEspacio(5, "Tarjeta de MOVE Pilates Boutique junto a una vela y eucalipto");
+const ARO = fotoEspacio(6, "Aro de Pilates colgado sobre el reformer junto a una fotografía en blanco y negro");
+const SALA_PLANTA = fotoEspacio(7, "Sala de reformers de MOVE con una planta en primer plano");
+const TOALLA = fotoEspacio(8, "Toalla y botella de agua preparadas sobre el reformer");
+const LOGO = fotoEspacio(9, "Logotipo de MOVE Pilates Boutique en la pared del estudio");
+
+export const recorridoEstudio = {
+  escritorio: [
+    [REFORMERS, SALA, PLANTAS],
+    [ARO, RINCON, TARJETA],
+    [SALA_PLANTA, LOGO, TOALLA],
+  ],
+  movil: [SALA, REFORMERS, PLANTAS, RINCON, ARO, LOGO],
+};
+
+/* El espacio en cuatro detalles (texto para buscadores) */
 export const momentosEspacio: Momento[] = [
   {
     titulo: "Entrar.",
