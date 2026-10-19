@@ -55,20 +55,26 @@ function loadAnalytics() {
 }
 
 export function CookieConsentProvider({ children }: { children: ReactNode }) {
-  const [consent, setConsent] = useState<StoredConsent | null>(() => readStoredConsent());
+  /* La elección guardada se lee tras montar: el HTML precompilado no la conoce y el
+     primer render tiene que coincidir con él (mapa y banner llegan justo después) */
+  const [consent, setConsent] = useState<StoredConsent | null>(null);
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const [draft, setDraft] = useState<OptionalPreferences>(EMPTY_PREFERENCES);
   const [ready, setReady] = useState(false);
   const analyticsAllowed = consent?.analytics === true;
   const mapsAllowed = consent?.maps === true;
 
-  useEffect(() => { setReady(true); }, []);
+  useEffect(() => {
+    setConsent(readStoredConsent());
+    setReady(true);
+  }, []);
 
   useEffect(() => {
+    if (!ready) return; // hasta leer la elección guardada no se borra nada
     if (analyticsAllowed) { loadAnalytics(); return; }
     removeAnalyticsCookies();
     window.gtag?.('consent', 'update', { analytics_storage: 'denied' });
-  }, [analyticsAllowed]);
+  }, [ready, analyticsAllowed]);
 
   useEffect(() => {
     if (!analyticsAllowed) return;

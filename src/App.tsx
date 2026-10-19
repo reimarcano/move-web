@@ -3,9 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, type ComponentType } from 'react';
 import {
-  BrowserRouter,
   Routes,
   Route,
   useLocation,
@@ -15,17 +14,57 @@ import { Helmet } from 'react-helmet-async';
 import Layout from './components/Layout';
 import SpringLoader from './components/SpringLoader';
 import Home from './pages/Home';
-import { useScrollReveal } from './hooks/useScrollReveal';
 import { canonicalForPath, OG_IMAGE, seoByPath } from './seo';
 
-const Classes = lazy(() => import('./pages/Classes'));
-const Pricing = lazy(() => import('./pages/Pricing'));
-const NuestroEstudio = lazy(() => import('./pages/NuestroEstudio'));
-const Eventos = lazy(() => import('./pages/Eventos'));
-const Contacto = lazy(() => import('./pages/Contacto'));
-const LegalNotice = lazy(() => import('./pages/Legal').then((module) => ({ default: module.LegalNotice })));
-const PrivacyPolicy = lazy(() => import('./pages/Legal').then((module) => ({ default: module.PrivacyPolicy })));
-const CookiePolicy = lazy(() => import('./pages/Legal').then((module) => ({ default: module.CookiePolicy })));
+type PageModule = { default: ComponentType };
+
+/* Página en su propio fragmento de JS que además se puede cargar por adelantado: si ya
+   está cargada cuando se pinta, React la usa en el acto, sin suspender. Así el HTML
+   precompilado se hidrata entero de una vez, sin huecos ni parpadeos. */
+function lazyPage(load: () => Promise<PageModule>) {
+  let loaded: PageModule | undefined;
+  const preload = () =>
+    load().then((module) => {
+      loaded = module;
+      return module;
+    });
+  const Page = lazy(() =>
+    loaded
+      ? // Un "then" síncrono: React lee el módulo sin esperar a otra vuelta
+        ({ then: (resolve: (module: PageModule) => void) => resolve(loaded!) } as unknown as Promise<PageModule>)
+      : preload(),
+  );
+  return Object.assign(Page, { preload });
+}
+
+const Classes = lazyPage(() => import('./pages/Classes'));
+const Pricing = lazyPage(() => import('./pages/Pricing'));
+const NuestroEstudio = lazyPage(() => import('./pages/NuestroEstudio'));
+const Eventos = lazyPage(() => import('./pages/Eventos'));
+const Contacto = lazyPage(() => import('./pages/Contacto'));
+const LegalNotice = lazyPage(() => import('./pages/Legal').then((module) => ({ default: module.LegalNotice })));
+const PrivacyPolicy = lazyPage(() => import('./pages/Legal').then((module) => ({ default: module.PrivacyPolicy })));
+const CookiePolicy = lazyPage(() => import('./pages/Legal').then((module) => ({ default: module.CookiePolicy })));
+
+const pagesByPath: Record<string, { preload: () => Promise<unknown> }> = {
+  '/clases': Classes,
+  '/precios': Pricing,
+  '/estudio': NuestroEstudio,
+  '/eventos': Eventos,
+  '/contacto': Contacto,
+  '/aviso-legal': LegalNotice,
+  '/privacidad': PrivacyPolicy,
+  '/cookies': CookiePolicy,
+};
+
+export function normalizePath(pathname: string) {
+  return pathname !== '/' ? pathname.replace(/\/+$/, '') || '/' : '/';
+}
+
+/* Carga la página de esa ruta antes de pintar (la portada ya va en el JS principal) */
+export async function preloadPage(pathname: string) {
+  await pagesByPath[normalizePath(pathname)]?.preload();
+}
 
 function SeoManager() {
   const location = useLocation();
@@ -65,8 +104,7 @@ function SeoManager() {
   );
 }
 
-function AppContent() {
-  useScrollReveal();
+export default function App() {
   const location = useLocation();
   const normalizedPath =
     location.pathname !== '/'
@@ -76,7 +114,8 @@ function AppContent() {
   return (
     <>
       <SpringLoader active={normalizedPath === '/'} />
-      <SeoManager />
+      {/* Al compilar, las etiquetas del <head> las escribe scripts/prerender.ts */}
+      {typeof window !== 'undefined' && <SeoManager />}
 
       <Suspense fallback={null}>
         <Routes>
@@ -94,13 +133,5 @@ function AppContent() {
         </Routes>
       </Suspense>
     </>
-  );
-}
-
-export default function App() {
-  return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
   );
 }

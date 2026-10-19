@@ -15,6 +15,10 @@ export default defineConfig(({mode}) => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    ssr: {
+      // Su build ESM no se puede importar tal cual desde Node: va dentro del bundle de prerender
+      noExternal: ['react-helmet-async'],
+    },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
