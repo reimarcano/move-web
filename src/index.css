@@ -1107,6 +1107,10 @@ html {
 .fq-item[data-open="true"] .fq-toggle::after { transform: rotate(90deg) scaleX(0); }
 .fq-a { overflow: hidden; transition: max-height 500ms var(--ease-move), opacity 500ms var(--ease-move); }
 .fq-a .m-text { margin: 0; padding: 0 28px 26px 46px; }
+/* Enlace bajo la respuesta: mismo subrayado que crece del pie de Instagram */
+.fq-link { display: inline-block; margin: -10px 0 28px 46px; padding-bottom: 3px; font-family: var(--font-serif); font-style: italic; font-size: var(--fs-body); color: var(--color-dark); text-decoration: none; background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat; transition: background-size 0.6s var(--ease-move); }
+.fq-link::after { content: " →"; font-style: normal; }
+@media (hover: hover) { .fq-link:hover { background-size: 0 1px; } }
 
 /* Los filetes de la lista se trazan al entrar, uno tras otro */
 @media (prefers-reduced-motion: no-preference) {

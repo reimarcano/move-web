@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { Link } from "react-router-dom";
 
 /* Pregunta frecuente desplegable: número, pregunta y un más que gira hasta formar un menos.
    La misma pieza en toda la web (Home, Eventos…). `idPrefix` evita ids repetidos. */
@@ -9,7 +10,7 @@ export default function FaqItem({
   onToggle,
   idPrefix = "faq",
 }: {
-  faq: { question: string; answer: string };
+  faq: { question: string; answer: string; link?: { label: string; href: string } };
   index: number;
   isOpen: boolean;
   onToggle: () => void;
@@ -42,6 +43,16 @@ export default function FaqItem({
         style={{ maxHeight: `${height}px`, opacity: isOpen ? 1 : 0 }}
       >
         <p className="m-text">{faq.answer}</p>
+        {faq.link &&
+          (faq.link.href.startsWith("/") ? (
+            <Link to={faq.link.href} className="fq-link" tabIndex={isOpen ? 0 : -1}>
+              {faq.link.label}
+            </Link>
+          ) : (
+            <a href={faq.link.href} target="_blank" rel="noreferrer" className="fq-link" tabIndex={isOpen ? 0 : -1}>
+              {faq.link.label}
+            </a>
+          ))}
       </div>
     </div>
   );

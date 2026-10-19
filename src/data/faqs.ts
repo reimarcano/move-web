@@ -1,33 +1,52 @@
+import { VALORACION_WHATSAPP_URL } from "./valoracion";
+
 export interface FAQ {
   question: string;
   answer: string;
+  /* Enlace opcional bajo la respuesta: rutas internas ("/precios") o URLs externas */
+  link?: { label: string; href: string };
 }
 
+/* Respuestas cortas (≈40–70 palabras); el detalle vive en la página enlazada.
+   Orden: del primer interés del visitante hasta la reserva y la ubicación. */
 export const faqs: FAQ[] = [
-  {
-    question: "¿Dónde está MOVE Pilates Boutique?",
-    answer:
-      "Estamos en Av. de Europa, 31, local 7 (acceso desde Calle Berna), 28224 Pozuelo de Alarcón, Madrid.",
-  },
   {
     question: "¿Puedo empezar si nunca he hecho Pilates Reformer?",
     answer:
       "Sí. No hace falta experiencia previa. Al trabajar con grupos de máximo 4 personas, podemos guiarte desde el primer día, adaptar cada ejercicio a tu nivel y asegurarnos de que progresas con seguridad y confianza.",
   },
   {
+    question: "¿Tenéis clase de prueba?",
+    answer:
+      "Sí: una clase de valoración de 50 minutos por 18 €. Conocemos tu nivel, tu postura y tus objetivos, y te recomendamos el plan que mejor encaja contigo. Si te apuntas, los 18 € se descuentan de tu primer mes o bono.",
+    link: { label: "Reservar por WhatsApp", href: VALORACION_WHATSAPP_URL },
+  },
+  {
+    question: "¿Cuántas personas hay por clase?",
+    answer:
+      "En MOVE trabajamos con grupos de máximo 4 personas. Así podemos corregirte, ajustar cada ejercicio y ayudarte a progresar en cada sesión. Es la base de nuestra propuesta: atención real y personalizada.",
+  },
+  {
+    question: "¿Cuáles son las tarifas de Move Pilates Reformer en Pozuelo?",
+    answer:
+      "Clases grupales (máximo 4 personas): 115 €/mes con 1 sesión semanal, 190 € con 2 y 220 € con 3. Sesiones privadas 1:1: bono de 4 por 210 € o de 8 por 400 €. Todas las clases duran 50 minutos. Puedes empezar con la clase de valoración de 18 €, que se descuenta de tu primer plan.",
+    link: { label: "Ver todas las tarifas", href: "/precios" },
+  },
+  {
     question: "¿Qué beneficios tiene el Pilates Reformer?",
     answer:
-      "El Pilates Reformer mejora la postura, fortalece el core y la musculatura profunda, aumenta la movilidad articular y mejora el control corporal. Es una disciplina muy eficaz para ganar fuerza, estabilidad y consciencia corporal, y para moverte con más control tanto en tu rutina diaria como en otros deportes. Además, el Pilates Reformer puede adaptarse a personas que buscan trabajar con cuidado si tienen molestias de espalda, lumbares o cervicales, a deportistas que quieren mejorar movilidad y rendimiento, y a mujeres en embarazo o postparto, siempre valorando cada caso con prudencia. En MOVE Pilates Boutique, en Pozuelo de Alarcón, trabajamos en grupos reducidos de máximo 4 personas y sesiones privadas para ofrecer una atención realmente personalizada.",
+      "Fortalece el core y la musculatura profunda, mejora la postura y la movilidad, y te da más control del cuerpo en el día a día y en otros deportes. Como la máquina permite ajustar la resistencia, se adapta a cada persona: si empiezas de cero, si eres deportista, si tienes molestias de espalda o si estás en embarazo o postparto.",
+    link: { label: "Ver para quién es cada clase", href: "/clases" },
+  },
+  {
+    question: "¿Qué diferencia hay entre Pilates Reformer y Pilates en suelo?",
+    answer:
+      "En suelo trabajas con tu propio peso sobre una esterilla. El Reformer es una máquina con muelles que añaden o quitan resistencia, así que cada ejercicio se ajusta a ti: te ayuda cuando empiezas y te exige más a medida que progresas. El resultado es un trabajo más preciso, variado y fácil de adaptar a cada cuerpo.",
   },
   {
     question: "¿Ayuda el Pilates Reformer con el dolor de espalda?",
     answer:
       "Sí. Trabajamos la fuerza profunda, la movilidad y el control postural de forma progresiva y segura. Muchas alumnas de MOVE han reducido sus molestias lumbares y cervicales con una práctica constante. Si tienes una lesión activa, te orientamos sobre el formato más adecuado para ti.",
-  },
-  {
-    question: "¿Cuántas personas hay por clase?",
-    answer:
-      "En MOVE trabajamos con grupos de máximo 4 personas. Esto nos permite corregir, ajustar y progresar contigo en cada sesión, algo imposible en clases masificadas. Es la base de nuestra propuesta: atención real, no atención simulada.",
   },
   {
     question: "¿Ofrecéis Pilates para embarazo?",
@@ -40,13 +59,8 @@ export const faqs: FAQ[] = [
       "Sí. Acompañamos la vuelta al movimiento paso a paso, cuidando especialmente el core profundo y el suelo pélvico. Siempre dentro de tus rangos y según cómo te sientas cada día. Consúltanos antes de empezar para orientarte bien según tu momento de recuperación.",
   },
   {
-    question: "¿Tenéis clase de prueba?",
+    question: "¿Dónde está MOVE Pilates Boutique?",
     answer:
-      "Sí. Nuestra clase de prueba es una clase de valoración de 50 minutos por 18 €: conocemos tu nivel, tu postura y tus objetivos para recomendarte el plan que mejor encaja contigo. Si te apuntas, descontamos los 18 € de tu primer mes o bono. Escríbenos por WhatsApp al +34 654 49 55 08 para confirmar disponibilidad.",
-  },
-  {
-    question: "¿Cuáles son las tarifas de Move Pilates Reformer en Pozuelo?",
-    answer:
-      "Clase de valoración (clase de prueba): 18 €, descontables de tu primer mes o bono. Clases grupales de Pilates Reformer (máx. 4 personas): 115 €/mes con 1 sesión por semana · 190 €/mes con 2 sesiones · 220 €/mes con 3 sesiones, con validez de 35 días. Sesiones privadas 1:1: Bono 4 sesiones por 210 € (52,50 €/sesión) · Bono 8 sesiones por 400 € (50 €/sesión). Todas las clases duran 50 minutos y todos los planes incluyen descuentos en eventos MOVE.",
+      "Estamos en Av. de Europa, 31, local 7 (acceso desde Calle Berna), 28224 Pozuelo de Alarcón, Madrid.",
   },
 ];
