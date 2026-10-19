@@ -3,9 +3,15 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 /* Reseñas copiadas literalmente de la ficha de Google (revisadas el 19/10/2026):
    mismo texto, saltos de línea y erratas. La frase destacada es un fragmento literal;
    los puntos suspensivos marcan dónde se corta. No editar el texto: si cambia en Google,
-   se vuelve a copiar. Orden: de lo que más se busca (grupos reducidos, Reformer, empezar,
-   postparto…) a lo más general. */
+   se vuelve a copiar. Orden: de lo que más se busca (Pozuelo, grupos reducidos, Reformer,
+   embarazo y postparto, empezar, Madrid…) a lo más general. */
 const reviewsData = [
+  {
+    id: 'carlos',
+    name: 'Carlos Morata',
+    destacado: 'Para mí, el mejor centro de pilates en Pozuelo.',
+    text: 'El trato en este centro es una pasada. Quiero destacar a Génesis, no solo por cómo da las clases y adapta los ejercicios según las lesiones o necesidades de cada persona, sino también por cómo trata a todo el mundo que se acerca al local. Se nota muchísimo la profesionalidad y el cariño con el que trabajan. Para mí, el mejor centro de pilates en Pozuelo.',
+  },
   {
     id: 'eriko',
     name: 'Eriko Pereira Villa',
@@ -19,10 +25,22 @@ const reviewsData = [
     text: '¡No puedo estar más feliz con este centro! El local es precioso y está impecable, lo que hace que entrenar sea un gusto. Las máquinas y el resto del equipamiento son de primerísima calidad.\nMención especial para Génesis; es una profesional increíble, atenta y técnica. Además, la gestión de cambios de clase es súper eficiente, algo que se agradece mucho. Desde que empecé con el Pilates Reformer aquí, mi salud ha dado un giro: ya no tengo dolores de espalda, mi postura ha mejorado notablemente y, como corredora, he notado un rendimiento mucho mayor en el running. ¡Recomendable al 100%!',
   },
   {
+    id: 'dayana',
+    name: 'Dayana Perez',
+    destacado: 'Me acompañó durante el embarazo, ayudándome a mantenerme activa, conectar con mi cuerpo…',
+    text: 'Este centro de pilates ha sido un regalo en mi vida. Me acompañó durante el embarazo, ayudándome a mantenerme activa, conectar con mi cuerpo y vivir esa etapa con más confianza y serenidad. Ahora en el postparto sigue siendo mi lugar seguro: me siento cuidada, escuchada y guiada. No es solo ejercicio, es un espacio de bienestar físico y emocional. ¡Lo recomiendo de todo corazón a cualquier persona, especialmente a mamás que quieran cuidarse en todas las etapas Gracias Gene por ser tan incondicional con tu trabajo!',
+  },
+  {
     id: 'zuly',
     name: 'Zuly Verastegui',
     destacado: '…te explica las posiciones acorde a tu nivel…',
     text: 'He ido a mi primera clase de pilates en este centro y que acierto, genesis es paciente y te explica las posiciones acorde a tu nivel, esta pendiente de que no te lesiones y ayudarte lo más posible a cumplir la posiciones, 100% recomendada',
+  },
+  {
+    id: 'miriam',
+    name: 'Miriam Moros',
+    destacado: 'Sin duda el mejor sitio para hacer pilates en Madrid.',
+    text: 'Sin duda el mejor sitio para hacer pilates en Madrid. Tanto las clases, como Génesis, como el espacio son increíbles, perfectos para desconectar y relajarse mientras haces deporte. Literalmente la única vez que 1hora de ejercicio se me pasa volando!\nMi sitio de confianza sin duda',
   },
   {
     id: 'linette',
