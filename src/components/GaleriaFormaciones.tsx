@@ -186,7 +186,7 @@ export default function GaleriaFormaciones({
       aria-label={etiqueta}
     >
       <div className="formacion__stage">
-        <img ref={logoRef} className="formacion__logo" src="/assets/move-m-marron.webp" alt="" aria-hidden="true" />
+        <img ref={logoRef} className="formacion__logo" src="/assets/move-m-marron.webp" alt="" aria-hidden="true" fetchPriority="low" />
         {fotos.map((foto, i) => (
           <button
             key={foto.src}
@@ -199,7 +199,7 @@ export default function GaleriaFormaciones({
             aria-label={i === actual || isStatic ? `Ampliar foto: ${foto.alt}` : `Ver foto: ${foto.alt}`}
           >
             {/* Carga normal: con `lazy` el navegador no ve como visibles las fotos transformadas */}
-            <img src={foto.src} alt="" decoding="async" draggable={false} />
+            <img src={foto.src} alt="" fetchPriority="low" decoding="async" draggable={false} />
           </button>
         ))}
 

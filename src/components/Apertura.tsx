@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import { m as motion, useScroll, useSpring, useTransform } from "motion/react";
 import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
 
 /* ────────────────────────────────────────────

@@ -10,6 +10,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { LazyMotion, domAnimation } from 'motion/react';
 
 import Layout from './components/Layout';
 import SpringLoader from './components/SpringLoader';
@@ -117,21 +118,24 @@ export default function App() {
       {/* Al compilar, las etiquetas del <head> las escribe scripts/prerender.ts */}
       {typeof window !== 'undefined' && <SeoManager />}
 
-      <Suspense fallback={null}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="clases" element={<Classes />} />
-            <Route path="precios" element={<Pricing />} />
-            <Route path="estudio" element={<NuestroEstudio />} />
-            <Route path="eventos" element={<Eventos />} />
-            <Route path="contacto" element={<Contacto />} />
-            <Route path="aviso-legal" element={<LegalNotice />} />
-            <Route path="privacidad" element={<PrivacyPolicy />} />
-            <Route path="cookies" element={<CookiePolicy />} />
-          </Route>
-        </Routes>
-      </Suspense>
+      {/* Solo las funciones de animación que usamos (sin drag ni layout): JS inicial más ligero */}
+      <LazyMotion features={domAnimation}>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="clases" element={<Classes />} />
+              <Route path="precios" element={<Pricing />} />
+              <Route path="estudio" element={<NuestroEstudio />} />
+              <Route path="eventos" element={<Eventos />} />
+              <Route path="contacto" element={<Contacto />} />
+              <Route path="aviso-legal" element={<LegalNotice />} />
+              <Route path="privacidad" element={<PrivacyPolicy />} />
+              <Route path="cookies" element={<CookiePolicy />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </LazyMotion>
     </>
   );
 }
