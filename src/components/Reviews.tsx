@@ -178,7 +178,7 @@ export default function Reviews() {
         {/* Valoración de Google: logo y estrellas, sin nota numérica para que no se quede desactualizada */}
         <p className="rv-score reveal reveal-delay-2">
           <GoogleLogo />
-          <span className="rv-stars" aria-label="Valoración de 5 estrellas en Google">
+          <span className="rv-stars" role="img" aria-label="Valoración de 5 estrellas en Google">
             {[0, 1, 2, 3, 4].map((star) => (
               <StarIcon key={star} size={12} />
             ))}

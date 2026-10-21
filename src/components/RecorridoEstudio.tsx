@@ -109,7 +109,7 @@ export default function RecorridoEstudio({
                   alt={partida && j > 0 ? "" : foto.alt}
                   aria-hidden={partida && j > 0 ? true : undefined}
                   className={partida ? "recorrido__img--partida" : undefined}
-                  fetchPriority={i === 0 ? "high" : undefined}
+                  fetchPriority={i === 0 ? "high" : "low"}
                   decoding="async"
                   draggable={false}
                 />

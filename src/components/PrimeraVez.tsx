@@ -115,6 +115,8 @@ export default function PrimeraVez() {
           <img
             ref={imgRef}
             src="/assets/move-pilates-madrid-03.webp"
+            srcSet="/assets/move-pilates-madrid-03-900.webp 900w, /assets/move-pilates-madrid-03.webp 1707w"
+            sizes="(max-width: 900px) 100vw, 50vw"
             alt="Clase de Pilates Reformer guiada en MOVE Pilates Boutique, Pozuelo de Alarcón"
             width={1707}
             height={2560}

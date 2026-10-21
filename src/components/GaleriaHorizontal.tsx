@@ -100,6 +100,7 @@ export default function GaleriaHorizontal({
                 }}
                 src={foto.src}
                 alt=""
+                fetchPriority="low"
                 decoding="async"
                 draggable={false}
               />

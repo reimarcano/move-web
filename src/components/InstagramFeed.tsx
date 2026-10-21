@@ -216,7 +216,7 @@ export default function InstagramFeed() {
                   tabIndex={clone ? -1 : undefined}
                   aria-label={`${post.alt} — ver en Instagram`}
                 >
-                  <img src={post.src} alt="" decoding="async" draggable={false} />
+                  <img src={post.src} alt="" loading="lazy" decoding="async" draggable={false} />
                   <span className="ig-caption" aria-hidden="true">@{INSTAGRAM_HANDLE}</span>
                 </a>
               </li>

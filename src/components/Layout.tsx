@@ -110,6 +110,8 @@ export default function Layout() {
                 <img 
                   src="/assets/logo-move.webp" 
                   alt="Logo de MOVE Pilates Boutique" 
+                  width={461}
+                  height={108}
                   className="h-6 w-auto object-contain"
                   referrerPolicy="no-referrer"
                 />
@@ -137,6 +139,8 @@ export default function Layout() {
               <img 
                 src="/assets/logo-move.webp" 
                 alt="Logo de MOVE Pilates Boutique" 
+                width={461}
+                height={108}
                 className="h-[21px] w-auto object-contain"
                 referrerPolicy="no-referrer"
               />
@@ -227,8 +231,12 @@ export default function Layout() {
             <div className="sm:col-span-2 lg:col-span-1">
               <Link to="/" className="inline-block">
                 <img 
-                  src="/assets/move pilates boutique pozuelo_logo.png" 
+                  src="/assets/move-logo-pozuelo-720.webp" 
                   alt="MOVE Pilates Boutique" 
+                  width={720}
+                  height={232}
+                  loading="lazy"
+                  decoding="async"
                   className="h-8 md:h-9 w-auto object-contain brightness-0 invert"
                   referrerPolicy="no-referrer"
                 />
@@ -249,8 +257,8 @@ export default function Layout() {
 
             {/* Column 2 - Estudio */}
             <div>
-              <h4 
-                className="mb-5 font-normal"
+              <h2 
+                className="mb-5 font-normal leading-normal"
                 style={{ 
                   fontFamily: 'var(--font-sans)',
                   fontSize: 'var(--fs-micro)',
@@ -260,7 +268,7 @@ export default function Layout() {
                 }}
               >
                 ESTUDIO
-              </h4>
+              </h2>
               <p 
                 style={{ 
                   fontFamily: 'var(--font-sans)',
@@ -291,8 +299,8 @@ export default function Layout() {
 
             {/* Column 3 - Contacto */}
             <div>
-              <h4 
-                className="mb-5 font-normal"
+              <h2 
+                className="mb-5 font-normal leading-normal"
                 style={{ 
                   fontFamily: 'var(--font-sans)',
                   fontSize: 'var(--fs-micro)',
@@ -302,7 +310,7 @@ export default function Layout() {
                 }}
               >
                 CONTACTO
-              </h4>
+              </h2>
               <div className="flex flex-col gap-3">
                 <a 
                   href="https://wa.me/34654495508" 
@@ -362,8 +370,8 @@ export default function Layout() {
 
             {/* Column 4 - Páginas */}
             <div>
-              <h4 
-                className="mb-5 font-normal"
+              <h2 
+                className="mb-5 font-normal leading-normal"
                 style={{ 
                   fontFamily: 'var(--font-sans)',
                   fontSize: 'var(--fs-micro)',
@@ -373,7 +381,7 @@ export default function Layout() {
                 }}
               >
                 PÁGINAS
-              </h4>
+              </h2>
               <nav className="flex flex-col" aria-label="Navegación del pie de página">
                 {[
                   { name: 'Clases', path: '/clases' },

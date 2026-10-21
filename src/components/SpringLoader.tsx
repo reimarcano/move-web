@@ -141,7 +141,7 @@ export default function SpringLoader({ active }: { active: boolean }) {
     >
       <div className="spring-loader__content" aria-hidden="true">
         <img
-          src="/assets/move pilates boutique pozuelo_logo.png"
+          src="/assets/move-logo-pozuelo-720.webp"
           alt=""
           className="spring-loader__brand"
           width={240}
