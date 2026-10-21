@@ -12,7 +12,8 @@
     <!-- Fuentes de la primera pantalla: se piden a la vez que el CSS, no después -->
     <link rel="preload" href="/fonts/move-times-roman-regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/move-arial-regular.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- SCHEMA.ORG — Local Business (unified with reviews) -->
+    <!-- SCHEMA.ORG — Negocio local. Nombre, dirección, teléfono, coordenadas y horario
+         deben coincidir con la ficha de Google Business (hasMap) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -22,6 +23,21 @@
       "description": "Estudio de Pilates Reformer en Pozuelo de Alarcón. Grupos reducidos de máximo 4 personas y sesiones privadas con atención personalizada.",
       "url": "https://www.movepilatesboutique.com",
       "telephone": "+34654495508",
+      "hasMap": "https://www.google.com/maps?cid=7878401388043902058",
+      "sameAs": [
+        "https://www.google.com/maps?cid=7878401388043902058",
+        "https://www.instagram.com/move.pilatesboutique/",
+        "https://www.tiktok.com/@movepilatesboutique"
+      ],
+      "founder": {
+        "@type": "Person",
+        "@id": "https://www.movepilatesboutique.com/estudio#genesis-romero",
+        "name": "Génesis Romero"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Pozuelo de Alarcón" },
+        { "@type": "City", "name": "Madrid" }
+      ],
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Av. de Europa, 31, local 7",
@@ -32,8 +48,8 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 40.4358,
-        "longitude": -3.8142
+        "latitude": 40.44382,
+        "longitude": -3.79002
       },
       "image": "https://www.movepilatesboutique.com/assets/og-image.jpg",
       "priceRange": "€€",

@@ -17,6 +17,12 @@ const faqPage = (items: { question: string; answer: string }[]) => ({
   })),
 });
 
+/* Rutas que no existen (dist/404.html): sin canonical y fuera del índice */
+export const NOT_FOUND_SEO = {
+  title: 'Página no encontrada · MOVE Pilates Boutique',
+  description: 'Esta página no existe. Vuelve al inicio de MOVE Pilates Boutique, estudio de Pilates Reformer en Pozuelo de Alarcón.',
+};
+
 export type SeoEntry = {
   title: string;
   description: string;
@@ -26,23 +32,23 @@ export type SeoEntry = {
 
 export const seoByPath: Record<string, SeoEntry> = {
   '/': {
-    title: 'Move Pilates Boutique · Pilates Reformer en Pozuelo de Alarcón',
+    title: 'MOVE Pilates Boutique · Pilates Reformer en Pozuelo de Alarcón',
     description:
       'Estudio boutique de Pilates Reformer en Pozuelo de Alarcón. Grupos reducidos de máximo 4 personas y sesiones privadas con atención personalizada.',
     jsonLd: [faqPage(faqs)],
   },
   '/clases': {
-    title: 'Clases de Pilates Reformer · Move · Pozuelo de Alarcón',
+    title: 'Clases de Pilates Reformer en Pozuelo · MOVE Pilates Boutique',
     description:
       'Clases de Pilates Reformer en Pozuelo de Alarcón. Grupos reducidos de máximo 4 personas y sesiones privadas con atención personalizada.',
   },
   '/precios': {
-    title: 'Tarifas Pilates Reformer · Move · Pozuelo de Alarcón',
+    title: 'Precios de Pilates Reformer en Pozuelo · MOVE Pilates Boutique',
     description:
       'Tarifas de Pilates Reformer en Pozuelo de Alarcón: clase de valoración por 18 €, clases grupales de máximo 4 personas desde 115 €/mes y bonos de sesiones privadas.',
   },
   '/eventos': {
-    title: 'Retiros de bienestar y Pilates Brunch en Madrid · Move',
+    title: 'Retiros y Pilates Brunch en Madrid · MOVE Pilates Boutique',
     description:
       'Retiros de bienestar en Madrid y Pilates Brunch en Pozuelo de Alarcón. Movimiento consciente, comida real y talleres en espacios elegidos con intención.',
     jsonLd: [
@@ -72,13 +78,15 @@ export const seoByPath: Record<string, SeoEntry> = {
     ],
   },
   '/estudio': {
-    title: 'Nuestro estudio de Pilates Reformer en Pozuelo · Move',
+    title: 'Estudio de Pilates Reformer en Pozuelo · MOVE Pilates Boutique',
     description:
       'Conoce el estudio boutique de Pilates Reformer de MOVE en Pozuelo de Alarcón: luz natural, reformers de madera, grupos de máximo 4 personas y Génesis Romero como instructora.',
     jsonLd: [
       {
         '@context': 'https://schema.org',
         '@type': 'Person',
+        // El mismo @id que `founder` en index.html: Google une a la fundadora con el estudio
+        '@id': `${SITE_URL}/estudio#genesis-romero`,
         name: 'Génesis Romero',
         jobTitle: 'Fundadora e instructora de Pilates Reformer',
         worksFor: ESTUDIO,
@@ -88,20 +96,20 @@ export const seoByPath: Record<string, SeoEntry> = {
     ],
   },
   '/contacto': {
-    title: 'Contacto · Move · Pozuelo de Alarcón',
+    title: 'Contacto y reservas en Pozuelo · MOVE Pilates Boutique',
     description:
       'Contacta con Move Pilates Boutique en Av. de Europa, 31, Pozuelo de Alarcón. Reservas mediante WhatsApp y la app TIMP.',
   },
   '/aviso-legal': {
-    title: 'Aviso legal · Move Pilates Boutique',
+    title: 'Aviso legal · MOVE Pilates Boutique',
     description: 'Información legal de Move Pilates Boutique.',
   },
   '/privacidad': {
-    title: 'Política de privacidad · Move Pilates Boutique',
+    title: 'Política de privacidad · MOVE Pilates Boutique',
     description: 'Información sobre el tratamiento de datos personales en Move Pilates Boutique.',
   },
   '/cookies': {
-    title: 'Política de cookies · Move Pilates Boutique',
+    title: 'Política de cookies · MOVE Pilates Boutique',
     description: 'Información y configuración de cookies de Move Pilates Boutique.',
   },
 };
