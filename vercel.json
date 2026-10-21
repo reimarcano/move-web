@@ -20,7 +20,6 @@
     { "source": "/contacto", "destination": "/contacto/index.html" },
     { "source": "/aviso-legal", "destination": "/aviso-legal/index.html" },
     { "source": "/privacidad", "destination": "/privacidad/index.html" },
-    { "source": "/cookies", "destination": "/cookies/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/cookies", "destination": "/cookies/index.html" }
   ]
 }

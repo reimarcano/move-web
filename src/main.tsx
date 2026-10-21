@@ -21,9 +21,10 @@ const app = (
 const container = document.getElementById('root')!;
 
 /* Si el HTML trae ya esta misma página compilada (scripts/prerender.ts), React la hidrata:
-   primero carga el JS de la página para hidratarla entera de una vez. En desarrollo, o en
-   una ruta que no existe (Vercel sirve la portada), se pinta desde cero. */
-if (container.dataset.prerendered === normalizePath(window.location.pathname)) {
+   primero carga el JS de la página para hidratarla entera de una vez. El 404 ("*") vale
+   para cualquier ruta que no exista. En desarrollo se pinta desde cero. */
+const prerendered = container.dataset.prerendered;
+if (prerendered === normalizePath(window.location.pathname) || prerendered === '*') {
   preloadPage(window.location.pathname)
     .catch(() => undefined)
     .then(() => hydrateRoot(container, app));

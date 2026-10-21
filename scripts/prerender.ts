@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { canonicalForPath, OG_IMAGE, seoByPath } from '../src/seo.ts';
+import { canonicalForPath, NOT_FOUND_SEO, OG_IMAGE, seoByPath } from '../src/seo.ts';
 
 /* Cada ruta pública se publica con su página completa en el HTML (titulares, textos,
    preguntas, reseñas, dirección…), no solo con los metadatos: así la leen también los
@@ -80,6 +80,21 @@ async function prerender() {
     await mkdir(path.dirname(outputPath), { recursive: true });
     await writeFile(outputPath, output);
   }
+
+  // Página 404: Vercel sirve dist/404.html con estado 404 en cualquier ruta que no existe.
+  // Sin canonical y con noindex; `data-prerendered="*"` = vale para cualquier ruta.
+  const html404 = await render('/404');
+  const notFound = template
+    .replace(
+      '</head>',
+      () => `
+    <title>${escapeHtml(NOT_FOUND_SEO.title)}</title>
+    <meta name="description" content="${escapeHtml(NOT_FOUND_SEO.description)}" />
+    <meta name="robots" content="noindex" />
+  </head>`,
+    )
+    .replace('<div id="root"></div>', () => `<div id="root" data-prerendered="*">${html404}</div>`);
+  await writeFile(path.join(distDirectory, '404.html'), notFound);
 }
 
 await prerender();

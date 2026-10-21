@@ -15,7 +15,8 @@ import { LazyMotion, domAnimation } from 'motion/react';
 import Layout from './components/Layout';
 import SpringLoader from './components/SpringLoader';
 import Home from './pages/Home';
-import { canonicalForPath, OG_IMAGE, seoByPath } from './seo';
+import NotFound from './pages/NotFound';
+import { canonicalForPath, NOT_FOUND_SEO, OG_IMAGE, seoByPath } from './seo';
 
 type PageModule = { default: ComponentType };
 
@@ -75,8 +76,9 @@ function SeoManager() {
       ? location.pathname.replace(/\/+$/, '')
       : '/';
 
-  const seo = seoByPath[normalizedPath] ?? seoByPath['/'];
-  const canonical = canonicalForPath(normalizedPath);
+  const existe = normalizedPath in seoByPath;
+  const seo = existe ? seoByPath[normalizedPath] : NOT_FOUND_SEO;
+  const canonical = canonicalForPath(existe ? normalizedPath : '/');
 
   return (
     <Helmet>
@@ -85,7 +87,8 @@ function SeoManager() {
       <title>{seo.title}</title>
       <meta name="description" content={seo.description} />
 
-      <link rel="canonical" href={canonical} />
+      {/* Una ruta inexistente no lleva canonical y queda fuera del índice */}
+      {existe ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex" />}
 
       <meta property="og:type" content="website" />
       <meta property="og:url" content={canonical} />
@@ -132,6 +135,7 @@ export default function App() {
               <Route path="aviso-legal" element={<LegalNotice />} />
               <Route path="privacidad" element={<PrivacyPolicy />} />
               <Route path="cookies" element={<CookiePolicy />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </Suspense>
