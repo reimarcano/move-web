@@ -34,17 +34,22 @@ function removeAnalyticsCookies() {
   const domains = [window.location.hostname, `.${window.location.hostname}`];
   document.cookie.split(';').forEach((cookie) => {
     const name = cookie.trim().split('=')[0];
-    if (name === '_ga' || name.startsWith('_ga_')) {
+    if (name === '_ga' || name.startsWith('_ga_') || name.startsWith('_gcl_')) {
       document.cookie = `${name}=; ${expiry}`;
       domains.forEach((domain) => { document.cookie = `${name}=; ${expiry}; domain=${domain}`; });
     }
   });
 }
 
+const GTM_ID = 'GTM-P6TZJFL6';
+
+/* Cualquier enlace que abra WhatsApp: wa.me, api.whatsapp.com o el esquema de la app */
+const WHATSAPP_HREF = /^(https?:\/\/)?(wa\.me|api\.whatsapp\.com|(www\.)?whatsapp\.com\/send)|^whatsapp:/i;
+
 function loadAnalytics() {
   if (document.getElementById('move-ga4')) return;
   window.dataLayer = window.dataLayer ?? [];
-  window.gtag = (...args: unknown[]) => window.dataLayer?.push(args);
+  window.gtag = function gtag() { window.dataLayer?.push(arguments); };
   window.gtag('js', new Date());
   window.gtag('config', 'G-RWGZ9S0QMF');
   const script = document.createElement('script');
@@ -52,6 +57,14 @@ function loadAnalytics() {
   script.async = true;
   script.src = 'https://www.googletagmanager.com/gtag/js?id=G-RWGZ9S0QMF';
   document.head.append(script);
+
+  /* Google Tag Manager: mismo arranque que el fragmento oficial, sólo tras el consentimiento */
+  window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+  const gtm = document.createElement('script');
+  gtm.id = 'move-gtm';
+  gtm.async = true;
+  gtm.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+  document.head.append(gtm);
 }
 
 export function CookieConsentProvider({ children }: { children: ReactNode }) {
@@ -81,9 +94,21 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     const trackLead = (event: MouseEvent) => {
       const target = event.target;
       if (!(target instanceof Element)) return;
-      const href = target.closest('a')?.getAttribute('href') ?? '';
-      const method = href.includes('wa.me/34654495508') ? 'whatsapp' : href.startsWith('tel:+34654495508') ? 'phone' : null;
-      if (method) window.gtag?.('event', 'generate_lead', { method, lead_source: window.location.pathname || '/' });
+      const link = target.closest('a');
+      const href = link?.getAttribute('href') ?? '';
+      const method = WHATSAPP_HREF.test(href) ? 'whatsapp' : href.startsWith('tel:') ? 'phone' : null;
+      if (!method) return;
+      const leadSource = window.location.pathname || '/';
+      window.gtag?.('event', 'generate_lead', { method, lead_source: leadSource });
+      /* Evento para GTM: el activador «Evento personalizado = whatsapp_click» dispara la conversión */
+      if (method === 'whatsapp') {
+        window.dataLayer?.push({
+          event: 'whatsapp_click',
+          whatsapp_url: href,
+          cta_text: (link?.textContent ?? '').trim().replace(/\s+/g, ' ').slice(0, 100),
+          lead_source: leadSource,
+        });
+      }
     };
     document.addEventListener('click', trackLead);
     return () => document.removeEventListener('click', trackLead);
@@ -126,7 +151,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
               <div><p className="mb-1 text-body font-medium text-[#493523]">Necesarias</p><p className="mb-0 text-small text-[#5E5146]">Guardan tu elección de privacidad. Siempre activas.</p></div>
               <label className="flex cursor-pointer items-start gap-3 rounded-[6px] p-2 transition-colors hover:bg-[#EAE2D3]">
                 <input type="checkbox" checked={draft.analytics} onChange={(event) => setDraft((current) => ({ ...current, analytics: event.target.checked }))} className="mt-1 h-4 w-4 accent-[#493523]" />
-                <span><span className="block text-body font-medium text-[#493523]">Analítica</span><span className="block text-small text-[#5E5146]">Google Analytics nos ayuda a conocer el uso agregado de la web.</span></span>
+                <span><span className="block text-body font-medium text-[#493523]">Analítica</span><span className="block text-small text-[#5E5146]">Google Analytics y Google Tag Manager nos ayudan a conocer el uso agregado de la web y a medir qué anuncios acaban en un contacto por WhatsApp.</span></span>
               </label>
               <label className="flex cursor-pointer items-start gap-3 rounded-[6px] p-2 transition-colors hover:bg-[#EAE2D3]">
                 <input type="checkbox" checked={draft.maps} onChange={(event) => setDraft((current) => ({ ...current, maps: event.target.checked }))} className="mt-1 h-4 w-4 accent-[#493523]" />
