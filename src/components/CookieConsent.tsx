@@ -41,7 +41,7 @@ function removeAnalyticsCookies() {
   });
 }
 
-const GTM_ID = 'GTM-P6TZJFL6';
+const GTM_ID = 'GTM-MT2R26QQ';
 
 /* Cualquier enlace que abra WhatsApp: wa.me, api.whatsapp.com o el esquema de la app */
 const WHATSAPP_HREF = /^(https?:\/\/)?(wa\.me|api\.whatsapp\.com|(www\.)?whatsapp\.com\/send)|^whatsapp:/i;
